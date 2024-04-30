@@ -8,7 +8,8 @@
 body{
     background-color: #F9F9F9;
     display: block;
-   overflow: hidden;
+    overflow: hidden;
+   
 }
 
 .navbar{
@@ -16,12 +17,11 @@ body{
     width: 100%;
     display: flex;
     align-items: center;
-    position: fixed;
     top: 0;
     overflow: hidden;
     z-index: 1000;
     background-color: #ffffff;
-    box-shadow: 0 2px 3px -2px rgba(0,0,0,.2);
+    box-shadow: 0px 2px 4px 0px rgba(92, 99, 105, 0.15);
     font-size: 15px;
 }
 
@@ -72,8 +72,9 @@ body{
 
 .navbar .right{
     display: flex;
-    align-items: center;
+    justify-content: end;
     flex: 1;
+    padding-right: 30px;
 }
 
 .navbar .right .todayGrossSale{
@@ -83,13 +84,12 @@ body{
 }
 
 .navbar .right .date{
-    margin-left: 80px;
+    margin-left: 40px;
 }
 
 
 .mainContainer{
     display: flex;
-    margin-top: 100px;
 }
 .sideBar{
     height: 100%;
@@ -190,7 +190,7 @@ body{
 
 }
 
-.container{
+.ItemCardView{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
     height: auto;
     width: 175px;
@@ -200,14 +200,14 @@ body{
     margin: 13.9px;
 }
 
-.container .image img{
+.ItemCardView .image img{
     height: 125px;
     width: 125px;
     margin: 10px;
     object-fit: contain;
 }
 
-.container .productName{
+.ItemCardView .productName{
     font-size: 13px;
     margin-left: 15px;
     margin-right: 15px;
@@ -215,14 +215,14 @@ body{
     font-weight: 600;
 }
 
-.container .netWeight{
+.ItemCardView .netWeight{
     font-size: 12px;
     margin-left: 15px;
     margin-bottom: 10px;
     font-style: italic;
 }
 
-.container .priceAddCart{
+.ItemCardView .priceAddCart{
     display: inline-flex;
     margin-bottom: 10px;
     
@@ -238,7 +238,7 @@ body{
 
 }
 
-.container button , img{
+.ItemCardView button , img{
     width: 25px;
     height: 25px;
     object-fit: contain;
@@ -315,11 +315,14 @@ body{
 
 .cart .orderList .container{
     display: flex;
+    align-items: center;
     background-color: #FFFFFF;
     width: 100%;
     height: 70px;
     border-radius: 13px;
     margin-top: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
+    margin-left: 30px;
 }
 
 .cart .orderList .container img{
@@ -516,12 +519,13 @@ input::-webkit-inner-spin-button {
 .addItem{
     position: absolute;
     height: 100vh;
+    top: 0px;
     width: 100vw;
     background: rgba(0, 0, 0, 0.30);
     display: flex;
     justify-content: center;
     align-items: center;
-   display: flex;
+    display: none;
 }
 
 .ItemContainer{
@@ -530,6 +534,7 @@ input::-webkit-inner-spin-button {
     border-radius: 13px;
     background: #FAFAFA;
     padding: 30px;
+    
 }
 
 .itemInfo{
@@ -639,4 +644,140 @@ button:focus {
     text-align: center;
     font-size: 12px;
     font-weight: 700;
+}
+
+.OrderSummary{
+    position: absolute;
+    height: 100vh;
+    top: 0px;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    
+}
+
+.OrderSummaryConatiner{
+    width: 500px;
+    height: 503px;
+    border-radius: 13px;
+    background: #FAFAFA;
+    padding: 30px;
+    
+}
+.SummaryContainer {
+    font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    height: 245px;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow-y: hidden;
+    background-color: #ffffff;
+}
+
+.SummaryContainer tr{
+    text-align: left;
+}
+
+.SummaryContainer th,
+.SummaryContainer td {
+    padding: 8px;
+    width: 100vh;
+    border: 1px solid #ddd;
+    text-align: left;
+    background-color: #ffffff;
+    border: none;
+    overflow-y: hidden;
+}
+
+.SummaryContainer th {
+    color: #007246;
+    font-weight: 500;
+}
+
+.SummaryContainer tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.SummaryContainer tbody tr:hover {
+    background-color: #e6e6e6;
+}
+
+.SummaryContainer td:first-child {
+    width: 40%;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.AmountSummary{
+    width: 441px;
+    height: 68px;
+    background-color: #FFF;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.05));
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 25px;
+    
+}
+
+.AmountSummary h2{
+    color: #B1B7C1;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+}
+
+.AmountSummary h1{
+    color: #008D5D;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+.dividerDIV{
+    height: 40px;
+    width: 1px;
+    background-color: #D0D0D0;
+}
+
+.ConfirmSection{
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.BackBtn{
+    width: 102px;
+    height: 40px;
+    border-radius: 7px;
+    background: #D9D9D9;
+    color: #FAFAFA;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+}
+
+.ConfirmBtn{
+    width: 309px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #04B075;
+    color: #FFF;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
 }
