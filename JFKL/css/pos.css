@@ -47,13 +47,11 @@ body{
     font-weight: 600;
     color: #008D5D;
     gap: 10px;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
 .navbar .searchBar{
     margin-left: 60px;
-    flex: 2;
+    flex: 3;
 }
 
 .navbar .searchBar input{
@@ -108,7 +106,6 @@ body{
     border-radius: 10px;
     background-color: #04B075;
     border: none;
-    outline: none;
     box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
     transition: 0.2s;
     cursor: pointer;
@@ -132,11 +129,6 @@ body{
     background-color: #ffffff;
     color: #a6acb8;
     font-size: 11px;
-}
-.sideBar .sbInventory button:hover,
-.sideBar .sbSales button:hover{
-    outline: 1.5px solid #a6acb8;
-    transition: all .2s ease-in-out;
 }
 
 .productDisplay{
@@ -179,9 +171,7 @@ body{
     background-color: #DCFFF3;
 }
 .categoryBtn:focus{
-    background-color: #04B075;
-    color: #ffffff;
-    outline: none;
+    background-color: #DCFFF3;
 }
 
 .productDisplay{
@@ -191,9 +181,8 @@ body{
 
 .products{
     background-color: #ffffff;
-    height:  70vh;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    height: 100vh;
+    margin-bottom: 60px;
     border-radius: 13px;
     padding: 30px;
     overflow: auto;
@@ -206,7 +195,7 @@ body{
     border-radius: 7px;
     padding: 10px;
     display: inline-block;
-    margin: 14px;
+    margin: 13.9px;
 }
 
 .container .image img{
@@ -222,8 +211,6 @@ body{
     margin-right: 15px;
     margin-bottom: 3px;
     font-weight: 600;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
 .container .netWeight{
