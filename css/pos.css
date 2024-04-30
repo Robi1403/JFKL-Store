@@ -8,7 +8,7 @@
 body{
     background-color: #F9F9F9;
     display: block;
-    overflow: hidden;
+   /* overflow: hidden;*/
 }
 
 .navbar{
@@ -513,3 +513,130 @@ input::-webkit-inner-spin-button {
     letter-spacing: -0.3px;
 }
 
+.addItem{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   display: none;
+}
+
+.ItemContainer{
+    width: 500px;
+    height: 363px;
+    border-radius: 13px;
+    background: #FAFAFA;
+    padding: 30px;
+}
+
+.itemInfo{
+    width: 438px;
+    height: 172px;
+    background-color: #FFF;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.05));
+    display: flex;
+    border-radius: 7px;
+    padding: 25px;
+}
+
+.itemInfo img{
+    margin: 0px;
+    width: 110px;
+    height: 110px;
+    margin-right: 30px;
+}
+
+.Infos h1{
+    color: #0B1215;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.Infos h3{
+    color: #352F36;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    margin-bottom: 40px;
+}
+
+.ItemQuantity{
+    display: flex;
+    margin-top: 20px;
+}
+
+.addQuantity{
+    width: 260px;
+    height: 112px;
+    background-color: #FFF;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.05));
+    border-radius: 7px;
+    padding: 20px;
+}
+
+.addQuantity h3{
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+img{
+    margin: 0px;
+}
+.addQuantity input{
+    height: 50px;
+    width: 85px;
+    border-radius: 7px;
+    border:  1px solid #C0C0C0;
+    outline: none;
+    margin-left: 15px;
+    margin-right: 15px;
+    outline: none;
+    text-align: center;
+    color: #0B1215;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.addMinusQuantity{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addToCart{
+    display: flex;
+    flex-direction: column;
+   padding: 10px 20px ;
+}
+
+.addToCart button{
+    width: 133px;
+    height: 40px;
+    border: none;
+}
+button:focus {
+    outline: none;
+  }
+.cancel{
+    border-radius: 7px;
+    background: #D9D9D9;
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+        
+}
+
+.toCart{
+    border-radius: 7px;
+    background: #04B075;
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+}
