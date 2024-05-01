@@ -16,10 +16,10 @@
             header("Location:../POS.html");
         }else {
             echo `<script>
-            window.location.href = "../index.php";
+            window.location.href = "../LoginPage.php";
             alert("Login Failed");
             </script>`;
-            header("Location:../index.php");
+            header("Location:../LoginPage.php");
         }
 
 
