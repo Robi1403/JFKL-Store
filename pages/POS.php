@@ -64,36 +64,48 @@
         </div>
 
         <div class="productDisplay">
-            <div class="category" id="categoryContainer">
-                <button class="categoryBtn">All</button>
-                <button class="categoryBtn">Canned Goods</button>
-                <button class="categoryBtn">Coffee</button>
-                <button class="categoryBtn">Biscuits</button>
-                <button class="categoryBtn">Ice Cream</button>
-                <button class="categoryBtn">Bread</button>
-                <button class="categoryBtn">Health and Beaty</button>
-                <button class="categoryBtn">Houshold & Cleaning Supply</button>
-                <button class="categoryBtn">Personal Care Products</button>
-                <button class="categoryBtn">Drinks</button>
-                <button class="categoryBtn">Powered Drinks</button>
-                <button class="categoryBtn">Junkfoods</button>
-                <button class="categoryBtn">Cigarettes</button>
-                <button class="categoryBtn">Frozen Foods</button>
-                <button class="categoryBtn">Instant Noodles</button>
-                <button class="categoryBtn">Alcholic Beverages</button>
-                <button class="categoryBtn">Candies & Chocolates</button>
-                <button class="categoryBtn">Dairy Products</button>
-                <button class="categoryBtn">Condiments</button>
-                <button class="categoryBtn">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn">Spreads and Fillings</button>
-                <button class="categoryBtn">School Supplies</button>
-            </div>
+           
+                <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
+                    <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+                </form>
+             
 
             <div class="ItemView">
+                
                     <div class="products">
                         <?php
-                        $query = "SELECT * FROM inventory";
+                            $category = "All";
+                            $category = $_POST['category'];
+
+                            if($category == "All") {
+                                $query = "SELECT * FROM inventory";
+                            } else {
+                                $query = "SELECT * FROM inventory WHERE category='$category'";
+                            }
+
                         $result = mysqli_query($conn, $query);
+
 
                         while($row = mysqli_fetch_array($result)){?>
                             <div class="ItemCardView">
