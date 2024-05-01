@@ -1,8 +1,10 @@
 <?php
 //include ("PhpFunctions/connection.php");
+include("PhpFunctions/remove_product.php");
 
 //ini muna since sa db ko
 $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
+
 ?>
 
 <!DOCTYPE html>
@@ -114,11 +116,7 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
                     </thead>
                     <tbody>
                         <?php
-                            if (isset($_POST['category'])) {
-                                $category = $_POST['category'];
-                            } else {
-                                $category = 'All';
-                            }
+                            $category = $_POST['category'] ?? 'All';
 
                             if ($category == 'All'){
                                 $select_query = "SELECT * FROM `inventory`";
@@ -131,7 +129,7 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     echo "<tr>";
-                                    echo "<td><input type='checkbox'></td>"; // Blank space for checkbox
+                                    echo "<td><input type='checkbox' name='selectedProducts[]' value='" .$row["product_id"] ."'></td>"; // Blank space for checkbox
                                     echo "<td>" . $row["product_id"] . "</td>"; // Product ID
                                     echo "<td>" . $row["product_name"] . "</td>"; // Product Name
                                     
@@ -154,9 +152,14 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
                         ?>
                     </tbody>
                 </table>
+
+                <form id="removeProductForm"  name="form" action="" method="post">
+                    <input type="hidden" id="selectedProducts" name="selectedProducts"> 
+                </form>
             </div>
         </div>
     </div>
+
 
     <script>
         //redirect to inventory
@@ -168,6 +171,35 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
         document.getElementById("POSBtn").onclick = function () {
             window.location.href = "POS.php";
         };
+
+        //get the selected checkboxes
+        function getSelectedCheckboxes() {
+            var checkboxes = document.querySelectorAll('.inventoryTable tbody input[type="checkbox"]:checked');
+            var selectedProducts = [];
+            checkboxes.forEach(function(checkbox) {
+                selectedProducts.push(checkbox.value);
+            });
+            return selectedProducts;
+        }
+
+        //removal of selected products
+        function removeSelectedProducts() {
+            var selectedProducts = getSelectedCheckboxes();
+
+            //confirms deletion
+            var confirmation = confirm("Are you sure you want to delete the selected products?");
+            if (confirmation) {
+                //update the hidden input field with selected products 
+                document.getElementById("selectedProducts").value = selectedProducts.join(',');
+                
+                document.getElementById("removeProductForm").submit();
+            }
+        }
+
+        document.getElementById("removeProductBtn").onclick = function () {
+            removeSelectedProducts();
+        };
+
     </script>
 </body>
 
