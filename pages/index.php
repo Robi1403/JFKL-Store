@@ -1,3 +1,7 @@
+<?php
+    include("PhpFunctions/connection.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +12,14 @@
 </head>
 <body>
     <div class="container">
-        <form action="" method="">
+        <form name="form" action="PhpFunctions/login.php" method="POST">
             <h3>Login</h3>
             
-            <input type="text" id="email" name="email" placeholder="User ID"><br><br>
+            <input type="text" id="username" name="username" placeholder="Username" required><br><br>
             
-            <input type="password" id="password" name="password" placeholder="Password"><br><br>
+            <input type="password" id="password" name="password" placeholder="Password" required><br><br>
 
-            <button type="submit" id="submit">Sign In</button>
+            <button type="submit" id="submit" name="submit" value="login">Sign In</button>
             
             <div id="logo">
                 <img src="../assets/storeLogo.svg" alt="">
@@ -23,5 +27,6 @@
             </div>
         </form>
     </div>
+    
 </body>
 </html>
