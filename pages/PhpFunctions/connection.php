@@ -3,7 +3,7 @@
     $username = "root";
     $password = "";
 
-    $db_name = "jfkl";
+    $db_name = "dbms_sari_sari_store";
 
     $conn = new mysqli($servername, $username, $password, $db_name );
 

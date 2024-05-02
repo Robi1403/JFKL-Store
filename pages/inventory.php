@@ -1,5 +1,6 @@
 <?php
 //include ("PhpFunctions/connection.php");
+
 include("PhpFunctions/remove_product.php");
 
 //ini muna since sa db ko
