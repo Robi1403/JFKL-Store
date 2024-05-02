@@ -317,5 +317,11 @@
         </div>
     </div>
     <script src="../js/script.js"></script>
+
+    <script>
+            document.getElementById("inventoryBtn").onclick = function () {
+                window.location.href = "inventory.php";
+            };
+    </script>
 </body>
 </html>
