@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2024 at 07:45 PM
+-- Generation Time: May 02, 2024 at 08:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,9 +44,9 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
-(1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 21.00, 27.00, 40, 'Argentina Meat Loaf 150g.png'),
-(2, 'Argentina Corn Beef', '150g', 'Piece', 'Canned Goods', 32.40, 39.00, 40, 'Argentina Corn Beef 150g.png'),
-(3, 'Century Tuna Flakes in Oil', '155g', 'Piece', 'Canned Goods', 35.00, 39.00, 12, 'Century Tuna Flakes in Oil 155g.png'),
+(1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 22.00, 27.00, 40, 'Argentina Meat Loaf 150g.png'),
+(2, 'Argentina Corn Beef', '150g', 'Piece', 'Canned Goods', 34.00, 39.00, 40, 'Argentina Corn Beef 150g.png'),
+(3, 'Argentina Giniling', '150g', 'Piece', 'Canned Goods', 28.00, 33.00, 12, 'Argentina Giniling 150g.png'),
 (4, 'Century Tuna Flakes in Oil', '155g', 'Piece', 'Canned Goods', 35.00, 39.00, 12, 'Century Tuna Flakes in Oil 155g.png'),
 (5, 'Fresca Tuna Adobo', '175g', 'Piece', 'Canned Goods', 27.00, 32.00, 6, 'Fresca Tuna Adobo 175g.png'),
 (6, 'Fresca Tuna Afritada', '175g', 'Piece', 'Canned Goods', 27.00, 32.00, 6, 'Fresca Tuna Afritada 175g.png'),
