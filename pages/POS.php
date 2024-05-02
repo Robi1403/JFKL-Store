@@ -1,3 +1,28 @@
+<?php
+    session_start();
+    include("PhpFunctions/connection.php");
+
+    if (isset($_POST['AddToCart'])) {
+        if (isset($_SESSION['cart'])) {
+            
+        }else{
+            $session_array = array(
+                'id' => $_GET['product_id'],
+                'product_name' => $_POST['product_name'],
+                'retail_price' => $_POST['retail_price'],
+                'picture_url' => $_POST['picture_url'],
+                'net_weight' => $_POST['net_weight'],
+
+
+            );
+
+            $_SESSION['cart'][] = $session_array;
+        }
+    }
+
+    var_dump($_GET);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,54 +85,72 @@
         </div>
 
         <div class="productDisplay">
-            <div class="category" id="categoryContainer">
-                <button class="categoryBtn">All</button>
-                <button class="categoryBtn">Canned Goods</button>
-                <button class="categoryBtn">Coffee</button>
-                <button class="categoryBtn">Biscuits</button>
-                <button class="categoryBtn">Ice Cream</button>
-                <button class="categoryBtn">Bread</button>
-                <button class="categoryBtn">Health and Beaty</button>
-                <button class="categoryBtn">Houshold & Cleaning Supply</button>
-                <button class="categoryBtn">Personal Care Products</button>
-                <button class="categoryBtn">Drinks</button>
-                <button class="categoryBtn">Powered Drinks</button>
-                <button class="categoryBtn">Junkfoods</button>
-                <button class="categoryBtn">Cigarettes</button>
-                <button class="categoryBtn">Frozen Foods</button>
-                <button class="categoryBtn">Instant Noodles</button>
-                <button class="categoryBtn">Alcholic Beverages</button>
-                <button class="categoryBtn">Candies & Chocolates</button>
-                <button class="categoryBtn">Dairy Products</button>
-                <button class="categoryBtn">Condiments</button>
-                <button class="categoryBtn">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn">Spreads and Fillings</button>
-                <button class="categoryBtn">School Supplies</button>
-            </div>
+             
+                <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
+                    <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
+                    <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+                </form>
+             
 
             <div class="ItemView">
-                <div class="products">
-
-                    <div class="ItemCardView">
-                        <div class="image">
-                            <img src="../assets/samplePic.svg">
-                        </div>
-                        <div class="productName">
-                            <p>Argentina Meat Loaf</p>
-                        </div>
-                        <div class="netWeight">
-                            <p>150g</p>
-                        </div>
-                        <div class="priceAddCart">
-                            <div class="price">
-                                <p>P29.00</p>
-                            </div>
-                            <button><img src="../assets/buttonAdd.svg"></button> 
-                        </div>
-                    </div>
                 
+                    <div class="products">
+                        <?php
+                            $category = $_POST['category'] ?? 'All';
+                           
 
-                </div>
+                            if($category == "All") {
+                                $query = "SELECT * FROM inventory";
+                            } else {
+                                $query = "SELECT * FROM inventory WHERE category='$category'";
+                            }
+
+                        $result = mysqli_query($conn, $query);
+
+
+                        while($row = mysqli_fetch_array($result)){?>
+                            
+                            <form method="get" action="POS.php?id=<?=$row['product_id'] ?>" class="ItemCardView">
+                                    <div class="image">
+                                        <img src="../assets/InventoryItems/<?php echo $row['picture_url'];?>">
+                                    </div>
+                                    <div class="productName">
+                                        <p><?php echo $row['product_name'];?></p>
+                                    </div>
+                                    <div class="netWeight">
+                                        <p><?php echo $row['net_weight']; ?></p>
+                                    </div>
+                                    <div class="priceAddCart">
+                                        <div class="price">
+                                            <p>₱<?php echo $row['retail_price']; ?></p>
+                                        </div>
+                                        <button type="submit" name="AddToCart"><img src="../assets/buttonAdd.svg"></button> 
+                                    </div> 
+                            </form>
+                        <?php    
+                        }
+                        ?>
+                    </div>
             </div>
         </div>
 
