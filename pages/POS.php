@@ -1,9 +1,10 @@
 <?php
-    include("PhpFunctions/connection.php");
+include ("PhpFunctions/connection.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,12 @@
 
     <title>JFKL Store</title>
 </head>
+
 <body>
     <div class="navbar">
         <div class="left">
             <div class="shape">
-                
+
             </div>
             <div class="logo">
                 <img src="../assets/storeLogo.svg" alt="">
@@ -44,19 +46,19 @@
     <div class="mainContainer">
         <div class="sideBar">
             <div class="sbPOS">
-                <button>
+                <button id="POSBtn">
                     <img src="../assets/POS.svg" alt=""><br>
                     <strong>POS</strong>
                 </button>
             </div>
             <div class="sbInventory">
-                <button>
+                <button id="inventoryBtn">
                     <img src="../assets/inventory.svg" alt=""><br>
                     <strong>Inventory</strong>
                 </button>
             </div>
             <div class="sbSales">
-                <button>
+                <button id="salesBtn">
                     <img src="../assets/sales.svg" alt=""><br>
                     <strong>Sales</strong>
                 </button>
@@ -90,33 +92,33 @@
             </div>
 
             <div class="ItemView">
-                    <div class="products">
-                        <?php
-                        $query = "SELECT * FROM inventory";
-                        $result = mysqli_query($conn, $query);
+                <div class="products">
+                    <?php
+                    $query = "SELECT * FROM inventory";
+                    $result = mysqli_query($conn, $query);
 
-                        while($row = mysqli_fetch_array($result)){?>
-                            <div class="ItemCardView">
-                                <div class="image">
-                                    <img src="../assets/InventoryItems/<?php echo $row['picture_url'];?>">
+                    while ($row = mysqli_fetch_array($result)) { ?>
+                        <div class="ItemCardView">
+                            <div class="image">
+                                <img src="../assets/InventoryItems/<?php echo $row['picture_url']; ?>">
+                            </div>
+                            <div class="productName">
+                                <p><?php echo $row['product_name']; ?></p>
+                            </div>
+                            <div class="netWeight">
+                                <p><?php echo $row['net_weight']; ?></p>
+                            </div>
+                            <div class="priceAddCart">
+                                <div class="price">
+                                    <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
-                                <div class="productName">
-                                    <p><?php echo $row['product_name'];?></p>
-                                </div>
-                                <div class="netWeight">
-                                    <p><?php echo $row['net_weight']; ?></p>
-                                </div>
-                                <div class="priceAddCart">
-                                    <div class="price">
-                                        <p>₱<?php echo $row['retail_price']; ?></p>
-                                    </div>
-                                    <button><img src="../assets/buttonAdd.svg"></button> 
-                                </div>
-                            </div> 
-                        <?php    
-                        }
-                        ?>
-                    </div>
+                                <button><img src="../assets/buttonAdd.svg"></button>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
 
@@ -148,7 +150,7 @@
                         <div class="quantity">
                             <h3>Quantity</h3>
                             <div class="qty">
-                                
+
                                 <img src="../assets/decreaseBtn.svg" alt=" ">
                                 <input type="number" value="1">
                                 <img src="../assets/buttonAdd.svg " alt="">
@@ -161,12 +163,12 @@
                         </div>
 
                         <div class="select">
-                            <input type="checkbox"  >
-                            <span class="checkmark" ></span>
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
                         </div>
                     </div>
-                    
-                    
+
+
                 </div>
 
                 <div class="CheckoutSection">
@@ -188,100 +190,107 @@
                     </div>
                     <div class="Checkoutbuttons">
                         <button class="HoldOrder">Hold Order</button>
-                    <button id="Checkout" class="ProceedBtn">Proceed</button>
+                        <button id="Checkout" class="ProceedBtn">Proceed</button>
                     </div>
-                    
-                </div>
-        </div>
-    </div>
 
-    <div class="addItem">
-        <div class="ItemContainer">
-            <div class="itemInfo">
-                <img src="../assets/samplePic.svg" alt="">
-                <div class="Infos">
-                    <h1>Argentina Meat Loaf</h1>
-                    <h3>150g</h3>
-                    <h1>P 27.00</h1>
                 </div>
             </div>
-            <div class="ItemQuantity">
-                <div class="addQuantity">
-                    <h3>Quantity</h3>
-                    <div class="addMinusQuantity">
-                        <img src="assets/decreaseBtn.svg" alt="">
-                        <input type="number">
-                        <img src="assets/buttonAdd.svg" alt="">
+        </div>
+
+        <div class="addItem">
+            <div class="ItemContainer">
+                <div class="itemInfo">
+                    <img src="../assets/samplePic.svg" alt="">
+                    <div class="Infos">
+                        <h1>Argentina Meat Loaf</h1>
+                        <h3>150g</h3>
+                        <h1>P 27.00</h1>
                     </div>
                 </div>
-                <div class="addToCart">
-                    <button class="cancel">Cancel</button>
-                    <button class="toCart">Add to cart</button>
+                <div class="ItemQuantity">
+                    <div class="addQuantity">
+                        <h3>Quantity</h3>
+                        <div class="addMinusQuantity">
+                            <img src="assets/decreaseBtn.svg" alt="">
+                            <input type="number">
+                            <img src="assets/buttonAdd.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="addToCart">
+                        <button class="cancel">Cancel</button>
+                        <button class="toCart">Add to cart</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="OrderSummary">
-        <div class="OrderSummaryConatiner">
-            <h1>Order Summary</h1>
-            <div class="SummaryContainer">
-                <table>
-                    <tr>
-                        <th>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-    
-                    <tr>
-                        <td>
-                            Argentina Meat Loaf
-                        </td>
+        <div class="OrderSummary">
+            <div class="OrderSummaryConatiner">
+                <h1>Order Summary</h1>
+                <div class="SummaryContainer">
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
 
-                        <td>
-                            P 27.00
-                        </td>
+                        <tr>
+                            <td>
+                                Argentina Meat Loaf
+                            </td>
 
-                        <td>
-                            1
-                        </td>
-                        <td>                       
-                            P 27.00
-                        </td>
-                    </tr>
+                            <td>
+                                P 27.00
+                            </td>
 
-            
-                </table>
-                
-            </div>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                P 27.00
+                            </td>
+                        </tr>
 
-            <div class="AmountSummary">
-                <div class="TotalPayment">
-                    <h2>Total</h2>
-                    <h1>P 1,024.00</h1>
+
+                    </table>
+
                 </div>
 
-                <div class="dividerDIV"></div>
+                <div class="AmountSummary">
+                    <div class="TotalPayment">
+                        <h2>Total</h2>
+                        <h1>P 1,024.00</h1>
+                    </div>
 
-                <div class="AmountReceived">
-                    <h2>Amount Receive</h2>
-                    <h1>P 1,024.00</h1>
+                    <div class="dividerDIV"></div>
+
+                    <div class="AmountReceived">
+                        <h2>Amount Receive</h2>
+                        <h1>P 1,024.00</h1>
+                    </div>
+                    <div class="dividerDIV"></div>
+
+                    <div class="change">
+                        <h2>Change</h2>
+                        <h1>P 1,024.00</h1>
+                    </div>
                 </div>
-                <div class="dividerDIV"></div>
 
-                <div class="change">
-                    <h2>Change</h2>
-                    <h1>P 1,024.00</h1>
+                <div class="ConfirmSection">
+                    <button class="BackBtn">Back</button>
+                    <button class="ConfirmBtn">Confirm Order</button>
                 </div>
-            </div>
-
-            <div class="ConfirmSection">
-                <button class="BackBtn">Back</button>
-                <button class="ConfirmBtn">Confirm Order</button>
             </div>
         </div>
-    </div>
-    <script src="../js/script.js"></script>
+        <script src="../js/script.js"></script>
+
+        <script>
+            document.getElementById("inventoryBtn").onclick = function () {
+                window.location.href = "inventory.php";
+            };
+        </script>
 </body>
+
 </html>
