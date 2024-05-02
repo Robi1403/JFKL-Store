@@ -183,7 +183,7 @@ body{
 
 .products{
     background-color: #ffffff;
-    height: 90vh;
+    height: 80%;
     border-radius: 13px;
     padding: 30px;
     overflow: auto;
@@ -192,7 +192,7 @@ body{
 
 .ItemCardView{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
-    height: 260px;
+    height: auto;
     width: 175px;
     border-radius: 7px;
     padding: 10px;
