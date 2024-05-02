@@ -1,10 +1,30 @@
 <?php
-include ("PhpFunctions/connection.php");
+    session_start();
+    include("PhpFunctions/connection.php");
+
+    if (isset($_POST['AddToCart'])) {
+        if (isset($_SESSION['cart'])) {
+            
+        }else{
+            $session_array = array(
+                'id' => $_GET['product_id'],
+                'product_name' => $_POST['product_name'],
+                'retail_price' => $_POST['retail_price'],
+                'picture_url' => $_POST['picture_url'],
+                'net_weight' => $_POST['net_weight'],
+
+
+            );
+
+            $_SESSION['cart'][] = $session_array;
+        }
+    }
+
+    var_dump($_GET);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +33,11 @@ include ("PhpFunctions/connection.php");
 
     <title>JFKL Store</title>
 </head>
-
 <body>
     <div class="navbar">
         <div class="left">
             <div class="shape">
-
+                
             </div>
             <div class="logo">
                 <img src="../assets/storeLogo.svg" alt="">
@@ -66,59 +85,72 @@ include ("PhpFunctions/connection.php");
         </div>
 
         <div class="productDisplay">
-            <div class="category" id="categoryContainer">
-                <button class="categoryBtn">All</button>
-                <button class="categoryBtn">Canned Goods</button>
-                <button class="categoryBtn">Coffee</button>
-                <button class="categoryBtn">Biscuits</button>
-                <button class="categoryBtn">Ice Cream</button>
-                <button class="categoryBtn">Bread</button>
-                <button class="categoryBtn">Health and Beaty</button>
-                <button class="categoryBtn">Houshold & Cleaning Supply</button>
-                <button class="categoryBtn">Personal Care Products</button>
-                <button class="categoryBtn">Drinks</button>
-                <button class="categoryBtn">Powered Drinks</button>
-                <button class="categoryBtn">Junkfoods</button>
-                <button class="categoryBtn">Cigarettes</button>
-                <button class="categoryBtn">Frozen Foods</button>
-                <button class="categoryBtn">Instant Noodles</button>
-                <button class="categoryBtn">Alcholic Beverages</button>
-                <button class="categoryBtn">Candies & Chocolates</button>
-                <button class="categoryBtn">Dairy Products</button>
-                <button class="categoryBtn">Condiments</button>
-                <button class="categoryBtn">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn">Spreads and Fillings</button>
-                <button class="categoryBtn">School Supplies</button>
-            </div>
+             
+        <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
+                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
+                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
+                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
+                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+            </form>
+             
 
             <div class="ItemView">
-                <div class="products">
-                    <?php
-                    $query = "SELECT * FROM inventory";
-                    $result = mysqli_query($conn, $query);
+                
+                    <div class="products">
+                        <?php
+                            $category = $_POST['category'] ?? 'All';
+                           
 
-                    while ($row = mysqli_fetch_array($result)) { ?>
-                        <div class="ItemCardView">
-                            <div class="image">
-                                <img src="../assets/InventoryItems/<?php echo $row['picture_url']; ?>">
-                            </div>
-                            <div class="productName">
-                                <p><?php echo $row['product_name']; ?></p>
-                            </div>
-                            <div class="netWeight">
-                                <p><?php echo $row['net_weight']; ?></p>
-                            </div>
-                            <div class="priceAddCart">
-                                <div class="price">
-                                    <p>₱<?php echo $row['retail_price']; ?></p>
-                                </div>
-                                <button><img src="../assets/buttonAdd.svg"></button>
-                            </div>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
+                            if($category == "All") {
+                                $query = "SELECT * FROM inventory";
+                            } else {
+                                $query = "SELECT * FROM inventory WHERE category='$category'";
+                            }
+
+                        $result = mysqli_query($conn, $query);
+
+
+                        while($row = mysqli_fetch_array($result)){?>
+                            
+                            <form method="get" action="POS.php?id=<?=$row['product_id'] ?>" class="ItemCardView">
+                                    <div class="image">
+                                        <img src="../assets/InventoryItems/<?php echo $row['picture_url'];?>">
+                                    </div>
+                                    <div class="productName">
+                                        <p><?php echo $row['product_name'];?></p>
+                                    </div>
+                                    <div class="netWeight">
+                                        <p><?php echo $row['net_weight']; ?></p>
+                                    </div>
+                                    <div class="priceAddCart">
+                                        <div class="price">
+                                            <p>₱<?php echo $row['retail_price']; ?></p>
+                                        </div>
+                                        <button type="submit" name="AddToCart"><img src="../assets/buttonAdd.svg"></button> 
+                                    </div> 
+                            </form>
+                        <?php    
+                        }
+                        ?>
+                    </div>
             </div>
         </div>
 
@@ -150,7 +182,7 @@ include ("PhpFunctions/connection.php");
                         <div class="quantity">
                             <h3>Quantity</h3>
                             <div class="qty">
-
+                                
                                 <img src="../assets/decreaseBtn.svg" alt=" ">
                                 <input type="number" value="1">
                                 <img src="../assets/buttonAdd.svg " alt="">
@@ -163,12 +195,12 @@ include ("PhpFunctions/connection.php");
                         </div>
 
                         <div class="select">
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
+                            <input type="checkbox"  >
+                            <span class="checkmark" ></span>
                         </div>
                     </div>
-
-
+                    
+                    
                 </div>
 
                 <div class="CheckoutSection">
@@ -190,107 +222,100 @@ include ("PhpFunctions/connection.php");
                     </div>
                     <div class="Checkoutbuttons">
                         <button class="HoldOrder">Hold Order</button>
-                        <button id="Checkout" class="ProceedBtn">Proceed</button>
+                    <button id="Checkout" class="ProceedBtn">Proceed</button>
                     </div>
+                    
+                </div>
+        </div>
+    </div>
 
+    <div class="addItem">
+        <div class="ItemContainer">
+            <div class="itemInfo">
+                <img src="../assets/samplePic.svg" alt="">
+                <div class="Infos">
+                    <h1>Argentina Meat Loaf</h1>
+                    <h3>150g</h3>
+                    <h1>P 27.00</h1>
+                </div>
+            </div>
+            <div class="ItemQuantity">
+                <div class="addQuantity">
+                    <h3>Quantity</h3>
+                    <div class="addMinusQuantity">
+                        <img src="assets/decreaseBtn.svg" alt="">
+                        <input type="number">
+                        <img src="assets/buttonAdd.svg" alt="">
+                    </div>
+                </div>
+                <div class="addToCart">
+                    <button class="cancel">Cancel</button>
+                    <button class="toCart">Add to cart</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="addItem">
-            <div class="ItemContainer">
-                <div class="itemInfo">
-                    <img src="../assets/samplePic.svg" alt="">
-                    <div class="Infos">
-                        <h1>Argentina Meat Loaf</h1>
-                        <h3>150g</h3>
-                        <h1>P 27.00</h1>
-                    </div>
+    <div class="OrderSummary">
+        <div class="OrderSummaryConatiner">
+            <h1>Order Summary</h1>
+            <div class="SummaryContainer">
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            Argentina Meat Loaf
+                        </td>
+
+                        <td>
+                            P 27.00
+                        </td>
+
+                        <td>
+                            1
+                        </td>
+                        <td>                       
+                            P 27.00
+                        </td>
+                    </tr>
+
+            
+                </table>
+                
+            </div>
+
+            <div class="AmountSummary">
+                <div class="TotalPayment">
+                    <h2>Total</h2>
+                    <h1>P 1,024.00</h1>
                 </div>
-                <div class="ItemQuantity">
-                    <div class="addQuantity">
-                        <h3>Quantity</h3>
-                        <div class="addMinusQuantity">
-                            <img src="assets/decreaseBtn.svg" alt="">
-                            <input type="number">
-                            <img src="assets/buttonAdd.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="addToCart">
-                        <button class="cancel">Cancel</button>
-                        <button class="toCart">Add to cart</button>
-                    </div>
+
+                <div class="dividerDIV"></div>
+
+                <div class="AmountReceived">
+                    <h2>Amount Receive</h2>
+                    <h1>P 1,024.00</h1>
+                </div>
+                <div class="dividerDIV"></div>
+
+                <div class="change">
+                    <h2>Change</h2>
+                    <h1>P 1,024.00</h1>
                 </div>
             </div>
-        </div>
 
-        <div class="OrderSummary">
-            <div class="OrderSummaryConatiner">
-                <h1>Order Summary</h1>
-                <div class="SummaryContainer">
-                    <table>
-                        <tr>
-                            <th>Item</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Argentina Meat Loaf
-                            </td>
-
-                            <td>
-                                P 27.00
-                            </td>
-
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                P 27.00
-                            </td>
-                        </tr>
-
-
-                    </table>
-
-                </div>
-
-                <div class="AmountSummary">
-                    <div class="TotalPayment">
-                        <h2>Total</h2>
-                        <h1>P 1,024.00</h1>
-                    </div>
-
-                    <div class="dividerDIV"></div>
-
-                    <div class="AmountReceived">
-                        <h2>Amount Receive</h2>
-                        <h1>P 1,024.00</h1>
-                    </div>
-                    <div class="dividerDIV"></div>
-
-                    <div class="change">
-                        <h2>Change</h2>
-                        <h1>P 1,024.00</h1>
-                    </div>
-                </div>
-
-                <div class="ConfirmSection">
-                    <button class="BackBtn">Back</button>
-                    <button class="ConfirmBtn">Confirm Order</button>
-                </div>
+            <div class="ConfirmSection">
+                <button class="BackBtn">Back</button>
+                <button class="ConfirmBtn">Confirm Order</button>
             </div>
         </div>
-        <script src="../js/script.js"></script>
-
-        <script>
-            document.getElementById("inventoryBtn").onclick = function () {
-                window.location.href = "inventory.php";
-            };
-        </script>
+    </div>
+    <script src="../js/script.js"></script>
 </body>
-
 </html>
