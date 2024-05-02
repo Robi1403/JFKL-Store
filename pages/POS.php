@@ -1,5 +1,26 @@
 <?php
+    session_start();
     include("PhpFunctions/connection.php");
+
+    if (isset($_POST['AddToCart'])) {
+        if (isset($_SESSION['cart'])) {
+            
+        }else{
+            $session_array = array(
+                'id' => $_GET['product_id'],
+                'product_name' => $_POST['product_name'],
+                'retail_price' => $_POST['retail_price'],
+                'picture_url' => $_POST['picture_url'],
+                'net_weight' => $_POST['net_weight'],
+
+
+            );
+
+            $_SESSION['cart'][] = $session_array;
+        }
+    }
+
+    var_dump($_GET);
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +85,7 @@
         </div>
 
         <div class="productDisplay">
-           
+             
                 <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <button class="categoryBtn" type="submit" name="category" value="All">All</button>
                     <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
@@ -95,8 +116,8 @@
                 
                     <div class="products">
                         <?php
-                            $category = "All";
-                            $category = $_POST['category'];
+                            $category = $_POST['category'] ?? 'All';
+                           
 
                             if($category == "All") {
                                 $query = "SELECT * FROM inventory";
@@ -108,23 +129,24 @@
 
 
                         while($row = mysqli_fetch_array($result)){?>
-                            <div class="ItemCardView">
-                                <div class="image">
-                                    <img src="../assets/InventoryItems/<?php echo $row['picture_url'];?>">
-                                </div>
-                                <div class="productName">
-                                    <p><?php echo $row['product_name'];?></p>
-                                </div>
-                                <div class="netWeight">
-                                    <p><?php echo $row['net_weight']; ?></p>
-                                </div>
-                                <div class="priceAddCart">
-                                    <div class="price">
-                                        <p>₱<?php echo $row['retail_price']; ?></p>
+                            
+                            <form method="get" action="POS.php?id=<?=$row['product_id'] ?>" class="ItemCardView">
+                                    <div class="image">
+                                        <img src="../assets/InventoryItems/<?php echo $row['picture_url'];?>">
                                     </div>
-                                    <button><img src="../assets/buttonAdd.svg"></button> 
-                                </div>
-                            </div> 
+                                    <div class="productName">
+                                        <p><?php echo $row['product_name'];?></p>
+                                    </div>
+                                    <div class="netWeight">
+                                        <p><?php echo $row['net_weight']; ?></p>
+                                    </div>
+                                    <div class="priceAddCart">
+                                        <div class="price">
+                                            <p>₱<?php echo $row['retail_price']; ?></p>
+                                        </div>
+                                        <button type="submit" name="AddToCart"><img src="../assets/buttonAdd.svg"></button> 
+                                    </div> 
+                            </form>
                         <?php    
                         }
                         ?>
