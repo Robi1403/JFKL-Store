@@ -436,6 +436,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     justify-content: space-between;
     margin: 0px 25px 10px 25px;
+     
 }
 .SubTotal h1{
     color: #000;
