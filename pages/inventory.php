@@ -1,11 +1,7 @@
 <?php
-//include ("PhpFunctions/connection.php");
-
+include ("PhpFunctions/connection.php");
 include ("PhpFunctions/remove_product.php");
-
-//ini muna since sa db ko
-$conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
-
+include ("PhpFunctions/add_product.php");
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +71,7 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
                 <button class="addProduct" id="addProductBtn">Add Product</button>
             </div>
 
-            <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="category" id="categoryContainer" name="categoryform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <button class="categoryBtn" type="submit" name="category" value="All">All</button>
                 <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
@@ -164,7 +160,7 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
     <div class="background" id="modal">
         <div class="ItemContainer">
             <h3>Add New Product</h3>
-            <form>
+            <form id="addProductForm" name="addProductForm" action="PhpFunctions/add_product.php" method="POST">
                 <div class="formContent">
                     <div class="productInfo">
                         <label for="productInfo">Product Info</label><br><br>
@@ -183,46 +179,50 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
                         </div>
                         <div class="labelInput">
                             <label>Product Name</label>
-                            <input type="text" id="username" required><br><br>
+                            <input type="text" id="username" name="productName" required><br><br>
                         </div>
                         <div class="labelInput">
                             <label>Net Weight</label>
-                            <input type="text" id="username" required><br><br>
+                            <input type="text" id="username" name="netWeight"><br><br>
                         </div>
-                        <div class="labelInput">
+                        <!-- <div class="labelInput">
                             <label>Product ID</label>
                             <input type="text" id="username" required><br><br>
-                        </div>
+                        </div> -->
                         <div class="labelInput">
                             <label for="category">Category</label>
-                            <select id="category" required>
+                            <select id="category" name="category" required>
                                 <option value=""></option>
                                 <option value="Canned Goods">Canned Goods</option>
                                 <option value="Coffee">Coffee</option>
                                 <option value="Biscuits">Biscuits</option>
                                 <option value="Ice Cream">Ice Cream</option>
                                 <option value="Bread">Bread</option>
-                                <option value="Health and Beauty">Health and Beauty</option>
-                                <option value="Household & Cleaning Supply">Household & Cleaning Supply</option>
-                                <option value="Personal Care Products">Personal Care Products</option>
-                                <option value="Drinks">Drinks</option>
-                                <option value="Powered Drinks">Powered Drinks</option>
-                                <option value="Junkfoods">Junkfoods</option>
+                                <option value="Health & Beauty">Health & Beauty</option>
+                                <option value="Household & Cleaning Supplies">Household & Cleaning Supplies</option>
+                                <option value="PC Products">Personal Collection Products</option>
+                                <option value="Cold Drinks">Cold Drinks</option>
+                                <option value="Powdered Drinks">Powdered Drinks</option>
+                                <option value="Junk Foods">Junk Foods</option>
                                 <option value="Cigarettes">Cigarettes</option>
                                 <option value="Frozen Foods">Frozen Foods</option>
                                 <option value="Instant Noodles">Instant Noodles</option>
                                 <option value="Alcoholic Beverages">Alcoholic Beverages</option>
                                 <option value="Candies & Chocolates">Candies & Chocolates</option>
                                 <option value="Dairy Products">Dairy Products</option>
-                                <option value="Condiments">Condiments</option>
-                                <option value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</option>
-                                <option value="Spreads and Fillings">Spreads and Fillings</option>
+                                <option value="Condiments & Sauces">Condiments & Sauces</option>
+                                <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
+                                <option value="Spreads and Fillings">Spreads & Fillings</option>
                                 <option value="School Supplies">School Supplies</option>
                             </select>
                         </div>
                         <div class="labelInput">
-                            <label>Unit</label>
-                            <input type="text" id="username" required><br><br>
+                            <label for="unit">Unit</label>
+                            <select id="unit" name="unit" required>
+                                <option value=""></option>
+                                <option value="Piece">Piece</option>
+                                <option value="Pack">Pack</option>
+                            </select>
                         </div>
                     </div>
                     <div class="additionalInfo">
@@ -230,23 +230,22 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
                             <label for="pricingInfo">Pricing Info</label><br><br>
                             <div class="labelInput">
                                 <label>Unit Price</label>
-                                <input type="text" id="username" required><br><br>
+                                <input type="text" id="username" name="unitPrice" required><br><br>
                             </div>
                             <div class="labelInput">
                                 <label>Retail Price</label>
-                                <input type="text" id="username" required><br><br>
+                                <input type="text" id="username" name="retailPrice" required><br><br>
                             </div>
                         </div>
                         <div class="stockInfo">
                             <label for="stockInfo">Stock Info</label><br><br>
                             <div class="labelInput">
                                 <label>Stock</label>
-                                <input type="text" id="username" required><br><br>
+                                <input type="text" id="username" name="stock" required><br><br>
                             </div>
                         </div>
                         <div class="updateButtons">
-
-                            <button class="addProduct" id="addNewProductBtn">Add Product</button>
+                            <button class="addProduct" id="addNewProductBtn" name="addNewProductBtn" type="submit">Add Product</button>
                             <button class="cancel" id="cancelBtn">Cancel</button>
                         </div>
                     </div>
