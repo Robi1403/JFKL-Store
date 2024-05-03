@@ -15,9 +15,12 @@ if (isset($_POST['addNewProductBtn'])) {
 
         $insert_query = "INSERT INTO `inventory`(`product_name`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES ('$productName', '$unit', '$category', '$unitPrice', '$retailPrice', '$stock', '$url')";
         if (mysqli_query($conn, $insert_query)) {
-            echo "Data inserted successfully.";
+            echo '<script>
+                    alert("Data inserted successfully."); 
+                    window.location.href = "../inventory.php";
+                </script>';
         } else {
-            echo "Error inserting data: " . mysqli_error($conn);
+            echo '<script>alert("Error inserting data: ' . mysqli_error($conn) . '");</script>';
         }
     }
     else {
@@ -25,9 +28,12 @@ if (isset($_POST['addNewProductBtn'])) {
 
         $insert_query = "INSERT INTO `inventory`(`product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES ('$productName', '$netWeight', '$unit', '$category', '$unitPrice', '$retailPrice', '$stock', '$url')";
         if (mysqli_query($conn, $insert_query)) {
-            echo "Data inserted successfully.";
+            echo '<script>
+                    alert("Data inserted successfully."); 
+                    window.location.href = "../inventory.php";
+                </script>';
         } else {
-            echo "Error inserting data: " . mysqli_error($conn);
+            echo '<script>alert("Error inserting data: ' . mysqli_error($conn) . '");</script>';
         }
     }
 }
