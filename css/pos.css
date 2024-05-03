@@ -192,7 +192,7 @@ body{
 
 .ItemCardView{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
-    height: 260px;
+    height: auto;
     width: 175px;
     border-radius: 7px;
     padding: 10px;
@@ -436,6 +436,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     justify-content: space-between;
     margin: 0px 25px 10px 25px;
+     
 }
 .SubTotal h1{
     color: #000;

@@ -1,9 +1,9 @@
 <?php
-//include ("PhpFunctions/connection.php");
+include ("PhpFunctions/connection.php");
 include("PhpFunctions/remove_product.php");
 
 //ini muna since sa db ko
-$conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
+//$conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
 
 ?>
 
@@ -45,7 +45,7 @@ $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
     <div class="sideBar">
         <div class="sbPOS">
             <button id="POSBtn">
-                <img src="../assets/POSbnw.svg" alt=""><br>
+                <img src="../assets/POS.svg" alt=""><br>
                 <strong>POS</strong>
             </button>
         </div>
