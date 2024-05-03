@@ -377,7 +377,7 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (331, 'Downy Premium Parfum Passion Fabric Conditioner', '20ml', 'Piece', 'Household & Cleaning Supplies', 5.67, 8.00, 24, 'Downy Premium Parfum Passion Fabric Conditioner 20ml.png'),
 (332, 'Downy Sunrise Fresh Fabric Conditioner', '24ml', 'Piece', 'Household & Cleaning Supplies', 5.67, 8.00, 24, 'Downy Sunrise Fresh Fabric Conditioner 24ml.png'),
 (333, 'Esperma Candle No.18', NULL, 'Piece', 'Household & Cleaning Supplies', 17.50, 20.00, 8, 'Esperma Candle No.18.png'),
-(334, 'Esperma Candle #5', NULL, 'Piece', 'Household & Cleaning Supplies', 2.40, 4.00, 20, 'Esperma Candle #5.png'),
+(334, 'Esperma Candle No.#5', NULL, 'Piece', 'Household & Cleaning Supplies', 2.40, 4.00, 20, 'Esperma Candle No.5.png'),
 (335, 'LCC GreatBuys Dishwashing Paste Kalamansi', '200g', 'Piece', 'Household & Cleaning Supplies', 22.00, 28.00, 5, 'LCC GreatBuys Dishwashing Paste Kalamansi 200g.png'),
 (336, 'LCC Lighter w/ Flashlight', NULL, 'Piece', 'Household & Cleaning Supplies', 6.00, 10.00, 20, 'LCC Lighter w/ Flashlight.png'),
 (337, 'Lion-Tiger Mosquito Killer', NULL, 'Piece', 'Household & Cleaning Supplies', 1.80, 3.00, 50, 'Lion-Tiger Mosquito Killer.png'),
