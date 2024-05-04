@@ -27,7 +27,10 @@
         </div>
 
         <div class="searchBar">
-            <input type="text" id="search" placeholder="Search">
+            <form action="">
+                <input type="text" id="search" placeholder="Search">
+                <button type="submit"><img src="../assets/search.svg" alt=""></button>
+            </form>
         </div>
 
         <div class="right">
