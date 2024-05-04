@@ -152,6 +152,7 @@ include ("PhpFunctions/update_product.php");
                                                 <input type="hidden" name="unitPrice_info" value="<?php echo $row["unit_price"]; ?>">
                                                 <input type="hidden" name="retailPrice_info" value="<?php echo $row["retail_price"]; ?>">
                                                 <input type="hidden" name="stock_info" value="<?php echo $row["stock"]; ?>">
+                                                <input type="hidden" name="url_info" value="<?php echo $row["picture_url"]; ?>">
                                                 
                                                 <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn" class="updateProduct"><img src='../assets/edit.svg'></button>
                                             </form>
@@ -460,6 +461,11 @@ include ("PhpFunctions/update_product.php");
                 var unitPrice = this.parentNode.querySelector('[name="unitPrice_info"]').value;
                 var retailPrice = this.parentNode.querySelector('[name="retailPrice_info"]').value;
                 var stock = this.parentNode.querySelector('[name="stock_info"]').value;
+                var url = this.parentNode.querySelector('[name="url_info"]').value;
+
+                //appends "../assets/InventoryItems/" to the url
+                var pictureUrl = "../assets/InventoryItems/" + url;
+                alert(pictureUrl); //TAMA 
 
                 //sets the product info in the input fields inside the UpdateProductModal
                 var productIdInput = document.getElementById('productIdInput');
@@ -504,8 +510,9 @@ include ("PhpFunctions/update_product.php");
                 var stockInput = document.getElementById('stockInput');
                 stockInput.value = stock;
 
-                // var url = document.getElementById('urlInput');
-                // urlInput.value = pictureUrl;
+                // Get the input-file element
+                var productImage = document.getElementById('productImage');
+                productImage.src = pictureUrl;
 
                 var updateProductModal = document.getElementById("updateProductModal");
                 updateProductModal.style.display = "block";
