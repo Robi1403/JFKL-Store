@@ -49,25 +49,35 @@ body{
     gap: 10px;
 }
 
-.navbar .searchBar{
+.navbar .searchBar form{
     margin-left: 60px;
     flex: 2.5;
     padding-right: 30px;
+    display: flex;
+    width: 100vh;
 }
 
 .navbar .searchBar input{
     font-size: 14px;
     height: 40px;
-    min-width: 400px;
     width: 100%;
     left: 0;
     border: none;
-    border-radius: 7px;
+    border-radius: 7px 0px 0px 7px;
     padding-left: 20px;
     background-color: #F6F6F6;
 }
 .navbar .searchBar input:focus{
     outline: none;
+}
+.navbar .searchBar button{
+    border: none;
+    border-radius: 0px 7px 7px 0px;
+}
+
+.navbar .searchBar img{
+    margin: 0px 15px 0px 15px;
+    width: 15px;
 }
 
 .navbar .right{
