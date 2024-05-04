@@ -295,21 +295,21 @@ include ("PhpFunctions/update_product.php");
                             </div>
                             <div class="labelInput">
                                 <label>Product ID</label>
-                                <input type="text" id="productIdInput" readonly><br><br>
+                                <input type="text" id="productIdInput" name="productIdInput" readonly><br><br>
                             </div>
 
                             <div class="labelInput">
                                 <label>Product Name</label>
-                                <input type="text" id="productNameInput" required><br><br>
+                                <input type="text" id="productNameInput" name="productNameInput" required><br><br>
                             </div>
                             <div class="labelInput">
                                 <label>Net Weight</label>
-                                <input type="text" id="netWeightInput"><br><br>
+                                <input type="text" id="netWeightInput" name="netWeightInput" ><br><br>
                             </div>
                             
                             <div class="labelInput">
                                 <label for="category">Category</label>
-                                <select name="category" id="categoryInput" required>
+                                <select name="categoryInput" id="categoryInput" required>
                                     <option value="" selected></option>
                                     <option value="Canned Goods">Canned Goods</option>
                                     <option value="Coffee">Coffee</option>
@@ -337,7 +337,7 @@ include ("PhpFunctions/update_product.php");
                             </div>
                             <div class="labelInput">
                                 <label for="unit">Unit</label>
-                                <select id="unitInput" name="unit" required>
+                                <select id="unitInput" name="unitInput" required>
                                     <option></option>
                                     <option>Piece</option>
                                     <option>Pack</option>
@@ -349,22 +349,22 @@ include ("PhpFunctions/update_product.php");
                                 <label for="pricingInfo">Pricing Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Unit Price</label>
-                                    <input type="text" id="unitPriceInput" name="unitPrice" id="unitPriceInput" required><br><br>
+                                    <input type="text" id="unitPriceInput" name="unitPriceInput" id="unitPriceInput" required><br><br>
                                 </div>
                                 <div class="labelInput">
                                     <label>Retail Price</label>
-                                    <input type="text" id="retailPriceInput" name="retailPrice" id="retailPriceInput" required><br><br>
+                                    <input type="text" id="retailPriceInput" name="retailPriceInput" id="retailPriceInput" required><br><br>
                                 </div>
                             </div>
                             <div class="stockInfo">
                                 <label for="stockInfo">Stock Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Stock</label>
-                                    <input type="text" id="stockInput" name="stock" id="stockInput" required><br><br>
+                                    <input type="text" id="stockInput" name="stockInput" id="stockInput" required><br><br>
                                 </div>
                             </div>
                             <div class="updateButtons">
-                                <button class="addProduct" id="updateProductInfoBtn" name="updateProductInfoBtn" type="submit">Update Product</button>
+                                <button class="addProduct" type="submit" id="updateProductInfoBtn" name="updateProductInfoBtn">Update Product</button>
                                 <button class="cancel" id="cancelUpdateBtn" name="cancelUpdateBtn">Cancel</button>
                             </div>
                         </div>
@@ -473,25 +473,19 @@ include ("PhpFunctions/update_product.php");
                 var netWeightInput = document.getElementById('netWeightInput');
                 netWeightInput.value = netWeight;
 
-                //gets the category value from the hidden input field
-                var categoryValue = document.querySelector('[name="category_info"]').value;
-
                 //selects the corresponding option in the dropdown menu
                 var categoryInput = document.getElementById('categoryInput');
                 for (var i = 0; i < categoryInput.options.length; i++) {
-                    if (categoryInput.options[i].value === categoryValue) {
+                    if (categoryInput.options[i].value === category) {
                         categoryInput.selectedIndex = i;
                         break;
                     }
                 }
 
-                //sets the unit value from the hidden input field
-                var unitValue = document.querySelector('[name="unit_info"]').value;
-
                 //selects the corresponding option in the dropdown menu
                 var unitInput = document.getElementById('unitInput');
                 for (var i = 0; i < unitInput.options.length; i++) {
-                    if (unitInput.options[i].value === unitValue) {
+                    if (unitInput.options[i].value === unit) {
                         unitInput.selectedIndex = i;
                         break;
                     }

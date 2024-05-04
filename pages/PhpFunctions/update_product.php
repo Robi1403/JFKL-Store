@@ -3,20 +3,21 @@
 include ("connection.php");
 
 if (isset($_POST['updateProductInfoBtn'])) {
-    echo'updating info';
-    $productName = $_POST['productName'];
-    $netWeight = $_POST['netWeight'];
-    $unit = $_POST['unit'];
-    $category = $_POST['category'];
-    $unitPrice = $_POST['unitPrice'];
-    $retailPrice = $_POST['retailPrice'];
-    $stock = $_POST['stock'];
+
+    $productId = $_POST['productIdInput'];
+    $productName = $_POST['productNameInput'];
+    $netWeight = $_POST['netWeightInput'];
+    $unit = $_POST['unitInput'];
+    $category = $_POST['categoryInput'];
+    $unitPrice = $_POST['unitPriceInput'];
+    $retailPrice = $_POST['retailPriceInput'];
+    $stock = $_POST['stockInput'];
 
     if ($netWeight == NULL) {
         $url = $productName . ".png";
 
-        // Construct the UPDATE query
         $update_query = "UPDATE `inventory` SET
+        `product_name` = '$productName',
         `net_weight` = NULL,
         `unit` = '$unit', 
         `category` = '$category', 
@@ -24,19 +25,21 @@ if (isset($_POST['updateProductInfoBtn'])) {
         `retail_price` = '$retailPrice', 
         `stock` = '$stock',
         `picture_url` =  '$url'
-        WHERE `product_name` = '$productName'";
+        WHERE `product_id` = '$productId'";
 
-        // Execute the UPDATE query
         if (mysqli_query($conn, $update_query)) {
-            echo "Data updated successfully.";
+            echo '<script>
+                    alert("Data updated successfully."); 
+                    window.location.href = "../inventory.php";
+                </script>';
         } else {
-            echo "Error updating data: " . mysqli_error($conn);
+            echo '<script>alert("Error updating data: ' . mysqli_error($conn) . '");</script>';
         }
     } else {
         $url = $productName . " " . $netWeight . ".png";
 
-        // Construct the UPDATE query
         $update_query = "UPDATE `inventory` SET 
+        `product_name` = '$productName',
         `net_weight` = '$netWeight',
         `unit` = '$unit', 
         `category` = '$category', 
@@ -44,9 +47,8 @@ if (isset($_POST['updateProductInfoBtn'])) {
         `retail_price` = '$retailPrice', 
         `stock` = '$stock',
         `picture_url` =  '$url'
-        WHERE `product_name` = '$productName'";
+        WHERE `product_id` = '$productId'";
 
-        // Execute the UPDATE query
         if (mysqli_query($conn, $update_query)) {
             echo "Data updated successfully.";
         } else {
