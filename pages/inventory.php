@@ -284,7 +284,7 @@ include ("PhpFunctions/update_product.php");
                                 <label>Product Image</label>
                                 <div class="addImage">
                                     <div class="imageContainer">
-                                        <img src="../assets/addImage.svg" id="productImage">
+                                        <img src="../assets/addImage.svg" id="editProductImage">
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
@@ -463,10 +463,6 @@ include ("PhpFunctions/update_product.php");
                 var stock = this.parentNode.querySelector('[name="stock_info"]').value;
                 var url = this.parentNode.querySelector('[name="url_info"]').value;
 
-                //appends "../assets/InventoryItems/" to the url
-                var pictureUrl = "../assets/InventoryItems/" + url;
-                alert(pictureUrl); //TAMA 
-
                 //sets the product info in the input fields inside the UpdateProductModal
                 var productIdInput = document.getElementById('productIdInput');
                 productIdInput.value = productId;
@@ -510,9 +506,12 @@ include ("PhpFunctions/update_product.php");
                 var stockInput = document.getElementById('stockInput');
                 stockInput.value = stock;
 
-                // Get the input-file element
-                var productImage = document.getElementById('productImage');
-                productImage.src = pictureUrl;
+                //appends "../assets/InventoryItems/" to the url
+                var pictureUrl = "../assets/InventoryItems/" + url;
+
+                //changes the src of image (from ../assets/addImage.svg to current product's url)
+                var editProductImage = document.getElementById('editProductImage');
+                editProductImage.src = pictureUrl;
 
                 var updateProductModal = document.getElementById("updateProductModal");
                 updateProductModal.style.display = "block";
