@@ -529,6 +529,6 @@ input[type=text]:-ms-input-placeholder{
 }
 
 /* NEW */
-#addProductModal, #editProductInfoModal{
+#addProductModal, #updateProductModal{
     display: none;
 }
