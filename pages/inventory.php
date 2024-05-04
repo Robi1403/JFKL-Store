@@ -13,7 +13,6 @@ include ("PhpFunctions/update_product.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JFKL Store</title>
     <link rel="stylesheet" href="../css/inventory.css">
-    <script src="../js/inventory.js"></script>
 </head>
 
 <body>
@@ -375,4 +374,5 @@ include ("PhpFunctions/update_product.php");
         </div>
     </div>
 </body>
+<script src="../js/inventory.js"></script>
 </html>
