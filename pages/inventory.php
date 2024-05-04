@@ -78,19 +78,25 @@ include ("PhpFunctions/add_product.php");
                 <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
                 <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
                 <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
-                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household &
+                    Cleaning Supplies</button>
+                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection
+                    Products</button>
                 <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
                 <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
                 <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
                 <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
                 <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
                 <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
-                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic Beverages</button>
-                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies & Chocolates</button>
+                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic
+                    Beverages</button>
+                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies &
+                    Chocolates</button>
                 <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments & Sauces</button>
-                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments &
+                    Sauces</button>
+                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking
+                    Ingredients & Seasonings</button>
                 <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
                 <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
             </div>
@@ -146,9 +152,8 @@ include ("PhpFunctions/add_product.php");
                                         <td><?php echo $row["stock"]; ?></td>
                                         <td>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                                                <input type="hidden" name="productId_info"
-                                                    value="<?php echo $row["product_id"]; ?>">
-                                                <button type="submit" name="passProductInfoBtn"><img
+                                                <input type="hidden" name="productId_info" value="<?php echo $row["product_id"]; ?>">
+                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn"><img
                                                         src='../assets/edit.svg'></button>
                                             </form>
                                         </td>
@@ -271,11 +276,14 @@ include ("PhpFunctions/add_product.php");
         </div>
     </div>
 
+    <!-- tama man -->
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['passProductInfoBtn'])) {
         $productId = $_POST['productId_info'];
 
+        
         // Fetch data from the database
+
         $select_query = "SELECT * FROM `inventory` WHERE `product_id` = '$productId'";
         $result = mysqli_query($conn, $select_query);
 
@@ -283,14 +291,14 @@ include ("PhpFunctions/add_product.php");
         if ($result && mysqli_num_rows($result) > 0) {
             // Fetch the product details
             $row = mysqli_fetch_assoc($result);
-            $productName = $row['product_name'];
-            $netWeight = $row['net_weight'];
-            $unit = $row['unit'];
-            $category = $row['category'];
-            $unitPrice = $row['unit_price'];
-            $retailPrice = $row['retail_price'];
-            $stock = $row['stock'];
-            $url = $row['picture_url'];
+            $productName_info = $row['product_name'];
+            $netWeight_info = $row['net_weight'];
+            $unit_info = $row['unit'];
+            $category_info = $row['category'];
+            $unitPrice_info = $row['unit_price'];
+            $retailPrice_info = $row['retail_price'];
+            $stock_info = $row['stock'];
+            $url_info = $row['picture_url'];
 
         } else {
             // No matching product found
@@ -303,7 +311,7 @@ include ("PhpFunctions/add_product.php");
         <div class="background">
             <div class="ItemContainer">
                 <h3>Update Product Information</h3>
-                <form id="addProductForm" name="addProductForm" action="PhpFunctions/add_product.php" method="POST">
+                <form id="addProductForm" name="addProductForm" action="PhpFunctions/update_product.php" method="POST">
                     <div class="formContent">
                         <div class="productInfo">
                             <label for="productInfo">Product Info</label><br><br>
@@ -323,13 +331,14 @@ include ("PhpFunctions/add_product.php");
                             <input type="hidden" id="productIdInput" name="productId">
                             <div class="labelInput">
                                 <label>Product Name</label>
-                                <input type="text" id="username" name="productName" id="productNameInput" value="<?php echo $productName; ?>"
-                                    required><br><br>
+                                <input type="text" id="username" name="productName" id="productNameInput"
+                                    value="<?php echo $productName_info; ?>" required><br><br>
                             </div>
                             <div class="labelInput">
                                 <label>Net Weight</label>
-                                <?php if($netWeight != NULL) {?>
-                                <input type="text" id="username" name="netWeight" id="netWeightInput" value="<?php echo $netWeight; ?>"><br><br>
+                                <?php if ($netWeight_info != NULL) { ?>
+                                    <input type="text" id="username" name="netWeight" id="netWeightInput"
+                                        value="<?php echo $netWeight_info; ?>"><br><br>
                                 <?php } ?>
                             </div>
                             <!-- <div class="labelInput">
@@ -339,37 +348,71 @@ include ("PhpFunctions/add_product.php");
                             <div class="labelInput">
                                 <label for="category">Category</label>
                                 <select id="category" name="category" id="categoryInput" required>
-                                    <option value="" <?php if ($category == '') echo 'selected'; ?>></option>
-                                    <option value="Canned Goods" <?php if ($category == 'Canned Goods') echo 'selected'; ?>>Canned Goods</option>
-                                    <option value="Coffee" <?php if ($category == 'Coffee') echo 'selected'; ?>>Coffee</option>
-                                    <option value="Biscuits" <?php if ($category == 'Biscuits') echo 'selected'; ?>>Biscuits</option>
-                                    <option value="Ice Cream" <?php if ($category == 'Ice Cream') echo 'selected'; ?>>Ice Cream</option>
-                                    <option value="Bread" <?php if ($category == 'Bread') echo 'selected'; ?>>Bread</option>
-                                    <option value="Health & Beauty" <?php if ($category == 'Bread') echo 'selected'; ?>>Health & Beauty</option>
-                                    <option value="Household & Cleaning Supplies" <?php if ($category == 'Bread') echo 'selected'; ?>>Household & Cleaning Supplies</option>
-                                    <option value="PC Products" <?php if ($category == 'PC Products') echo 'selected'; ?>>Personal Collection Products</option>
-                                    <option value="Cold Drinks" <?php if ($category == 'Cold Drinks') echo 'selected'; ?>>Cold Drinks</option>
-                                    <option value="Powdered Drinks" <?php if ($category == 'Powdered Drinks') echo 'selected'; ?>>Powdered Drinks</option>
-                                    <option value="Junk Foods" <?php if ($category == 'Junk Foods') echo 'selected'; ?>>Junk Foods</option>
-                                    <option value="Cigarettes" <?php if ($category == 'Cigarettes') echo 'selected'; ?>>Cigarettes</option>
-                                    <option value="Frozen Foods" <?php if ($category == 'Frozen Foods') echo 'selected'; ?>>Frozen Foods</option>
-                                    <option value="Instant Noodles" <?php if ($category == 'Instant Noodles') echo 'selected'; ?>>Instant Noodles</option>
-                                    <option value="Alcoholic Beverages" <?php if ($category == 'Alcoholic Beverages') echo 'selected'; ?>>Alcoholic Beverages</option>
-                                    <option value="Candies & Chocolates" <?php if ($category == 'Candies & Chocolates') echo 'selected'; ?>>Candies & Chocolates</option>
-                                    <option value="Dairy Products" <?php if ($category == 'Dairy Products') echo 'selected'; ?>>Dairy Products</option>
-                                    <option value="Condiments & Sauces" <?php if ($category == 'Condiments & Sauces') echo 'selected'; ?>>Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings" <?php if ($category == 'Cooking Ingredients & Seasonings') echo 'selected'; ?>>Cooking Ingredients & Seasonings
+                                    <option value="" <?php if ($category_info == '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Canned Goods" <?php if ($category_info == 'Canned Goods')
+                                        echo 'selected'; ?>>Canned Goods</option>
+                                    <option value="Coffee" <?php if ($category_info == 'Coffee')
+                                        echo 'selected'; ?>>Coffee
                                     </option>
-                                    <option value="Spreads & Fillings" <?php if ($category == 'Spreads & Fillings') echo 'selected'; ?>>Spreads & Fillings</option>
-                                    <option value="School Supplies" <?php if ($category == 'School Supplies') echo 'selected'; ?>>School Supplies</option>
+                                    <option value="Biscuits" <?php if ($category_info == 'Biscuits')
+                                        echo 'selected'; ?>>
+                                        Biscuits</option>
+                                    <option value="Ice Cream" <?php if ($category_info == 'Ice Cream')
+                                        echo 'selected'; ?>>Ice
+                                        Cream</option>
+                                    <option value="Bread" <?php if ($category_info == 'Bread')
+                                        echo 'selected'; ?>>Bread
+                                    </option>
+                                    <option value="Health & Beauty" <?php if ($category_info == 'Bread')
+                                        echo 'selected'; ?>>
+                                        Health & Beauty</option>
+                                    <option value="Household & Cleaning Supplies" <?php if ($category_info == 'Bread')
+                                        echo 'selected'; ?>>Household & Cleaning Supplies</option>
+                                    <option value="PC Products" <?php if ($category_info == 'PC Products')
+                                        echo 'selected'; ?>>
+                                        Personal Collection Products</option>
+                                    <option value="Cold Drinks" <?php if ($category_info == 'Cold Drinks')
+                                        echo 'selected'; ?>>
+                                        Cold Drinks</option>
+                                    <option value="Powdered Drinks" <?php if ($category_info == 'Powdered Drinks')
+                                        echo 'selected'; ?>>Powdered Drinks</option>
+                                    <option value="Junk Foods" <?php if ($category_info == 'Junk Foods')
+                                        echo 'selected'; ?>>
+                                        Junk Foods</option>
+                                    <option value="Cigarettes" <?php if ($categor_infoy == 'Cigarettes')
+                                        echo 'selected'; ?>>
+                                        Cigarettes</option>
+                                    <option value="Frozen Foods" <?php if ($category_info == 'Frozen Foods')
+                                        echo 'selected'; ?>>Frozen Foods</option>
+                                    <option value="Instant Noodles" <?php if ($category_info == 'Instant Noodles')
+                                        echo 'selected'; ?>>Instant Noodles</option>
+                                    <option value="Alcoholic Beverages" <?php if ($category_info == 'Alcoholic Beverages')
+                                        echo 'selected'; ?>>Alcoholic Beverages</option>
+                                    <option value="Candies & Chocolates" <?php if ($category_info == 'Candies & Chocolates')
+                                        echo 'selected'; ?>>Candies & Chocolates</option>
+                                    <option value="Dairy Products" <?php if ($category_info == 'Dairy Products')
+                                        echo 'selected'; ?>>Dairy Products</option>
+                                    <option value="Condiments & Sauces" <?php if ($category_info == 'Condiments & Sauces')
+                                        echo 'selected'; ?>>Condiments & Sauces</option>
+                                    <option value="Cooking Ingredients & Seasonings" <?php if ($category_info == 'Cooking Ingredients & Seasonings')
+                                        echo 'selected'; ?>>Cooking Ingredients & Seasonings
+                                    </option>
+                                    <option value="Spreads & Fillings" <?php if ($category_info == 'Spreads & Fillings')
+                                        echo 'selected'; ?>>Spreads & Fillings</option>
+                                    <option value="School Supplies" <?php if ($category_info == 'School Supplies')
+                                        echo 'selected'; ?>>School Supplies</option>
                                 </select>
                             </div>
                             <div class="labelInput">
                                 <label for="unit">Unit</label>
-                                <select id="unitInput" name="unit" value="<?php echo $unit; ?>" required>
-                                <option value="" <?php if ($unit == '') echo 'selected'; ?>></option>
-                                    <option value="Piece" <?php if ($unit == 'Piece') echo 'selected'; ?>>Piece</option>
-                                    <option value="Pack" <?php if ($unit == 'Pack') echo 'selected'; ?>>Pack</option>
+                                <select id="unitInput" name="unit" value="<?php echo $unit_info; ?>" required>
+                                    <option value="" <?php if ($unit_info == '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Piece" <?php if ($unit_info == 'Piece')
+                                        echo 'selected'; ?>>Piece</option>
+                                    <option value="Pack" <?php if ($unit_info == 'Pack')
+                                        echo 'selected'; ?>>Pack</option>
                                 </select>
                             </div>
                         </div>
@@ -378,26 +421,27 @@ include ("PhpFunctions/add_product.php");
                                 <label for="pricingInfo">Pricing Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Unit Price</label>
-                                    <input type="text" id="username" name="unitPrice" id="unitPriceInput" value="<?php echo $unitPrice; ?>"
-                                        required><br><br>
+                                    <input type="text" id="username" name="unitPrice" id="unitPriceInput"
+                                        value="<?php echo $unitPrice_info; ?>" required><br><br>
                                 </div>
                                 <div class="labelInput">
                                     <label>Retail Price</label>
-                                    <input type="text" id="username" name="retailPrice" id="retailPriceInput" value="<?php echo $retailPrice; ?>"
-                                        required><br><br>
+                                    <input type="text" id="username" name="retailPrice" id="retailPriceInput"
+                                        value="<?php echo $retailPrice_info; ?>" required><br><br>
                                 </div>
                             </div>
                             <div class="stockInfo">
                                 <label for="stockInfo">Stock Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Stock</label>
-                                    <input type="text" id="username" name="stock" id="stockInput" value="<?php echo $stock; ?>" required><br><br>
+                                    <input type="text" id="username" name="stock" id="stockInput"
+                                        value="<?php echo $stock_info; ?>" required><br><br>
                                 </div>
                             </div>
                             <div class="updateButtons">
-                                <button class="addProduct" id="addNewProductBtn" name="addNewProductBtn"
+                                <button class="addProduct" id="updateProductInfoBtn" name="updateProductInfoBtn"
                                     type="submit">Update Product</button>
-                                <button class="cancel" id="cancelUpdateBtn">Cancel</button>
+                                <button class="cancel" id="cancelUpdateBtn" name="cancelUpdateBtn">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -474,79 +518,39 @@ include ("PhpFunctions/add_product.php");
         });
     </script>
 
-    <!-- <script>
-        // Get reference to the edit button
-        var passProductInfoBtn = document.getElementById('passProductInfoBtn');
 
-        // Add click event listener
-        passProductInfoBtn.addEventListener('click', function() {
-            // Get product info from hidden input fields
-            var productId = document.getElementById('productId_info').value;
-            var productName = document.getElementById('productName_info').value;
-            var netWeight = document.getElementById('netWeight_info').value;
-            var category = document.getElementById('category_info').value;
-            var unit = document.getElementById('unit_info').value;
-            var unitPrice = document.getElementById('unitPrice_info').value;
-            var retailPrice = document.getElementById('retailPrice_info').value;
-            var stock = document.getElementById('stock_info').value;
-            var url = document.getElementById('url_info').value;
+    <script>
 
-            // Populate the form fields in the modal with product info
-            document.getElementById('productNameInput').value = productName;
-            document.getElementById('netWeightInput').value = netWeight;
-            document.getElementById('categoryInput').value = category;
-            document.getElementById('unitInput').value = unit;
-            document.getElementById('unitPriceInput').value = unitPrice;
-            document.getElementById('retailPriceInput').value = retailPrice;
-            document.getElementById('stockInput').value = stock;
-            document.getElementById('productImage').src = url;
-
-            // Set the productId value in the form action attribute
-            document.getElementById('updateProductForm').action = '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?id=' + productId;
-
-            // Show the modal
-            updateProductModal.style.display = 'block';
-        });
-    </script> -->
-
-    <!-- <script>
         var updateProductBtn = document.getElementById("passProductInfoBtn");
 
-        updateProductBtn.addEventListener("click", function () {
-            var updateProductModal = document.getElementById("updateProductModal");
+        updateProductBtn.addEventListener("click", function (event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
 
+            var productId = this.parentNode.querySelector('[name="productId_info"]').value;
+            document.getElementById('productIdInput').value = productId;
+            var updateProductModal = document.getElementById("updateProductModal");
             updateProductModal.style.display = "block";
         });
 
         var cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
 
-        cancelUpdateBtn.addEventListener("click", function () {
-            var updateProductModal = document.getElementById("updateProductModal");
+        cancelUpdateBtn.addEventListener("click", function (event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
 
+            var updateProductModal = document.getElementById("updateProductModal");
             updateProductModal.style.display = "none";
         });
-    </script> -->
 
-    <script>
-        // Edit product button click event
-        var editButtons = document.querySelectorAll('[name="passProductInfoBtn"]');
-
-        editButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var productId = this.parentNode.querySelector('[name="productId_info"]').value;
-                document.getElementById('productIdInput').value = productId;
-                var updateProductModal = document.getElementById('updateProductModal');
-                updateProductModal.style.display = 'block';
-            });
-        });
     </script>
-    
+
     <script>
         //filter category
         function filterInventory(category) {
             var rows = document.querySelectorAll('.inventoryTable tbody tr');
-            rows.forEach(function(row) {
-                var categoryCell = row.cells[4].textContent; 
+            rows.forEach(function (row) {
+                var categoryCell = row.cells[4].textContent;
                 if (category === 'All' || categoryCell === category) {
                     row.style.display = '';
                 } else {
