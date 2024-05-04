@@ -1,7 +1,10 @@
+<!-- naga select gabos but su value sala -->
+
 <?php
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/remove_product.php");
 include ("PhpFunctions/add_product.php");
+include ("PhpFunctions/update_product.php");
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +156,15 @@ include ("PhpFunctions/add_product.php");
                                         <td>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                                 <input type="hidden" name="productId_info" value="<?php echo $row["product_id"]; ?>">
-                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn"><img
+                                                <input type="hidden" name="productName_info" value="<?php echo $row["product_name"]; ?>">
+                                                <input type="hidden" name="netWeight_info" value="<?php echo $row["net_weight"]; ?>">
+                                                <input type="hidden" name="category_info" value="<?php echo $row["category"]; ?>">
+                                                <input type="hidden" name="unit_info" value="<?php echo $row["unit"]; ?>">
+                                                <input type="hidden" name="unitPrice_info" value="<?php echo $row["unit_price"]; ?>">
+                                                <input type="hidden" name="retailPrice_info" value="<?php echo $row["retail_price"]; ?>">
+                                                <input type="hidden" name="stock_info" value="<?php echo $row["stock"]; ?>">
+                                                
+                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn" class="updateProduct"><img
                                                         src='../assets/edit.svg'></button>
                                             </form>
                                         </td>
@@ -276,14 +287,12 @@ include ("PhpFunctions/add_product.php");
         </div>
     </div>
 
-    <!-- tama man -->
-    <?php
+    <!-- <php
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['passProductInfoBtn'])) {
         $productId = $_POST['productId_info'];
 
-        
+        echo '<script>alert("product id (php): ' .$productId .'")';
         // Fetch data from the database
-
         $select_query = "SELECT * FROM `inventory` WHERE `product_id` = '$productId'";
         $result = mysqli_query($conn, $select_query);
 
@@ -305,7 +314,7 @@ include ("PhpFunctions/add_product.php");
             echo "Product not found!";
         }
     }
-    ?>
+    ?> -->
 
     <div id="updateProductModal">
         <div class="background">
@@ -328,91 +337,57 @@ include ("PhpFunctions/add_product.php");
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="productIdInput" name="productId">
+                            <div class="labelInput">
+                                <label>Product ID</label>
+                                <input type="text" id="productIdInput" readonly><br><br>
+                            </div>
+
                             <div class="labelInput">
                                 <label>Product Name</label>
-                                <input type="text" id="username" name="productName" id="productNameInput"
-                                    value="<?php echo $productName_info; ?>" required><br><br>
+                                <input type="text" id="productNameInput" required><br><br>
+                                    <!-- <input type="text" id="productNameInput" name="productName" id="productNameInput"
+                                    value="<php echo $productName_info; ?>" required><br><br> -->
                             </div>
                             <div class="labelInput">
                                 <label>Net Weight</label>
-                                <?php if ($netWeight_info != NULL) { ?>
-                                    <input type="text" id="username" name="netWeight" id="netWeightInput"
-                                        value="<?php echo $netWeight_info; ?>"><br><br>
-                                <?php } ?>
+                                    <!-- <input type="text" id="netWeightInput" ><br><br> -->
+                                    <input type="text" id="netWeightInput"><br><br>
                             </div>
-                            <!-- <div class="labelInput">
-                            <label>Product ID</label>
-                            <input type="text" id="username" required><br><br>
-                        </div> -->
+                            
                             <div class="labelInput">
                                 <label for="category">Category</label>
-                                <select id="category" name="category" id="categoryInput" required>
-                                    <option value="" <?php if ($category_info == '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Canned Goods" <?php if ($category_info == 'Canned Goods')
-                                        echo 'selected'; ?>>Canned Goods</option>
-                                    <option value="Coffee" <?php if ($category_info == 'Coffee')
-                                        echo 'selected'; ?>>Coffee
-                                    </option>
-                                    <option value="Biscuits" <?php if ($category_info == 'Biscuits')
-                                        echo 'selected'; ?>>
-                                        Biscuits</option>
-                                    <option value="Ice Cream" <?php if ($category_info == 'Ice Cream')
-                                        echo 'selected'; ?>>Ice
-                                        Cream</option>
-                                    <option value="Bread" <?php if ($category_info == 'Bread')
-                                        echo 'selected'; ?>>Bread
-                                    </option>
-                                    <option value="Health & Beauty" <?php if ($category_info == 'Bread')
-                                        echo 'selected'; ?>>
-                                        Health & Beauty</option>
-                                    <option value="Household & Cleaning Supplies" <?php if ($category_info == 'Bread')
-                                        echo 'selected'; ?>>Household & Cleaning Supplies</option>
-                                    <option value="PC Products" <?php if ($category_info == 'PC Products')
-                                        echo 'selected'; ?>>
-                                        Personal Collection Products</option>
-                                    <option value="Cold Drinks" <?php if ($category_info == 'Cold Drinks')
-                                        echo 'selected'; ?>>
-                                        Cold Drinks</option>
-                                    <option value="Powdered Drinks" <?php if ($category_info == 'Powdered Drinks')
-                                        echo 'selected'; ?>>Powdered Drinks</option>
-                                    <option value="Junk Foods" <?php if ($category_info == 'Junk Foods')
-                                        echo 'selected'; ?>>
-                                        Junk Foods</option>
-                                    <option value="Cigarettes" <?php if ($categor_infoy == 'Cigarettes')
-                                        echo 'selected'; ?>>
-                                        Cigarettes</option>
-                                    <option value="Frozen Foods" <?php if ($category_info == 'Frozen Foods')
-                                        echo 'selected'; ?>>Frozen Foods</option>
-                                    <option value="Instant Noodles" <?php if ($category_info == 'Instant Noodles')
-                                        echo 'selected'; ?>>Instant Noodles</option>
-                                    <option value="Alcoholic Beverages" <?php if ($category_info == 'Alcoholic Beverages')
-                                        echo 'selected'; ?>>Alcoholic Beverages</option>
-                                    <option value="Candies & Chocolates" <?php if ($category_info == 'Candies & Chocolates')
-                                        echo 'selected'; ?>>Candies & Chocolates</option>
-                                    <option value="Dairy Products" <?php if ($category_info == 'Dairy Products')
-                                        echo 'selected'; ?>>Dairy Products</option>
-                                    <option value="Condiments & Sauces" <?php if ($category_info == 'Condiments & Sauces')
-                                        echo 'selected'; ?>>Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings" <?php if ($category_info == 'Cooking Ingredients & Seasonings')
-                                        echo 'selected'; ?>>Cooking Ingredients & Seasonings
-                                    </option>
-                                    <option value="Spreads & Fillings" <?php if ($category_info == 'Spreads & Fillings')
-                                        echo 'selected'; ?>>Spreads & Fillings</option>
-                                    <option value="School Supplies" <?php if ($category_info == 'School Supplies')
-                                        echo 'selected'; ?>>School Supplies</option>
+                                <select name="category" id="categoryInput" required>
+                                    <option value="" selected></option>
+                                    <option value="Canned Goods">Canned Goods</option>
+                                    <option value="Coffee">Coffee</option>
+                                    <option value="Biscuits">Biscuits</option>
+                                    <option value="Ice Cream">Ice Cream</option>
+                                    <option value="Bread">Bread</option>
+                                    <option value="Health & Beauty">Health & Beauty</option>
+                                    <option value="Household & Cleaning Supplies">Household & Cleaning Supplies</option>
+                                    <option value="PC Products">Personal Collection Products</option>
+                                    <option value="Cold Drinks">Cold Drinks</option>
+                                    <option value="Powdered Drinks">Powdered Drinks</option>
+                                    <option value="Junk Foods">Junk Foods</option>
+                                    <option value="Cigarettes">Cigarettes</option>
+                                    <option value="Frozen Foods">Frozen Foods</option>
+                                    <option value="Instant Noodles">Instant Noodles</option>
+                                    <option value="Alcoholic Beverages">Alcoholic Beverages</option>
+                                    <option value="Candies & Chocolates">Candies & Chocolates</option>
+                                    <option value="Dairy Products">Dairy Products</option>
+                                    <option value="Condiments & Sauces">Condiments & Sauces</option>
+                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
+                                    <option value="Spreads & Fillings">Spreads & Fillings</option>
+                                    <option value="School Supplies">School Supplies</option>
                                 </select>
+
                             </div>
                             <div class="labelInput">
                                 <label for="unit">Unit</label>
-                                <select id="unitInput" name="unit" value="<?php echo $unit_info; ?>" required>
-                                    <option value="" <?php if ($unit_info == '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Piece" <?php if ($unit_info == 'Piece')
-                                        echo 'selected'; ?>>Piece</option>
-                                    <option value="Pack" <?php if ($unit_info == 'Pack')
-                                        echo 'selected'; ?>>Pack</option>
+                                <select id="unitInput" name="unit" required>
+                                    <option></option>
+                                    <option>Piece</option>
+                                    <option>Pack</option>
                                 </select>
                             </div>
                         </div>
@@ -421,21 +396,21 @@ include ("PhpFunctions/add_product.php");
                                 <label for="pricingInfo">Pricing Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Unit Price</label>
-                                    <input type="text" id="username" name="unitPrice" id="unitPriceInput"
-                                        value="<?php echo $unitPrice_info; ?>" required><br><br>
+                                    <input type="text" id="unitPriceInput" name="unitPrice" id="unitPriceInput"
+                                        value="<?php echo $unitPrice; ?>" required><br><br>
                                 </div>
                                 <div class="labelInput">
                                     <label>Retail Price</label>
-                                    <input type="text" id="username" name="retailPrice" id="retailPriceInput"
-                                        value="<?php echo $retailPrice_info; ?>" required><br><br>
+                                    <input type="text" id="retailPriceInput" name="retailPrice" id="retailPriceInput"
+                                        value="<?php echo $retailPrice; ?>" required><br><br>
                                 </div>
                             </div>
                             <div class="stockInfo">
                                 <label for="stockInfo">Stock Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Stock</label>
-                                    <input type="text" id="username" name="stock" id="stockInput"
-                                        value="<?php echo $stock_info; ?>" required><br><br>
+                                    <input type="text" id="stockInput" name="stock" id="stockInput"
+                                        value="<?php echo $stock; ?>" required><br><br>
                                 </div>
                             </div>
                             <div class="updateButtons">
@@ -518,20 +493,106 @@ include ("PhpFunctions/add_product.php");
         });
     </script>
 
-
     <script>
+        // Select all buttons with the class passProductInfoBtn
+        var updateProductBtns = document.querySelectorAll(".updateProduct");
 
-        var updateProductBtn = document.getElementById("passProductInfoBtn");
+        // Loop through each button and attach the event listener
+        updateProductBtns.forEach(function(btn) {
+            btn.addEventListener("click", function(event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
 
-        updateProductBtn.addEventListener("click", function (event) {
-            // Prevent the default form submission behavior
-            event.preventDefault();
+                // Get the product information associated with these buttons
+                var productId = this.parentNode.querySelector('[name="productId_info"]').value;
+                var productName = this.parentNode.querySelector('[name="productName_info"]').value;
+                var netWeight = this.parentNode.querySelector('[name="netWeight_info"]').value;
+                var category = this.parentNode.querySelector('[name="category_info"]').value;
+                var unit = this.parentNode.querySelector('[name="unit_info"]').value;
+                var unitPrice = this.parentNode.querySelector('[name="unitPrice_info"]').value;
+                var retailPrice = this.parentNode.querySelector('[name="retailPrice_info"]').value;
+                var stock = this.parentNode.querySelector('[name="stock_info"]').value;
+                
+                // Set the product info in the hidden input field
+                document.getElementById('productIdInput').value = productId;
 
-            var productId = this.parentNode.querySelector('[name="productId_info"]').value;
-            document.getElementById('productIdInput').value = productId;
-            var updateProductModal = document.getElementById("updateProductModal");
-            updateProductModal.style.display = "block";
+                document.getElementById('productNameInput').value = productName;
+
+                document.getElementById('netWeightInput').value = netWeight;
+
+                document.getElementById('categoryInput').value = category;
+
+                document.getElementById('unitInput').value = unit
+
+                document.getElementById('unitPriceInput').value = unitPrice;
+
+                document.getElementById('retailPriceInput').value = retailPrice;
+
+                document.getElementById('stockInput').value = stock;
+
+                // Set the product info in the input field inside the modal form
+                var productIdInput = document.getElementById('productIdInput');
+                productIdInput.value = productId;
+
+                var productNameInput = document.getElementById('productNameInput');
+                productNameInput.value = productName;
+
+                var netWeightInput = document.getElementById('netWeightInput');
+                netWeightInput.value = netWeight;
+
+                // Get the category value from the hidden input field
+                var categoryValue = document.querySelector('[name="category_info"]').value;
+
+                // Select the corresponding option in the dropdown menu
+                var categoryInput = document.getElementById('categoryInput');
+                for (var i = 0; i < categoryInput.options.length; i++) {
+                    if (categoryInput.options[i].value === categoryValue) {
+                        categoryInput.selectedIndex = i;
+                        break;
+                    }
+                }
+
+                // Get the unit value from the hidden input field
+                var unitValue = document.querySelector('[name="unit_info"]').value;
+
+                // Select the corresponding option in the dropdown menu
+                var unitInput = document.getElementById('unitInput');
+                for (var i = 0; i < unitInput.options.length; i++) {
+                    if (unitInput.options[i].value === unitValue) {
+                        unitInput.selectedIndex = i;
+                        break;
+                    }
+                }
+
+                var unitPriceInput = document.getElementById('unitPriceInput');
+                unitPriceInput.value = unitPrice;
+
+                var retailPriceInput = document.getElementById('retailPriceInput');
+                retailPriceInput.value = retailPrice;
+
+                var stockInput = document.getElementById('stockInput');
+                stockInput.value = stock;
+
+                // var url = document.getElementById('retailPriceInput');
+                // retailPriceInput.value = productId;
+                
+                // Show the updateProductModal
+                var updateProductModal = document.getElementById("updateProductModal");
+                updateProductModal.style.display = "block";
+            });
         });
+
+        // var updateProductBtn = document.getElementById("passProductInfoBtn");
+
+        // updateProductBtn.addEventListener("click", function (event) {
+        //     // Prevent the default form submission behavior
+        //     event.preventDefault();
+
+        //     var productId = this.parentNode.querySelector('[name="productId_info"]').value;
+        //     document.getElementById('productIdInput').value = productId;
+        //     var updateProductModal = document.getElementById("updateProductModal");
+        //     updateProductModal.style.display = "block";
+        // });
 
         var cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
 
