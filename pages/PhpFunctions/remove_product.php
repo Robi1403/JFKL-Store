@@ -1,12 +1,12 @@
 <?php
+include ("connection.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])){
 
     if (is_string($_POST['selectedProducts']) && !empty($_POST['selectedProducts'])) {
 
         //split string selectedProducts to array based on ,
         $selectedProducts = explode(',', $_POST['selectedProducts']);
-
-        $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
