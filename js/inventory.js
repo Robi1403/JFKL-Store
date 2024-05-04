@@ -21,6 +21,28 @@ function filterInventory(category) {
     });
 }
 
+//---SEARCH PRODUCT---//
+document.getElementById("search").addEventListener("input", function () {
+    var searchText = this.value.toLowerCase(); 
+
+    //selects all rows in the table body
+    var rows = document.querySelectorAll('.inventoryTable tbody tr');
+
+    //loops through each row and check if it contains the search text
+    rows.forEach(function (row) {
+        //gets the product name 
+        var productName = row.cells[2].textContent.toLowerCase(); 
+        if (productName.includes(searchText)) {
+            //shows the row if it contains the search text
+            row.style.display = ''; 
+        } else {
+            //hides the row if it doesn't 
+            row.style.display = 'none'; 
+        }
+    });
+});
+//---END---//
+
 //---ADD PRODUCT---//
 
 //To get uploaded img

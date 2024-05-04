@@ -13,6 +13,7 @@ include ("PhpFunctions/update_product.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JFKL Store</title>
     <link rel="stylesheet" href="../css/inventory.css">
+    <link rel="icon" href="../assets/storeLogo.svg">
 </head>
 
 <body>
@@ -43,13 +44,13 @@ include ("PhpFunctions/update_product.php");
     <div class="sideBar">
         <div class="sbPOS">
             <button id="POSBtn">
-                <img src="../assets/POSbnw.svg" alt=""><br>
+                <img src="../assets/POS_g.svg" alt=""><br>
                 <strong>POS</strong>
             </button>
         </div>
         <div class="sbInventory">
             <button id="inventoryBtn">
-                <img src="../assets/inventorybnw.svg" alt=""><br>
+                <img src="../assets/inventory_g.svg" alt=""><br>
                 <strong>Inventory</strong>
             </button>
         </div>
