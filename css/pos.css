@@ -49,25 +49,36 @@ body{
     gap: 10px;
 }
 
-.navbar .searchBar{
+.navbar .searchBar form{
     margin-left: 60px;
     flex: 2.5;
     padding-right: 30px;
+    display: flex;
+    width: 100vh;
 }
 
 .navbar .searchBar input{
     font-size: 14px;
     height: 40px;
-    min-width: 400px;
     width: 100%;
     left: 0;
     border: none;
-    border-radius: 7px;
+    border-radius: 7px 0px 0px 7px;
     padding-left: 20px;
     background-color: #F6F6F6;
 }
 .navbar .searchBar input:focus{
     outline: none;
+}
+.navbar .searchBar button{
+    background-color: #F6F6F6;
+    border: none;
+    border-radius: 0px 7px 7px 0px;
+}
+
+.navbar .searchBar img{
+    margin: 0px 15px 0px 15px;
+    width: 15px;
 }
 
 .navbar .right{
@@ -183,7 +194,7 @@ body{
 
 .products{
     background-color: #ffffff;
-    height: 90vh;
+    height: 80%;
     border-radius: 13px;
     padding: 30px;
     overflow: auto;
@@ -192,7 +203,7 @@ body{
 
 .ItemCardView{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
-    height: 260px;
+    height: auto;
     width: 175px;
     border-radius: 7px;
     padding: 10px;
@@ -436,6 +447,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     justify-content: space-between;
     margin: 0px 25px 10px 25px;
+     
 }
 .SubTotal h1{
     color: #000;
