@@ -137,7 +137,6 @@ include("PhpFunctions/modal.php");
                                     <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
                                 <input type="hidden" class="ProductID" name="productId" value="<?php echo $row['product_id']; ?>">
-                                <input type="hidden" name="quantity" value="1"> 
                                 <button type="button" name="toCart" class="toCart"><img src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
@@ -170,38 +169,15 @@ include("PhpFunctions/modal.php");
 
                 ?>
 
-                <?php
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
-                    // Create a session array to store product data
-                    $session_array = array(
-                        'id' => $_POST['productID'],
-                        'product_name' => $_POST['productName'],
-                        'retail_price' => $_POST['productRetailPrice'],
-                        'picture_url' => $_POST['productURL'],
-                        'net_weight' => $_POST['productNetweight'],
-                        'quantity' => $_POST['Quantity'],
-                        'unitPrice' => $_POST['productUnitPrice'],
 
-                    );
 
-                    // Check if the session cart already exists
-                    if (isset($_SESSION['cart'])) {
-                        // If it exists, add the new item to the cart array
-                        $_SESSION['cart'][] = $session_array;
-                    } else {
-                        // If it doesn't exist, create the cart array and add the item
-                        $_SESSION['cart'] = array($session_array);
-                    }
-                }
-                ?>
 
                 <div class="orderList">
                     
                 
                     <?php
 
-                    var_dump($_SESSION['cart']);
 
                     $SubTotal = 0;
                     $realCostofGoods = 0;
@@ -307,43 +283,12 @@ include("PhpFunctions/modal.php");
             </div>
         </div>
    
-        <div class="addItem">
+       
 
-                        <!-- <div class="ItemContainer">
-                                <div class="itemInfo">
-                                    <img src="../assets/samplePic.svg" alt="">
-                                    <div class="Infos">
-                                        <h1>aRGRNTINA</h1>
-                                        <h3>150g</h3>
-                                        <h1>100</h1>
-                                    </div>
-                                </div>
-                                <div class="ItemQuantity">
-                                    <div class="addQuantity">
-                                        <h3>Quantity</h3>
-                                        <div class="addMinusQuantity">0
-                                        <button onclick="decreaseQuantity(this)">
-                                            <img src="../assets/decreaseBtn.svg" alt="">
-                                        </button>
-                                        
-                                        <input type="number" id="quantityInput" name="Quantity" value="<?php echo $quantity ?>">
-                                        
-                                        <button onclick="increaseQuantity(this)">
-                                            <img src="../assets/buttonAdd.svg" alt="">
-                                        </button>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="addToCart">
-                                        <button class="cancel" >Cancel</button>
-                                        <button class="toCart">Add to cart</button>
-                                    </div>
-                                </div>
-                            </div> -->
+<div class="addItem">
 
-            
-            </div>
 
+</div>
     
           
         <div class="OrderSummary">
@@ -417,7 +362,7 @@ include("PhpFunctions/modal.php");
                 var id = $(this).siblings(".ProductID").val();
                 $.ajax({
                     method: 'POST',
-                    url: 'PhpFunctions/modal.php',
+                    url: '',
                     data: {id: id},
                     success: function(response) {
                         $(".addItem").css("display", "flex");

@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include("connection.php");
 
 if (isset($_POST['id'])) {
@@ -45,7 +44,7 @@ if (isset($_POST['id'])) {
 
                     <div class="addToCart">
                         <button type="button" class="cancel" onclick="exitModal()">Cancel</button> <!-- Changed type to button -->
-                        <button type="submit" name="AddToCart" class="toCart">Add to cart</button>
+                        <button type="submit" name="AddToCart" class="AddToCart">Add to cart</button>
                     </div>
                 </div>
             </form>
@@ -70,6 +69,10 @@ if (isset($_POST['id'])) {
                     cancel.style.display ='none';
                 }
             </script>
+
+
+                
+            
 <?php
         }
     }
@@ -77,7 +80,7 @@ if (isset($_POST['id'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
     // Display form data for debugging
-    var_dump($_POST);
+    
 
     // Process form submission
     // Create a session array to store product data
@@ -95,11 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
     if (isset($_SESSION['cart'])) {
         // If it exists, add the new item to the cart array
         $_SESSION['cart'][] = $session_array;
-        var_dump($_SESSION['cart']);
     } else {
         // If it doesn't exist, create the cart array and add the item
         $_SESSION['cart'] = array($session_array);
         var_dump($_SESSION['cart']);
+
+        echo `<script>var cancel = document.querySelector('.addItem');
+        cancel.style.display ='none';</script>`;
     }
 }
 ?>
