@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("PhpFunctions/connection.php");
+include("PhpFunctions/modal.php");
+
 
 ?>
 
@@ -29,7 +31,10 @@ include("PhpFunctions/connection.php");
         </div>
 
         <div class="searchBar">
-            <input type="text" id="search" placeholder="Search">
+            <form action="">
+                <input type="text" id="search" placeholder="Search">
+                <button type="submit"><img src="../assets/search.svg" alt=""></button>
+            </form>
         </div>
 
         <div class="right">
@@ -44,7 +49,11 @@ include("PhpFunctions/connection.php");
             </div>
         </div>
     </div>
-
+    <div class="SearchBg" id="SearchBg">
+        <div class="SearchResult"  id="SearchResult">
+        </div>
+    </div>
+    
     <div class="mainContainer">
         <div class="sideBar">
             <div id="POSBtn" class="sbPOS">
@@ -127,18 +136,12 @@ include("PhpFunctions/connection.php");
                                 <div class="price">
                                     <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
-                                <input type="hidden" name="productId" value="<?php echo $row['product_id']; ?>">
-                                <input type="hidden" name="productPictureUrl" value="<?php echo $row['picture_url']; ?>">
-                                <input type="hidden" name="productName" value="<?php echo $row['product_name']; ?>">
-                                <input type="hidden" name="netWeight" value="<?php echo $row['net_weight']; ?>">
-                                <input type="hidden" name="productPrice" value="<?php echo $row['retail_price']; ?>">
-                                <input type="hidden" name="unitPrice" value="<?php echo $row['unit_price']; ?>">
-
-                                <input type="hidden" name="quantity" value="1">
-
-                                <button type="submit" name="AddToCart"><img src="../assets/buttonAdd.svg"></button>
+                                <input type="hidden" class="ProductID" name="productId" value="<?php echo $row['product_id']; ?>">
+                                <input type="hidden" name="quantity" value="1"> 
+                                <button type="button" name="toCart" class="toCart"><img src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
+
 
 
 
@@ -172,13 +175,13 @@ include("PhpFunctions/connection.php");
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
                     // Create a session array to store product data
                     $session_array = array(
-                        'id' => $_POST['productId'],
+                        'id' => $_POST['productID'],
                         'product_name' => $_POST['productName'],
-                        'retail_price' => $_POST['productPrice'],
-                        'picture_url' => $_POST['productPictureUrl'],
-                        'net_weight' => $_POST['netWeight'],
-                        'quantity' => $_POST['quantity'],
-                        'unitPrice' => $_POST['unitPrice'],
+                        'retail_price' => $_POST['productRetailPrice'],
+                        'picture_url' => $_POST['productURL'],
+                        'net_weight' => $_POST['productNetweight'],
+                        'quantity' => $_POST['Quantity'],
+                        'unitPrice' => $_POST['productUnitPrice'],
 
                     );
 
@@ -194,7 +197,12 @@ include("PhpFunctions/connection.php");
                 ?>
 
                 <div class="orderList">
+                    
+                
                     <?php
+
+                    var_dump($_SESSION['cart']);
+
                     $SubTotal = 0;
                     $realCostofGoods = 0;
                     $numberOfItems = 0;
@@ -209,7 +217,6 @@ include("PhpFunctions/connection.php");
                     }
 
                     if (!empty($_SESSION['cart'])) {
-
 
 
 
@@ -299,52 +306,46 @@ include("PhpFunctions/connection.php");
                 </div>
             </div>
         </div>
-        <!--
-    <div class="addItem">
+   
+        <div class="addItem">
 
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
-            $quantity = 1;
+                        <!-- <div class="ItemContainer">
+                                <div class="itemInfo">
+                                    <img src="../assets/samplePic.svg" alt="">
+                                    <div class="Infos">
+                                        <h1>aRGRNTINA</h1>
+                                        <h3>150g</h3>
+                                        <h1>100</h1>
+                                    </div>
+                                </div>
+                                <div class="ItemQuantity">
+                                    <div class="addQuantity">
+                                        <h3>Quantity</h3>
+                                        <div class="addMinusQuantity">0
+                                        <button onclick="decreaseQuantity(this)">
+                                            <img src="../assets/decreaseBtn.svg" alt="">
+                                        </button>
+                                        
+                                        <input type="number" id="quantityInput" name="Quantity" value="<?php echo $quantity ?>">
+                                        
+                                        <button onclick="increaseQuantity(this)">
+                                            <img src="../assets/buttonAdd.svg" alt="">
+                                        </button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="addToCart">
+                                        <button class="cancel" >Cancel</button>
+                                        <button class="toCart">Add to cart</button>
+                                    </div>
+                                </div>
+                            </div> -->
 
-        ?>
-                            
-                <div class="ItemContainer">
-                    <div class="itemInfo">
-                        <img src="../assets/<?php echo $_POST['productPictureUrl']; ?>" alt="">
-                        <div class="Infos">
-                            <h1><?php echo $_POST['productName'] ?></h1>
-                            <h3><?php echo $_POST['netWeight'] ?></h3>
-                            <h1>₱<?php echo  $_POST['productPrice'] ?></h1>
-                        </div>
-                    </div>
-                    <div class="ItemQuantity">
-                        <div class="addQuantity">
-                            <h3>Quantity</h3>
-                            <div class="addMinusQuantity">
-                            <button onclick="decreaseQuantity(this)">
-                                <img src="../assets/decreaseBtn.svg" alt="">
-                            </button>
-                            
-                            <input type="number" id="quantityInput" name="Quantity" value="<?php echo $quantity ?>">
-                            
-                            <button onclick="increaseQuantity(this)">
-                                <img src="../assets/buttonAdd.svg" alt="">
-                            </button>
-                                
-                            </div>
-                        </div>
-                        <div class="addToCart">
-                            <button class="cancel" >Cancel</button>
-                            <button class="toCart">Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                   
-                <?php  }
-                ?>
-       
-    </div>
-            -->
+            
+            </div>
+
+    
+          
         <div class="OrderSummary">
             <div class="OrderSummaryConatiner">
                 <h1>Order Summary</h1>
@@ -406,68 +407,32 @@ include("PhpFunctions/connection.php");
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="../js/script.js"></script>
         <script>
-            document.getElementById("inventoryBtn").onclick = function() {
-                window.location.href = "inventory.php";
-            };
+        $(document).ready(function() {
+            $(document).on('click', '.toCart', function(event) { 
 
-            //redirect to POS
-            document.getElementById("POSBtn").onclick = function() {
-                window.location.href = "POS.php";
-            };
-
-            function decreaseQuantity(button) {
-                var input = button.nextElementSibling;
-                if (parseInt(input.value) > 1) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            }
-
-            function increaseQuantity(button) {
-                var input = button.previousElementSibling;
-                input.value = parseInt(input.value) + 1;
-            }
-
-            var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
-            var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);
-            var changeDiv = document.getElementById('change');
-
-            var Change = ClientAmount - OverAllTotal;
-
-            changeDiv.innerHTML = Change;
-
-            var UserInput = document.getElementById('ClientAmount');
-            var typingTimer; 
-            var doneTypingInterval = 500; 
-
-            Compute();
-
-            UserInput.addEventListener("keyup", function(event) {
-                clearTimeout(typingTimer); 
-
-            
-                typingTimer = setTimeout(function() {
-                    Compute(); 
-                }, doneTypingInterval);
+                event.preventDefault(); 
+                var id = $(this).siblings(".ProductID").val();
+                $.ajax({
+                    method: 'POST',
+                    url: 'PhpFunctions/modal.php',
+                    data: {id: id},
+                    success: function(response) {
+                        $(".addItem").css("display", "flex");
+                        $('.addItem').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert("An error occurred: " + error); 
+                    }
+                });
             });
+        });
 
-    
-            function Compute() {
-                var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
-                var ClientAmount = parseFloat(UserInput.value);
-                var changeDiv = document.getElementById('change');
 
-                var Change = ClientAmount - OverAllTotal;
-
-                if (isNaN(Change)) {
-                    changeDiv.innerHTML = 0;
-                } else {
-                    changeDiv.innerHTML = Change;
-                }
-            }
         </script>
-
-
+        
 </body>
 
 </html>
