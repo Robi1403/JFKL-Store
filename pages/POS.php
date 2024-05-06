@@ -1,7 +1,6 @@
 <?php
 session_start();
 include ("PhpFunctions/connection.php");
-
 ?>
 
 <!DOCTYPE html>
@@ -72,48 +71,36 @@ include ("PhpFunctions/connection.php");
 
         <div class="productDisplay">
 
-            <form class="category" id="categoryContainer" name="form"
-                action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
-                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
-                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
-                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
-                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and
-                    Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household
-                    & Cleaning Supply</button>
-                <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care
-                    Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
-                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant
-                    Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic
-                    Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies &
-                    Chocolates</button>
-                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
-                <button class="categoryBtn" type="submit" name="category"
-                    value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and
-                    Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School
-                    Supplies</button>
-            </form>
-
+            <div class="category" id="categoryContainer">
+                <button class="categoryBtn" onclick="filterInventory('All')">All</button>
+                <button class="categoryBtn" onclick="filterInventory('Canned Goods')">Canned Goods</button>
+                <button class="categoryBtn" onclick="filterInventory('Coffee')">Coffee</button>
+                <button class="categoryBtn" onclick="filterInventory('Biscuits')">Biscuits</button>
+                <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
+                <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
+                <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
+                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
+                <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
+                <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
+                <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
+                <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
+                <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
+                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic Beverages</button>
+                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies & Chocolates</button>
+                <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments & Sauces</button>
+                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
+                <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
+            </div>
 
             <div class="ItemView">
 
                 <div class="products">
                     <?php
                     $category = $_POST['category'] ?? 'All';
-
 
                     if ($category == "All") {
                         $query = "SELECT * FROM inventory";
@@ -122,7 +109,6 @@ include ("PhpFunctions/connection.php");
                     }
 
                     $result = mysqli_query($conn, $query);
-
 
                     while ($row = mysqli_fetch_array($result)) { ?>
 
@@ -153,94 +139,12 @@ include ("PhpFunctions/connection.php");
                                         src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
-
-
-
-                        <?php
+                    <?php
                     }
                     ?>
                 </div>
             </div>
         </div>
-
-        <script>
-
-            document.addEventListener("DOMContentLoaded", function () {
-                // Select all buttons with the class showModalButton
-                var showModalButtons = document.querySelectorAll(".showthemodal");
-
-                // Select the modal by its ID
-                var modal = document.getElementById("modalmodal");
-
-                // Add click event listener to each button
-                showModalButtons.forEach(function (button) {
-                    button.addEventListener("click", function () {
-                        event.preventDefault();
-
-
-                        // Traverse up the DOM to the parent form
-                        var parentForm = button.closest("form");
-
-                        // Find the hidden input field within the form by name
-                        var productIdInput = parentForm.querySelector("input[name='productId']");
-                        var productNameInput = parentForm.querySelector("input[name='productName']");
-                        var netWeight = parentForm.querySelector("input[name='netWeight']");
-                        var productRetailPrice = parentForm.querySelector("input[name='productRetailPrice']");
-                        var productUnitPrice = parentForm.querySelector("input[name='productUnitPrice']");
-                        var productURL = parentForm.querySelector("input[name='productURL']");
-                        var quantity = parentForm.querySelector("input[name='quantity']");
-
-                        // Retrieve the value of the hidden input field
-                        var productId = productIdInput.value;
-                        var productName = productNameInput.value;
-                        var netWeight = netWeight.value;
-                        var productRetailPrice = productRetailPrice.value;
-                        var productUnitPrice = productUnitPrice.value;
-                        var productURL = productURL.value;
-                        var quantity = quantity.value;
-
-                        // alert("Product ID: " + productId +
-                        //     "\nProduct Name: " + productName +
-                        //     "\nNet Weight: " + netWeight +
-                        //     "\nRetail Price: " + productRetailPrice +
-                        //     "\nUnit Price: " + productUnitPrice +
-                        //     "\nProduct URL: " + productURL +
-                        //     "\nQuantity: " + quantity);
-
-                        document.getElementById("productIdHidden").value = productId;
-                        document.getElementById("productNameHidden").value = productName;
-                        document.getElementById("netWeightHidden").value = netWeight;
-                        document.getElementById("productRetailPriceHidden").value = productRetailPrice;
-                        document.getElementById("productUnitPriceHidden").value = productUnitPrice;
-                        document.getElementById("quantityHidden").value = quantity;
-                        document.getElementById("productURLHidden").value = productURL;
-
-                        // Populate the modal elements with the retrieved data
-                        document.getElementById("productNameInfo").textContent = productName;
-                        document.getElementById("netWeightInfo").textContent = netWeight;
-                        document.getElementById("productRetailPriceInfo").textContent = "₱" + productRetailPrice;
-
-                        // Set the src attribute of the img element
-                        var imgElement = document.getElementById("productImage");
-                        imgElement.src = "../assets/InventoryItems/" + productURL;
-
-                        // Change the display style of the modal
-                        modal.style.display = "flex";
-                    });
-                });
-
-                var forms = document.querySelectorAll(".itemView form");
-
-                // Add submit event listener to each form
-                forms.forEach(function (form) {
-                    form.addEventListener("submit", function (event) {
-                        // Prevent the default form submission
-                        event.preventDefault();
-                    });
-                });
-
-            });
-        </script>
 
         <div class="cartSection">
             <div class="cart">
@@ -263,7 +167,6 @@ include ("PhpFunctions/connection.php");
                 <?php
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
-                    // Create a session array to store product data
                     $session_array = array(
                         'id' => $_POST['productId'],
                         'product_name' => $_POST['productName'],
@@ -275,12 +178,9 @@ include ("PhpFunctions/connection.php");
 
                     );
 
-                    // Check if the session cart already exists
                     if (isset($_SESSION['cart'])) {
-                        // If it exists, add the new item to the cart array
                         $_SESSION['cart'][] = $session_array;
                     } else {
-                        // If it doesn't exist, create the cart array and add the item
                         $_SESSION['cart'] = array($session_array);
                     }
                 }
@@ -291,10 +191,6 @@ include ("PhpFunctions/connection.php");
                     $SubTotal = 0;
                     $numberOfItems = 0;
                     if (!empty($_SESSION['cart'])) {
-
-
-
-
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
                                 <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
@@ -313,7 +209,6 @@ include ("PhpFunctions/connection.php");
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
-
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
                                         <input type="number" name="quantity" value="1">
                                         <img src="../assets/buttonAdd.svg " alt="">
@@ -340,12 +235,8 @@ include ("PhpFunctions/connection.php");
                             $SubTotal = $SubTotal + $total;
                             $numberOfItems += 1;
                         }
-
                     }
                     ?>
-
-
-
                 </div>
 
                 <div class="CheckoutSection">
@@ -402,7 +293,6 @@ include ("PhpFunctions/connection.php");
         }
         ?>
 
-        <!-- Your HTML code with the form -->
         <div id="modalmodal" class="modalmodal">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ItemContainer">
                 <input type="hidden" name="productId" id="productIdHidden">
@@ -413,7 +303,6 @@ include ("PhpFunctions/connection.php");
                 <input type="hidden" name="quantity" id="quantityHidden">
                 <input type="hidden" name="productURL" id="productURLHidden">
 
-                <!-- Display product details fetched from the database -->
                 <div class="itemInfo">
                     <img src="../assets/InventoryItems/" alt="" id="productImage">
                     <div class="Infos">
@@ -426,11 +315,11 @@ include ("PhpFunctions/connection.php");
                     <div class="addQuantity">
                         <h3>Quantity</h3>
                         <div class="addMinusQuantity">
-                            <button type="button" onclick="decreaseQuantity()"> <!-- Changed type to button -->
+                            <button type="button" onclick="decreaseQuantity()">
                                 <img src="../assets/decreaseBtn.svg" alt="Decrease">
                             </button>
                             <input type="number" class="quantityInput" name="Quantity" value="1">
-                            <button type="button" onclick="increaseQuantity()"> <!-- Changed type to button -->
+                            <button type="button" onclick="increaseQuantity()">
                                 <img src="../assets/buttonAdd.svg" alt="Increase">
                             </button>
                         </div>
@@ -438,105 +327,13 @@ include ("PhpFunctions/connection.php");
 
                     <div class="addToCart">
                         <button type="button" class="cancel" onclick="exitModal()">Cancel</button>
-                        <!-- Changed type to button -->
                         <button type="submit" name="AddToCart" class="AddToCart">Add to cart</button>
                     </div>
                 </div>
             </form>
         </div>
-
-
-        <script>
-            function decreaseQuantity() {
-                alert('click');
-                var inputElement = document.querySelector('.quantityInput');
-                var currentValue = parseInt(inputElement.value);
-                if (currentValue > 1) {
-                    inputElement.value = currentValue - 1;
-                }
-            }
-
-            function increaseQuantity() {
-                var inputElement = document.querySelector('.quantityInput');
-                var currentValue = parseInt(inputElement.value);
-                inputElement.value = currentValue + 1;
-            }
-
-            function exitModal() {
-                var cancel = document.querySelector('.modalmodal');
-                cancel.style.display = 'none';
-            }
-        </script>
-
-
+    </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            document.getElementById("inventoryBtn").onclick = function () {
-                window.location.href = "inventory.php";
-            };
-
-            //redirect to POS
-            document.getElementById("POSBtn").onclick = function () {
-                window.location.href = "POS.php";
-            };
-
-            function decreaseQuantity(button) {
-                var input = button.nextElementSibling;
-                if (parseInt(input.value) > 1) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            }
-
-            function increaseQuantity(button) {
-                var input = button.previousElementSibling;
-                input.value = parseInt(input.value) + 1;
-            }
-
-            var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
-            var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);
-            var changeDiv = document.getElementById('change');
-
-            var Change = ClientAmount - OverAllTotal;
-
-            changeDiv.innerHTML = Change;
-
-
-
-            function Compute() {
-
-                var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
-                var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);
-                var changeDiv = document.getElementById('change');
-
-                var Change = ClientAmount - OverAllTotal;
-
-                if (isNaN(Change)) {
-                    changeDiv.innerHTML = 0;
-                } else {
-                    changeDiv.innerHTML = Change;
-                }
-            }
-
-            Compute();
-
-            setInterval(Compute, 1000);
-
-            // Select all buttons with a specific class
-            var addToCartButtons = document.querySelectorAll('.AddToCart');
-
-            // Iterate through each button and attach the event listener
-            addToCartButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var addItemElement = document.getElementById('modalmodal');
-                    // addItemElement.style.display = 'block';
-                });
-            });
-
-
-
-        </script>
-
-
+        <script src="../js/pos.js"></script>
 </body>
-
 </html>
