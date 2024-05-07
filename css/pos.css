@@ -8,7 +8,7 @@
 body{
     background-color: #F9F9F9;
     display: block;
-    overflow: hidden;
+    /* overflow: hidden; */
    
 }
 
@@ -97,6 +97,7 @@ body{
 .navbar .right .date{
     margin-left: 40px;
 }
+
 
 
 .mainContainer{
@@ -194,7 +195,7 @@ body{
 
 .products{
     background-color: #ffffff;
-    height: 80%;
+    height: 80vh;
     border-radius: 13px;
     padding: 30px;
     overflow: auto;
@@ -668,7 +669,6 @@ button:focus {
     justify-content: center;
     align-items: center;
     display: none;
-    
 }
 
 .OrderSummaryConatiner{
@@ -792,4 +792,34 @@ button:focus {
     font-weight: 700;
     line-height: normal;
     border: none;
+}
+
+.SearchResult{
+    width: 100%;
+    min-width: 650px;
+    max-width: 950px;
+    background-color: #fff;
+    position: absolute;
+    top: 0px;
+    left: 320px;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 0px 20px 20px 20px;
+}
+
+.SearchBg{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+}
+
+.SearchResult th,
+.SearchResult td {
+    padding: 10px;
 }
