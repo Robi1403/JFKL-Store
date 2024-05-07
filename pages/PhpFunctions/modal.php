@@ -45,42 +45,19 @@ if (isset($_POST['id'])) {
 
                     <div class="addToCart">
                         <button type="button" class="cancel" onclick="exitModal()">Cancel</button> <!-- Changed type to button -->
-                        <button type="submit" name="AddToCart" class="toCart">Add to cart</button>
+                        <button type="submit" name="AddToCart" class="">Add to cart</button>
                     </div>
                 </div>
             </form>
 
-            <script>
-                function decreaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    if (currentValue > 1) {
-                        inputElement.value = currentValue - 1;
-                    }
-                }
-
-                function increaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    inputElement.value = currentValue + 1;
-                }
-
-                function exitModal() {
-                    var cancel = document.querySelector('.addItem');
-                    cancel.style.display ='none';
-                }
-            </script>
+            
 <?php
         }
     }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
-    // Display form data for debugging
-    var_dump($_POST);
 
-    // Process form submission
-    // Create a session array to store product data
     $session_array = array(
         'id' => $_POST['productID'],
         'product_name' => $_POST['productName'],
@@ -91,15 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
         'unitPrice' => $_POST['productUnitPrice'],
     );
 
-    // Check if the session cart already exists
+
     if (isset($_SESSION['cart'])) {
-        // If it exists, add the new item to the cart array
         $_SESSION['cart'][] = $session_array;
-        var_dump($_SESSION['cart']);
     } else {
-        // If it doesn't exist, create the cart array and add the item
         $_SESSION['cart'] = array($session_array);
-        var_dump($_SESSION['cart']);
     }
+
+    header('Location: ../POS.php');
 }
 ?>
