@@ -8,19 +8,6 @@ document.getElementById("POSBtn").onclick = function () {
     window.location.href = "POS.php";
 };
 
-//filter category
-function filterInventory(category) {
-    var rows = document.querySelectorAll('.inventoryTable tbody tr');
-    rows.forEach(function (row) {
-        var categoryCell = row.cells[4].textContent;
-        if (category === 'All' || categoryCell === category) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
-    });
-}
-
 //---SEARCH PRODUCT---//
 document.getElementById("search").addEventListener("input", function () {
     var searchText = this.value.toLowerCase(); 

@@ -29,14 +29,20 @@ include ("PhpFunctions/update_product.php");
         </div>
 
         <div class="right">
-            <div class="todayGrossSaleLabel">
+            <!-- <div class="todayGrossSaleLabel">
                 <p>Today's Gross Sale: </p>
             </div>
             <div class="todayGrossSale">
                 <p><strong>P969.00</strong></p>
-            </div>
+            </div> -->
             <div class="date">
-                <p>May 13, 2024</p>
+                <p>
+                    <?php
+                        date_default_timezone_set('Asia/Manila');
+                        $currentDateTime = date('F j, Y h:i A');
+                        echo $currentDateTime;
+                    ?>
+                </p>
             </div>
         </div>
     </div>
@@ -72,36 +78,30 @@ include ("PhpFunctions/update_product.php");
                 <button class="removeProduct" id="removeProductBtn">Remove Product</button>
                 <button class="addProduct" id="addProductBtn">Add Product</button>
             </div>
-            <div class="category" id="categoryContainer">
-                <button class="categoryBtn" onclick="filterInventory('All')">All</button>
-                <button class="categoryBtn" onclick="filterInventory('Canned Goods')">Canned Goods</button>
-                <button class="categoryBtn" onclick="filterInventory('Coffee')">Coffee</button>
-                <button class="categoryBtn" onclick="filterInventory('Biscuits')">Biscuits</button>
-                <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
-                <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
-                <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
-                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household &
-                    Cleaning Supplies</button>
-                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection
-                    Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
-                <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
-                <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
-                <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
-                <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
-                <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
-                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic
-                    Beverages</button>
-                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies &
-                    Chocolates</button>
-                <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments &
-                    Sauces</button>
-                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking
-                    Ingredients & Seasonings</button>
-                <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
-                <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
-            </div>
+            <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
+                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
+                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
+                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
+                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+            </form>
 
             <div class="inventory">
                 <table class="inventoryTable">
@@ -141,7 +141,7 @@ include ("PhpFunctions/update_product.php");
                                         <td><?php echo $row["category"]; ?></td>
                                         <td><?php echo $row["unit_price"]; ?></td>
                                         <td><?php echo $row["retail_price"]; ?></td>
-                                        <td><?php echo $row["stock"]; ?></td>
+                                        <td <?php if ($row["stock"] <= 5) echo 'style="color: red;"'; ?>><?php echo $row["stock"]; ?></td>
                                         <td>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                                 <!-- hidden inputs for the UpdateProductModal with product information -->
@@ -189,6 +189,7 @@ include ("PhpFunctions/update_product.php");
                                 <div class="addImage">
                                     <div class="imageContainer">
                                         <img src="../assets/addImage.svg" id="productImage">
+                                        <input type="hidden" name="produtURL" required><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
@@ -199,11 +200,11 @@ include ("PhpFunctions/update_product.php");
                             </div>
                             <div class="labelInput">
                                 <label>Product Name</label>
-                                <input type="text" id="username" name="productName" required><br><br>
+                                <input type="text" name="productName" required><br><br>
                             </div>
                             <div class="labelInput">
                                 <label>Net Weight</label>
-                                <input type="text" id="username" name="netWeight"><br><br>
+                                <input type="text" name="netWeight"><br><br>
                             </div>
                             <div class="labelInput">
                                 <label for="category">Category</label>
@@ -247,18 +248,18 @@ include ("PhpFunctions/update_product.php");
                                 <label for="pricingInfo">Pricing Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Unit Price</label>
-                                    <input type="text" id="username" name="unitPrice" required><br><br>
+                                    <input type="text" name="unitPrice" required><br><br>
                                 </div>
                                 <div class="labelInput">
                                     <label>Retail Price</label>
-                                    <input type="text" id="username" name="retailPrice" required><br><br>
+                                    <input type="text" name="retailPrice" required><br><br>
                                 </div>
                             </div>
                             <div class="stockInfo">
                                 <label for="stockInfo">Stock Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Stock</label>
-                                    <input type="text" id="username" name="stock" required><br><br>
+                                    <input type="text" name="stock" required><br><br>
                                 </div>
                             </div>
                             <div class="updateButtons">
