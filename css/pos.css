@@ -541,11 +541,7 @@ input::-webkit-inner-spin-button {
 
 .ProceedBtn{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-<<<<<<< Updated upstream
     width: 100%;
-=======
-    width: 100vh;
->>>>>>> Stashed changes
     height: 40px;
     padding: 7px 25px 7px 25px;
     text-align: center;
@@ -876,7 +872,3 @@ button:focus {
 .searchRow:hover{
     background-color: #e4e4e4;
 }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
