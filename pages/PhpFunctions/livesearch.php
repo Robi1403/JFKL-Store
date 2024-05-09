@@ -9,83 +9,46 @@ if (isset($_POST['input'])) {
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0 ) {?>
-        <div class="liveSearchContainer">
-            <div class="header">
-                <div class="image">
-                
-                </div>
-                <div class="productID">
-                    <p>Product ID</p>
-                </div>
-                <div class="productName">
-                    <p>Product Name</p>
-                </div>
-                <div class="netWeight">
-                    <p>Net Weight</p>
-                </div>
-                <div class="productPrice">
-                    <p>Price</p>
-                </div>
-            </div>
-            
-            <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php 
                 while($row = mysqli_fetch_assoc($result)){
                     $id = $row['product_id'];
                     $name = $row['product_name'];
                     $price = $row['retail_price'];
                     $pic = $row['picture_url'];
-                    $netweight = $row['net_weight'];
 
                     ?>
-                        <button class="select">
-                            <div class="image">
-                                <img src="../assets/InventoryItems/<?php echo $pic ?>" alt="">
-                            </div>
-                            <div class="productID">
-                                <?php echo $id ?>
-                            </div>
-                            <div class="productName">
-                                <?php echo $name ?>
-                            </div>
-                            <div class="netWeight">
-                                <?php echo $netweight ?>
-                            </div>
-                            <div class="productPrice">
-                                <?php echo $price ?>
-                            </div>
-                        </button>
+        
+                        <tr>
+                            <td><img src="../assets/InventoryItems/<?php echo $pic ?>" alt=""></td>
+                            <td><?php echo $id ?></td>
+                            <td><?php echo $name ?></td>
+                            <td><?php echo $price ?></td>
+                        </tr>
+                        
                     <?php
-                }
-                ?>
-            </div>
 
+                }
+                
+                
+                ?>
+            </tbody>
+        </table>
 
         
-        </div>
+
         <?php
     }else {
-        echo '
-        <div class="liveSearchContainer">
-            <div class="header">
-                <div class="image">
-                
-                </div>
-                <div class="productID">
-                    <p>Product ID</p>
-                </div>
-                <div class="productName">
-                    <p>Product Name</p>
-                </div>
-                <div class="netWeight">
-                    <p>Net Weight</p>
-                </div>
-                <div class="productPrice">
-                    <p>Price</p>
-                </div>
-            </div>
-        </div>';
-        echo "Product not found";
+        echo "product not found";
     }
 }
 
