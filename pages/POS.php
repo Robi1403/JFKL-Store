@@ -158,11 +158,17 @@
             <div class="cart">
                 <div class="cartLabel">
                     <p>Cart</p>
+<<<<<<< Updated upstream
                 </div>
                 <div class="buttons">
                     <button>New Order</button>
                     <button>Hold Order</button>
                     <button>Clear</button>
+=======
+                    <div class="buttons">
+                        <a href="POS.php?action=clearAll">Clear</a>
+                    </div>
+>>>>>>> Stashed changes
                 </div>
                 <div class="orderList">
                     <div class="container">
@@ -179,6 +185,7 @@
                             <h1>P 27.00</h1>
                         </div>
 
+<<<<<<< Updated upstream
                         <div class="quantity">
                             <h3>Quantity</h3>
                             <div class="qty">
@@ -186,6 +193,62 @@
                                 <img src="../assets/decreaseBtn.svg" alt=" ">
                                 <input type="number" value="1">
                                 <img src="../assets/buttonAdd.svg " alt="">
+=======
+                    if (!empty($_SESSION['cart'])) {
+
+
+
+                        foreach ($_SESSION['cart'] as $key => $value) { ?>
+                            <div class="container">
+                                <div class="image">
+                                    <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
+                                </div>
+                                
+
+                                <div class="items">
+                                    <h3>Item</h3>
+                                    <h1><?php echo $value['product_name'] ?></h1>
+                                    <h2><?php echo $value['net_weight'] ?></h2>
+                                </div>
+
+                                <div class="Price">
+                                    <h3>Price</h3>
+                                    <h1>₱<?php echo  $value['retail_price']  ?></h1>
+                                   
+                                </div>
+
+                                <div class="quantity">
+                                    <h3>Quantity</h3>
+                                    <div class="qty">
+                                        <button>
+                                        <img src="../assets/decreaseBtn.svg" alt=" ">
+                                        </button>
+                                        
+                                        <input type="number" value="<?php echo $value['quantity'] ?>">
+                                        <button>
+                                            <img src="../assets/buttonAdd.svg " alt="">
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="total">
+
+                                    <?php
+                                    $total = $value['retail_price'] * $value['quantity'];
+                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
+                                    ?>
+
+                                    <h3>Total</h3>
+                                    <h1>₱<?php echo $total ?></h1>
+                                </div>
+
+                                <div class="delete">
+                                    <button>
+                                        <img src="../assets/delete.svg" alt="">
+                                    </button>
+                                </div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
 
