@@ -16,20 +16,21 @@ body{
     height: 100px;
     width: 100%;
     display: flex;
+    position: relative;
     align-items: center;
     top: 0;
     overflow: hidden;
     z-index: 1000;
     background-color: #ffffff;
-    box-shadow: 0 2px 3px -2px rgba(0,0,0,.2);
+    box-shadow: 0px 2px 4px 0px rgba(92, 99, 105, 0.15);
     font-size: 15px;
 }
 
-.navbar .left{
+.left{
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    flex: 0.6;
+    min-width: 260px;
 }
 
 .navbar .left .shape{
@@ -47,40 +48,45 @@ body{
     font-weight: 600;
     color: #008D5D;
     gap: 10px;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
-.navbar .searchBar{
+.navbar .searchBar form{
     margin-left: 60px;
-<<<<<<< Updated upstream
-    flex: 2;
-=======
     flex: 2.5;
     padding-right: 30px;
     display: flex;
     width: 700px;
->>>>>>> Stashed changes
 }
 
 .navbar .searchBar input{
     font-size: 14px;
     height: 40px;
-    width: 700px;
+    width: 100%;
     left: 0;
     border: none;
-    border-radius: 7px;
+    border-radius: 7px 0px 0px 7px;
     padding-left: 20px;
     background-color: #F6F6F6;
 }
 .navbar .searchBar input:focus{
     outline: none;
 }
+.navbar .searchBar button{
+    background-color: #F6F6F6;
+    border: none;
+    border-radius: 0px 7px 7px 0px;
+}
+
+.navbar .searchBar img{
+    margin: 0px 15px 0px 15px;
+    width: 15px;
+}
 
 .navbar .right{
     display: flex;
-    align-items: center;
+    justify-content: end;
     flex: 1;
+    padding-right: 30px;
 }
 
 .navbar .right .todayGrossSale{
@@ -90,8 +96,9 @@ body{
 }
 
 .navbar .right .date{
-    margin-left: 80px;
+    margin-left: 40px;
 }
+
 
 
 .mainContainer{
@@ -175,10 +182,15 @@ body{
 }
 
 .categoryBtn:hover{
-    background-color: #DCFFF3;
+    color: #ffffff;
+    background-color: #009963;
+    outline: none;
 }
 .categoryBtn:focus{
-    background-color: #DCFFF3;
+    background-color: #009963;
+}
+.categoryBtn:active{
+    background-color: #009963;
 }
 
 .productDisplay{
@@ -186,19 +198,22 @@ body{
     padding: 30px;
 }
 
-
-.products{
+.ItemView{
     background-color: #ffffff;
-    height: 90vh;
+    height: 80vh;
     border-radius: 13px;
-    padding: 30px;
-    overflow: auto;
-
+    padding: 0px 0px 0px 0px;
+}
+.products{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 78vh;
+    padding: 35px 20px 55px 20px;
 }
 
 .ItemCardView{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
-    height: 260px;
+    height: auto;
     width: 175px;
     border-radius: 7px;
     padding: 10px;
@@ -262,13 +277,13 @@ body{
 }
 
 .cart{
-   display: flex;
-   flex-direction: column;
-    width: 400px;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 100vh;
     background-color: #ffffff;
     box-shadow: -2px 0 3px -2px rgba(0,0,0,.2);
-    padding-bottom: 150px;
+    padding: 30px 30px 125px 30px;
 }
 
 .cart .cartLabel {
@@ -278,27 +293,6 @@ body{
     padding: 0px 10px 0px 5px;
 }
 
-<<<<<<< Updated upstream
-.cart .cartLabel p{
-    font-size: 24px;
-    font-weight: 600;
-    color: #009963;
-    padding-top: 30px;
-    padding-left: 30px;
-}
-
-.cart .buttons{
-    margin-top: 10px;
-    padding-left: 30px;
-
-}
-
-.cart .buttons button{
-    font-size: 13px;
-    width: auto;
-    padding: 7px 25px 7px 25px;
-    margin: 5px; 
-=======
 .cart .cartLabel p {
     font-size: 27px;
     font-weight: 600;
@@ -313,8 +307,7 @@ body{
 .cart .buttons a {
     font-size: 13px;
     width: auto;
-    padding: 7px 25px 7px 25px;
->>>>>>> Stashed changes
+    padding: 5px 25px 7px 25px;
     text-align: center;
     vertical-align: middle;
     white-space: nowrap; 
@@ -324,26 +317,23 @@ body{
     border-radius: 7px;
     outline: 1.5px solid #04B075;
     cursor: pointer;
-    transition: all .2s ease-in-out;
-<<<<<<< Updated upstream
-=======
+    transition: all .1s ease-in-out;
     text-decoration: none;
     line-height: 15px;
     height: 27px;
->>>>>>> Stashed changes
+}
+.cart .buttons a:hover {
+    background-color: #009963;
+    outline: none;
+    color: #ffffff;
 }
 
 
  .orderList{
     display: flex;
     flex: 1;
-<<<<<<< Updated upstream
-    margin-top: 10px;
-    padding: 0px 30px 0px 0px;
-=======
     padding: 5px 20px 0px 5px;
     margin-top: 25px;
->>>>>>> Stashed changes
     margin-bottom: 20px;
     overflow-y: scroll;
     display: flex;
@@ -356,53 +346,47 @@ body{
 .cart .orderList .container{
     display: flex;
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     width: 100%;
-    height: 70px;
+    height: 75px;
     border-radius: 13px;
-<<<<<<< Updated upstream
-    margin-top: 10px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
-    margin-left: 30px;
-}
-
-.cart .orderList .container img{
-    height: 45px;
-    width: 45px;
-    margin: 0px;
-=======
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;   
     padding: 15px 20px 15px 20px;
     gap: 5px;
     align-items: flex-start;
->>>>>>> Stashed changes
 }
 
 .cart .orderList .container h3{
     color: #666;
     font-size: 12px;
-    font-weight: 400;
-    letter-spacing: -0.3px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-self: flex-start;
 }
 
 .cart .orderList .container h1{
     color: #0B1215;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 50px;
-    margin-top: 4px;
-    margin-right: 15px;
+    margin-top: 7px;
 }
 
 .cart .orderList .container h2{
     color: #000;
-    font-size: 8px;
-    font-weight: 400;
-    letter-spacing: -0.3px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cart .orderList .container .image {
@@ -433,11 +417,12 @@ body{
 .cart .orderList .container .qty img{
     height: 15px;
     width: 15px;
+    padding: 0;
 }
 
 .cart .orderList .container .qty input{
     height: 20px;
-    width: 20px;
+    width: 15px;
     margin-left: 5px;
     margin-right: 5px;
     text-align: center;
@@ -445,8 +430,6 @@ body{
     border: none;
 }
 
-<<<<<<< Updated upstream
-=======
 .cart .orderList .container .qty button{
     height: 15px;
     width: 15px;
@@ -461,7 +444,6 @@ body{
     
 }
 
->>>>>>> Stashed changes
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -478,15 +460,11 @@ input::-webkit-inner-spin-button {
     background-color: transparent;
     outline: none;
 }
+
 .cart .orderList .container .delete img{
     height: 15px;
     width: 15px;
-<<<<<<< Updated upstream
-    border-radius: 2px;
-    border: 1.5px solid #D9D9D9;
-=======
     margin-top: 15px;
->>>>>>> Stashed changes
 }
 
 .cart .orderList .container .select input:checked{
@@ -496,22 +474,20 @@ input::-webkit-inner-spin-button {
 
 .lineDiv{
     height: 1px;
-    width: 360px;
+    width: 100%;
     background-color: #EBEBEB;
-    margin-left: 20px;
-    margin-right: 20px;
 }   
 
 .Total {
     display: flex;
     justify-content: space-between;
-    margin: 0px 25px 10px 25px;
+    margin: 0px 5px 20px 5px;
 }
 
 .CustomerAmount{
     display: flex;
     justify-content: space-between;
-    margin: 25px 25px 10px 25px;
+    margin: 20px 5px 10px 5px;
 }
 
 .Total h1{
@@ -526,31 +502,22 @@ input::-webkit-inner-spin-button {
 .SubTotal{
     display: flex;
     justify-content: space-between;
-    margin: 0px 25px 10px 25px;
+    margin: 0px 5px 10px 5px;
+    
+     
 }
 .SubTotal h1{
     color: #000;
-<<<<<<< Updated upstream
-    font-family: Helvetica;
-    font-size: 16px;
-    font-weight: 700;
-=======
     font-size: 14px;
     font-weight: 500;
->>>>>>> Stashed changes
     letter-spacing: -0.3px;
+    margin-bottom: 10px;
 }
 
 .CustomerAmount h1{
     color: #000;
-<<<<<<< Updated upstream
-    font-family: Helvetica;
-    font-size: 16px;
-    font-weight: 700;
-=======
     font-size: 14px;
     font-weight: 500;
->>>>>>> Stashed changes
     letter-spacing: -0.3px;
 }
 
@@ -562,10 +529,6 @@ input::-webkit-inner-spin-button {
     text-align: right;
     color: #000;
     text-align: right;
-<<<<<<< Updated upstream
-    font-family: Helvetica;
-=======
->>>>>>> Stashed changes
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -573,15 +536,16 @@ input::-webkit-inner-spin-button {
     outline: none;
     padding: 10px;
 }
+
+
 .Checkoutbuttons{
     display: flex;
     justify-content: space-between;
-    padding-left: 30px ;
-    padding-right: 30px;
+    gap: 10px;
 }
 .HoldOrder{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 45%;
+    width: 100vh;
     padding: 7px 25px 7px 25px;
     margin: 5px; 
     text-align: center;
@@ -601,7 +565,7 @@ input::-webkit-inner-spin-button {
 
 .ProceedBtn{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 45%;
+    width: 100vh;
     height: 40px;
     padding: 7px 25px 7px 25px;
     margin: 5px; 
@@ -688,7 +652,7 @@ input::-webkit-inner-spin-button {
 
 .addQuantity h3{
     color: #000;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
     margin-bottom: 10px;
 }
@@ -707,7 +671,7 @@ img{
     text-align: center;
     color: #0B1215;
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -716,24 +680,31 @@ img{
     align-items: center;
     justify-content: center;
 }
+.addMinusQuantity button{
+    background-color: transparent;
+    border: none;
+}
+
 
 .addToCart{
     display: flex;
+    justify-content: center;
     flex-direction: column;
-   padding: 10px 20px ;
+    padding: 0px 0px 0px 20px;
 }
 
 .addToCart button{
-    width: 133px;
+    width: 190px;
     height: 40px;
     border: none;
 }
 button:focus {
     outline: none;
-  }
+}
+
 .cancel{
     border-radius: 7px;
-    background: #D9D9D9;
+    background-color: #D9D9D9;
     color: #FFF;
     text-align: center;
     font-size: 12px;
@@ -747,7 +718,6 @@ button:focus {
     color: #FFF;
     text-align: center;
     font-size: 12px;
-    font-weight: 700;
 }
 
 .OrderSummary{
@@ -760,7 +730,6 @@ button:focus {
     justify-content: center;
     align-items: center;
     display: none;
-    
 }
 
 .OrderSummaryConatiner{
@@ -827,13 +796,12 @@ button:focus {
     justify-content: space-around;
     padding: 20px;
     margin-top: 25px;
-    
 }
 
 .AmountSummary h2{
     color: #B1B7C1;
     text-align: center;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: -0.3px;
 }
@@ -884,8 +852,6 @@ button:focus {
     line-height: normal;
     border: none;
 }
-<<<<<<< Updated upstream
-=======
 
 .SearchResult{
     width: 100%;
@@ -985,4 +951,3 @@ button:focus {
     transition: all .1s ease;
     border-radius: 7px;
 }
->>>>>>> Stashed changes
