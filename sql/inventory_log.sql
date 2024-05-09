@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 03:13 PM
+-- Generation Time: May 09, 2024 at 08:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `inventory_log` (
   `log_id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `action_type` enum('Add','Update','Remove') DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  `previous_state` text DEFAULT NULL,
-  `new_state` text DEFAULT NULL
+  `product_id` int(11) NOT NULL,
+  `action_type` enum('Add','Update','Remove') NOT NULL,
+  `date` datetime NOT NULL,
+  `previous_state` text NOT NULL,
+  `new_state` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -44,8 +44,7 @@ CREATE TABLE `inventory_log` (
 -- Indexes for table `inventory_log`
 --
 ALTER TABLE `inventory_log`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `fk_log_product_id` (`product_id`);
+  ADD PRIMARY KEY (`log_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -56,16 +55,6 @@ ALTER TABLE `inventory_log`
 --
 ALTER TABLE `inventory_log`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `inventory_log`
---
-ALTER TABLE `inventory_log`
-  ADD CONSTRAINT `fk_log_product_id` FOREIGN KEY (`product_id`) REFERENCES `inventory` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

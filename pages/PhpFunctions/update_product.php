@@ -20,8 +20,8 @@ if (isset($_POST['updateProductInfoBtn'])) {
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
 
-        $previous_state = NULL;
-        $new_state = NULL;
+        $previous_state = "";
+        $new_state = "";
 
         if ($productName != $row['product_name']) {
             $previous_state = "Product Name: " . $row['product_name'] . "\n";
@@ -29,8 +29,22 @@ if (isset($_POST['updateProductInfoBtn'])) {
         }
 
         if ($netWeight != $row['net_weight']) {
-            $previous_state .= "Net Weight: " . $row['net_weight'] ."\n";
-            $new_state .= "Net Weight: " . $netWeight ."\n";
+            if ($netWeight != NULL) {
+                if ( $row['net_weight'] != NULL) {
+                $previous_state .= "Net Weight: " . $row['net_weight'] ."\n";
+                } else {
+                    $previous_state .= "Net Weight: NULL\n";
+                }
+
+                $new_state .= "Net Weight: " . $netWeight ."\n";
+            } else {
+                if ($row['net_weight'] != NULL) {
+                    $previous_state .= "Net Weight: " .$row['net_weight'] ."\n";
+                } else {
+                    $previous_state .= "Net Weight: NULL\n";
+                }
+                $new_state .= "Net Weight: NULL\n";
+            }
         }
 
         if ($unit != $row['unit']) {

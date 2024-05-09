@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 03:18 PM
+-- Generation Time: May 09, 2024 at 08:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,7 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
-(1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 22.00, 27.00, 45, 'Argentina Meat Loaf 150g.png'),
+(1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 22.00, 27.00, 40, 'Argentina Meat Loaf 150g.png'),
 (2, 'Argentina Corn Beef', '150g', 'Piece', 'Canned Goods', 34.00, 39.00, 40, 'Argentina Corn Beef 150g.png'),
 (3, 'Argentina Giniling', '150g', 'Piece', 'Canned Goods', 28.00, 33.00, 12, 'Argentina Giniling 150g.png'),
 (4, 'Century Tuna Flakes in Oil', '155g', 'Piece', 'Canned Goods', 35.00, 39.00, 12, 'Century Tuna Flakes in Oil 155g.png'),
@@ -445,13 +445,13 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (399, 'Nips Peanuts', '14g', 'Piece', 'Candies & Chocolates', 4.77, 5.00, 12, 'Nips Peanuts 14g.png'),
 (400, 'Nips Milk Chocolate', '14g', 'Piece', 'Candies & Chocolates', 4.77, 5.00, 12, 'Nips Milk Chocolate 14g.png'),
 (401, 'Nips White Chocolate', '14g', 'Piece', 'Candies & Chocolates', 4.77, 5.00, 12, 'Nips White Chocolate 14g.png'),
-(402, 'Lipps Pop Stick Color Rumble', '6.5g', 'Piece', 'Candies & Chocolates', 1.12, 2.00, 60, 'Lipps Pop Stick Color Rumble 6.5g.png'),
-(403, 'Choco Joy', '3.5g', 'Piece', 'Candies & Chocolates', 0.74, 1.00, 50, 'Choco Joy 3.5g.png'),
+(402, 'Lipps Pop Stick Strawberry', '6.5g', 'Piece', 'Candies & Chocolates', 1.12, 2.00, 60, 'Lipps Pop Stick Strawberry 6.5g.png'),
+(403, 'Champi', '3.5g', 'Piece', 'Candies & Chocolates', 0.74, 1.00, 50, 'Champi 3.5g.png'),
 (404, 'Pintoora Gum ball', '4g', 'Piece', 'Candies & Chocolates', 0.87, 1.00, 30, 'Pintoora Gum ball 4g.png'),
 (405, 'Halls Mentho-Lyptus', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Mentho-Lyptus 2.8g.png'),
 (406, 'Halls Honey-Lemon', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Honey-Lemon 2.8g.png'),
 (407, 'Halls Raspberry', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Raspberry 2.8g.png'),
-(408, 'Halls Fresh Spearmint', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Fresh Spearmint 2.8g.png'),
+(408, 'Halls Fresh Lime', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Fresh Lime 2.8g.png'),
 (409, 'Alaska Condensada', '206g', 'Piece', 'Dairy Products', 36.25, 40.00, 12, 'Alaska Condensada 206g.png');
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
 (410, 'Alaska Condensada', '370g', 'Piece', 'Dairy Products', 56.50, 60.00, 6, 'Alaska Condensada 370g.png'),

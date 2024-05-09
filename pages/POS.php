@@ -83,7 +83,7 @@ include("PhpFunctions/SaveTransaction.php");
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health and Beauty</button>
                 <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
                 <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
                 <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
