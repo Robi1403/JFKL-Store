@@ -182,15 +182,10 @@ body{
 }
 
 .categoryBtn:hover{
-    color: #ffffff;
-    background-color: #009963;
-    outline: none;
+    background-color: #DCFFF3;
 }
 .categoryBtn:focus{
-    background-color: #009963;
-}
-.categoryBtn:active{
-    background-color: #009963;
+    background-color: #DCFFF3;
 }
 
 .productDisplay{
@@ -202,13 +197,13 @@ body{
     background-color: #ffffff;
     height: 80vh;
     border-radius: 13px;
-    padding: 0px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
 }
 .products{
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 78vh;
-    padding: 35px 20px 55px 20px;
+    height: 72vh;
+    padding: 0px 20px 0px 20px;
 }
 
 .ItemCardView{
@@ -307,7 +302,7 @@ body{
 .cart .buttons a {
     font-size: 13px;
     width: auto;
-    padding: 5px 25px 7px 25px;
+    padding: 7px 25px 7px 25px;
     text-align: center;
     vertical-align: middle;
     white-space: nowrap; 
@@ -317,15 +312,10 @@ body{
     border-radius: 7px;
     outline: 1.5px solid #04B075;
     cursor: pointer;
-    transition: all .1s ease-in-out;
+    transition: all .2s ease-in-out;
     text-decoration: none;
     line-height: 15px;
     height: 27px;
-}
-.cart .buttons a:hover {
-    background-color: #009963;
-    outline: none;
-    color: #ffffff;
 }
 
 
@@ -460,7 +450,6 @@ input::-webkit-inner-spin-button {
     background-color: transparent;
     outline: none;
 }
-
 .cart .orderList .container .delete img{
     height: 15px;
     width: 15px;
