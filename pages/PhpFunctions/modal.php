@@ -26,11 +26,11 @@ if (isset($_POST['id'])) {
                     <div class="addQuantity">
                         <h3>Quantity</h3>
                         <div class="addMinusQuantity">
-                            <button type="button" class="minus" onclick="decreaseQuantity()"> <!-- Changed type to button -->
+                            <button type="button" onclick="decreaseQuantity()"> <!-- Changed type to button -->
                                 <img src="../assets/decreaseBtn.svg" alt="Decrease">
                             </button>
                             <input type="number" class="quantityInput" name="Quantity" value="1">
-                            <button type="button" class="add" onclick="increaseQuantity()"> <!-- Changed type to button -->
+                            <button type="button" onclick="increaseQuantity()"> <!-- Changed type to button -->
                                 <img src="../assets/buttonAdd.svg" alt="Increase">
                             </button>
                         </div>
