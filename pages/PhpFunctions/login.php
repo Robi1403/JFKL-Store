@@ -13,13 +13,13 @@
         $count = mysqli_num_rows($result);
 
         if ($count == 1) {
-            header("Location:../POS.php");
+            header("Location: ../POS.php");
         }else {
             echo `<script>
             window.location.href = "../LoginPage.php";
             alert("Login Failed");
             </script>`;
-            header("Location:../LoginPage.php");
+            header("Location: ../LoginPage.php");
         }
 
 

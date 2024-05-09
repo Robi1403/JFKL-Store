@@ -1,6 +1,7 @@
 <?php
 session_start();
-include ("PhpFunctions/connection.php");
+include("PhpFunctions/connection.php");
+include("PhpFunctions/SaveTransaction.php");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,11 @@ include ("PhpFunctions/connection.php");
             </div>
         </div>
     </div>
-
+    <div class="SearchBg" id="SearchBg">
+        <div class="SearchResult"  id="SearchResult">
+        </div>
+    </div>
+    
     <div class="mainContainer">
         <div class="sideBar">
             <div id="POSBtn" class="sbPOS">
@@ -95,7 +100,7 @@ include ("PhpFunctions/connection.php");
                 <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
                 <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
             </div>
-
+          
             <div class="ItemView">
 
                 <div class="products">
@@ -110,10 +115,10 @@ include ("PhpFunctions/connection.php");
 
                     $result = mysqli_query($conn, $query);
 
+
                     while ($row = mysqli_fetch_array($result)) { ?>
 
-                        <form method="post" id="itemView" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
-                            class="ItemCardView">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ItemCardView">
                             <div class="image">
                                 <img src="../assets/InventoryItems/<?php echo $row['picture_url']; ?>">
                             </div>
@@ -127,18 +132,13 @@ include ("PhpFunctions/connection.php");
                                 <div class="price">
                                     <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
-                                <input type="hidden" name="productId" value="<?php echo $row['product_id']; ?>">
-                                <input type="hidden" name="productName" value="<?php echo $row['product_name']; ?>">
-                                <input type="hidden" name="netWeight" value="<?php echo $row['net_weight']; ?>">
-                                <input type="hidden" name="productRetailPrice" value="<?php echo $row['retail_price']; ?>">
-                                <input type="hidden" name="productUnitPrice" value="<?php echo $row['unit_price']; ?>">
-                                <input type="hidden" name="productURL" value="<?php echo $row['picture_url']; ?>">
-                                <input type="hidden" name="quantity" value="1">
 
-                                <button type="submit" name="AddToCart" class="showthemodal"><img
-                                        src="../assets/buttonAdd.svg"></button>
+                                <input type="hidden" class="ProductID" name="productId" value="<?php echo $row['product_id']; ?>">
+                                <input type="hidden" name="quantity" value="1"> 
+                                <button type="button" name="toCart" class="toCart"><img src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
+
                     <?php
                     }
                     ?>
@@ -163,34 +163,18 @@ include ("PhpFunctions/connection.php");
                 }
 
                 ?>
-
-                <?php
-
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
-                    $session_array = array(
-                        'id' => $_POST['productId'],
-                        'product_name' => $_POST['productName'],
-                        'unit_price' => $_POST['productUnitPrice'],
-                        'retail_price' => $_POST['productRetailPrice'],
-                        'picture_url' => $_POST['productURL'],
-                        'net_weight' => $_POST['netWeight'],
-                        'quantity' => $_POST['quantity'],
-
-                    );
-
-                    if (isset($_SESSION['cart'])) {
-                        $_SESSION['cart'][] = $session_array;
-                    } else {
-                        $_SESSION['cart'] = array($session_array);
-                    }
-                }
-                ?>
-
                 <div class="orderList">
+                    
+                
                     <?php
                     $SubTotal = 0;
+                    $realCostofGoods = 0;
                     $numberOfItems = 0;
+                    $quantity = 1;
+
+
                     if (!empty($_SESSION['cart'])) {
+
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
                                 <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
@@ -203,15 +187,22 @@ include ("PhpFunctions/connection.php");
 
                                 <div class="Price">
                                     <h3>Price</h3>
-                                    <h1>₱<?php echo $value['retail_price'] ?></h1>
+                                    <h1>₱<?php echo  $value['retail_price']  ?></h1>
+                                   
                                 </div>
 
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
+                                        <button">
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
-                                        <input type="number" name="quantity" value="1">
-                                        <img src="../assets/buttonAdd.svg " alt="">
+                                        </button>
+                                        
+                                        <input type="number" value="<?php echo $value['quantity'] ?>">
+                                        <button>
+                                            <img src="../assets/buttonAdd.svg " alt="">
+                                        </button>
+                                        
                                     </div>
                                 </div>
 
@@ -219,6 +210,7 @@ include ("PhpFunctions/connection.php");
 
                                     <?php
                                     $total = $value['retail_price'] * $value['quantity'];
+                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
                                     ?>
 
                                     <h3>Total</h3>
@@ -230,13 +222,18 @@ include ("PhpFunctions/connection.php");
                                     <span class="checkmark"></span>
                                 </div>
                             </div>
-                            <?php
+                    <?php
 
                             $SubTotal = $SubTotal + $total;
-                            $numberOfItems += 1;
+                            $realCostofGoods =  $realCostofGoods + $CostOfGoods;
+                            $numberOfItems += $value['quantity'];
                         }
                     }
+
+
+                    
                     ?>
+
                 </div>
 
                 <div class="CheckoutSection">
@@ -257,59 +254,85 @@ include ("PhpFunctions/connection.php");
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
-                        <button class="HoldOrder">Hold Order</button>
-                        <button id="Checkout" class="ProceedBtn">Proceed</button>
+
+                        <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <?php
+   
+        <div class="addItem"></div>
 
-        // Check if the form is submitted
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
-            // Check if the product ID is set
-            if (isset($_POST['productId'])) {
-                // Escape the product ID to prevent SQL injection
-                $productId = mysqli_real_escape_string($conn, $_POST['productId']);
+    
+          
+        <div class="OrderSummary">
+            <div class="OrderSummaryConatiner">
+                <h1>Order Summary</h1>
+                <div class="SummaryContainer">
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        <?php
+                        if (!empty($_SESSION['cart'])) {
 
-                // Query to fetch product details based on the product ID
-                $query = "SELECT * FROM inventory WHERE product_id = '$productId'";
-                $result = mysqli_query($conn, $query);
+                                foreach ($_SESSION['cart'] as $key => $value) { ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $value['product_name'] ?>
+                                    </td>
 
-                // Check if the query was successful
-                if ($result) {
-                    // Fetch the product details
-                    $productData = mysqli_fetch_assoc($result);
-                } else {
-                    // Handle query error
-                    echo "Error: " . mysqli_error($conn);
-                }
-            } else {
-                // Handle missing product ID
-                echo "Product ID is missing.";
-            }
-        }
-        ?>
+                                    <td>
+                                        <?php echo $value['retail_price'] ?>
+                                    </td>
 
-        <div id="modalmodal" class="modalmodal">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ItemContainer">
-                <input type="hidden" name="productId" id="productIdHidden">
-                <input type="hidden" name="productName" id="productNameHidden">
-                <input type="hidden" name="netWeight" id="netWeightHidden">
-                <input type="hidden" name="productRetailPrice" id="productRetailPriceHidden">
-                <input type="hidden" name="productUnitPrice" id="productUnitPriceHidden">
-                <input type="hidden" name="quantity" id="quantityHidden">
-                <input type="hidden" name="productURL" id="productURLHidden">
+                                    <td>
+                                    <?php echo $value['quantity'] ?>
+                                    </td>
 
-                <div class="itemInfo">
-                    <img src="../assets/InventoryItems/" alt="" id="productImage">
-                    <div class="Infos">
-                        <h1 id="productNameInfo"></h1>
-                        <h3 id="netWeightInfo"></h3>
-                        <h1 id="productRetailPriceInfo">₱</h1>
+                                    <?php
+                                    $total = $value['retail_price'] * $value['quantity'];
+                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
+                                    ?>
+                                    <td>
+                                    <?php echo $total ?>
+                                    </td>
+                                </tr>
+                         <?php }
+                        }?>           
+
+                    </table>
+
+                </div>
+
+                <div class="AmountSummary">
+                    <div class="TotalPayment">
+                        <h2>Total</h2>
+                        <h1><?php echo $SubTotal ?></h1>
                     </div>
+
+                    <div class="dividerDIV"></div>
+
+                    <div class="AmountReceived">
+                        <h2>Amount Receive</h2>
+                        <h1>P 1,024.00</h1>
+                    </div>
+                    <div class="dividerDIV"></div>
+
+                    <div class="change" >
+                        <h2>Change</h2>
+                        <h1>P 1,024.00</h1>
+                    </div>
+                </div>
+
+                <div class="ConfirmSection">
+                    <button class="BackBtn" onclick="cancel()">Back</button>
+                    <button class="ConfirmBtn">Confirm Order</button>
                 </div>
                 <div class="ItemQuantity">
                     <div class="addQuantity">
@@ -333,7 +356,68 @@ include ("PhpFunctions/connection.php");
             </form>
         </div>
     </div>
+            <?php //saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);?>
+
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="../js/pos.js"></script>
+
+        <script src="../js/script.js"></script>
+        <script>
+        $(document).ready(function() {
+            $(document).on('click', '.toCart', function(event) { 
+
+                event.preventDefault(); 
+                var id = $(this).siblings(".ProductID").val();
+                $.ajax({
+                    method: 'POST',
+                    url: 'PhpFunctions/modal.php',
+                    data: {id: id},
+                    success: function(response) {
+                        $(".addItem").css("display", "flex");
+                        $('.addItem').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert("An error occurred: " + error); 
+                    }
+                });
+            });
+        });
+
+
+        </script>
+
+<script>
+                function decreaseQuantity() {
+                    var inputElement = document.querySelector('.quantityInput');
+                    var currentValue = parseInt(inputElement.value);
+                    if (currentValue > 1) {
+                        inputElement.value = currentValue - 1;
+                    }
+                }
+
+                function increaseQuantity() {
+                    var inputElement = document.querySelector('.quantityInput');
+                    var currentValue = parseInt(inputElement.value);
+                    inputElement.value = currentValue + 1;
+                }
+
+                function exitModal() {
+                    var cancel = document.querySelector('.addItem');
+                    cancel.style.display ='none';
+                }
+
+                function cancel() {
+                    var cancel = document.querySelector('.OrderSummary');
+                    cancel.style.display ='none';
+                }
+
+                function openSummaryModal() {
+                    var show = document.querySelector('.OrderSummary');
+                    show.style.display ='flex';
+                }
+            </script>
+        
+
 </body>
+
 </html>
