@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("PhpFunctions/connection.php");
+include("PhpFunctions/SaveTransaction.php");
 ?>
 
 <!DOCTYPE html>
@@ -177,16 +178,7 @@ include("PhpFunctions/connection.php");
                     $quantity = 1;
 
 
-                    function add($quantity){
-                        return $quantity += 1;
-                    }
-                    function minus($quantity){
-                        return $quantity -= 1;
-                    }
-
                     if (!empty($_SESSION['cart'])) {
-
-
 
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
@@ -207,7 +199,7 @@ include("PhpFunctions/connection.php");
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
-                                        <button>
+                                        <button">
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
                                         </button>
                                         
@@ -239,10 +231,12 @@ include("PhpFunctions/connection.php");
 
                             $SubTotal = $SubTotal + $total;
                             $realCostofGoods =  $realCostofGoods + $CostOfGoods;
-                            $numberOfItems += 1;
+                            $numberOfItems += $value['quantity'];
                         }
                     }
-                    echo $realCostofGoods ;
+
+
+                    
                     ?>
 
 
@@ -267,8 +261,7 @@ include("PhpFunctions/connection.php");
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
-                        <button class="HoldOrder">Hold Order</button>
-                        <button id="Checkout" class="ProceedBtn">Proceed</button>
+                        <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
 
                 </div>
@@ -290,24 +283,33 @@ include("PhpFunctions/connection.php");
                             <th>Quantity</th>
                             <th>Total</th>
                         </tr>
+                        <?php
+                        if (!empty($_SESSION['cart'])) {
 
-                        <tr>
-                            <td>
-                                Argentina Meat Loaf
-                            </td>
+                                foreach ($_SESSION['cart'] as $key => $value) { ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $value['product_name'] ?>
+                                    </td>
 
-                            <td>
-                                P 27.00
-                            </td>
+                                    <td>
+                                        <?php echo $value['retail_price'] ?>
+                                    </td>
 
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                P 27.00
-                            </td>
-                        </tr>
+                                    <td>
+                                    <?php echo $value['quantity'] ?>
+                                    </td>
 
+                                    <?php
+                                    $total = $value['retail_price'] * $value['quantity'];
+                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
+                                    ?>
+                                    <td>
+                                    <?php echo $total ?>
+                                    </td>
+                                </tr>
+                         <?php }
+                        }?>           
 
                     </table>
 
@@ -316,7 +318,7 @@ include("PhpFunctions/connection.php");
                 <div class="AmountSummary">
                     <div class="TotalPayment">
                         <h2>Total</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1><?php echo $SubTotal ?></h1>
                     </div>
 
                     <div class="dividerDIV"></div>
@@ -327,17 +329,20 @@ include("PhpFunctions/connection.php");
                     </div>
                     <div class="dividerDIV"></div>
 
-                    <div class="change">
+                    <div class="change" >
                         <h2>Change</h2>
                         <h1>P 1,024.00</h1>
                     </div>
                 </div>
 
                 <div class="ConfirmSection">
-                    <button class="BackBtn">Back</button>
+                    <button class="BackBtn" onclick="cancel()">Back</button>
                     <button class="ConfirmBtn">Confirm Order</button>
                 </div>
             </div>
+
+            <?php //saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);?>
+
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -384,6 +389,16 @@ include("PhpFunctions/connection.php");
                 function exitModal() {
                     var cancel = document.querySelector('.addItem');
                     cancel.style.display ='none';
+                }
+
+                function cancel() {
+                    var cancel = document.querySelector('.OrderSummary');
+                    cancel.style.display ='none';
+                }
+
+                function openSummaryModal() {
+                    var show = document.querySelector('.OrderSummary');
+                    show.style.display ='flex';
                 }
             </script>
         
