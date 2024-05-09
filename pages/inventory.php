@@ -38,9 +38,9 @@ include ("PhpFunctions/update_product.php");
             <div class="date">
                 <p>
                     <?php
-                        date_default_timezone_set('Asia/Manila');
-                        $currentDateTime = date('F j, Y h:i A');
-                        echo $currentDateTime;
+                    date_default_timezone_set('Asia/Manila');
+                    $currentDateTime = date('F j, Y h:i A');
+                    echo $currentDateTime;
                     ?>
                 </p>
             </div>
@@ -71,37 +71,50 @@ include ("PhpFunctions/update_product.php");
 
     <div class="mainContainer">
         <div class="productDisplay">
-
             <div class="delAddProduct">
+                
                 <div class="searchBar">
                     <input type="text" id="search" placeholder="Search">
                 </div>
+                <button class="inventoryLogBtn" id="inventory_LogBtn" onclick="window.location.href = 'inventory_log.php';">Inventory Log </button>
                 <button class="removeProduct" id="removeProductBtn">Remove Product</button>
                 <button class="addProduct" id="addProductBtn">Add Product</button>
             </div>
-            <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="category" id="categoryContainer" name="form"
+                action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <button class="categoryBtn" type="submit" name="category" value="All">All</button>
                 <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health &
+                    Beauty</button>
+                <button class="categoryBtn" type="submit" name="category"
+                    value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection
+                    Products</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered
+                    Drinks</button>
                 <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
                 <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant
+                    Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic
+                    Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies &
+                    Chocolates</button>
                 <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments &
+                    Sauces</button>
+                <button class="categoryBtn" type="submit" name="category"
+                    value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads &
+                    Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School
+                    Supplies</button>
             </form>
 
             <div class="inventory">
@@ -133,30 +146,42 @@ include ("PhpFunctions/update_product.php");
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) { ?>
-                                <form name="productTable" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                <form name="productTable" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                                    method="POST">
                                     <tr>
-                                        <td><input type="checkbox" name="selectedProducts[]" value="<?php echo $row["product_id"]; ?>"></td>
+                                        <td><input type="checkbox" name="selectedProducts[]"
+                                                value="<?php echo $row["product_id"]; ?>"></td>
                                         <td><?php echo $row["product_id"]; ?></td>
                                         <td><?php echo $row["product_name"]; ?></td>
                                         <td><?php echo $row["net_weight"] ?? '-'; ?></td>
                                         <td><?php echo $row["category"]; ?></td>
                                         <td><?php echo $row["unit_price"]; ?></td>
                                         <td><?php echo $row["retail_price"]; ?></td>
-                                        <td <?php if ($row["stock"] <= 5) echo 'style="color: red;"'; ?>><?php echo $row["stock"]; ?></td>
+                                        <td <?php if ($row["stock"] <= 5)
+                                            echo 'style="color: red;"'; ?>>
+                                            <?php echo $row["stock"]; ?>
+                                        </td>
                                         <td>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                                 <!-- hidden inputs for the UpdateProductModal with product information -->
-                                                <input type="hidden" name="productId_info" value="<?php echo $row["product_id"]; ?>">
-                                                <input type="hidden" name="productName_info" value="<?php echo $row["product_name"]; ?>">
-                                                <input type="hidden" name="netWeight_info" value="<?php echo $row["net_weight"]; ?>">
-                                                <input type="hidden" name="category_info" value="<?php echo $row["category"]; ?>">
+                                                <input type="hidden" name="productId_info"
+                                                    value="<?php echo $row["product_id"]; ?>">
+                                                <input type="hidden" name="productName_info"
+                                                    value="<?php echo $row["product_name"]; ?>">
+                                                <input type="hidden" name="netWeight_info"
+                                                    value="<?php echo $row["net_weight"]; ?>">
+                                                <input type="hidden" name="category_info"
+                                                    value="<?php echo $row["category"]; ?>">
                                                 <input type="hidden" name="unit_info" value="<?php echo $row["unit"]; ?>">
-                                                <input type="hidden" name="unitPrice_info" value="<?php echo $row["unit_price"]; ?>">
-                                                <input type="hidden" name="retailPrice_info" value="<?php echo $row["retail_price"]; ?>">
+                                                <input type="hidden" name="unitPrice_info"
+                                                    value="<?php echo $row["unit_price"]; ?>">
+                                                <input type="hidden" name="retailPrice_info"
+                                                    value="<?php echo $row["retail_price"]; ?>">
                                                 <input type="hidden" name="stock_info" value="<?php echo $row["stock"]; ?>">
                                                 <input type="hidden" name="url_info" value="<?php echo $row["picture_url"]; ?>">
-                                                
-                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn" class="updateProduct"><img src='../assets/edit.svg'></button>
+
+                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn"
+                                                    class="updateProduct"><img src='../assets/edit.svg'></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -288,7 +313,8 @@ include ("PhpFunctions/update_product.php");
                                 <div class="addImage">
                                     <div class="imageContainer">
                                         <img src="../assets/addImage.svg" id="editProductImage">
-                                        <input type="hidden" id="productURLInput" name="productURLInput" readonly><br><br>
+                                        <input type="hidden" id="productURLInput" name="productURLInput"
+                                            readonly><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
@@ -309,9 +335,9 @@ include ("PhpFunctions/update_product.php");
                             </div>
                             <div class="labelInput">
                                 <label>Net Weight</label>
-                                <input type="text" id="netWeightInput" name="netWeightInput" ><br><br>
+                                <input type="text" id="netWeightInput" name="netWeightInput"><br><br>
                             </div>
-                            
+
                             <div class="labelInput">
                                 <label for="category">Category</label>
                                 <select name="categoryInput" id="categoryInput" required>
@@ -334,7 +360,8 @@ include ("PhpFunctions/update_product.php");
                                     <option value="Candies & Chocolates">Candies & Chocolates</option>
                                     <option value="Dairy Products">Dairy Products</option>
                                     <option value="Condiments & Sauces">Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
+                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings
+                                    </option>
                                     <option value="Spreads & Fillings">Spreads & Fillings</option>
                                     <option value="School Supplies">School Supplies</option>
                                 </select>
@@ -354,22 +381,26 @@ include ("PhpFunctions/update_product.php");
                                 <label for="pricingInfo">Pricing Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Unit Price</label>
-                                    <input type="text" id="unitPriceInput" name="unitPriceInput" id="unitPriceInput" required><br><br>
+                                    <input type="text" id="unitPriceInput" name="unitPriceInput" id="unitPriceInput"
+                                        required><br><br>
                                 </div>
                                 <div class="labelInput">
                                     <label>Retail Price</label>
-                                    <input type="text" id="retailPriceInput" name="retailPriceInput" id="retailPriceInput" required><br><br>
+                                    <input type="text" id="retailPriceInput" name="retailPriceInput"
+                                        id="retailPriceInput" required><br><br>
                                 </div>
                             </div>
                             <div class="stockInfo">
                                 <label for="stockInfo">Stock Info</label><br><br>
                                 <div class="labelInput">
                                     <label>Stock</label>
-                                    <input type="text" id="stockInput" name="stockInput" id="stockInput" required><br><br>
+                                    <input type="text" id="stockInput" name="stockInput" id="stockInput"
+                                        required><br><br>
                                 </div>
                             </div>
                             <div class="updateButtons">
-                                <button class="addProduct" type="submit" id="updateProductInfoBtn" name="updateProductInfoBtn">Update Product</button>
+                                <button class="addProduct" type="submit" id="updateProductInfoBtn"
+                                    name="updateProductInfoBtn">Update Product</button>
                                 <button class="cancel" id="cancelUpdateBtn" name="cancelUpdateBtn">Cancel</button>
                             </div>
                         </div>
@@ -380,4 +411,5 @@ include ("PhpFunctions/update_product.php");
     </div>
 </body>
 <script src="../js/inventory.js"></script>
+
 </html>

@@ -196,16 +196,9 @@ body{
     transition: all .2s ease-in-out;
 }
 
-.removeProduct {
-    background-color: #FF4747;
-}
 
 .removeProduct:hover {
     background-color: #d13131; /* Darker shade on hover */
-}
-
-.addProduct {
-    background-color: #04B075;
 }
 
 .addProduct:hover {
@@ -533,3 +526,70 @@ input[type=text]:-ms-input-placeholder{
     display: none;
 }
 
+.inventoryLogBtn {
+    background-color: #414a4d;
+    transition: all .2s ease-in-out;
+}
+
+.inventoryLogBtn:hover {
+    background-color: #2d3335; /* Darker shade on hover */
+}
+
+#backBtn {
+    margin-top: 30px;
+    margin-right: 80px;
+}
+
+.inventoryLog{
+    width: 100vw;
+    height: auto;
+    max-height: 68vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px 10px 0 10px;
+}
+
+.inventoryTable {
+    font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+.inventoryTable table{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.inventoryTable th,
+.inventoryTable td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background-color: #ffffff;
+    border: none;
+    max-width: 200px
+}
+
+.inventoryLog thead th {
+    color: #007246;
+    position: sticky;
+    top: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-align: center;
+}
+
+.inventoryTable tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.inventoryTable tbody tr:hover {
+    background-color: #e6e6e6;
+}
+
+.inventoryTable td:first-child {
+    background-color: #ffffff;
+    text-align: center;
+}

@@ -8,6 +8,12 @@ document.getElementById("POSBtn").onclick = function () {
     window.location.href = "POS.php";
 };
 
+// //redirect to Inventory Log
+// document.getElementById("inventory_LogBtn").onclick = function () {
+//     alert("Clicking");
+//     window.location.href = "inventory_log.php";
+// };
+
 //---SEARCH PRODUCT---//
 document.getElementById("search").addEventListener("input", function () {
     var searchText = this.value.toLowerCase(); 
