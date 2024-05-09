@@ -6,9 +6,12 @@ document.getElementById("inventoryBtn").onclick = function () {
 //redirect to POS
 document.getElementById("POSBtn").onclick = function () {
     window.location.href = "POS.php";
+<<<<<<< Updated upstream
 
 };
 
+=======
+>>>>>>> Stashed changes
 };
 
 document.getElementById("inventoryBtn").onclick = function() {
@@ -83,3 +86,7 @@ $(document).ready(function () {
     })
     
 })
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
