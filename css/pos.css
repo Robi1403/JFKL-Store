@@ -541,7 +541,7 @@ input::-webkit-inner-spin-button {
 
 .ProceedBtn{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 100%;
+    width: 100vh;
     height: 40px;
     padding: 7px 25px 7px 25px;
     text-align: center;

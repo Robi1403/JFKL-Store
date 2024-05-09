@@ -15,11 +15,7 @@ if (isset($_POST['id'])) {
 
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ItemContainer">
                 <div class="itemInfo">
-<<<<<<< Updated upstream
                     <img src="../assets/InventoryItems/<?php echo $row['picture_url']; ?>" alt="">
-=======
-                    <img src="../assets/<?php echo $row['picture_url']; ?>" alt="">
->>>>>>> Stashed changes
                     <div class="Infos">
                         <h1><?php echo $row['product_name'] ?></h1>
                         <h3><?php echo $row['net_weight'] ?></h3>
@@ -49,11 +45,7 @@ if (isset($_POST['id'])) {
 
                     <div class="addToCart">
                         <button type="button" class="cancel" onclick="exitModal()">Cancel</button> <!-- Changed type to button -->
-<<<<<<< Updated upstream
                         <button type="submit" name="AddToCart" class="AddToCartBtn">Add to cart</button>
-=======
-                        <button type="submit" name="AddToCart" class="">Add to cart</button>
->>>>>>> Stashed changes
                     </div>
                 </div>
             </form>
