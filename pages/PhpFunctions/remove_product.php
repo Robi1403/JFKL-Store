@@ -1,12 +1,12 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+include ("connection.php");
 
-    if (isset($_POST['selectedProducts']) && is_string($_POST['selectedProducts']) && !empty($_POST['selectedProducts'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])){
+
+    if (is_string($_POST['selectedProducts']) && !empty($_POST['selectedProducts'])) {
 
         //split string selectedProducts to array based on ,
         $selectedProducts = explode(',', $_POST['selectedProducts']);
-
-        $conn = new mysqli('localhost', 'root', '', 'dbms_sari_sari_store');
 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
 
     } else {
-        echo "No products selected for deletion.";
+        echo '<script>alert("No products selected for deletion.")</script>';
     }
 } 
 ?>

@@ -76,38 +76,36 @@ include("PhpFunctions/SaveTransaction.php");
 
         <div class="productDisplay">
 
-            <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
-                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
-                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
-                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
-                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
-                <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
-                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
-                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
-            </form>
-
-
+            <div class="category" id="categoryContainer">
+                <button class="categoryBtn" onclick="filterInventory('All')">All</button>
+                <button class="categoryBtn" onclick="filterInventory('Canned Goods')">Canned Goods</button>
+                <button class="categoryBtn" onclick="filterInventory('Coffee')">Coffee</button>
+                <button class="categoryBtn" onclick="filterInventory('Biscuits')">Biscuits</button>
+                <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
+                <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
+                <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
+                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
+                <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
+                <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
+                <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
+                <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
+                <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
+                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic Beverages</button>
+                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies & Chocolates</button>
+                <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments & Sauces</button>
+                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
+                <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
+            </div>
+          
             <div class="ItemView">
 
                 <div class="products">
                     <?php
                     $category = $_POST['category'] ?? 'All';
-
 
                     if ($category == "All") {
                         $query = "SELECT * FROM inventory";
@@ -134,14 +132,12 @@ include("PhpFunctions/SaveTransaction.php");
                                 <div class="price">
                                     <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
+
                                 <input type="hidden" class="ProductID" name="productId" value="<?php echo $row['product_id']; ?>">
                                 <input type="hidden" name="quantity" value="1"> 
                                 <button type="button" name="toCart" class="toCart"><img src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
-
-
-
 
                     <?php
                     }
@@ -167,7 +163,6 @@ include("PhpFunctions/SaveTransaction.php");
                 }
 
                 ?>
-
                 <div class="orderList">
                     
                 
@@ -239,8 +234,6 @@ include("PhpFunctions/SaveTransaction.php");
                     
                     ?>
 
-
-
                 </div>
 
                 <div class="CheckoutSection">
@@ -261,12 +254,14 @@ include("PhpFunctions/SaveTransaction.php");
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
+
                         <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
 
                 </div>
             </div>
         </div>
+
    
         <div class="addItem"></div>
 
@@ -339,8 +334,28 @@ include("PhpFunctions/SaveTransaction.php");
                     <button class="BackBtn" onclick="cancel()">Back</button>
                     <button class="ConfirmBtn">Confirm Order</button>
                 </div>
-            </div>
+                <div class="ItemQuantity">
+                    <div class="addQuantity">
+                        <h3>Quantity</h3>
+                        <div class="addMinusQuantity">
+                            <button type="button" onclick="decreaseQuantity()">
+                                <img src="../assets/decreaseBtn.svg" alt="Decrease">
+                            </button>
+                            <input type="number" class="quantityInput" name="Quantity" value="1">
+                            <button type="button" onclick="increaseQuantity()">
+                                <img src="../assets/buttonAdd.svg" alt="Increase">
+                            </button>
+                        </div>
+                    </div>
 
+                    <div class="addToCart">
+                        <button type="button" class="cancel" onclick="exitModal()">Cancel</button>
+                        <button type="submit" name="AddToCart" class="AddToCart">Add to cart</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
             <?php //saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);?>
 
         </div>
@@ -402,6 +417,7 @@ include("PhpFunctions/SaveTransaction.php");
                 }
             </script>
         
+
 </body>
 
 </html>

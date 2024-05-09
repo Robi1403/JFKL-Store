@@ -8,7 +8,7 @@
 body{
     background-color: #F9F9F9;
     display: block;
-    overflow: hidden;
+    /* overflow: hidden; */
    
 }
 
@@ -478,8 +478,7 @@ input::-webkit-inner-spin-button {
 .SubTotal{
     display: flex;
     justify-content: space-between;
-    margin: 0px 5px 10px 5px;
-    
+    margin: 0px 25px 10px 25px;
      
 }
 .SubTotal h1{
@@ -577,7 +576,6 @@ input::-webkit-inner-spin-button {
     border-radius: 13px;
     background: #FAFAFA;
     padding: 30px;
-    
 }
 
 .itemInfo{
@@ -872,3 +870,4 @@ button:focus {
 .searchRow:hover{
     background-color: #e4e4e4;
 }
+
