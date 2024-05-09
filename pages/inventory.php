@@ -3,6 +3,8 @@ include ("PhpFunctions/connection.php");
 include ("PhpFunctions/remove_product.php");
 include ("PhpFunctions/add_product.php");
 include ("PhpFunctions/update_product.php");
+=======
+
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +53,7 @@ include ("PhpFunctions/update_product.php");
         <div class="sbPOS">
             <button id="POSBtn">
                 <img src="../assets/POS_g.svg" alt=""><br>
+
                 <strong>POS</strong>
             </button>
         </div>
