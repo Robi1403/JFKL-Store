@@ -26,12 +26,7 @@ if (isset($_POST['input'])) {
                     $price = $row['retail_price'];
                     $pic = $row['picture_url'];
 
-<<<<<<< Updated upstream
                     ?>           
-=======
-                    ?>
-    
->>>>>>> Stashed changes
                         <tr>
                             <td><img src="../assets/InventoryItems/<?php echo $pic ?>" alt=""></td>
                             <td><?php echo $id ?></td>

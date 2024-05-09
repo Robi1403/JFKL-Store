@@ -3,8 +3,6 @@ include ("PhpFunctions/connection.php");
 include ("PhpFunctions/remove_product.php");
 include ("PhpFunctions/add_product.php");
 include ("PhpFunctions/update_product.php");
-=======
-
 ?>
 
 <!DOCTYPE html>
