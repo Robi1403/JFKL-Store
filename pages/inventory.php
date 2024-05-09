@@ -192,7 +192,7 @@ include ("PhpFunctions/update_product.php");
                                 <div class="addImage">
                                     <div class="imageContainer">
                                         <img src="../assets/addImage.svg" id="productImage">
-                                        <input type="hidden" name="produtURL" required><br><br>
+                                        <input type="hidden" name="productURL" required><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
@@ -290,6 +290,7 @@ include ("PhpFunctions/update_product.php");
                                 <div class="addImage">
                                     <div class="imageContainer">
                                         <img src="../assets/addImage.svg" id="editProductImage">
+                                        <input type="hidden" id="productURLInput" name="productURLInput" readonly><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
@@ -298,6 +299,7 @@ include ("PhpFunctions/update_product.php");
                                     </div>
                                 </div>
                             </div>
+
                             <div class="labelInput">
                                 <label>Product ID</label>
                                 <input type="text" id="productIdInput" name="productIdInput" readonly><br><br>

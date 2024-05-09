@@ -12,6 +12,76 @@ if (isset($_POST['updateProductInfoBtn'])) {
     $unitPrice = $_POST['unitPriceInput'];
     $retailPrice = $_POST['retailPriceInput'];
     $stock = $_POST['stockInput'];
+    $url = $_POST['productURLInput'];
+
+    $select_query = "SELECT * FROM `inventory` WHERE `product_id` = '$productId'";
+    $result = mysqli_query($conn, $select_query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        $previous_state = NULL;
+        $new_state = NULL;
+
+        if ($productName != $row['product_name']) {
+            $previous_state = "Product Name: " . $row['product_name'] . "\n";
+            $new_state = "Product Name: " . $productName ."\n";
+        }
+
+        if ($netWeight != $row['net_weight']) {
+            $previous_state .= "Net Weight: " . $row['net_weight'] ."\n";
+            $new_state .= "Net Weight: " . $netWeight ."\n";
+        }
+
+        if ($unit != $row['unit']) {
+            $previous_state .= "Unit: "  .$row['unit'] ."\n";
+            $new_state .= "Unit: " .$unit . "\n";
+        }
+
+        if ($category != $row['category']) {
+            $previous_state .= "Category: "  .$row['category'] ."\n";
+            $new_state .= "Category: "  .$category . "\n";
+        }
+
+        if ($unitPrice != $row['unit_price']) {
+            $previous_state .= "Unit Price: "  .$row['unit_price'] ."\n";
+            $new_state .= "Unit Price: "  .$unitPrice . "\n";
+        }
+
+        if ($retailPrice != $row['retail_price']) {
+            $previous_state .= "Retail Price: "  .$row['retail_price'] ."\n";
+            $new_state .=  "Retail Price: "  .$retailPrice ."\n";
+        }
+
+        if ($stock != $row['stock']) {
+            $previous_state .=  "Stock: "  .$row['stock'] ."\n";
+            $new_state .=  "Stock: "  .$stock ."\n";
+        }
+
+        if ($url != $row['picture_url']) {
+            $previous_state .= "Url: "  .$row['picture_url'] ."\n";
+            $new_state .= "Url: "  .$url ."\n";
+        }
+
+        if ($new_state == NULL) {
+            echo '<script> alert("Nothing was changed");
+            window.location.href = "../inventory.php";  </script>';
+        }
+
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d H:i:s');
+        
+        $insert_query = "INSERT INTO `inventory_log`(`product_id`, `action_type`, `date`, `previous_state`, `new_state`) VALUES ('$productId', 'Update', '$date', '$previous_state', '$new_state')";
+        if (mysqli_query($conn, $insert_query)) {
+            echo '<script>
+                alert("Data inserted successfully to inventory log."); 
+            </script>';
+        } else {
+            echo '<script>alert("Error inserting data to inventory log: ' . mysqli_error($conn) . '");</script>';
+        }
+    } else {
+        echo '<script>alert("Error retrieving data from the database: ' . mysqli_error($conn) . '");</script>';
+    }
 
     if ($netWeight == NULL) {
         $url = $productName . ".png";
@@ -50,9 +120,12 @@ if (isset($_POST['updateProductInfoBtn'])) {
         WHERE `product_id` = '$productId'";
 
         if (mysqli_query($conn, $update_query)) {
-            echo "Data updated successfully.";
+            echo '<script>
+                    alert("Data updated successfully.");
+                    window.location.href = "../inventory.php"; 
+                </script>';
         } else {
-            echo "Error updating data: " . mysqli_error($conn);
+            echo '<script>alert("Error updating data: ' . mysqli_error($conn) . '");</script>';
         }
     }
 }

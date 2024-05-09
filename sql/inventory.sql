@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 06:25 AM
+-- Generation Time: May 09, 2024 at 03:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,7 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
-(1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 22.00, 27.00, 40, 'Argentina Meat Loaf 150g.png'),
+(1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 22.00, 27.00, 45, 'Argentina Meat Loaf 150g.png'),
 (2, 'Argentina Corn Beef', '150g', 'Piece', 'Canned Goods', 34.00, 39.00, 40, 'Argentina Corn Beef 150g.png'),
 (3, 'Argentina Giniling', '150g', 'Piece', 'Canned Goods', 28.00, 33.00, 12, 'Argentina Giniling 150g.png'),
 (4, 'Century Tuna Flakes in Oil', '155g', 'Piece', 'Canned Goods', 35.00, 39.00, 12, 'Century Tuna Flakes in Oil 155g.png'),
@@ -586,12 +586,12 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (539, 'Maxx Menthol Candy Cherry 50pcs', '200g', 'Pack', 'Candies & Chocolates', 42.00, 47.00, 3, 'Maxx Menthol Candy Cherry 50pcs 200g.png'),
 (540, 'Ricoa Flat Tops Milk Chocolate 30pcs', '150g', 'Pack', 'Candies & Chocolates', 47.00, 55.00, 3, 'Ricoa Flat Tops Milk Chocolate 30pcs 150g.png'),
 (541, 'Lipps Pop Stick Strawberry 22pcs', '143g', 'Pack', 'Candies & Chocolates', 20.00, 22.00, 3, 'Lipps Pop Stick Strawberry 22pcs 143g.png'),
-(542, 'Choco Joy 50pcs', '165g', 'Pack', 'Candies & Chocolates', 37.00, 45.00, 3, 'Choco Joy 50pcs 165g.png'),
+(542, 'Champi 50pcs', '165g', 'Pack', 'Candies & Chocolates', 37.00, 45.00, 3, 'Champi 50pcs 165g.png'),
 (543, 'Pintoora Gum ball 30pcs', '120g', 'Pack', 'Candies & Chocolates', 26.00, 30.00, 3, 'Pintoora Gum ball 30pcs 120g.png'),
 (544, 'Halls Mentho-Lyptus 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Mentho-Lyptus 50pcs 140g.png'),
 (545, 'Halls Honey-Lemon 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Honey-Lemon 50pcs 140g.png'),
 (546, 'Halls Raspberry 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Raspberry 50pcs 140g.png'),
-(547, 'Halls Fresh Spearmint 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Fresh Spearmint 50pcs 140g.png');
+(547, 'Halls Fresh Lime 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Fresh Lime 50pcs 140g.png');
 
 --
 -- Indexes for dumped tables

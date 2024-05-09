@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2024 at 10:02 PM
+-- Generation Time: May 09, 2024 at 03:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,20 +18,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbms_sari_sari_store`
+-- Database: `jfkl`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `all_sales`
+-- Table structure for table `inventory_log`
 --
 
-CREATE TABLE `all_sales` (
-  `sale_id` int(11) NOT NULL,
-  `sale_date` date DEFAULT NULL,
-  `sale_time` time DEFAULT NULL,
-  `sale_amount` decimal(10,2) DEFAULT NULL
+CREATE TABLE `inventory_log` (
+  `log_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `action_type` enum('Add','Update','Remove') DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `previous_state` text DEFAULT NULL,
+  `new_state` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -39,20 +41,31 @@ CREATE TABLE `all_sales` (
 --
 
 --
--- Indexes for table `all_sales`
+-- Indexes for table `inventory_log`
 --
-ALTER TABLE `all_sales`
-  ADD PRIMARY KEY (`sale_id`);
+ALTER TABLE `inventory_log`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `fk_log_product_id` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `all_sales`
+-- AUTO_INCREMENT for table `inventory_log`
 --
-ALTER TABLE `all_sales`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `inventory_log`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `inventory_log`
+--
+ALTER TABLE `inventory_log`
+  ADD CONSTRAINT `fk_log_product_id` FOREIGN KEY (`product_id`) REFERENCES `inventory` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -82,6 +82,10 @@ updateProductBtns.forEach(function (btn) {
         var url = this.parentNode.querySelector('[name="url_info"]').value;
 
         //sets the product info in the input fields inside the UpdateProductModal
+        
+        var productURLInput = document.getElementById('productURLInput');
+        productURLInput.value = url;
+
         var productIdInput = document.getElementById('productIdInput');
         productIdInput.value = productId;
 
