@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Nueue', sans-serif;
+    font-family: 'Helvetica ', sans-serif;
 }
 
 body{
@@ -182,11 +182,7 @@ body{
 
 .salesDisplay .transactions{
     display: flex;
-    gap: 20px;
-    background-color: #ffffff;
     height: 60%;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: 13px;
 }
 
 .sales .salesStats{
@@ -199,11 +195,13 @@ body{
     height: 100%;
 }
 
+
+
 .salesStatsLabel{
     width: auto;
 }
 .salesStatsLabel p{
-    font-size: 24px;
+    font-size: 30px;
     margin-left: 10px;
     line-height: 40px;
     font-weight: 600;
@@ -217,7 +215,7 @@ body{
     border-radius: 20px 20px 0px 0px;
     height: 7px;
     position: relative;
-    background-color: #008D5D;
+    background-color: #04B075;
 
 }
 
@@ -304,11 +302,8 @@ body{
 
 
 
-.stocksLabel{
-    width: auto;
-}
 .stocksLabel p{
-    font-size: 24px;
+    font-size: 30px;
     margin-left: 10px;
     line-height: 40px;
     font-weight: 600;
@@ -316,13 +311,14 @@ body{
     overflow: hidden;
     text-overflow: inherit;
     white-space: nowrap;
-
 }
+
+
 .stockTracker .lineShape{
     border-radius: 20px 20px 0px 0px;
     height: 7px;
     position: relative;
-    background-color: #008D5D;
+    background-color: #04B075;
 }
 
 .stockTracker .mainContainer{
@@ -332,31 +328,183 @@ body{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: flex;
     flex-direction: row;
-    gap: 10px;
     overflow: scroll;
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 0px 30px 7px 30px;
+
+}
+
+.stocksTable{
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 0px 10px 0px 10px;
+}
+
+.stocksTable thead th{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    padding: 10px 0px 10px 0px;
+    color: #04B075;
+    font-weight: 600;
+
+}
+
+.stocksTable td{
+    padding: 5px 0px 5px 0px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    border: none;
+}
+
+.stocksTable tbody #productID,
+.stocksTable .col1 {
+    width: 10vw;
+    margin-right: 15px;
+}
+.stocksTable tbody #productName,
+.stocksTable .col2 {
+    width: 40vw;
+
+
+}
+.stocksTable tbody #netWeight,
+.stocksTable .col3 {
+    width: 10vw;
+
+}
+.stocksTable tbody #category,
+.stocksTable .col4 {
+    width: 15vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.stocksTable tbody #stock,
+.stocksTable .col5 {
+    width: 5vw;
+}
+.stocksTable tbody #stock p{
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+
+.transactions{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.transactions .transactionLabel p{
+    font-size: 30px;
+    margin-left: 10px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+
+}
+.transactions .lineShape{
+    border-radius: 20px 20px 0px 0px;
+    height: 7px;
+    position: relative;
+    background-color: #04B075;
+}
+
+.transactions .mainContainer{
+    background-color: #ffffff;
+    border-radius: 0px 0px 13px 13px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.transactions .mainContainer{
+    background-color: #ffffff;
+    height: 33vh;
+    border-radius: 0px 0px 13px 13px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 40px 7px 40px;
 
 }
 
 .stocksTable{
     font-size: 14px;
-    width: 100%;
-    padding: 10px;
     border-radius: 8px;
-
+    padding: 0px 10px 0px 10px;
 }
 
-.stocksTable th,
+.stocksTable thead th{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    padding: 15px 0px 15px 0px;
+    text-align: left;
+}
+
 .stocksTable td{
-    padding: 8px;
+    padding: 5px 0px 5px 0px;
     border: 1px solid #ddd;
     text-align: left;
     background-color: #ffffff;
     border: none;
+}
+
+.stocksTable tbody #transactionNum,
+.stocksTable .col1 {
+    width: 20vw;
+    margin-right: 15px;
+}
+.stocksTable tbody #numItems,
+.stocksTable .col2 {
+    width: 30vw;
+
+}
+.stocksTable tbody #total,
+.stocksTable .col3 {
+    width: 30vw;
+}
+.stocksTable tbody #date,
+.stocksTable .col4 {
+    width: 30vw;
     overflow: hidden;
-    text-overflow: inherit;
     white-space: nowrap;
-    width: 100%;
+    text-overflow: ellipsis;
+}
+.stocksTable tbody #seeDetails,
+.stocksTable .col5 {
+    width: 10vw;
+}
+.stocksTable tbody #seeDetails button{
+    border: 1px solid #04B075;
+    color: #04B075;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    font-size: 12px;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.stocksTable tbody #seeDetails button:hover{
+    background-color: #04B075;
+    outline: none;
+    color: #ffffff;
 }
