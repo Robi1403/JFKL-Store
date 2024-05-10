@@ -8,12 +8,9 @@ document.getElementById("POSBtn").onclick = function () {
     window.location.href = "POS.php";
 };
 
-document.getElementById("inventoryBtn").onclick = function() {
-    window.location.href = "inventory.php";
-};
-
-document.getElementById("POSBtn").onclick = function() {
-    window.location.href = "POS.php";
+//redirect to sales
+document.getElementById("salesBtn").onclick = function () {
+    window.location.href = "sales.php";
 };
 
 

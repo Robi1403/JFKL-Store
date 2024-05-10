@@ -76,7 +76,7 @@ include ("PhpFunctions/update_product.php");
                 <div class="searchBar">
                     <input type="text" id="search" placeholder="Search">
                 </div>
-                <button class="inventoryLogBtn" id="inventory_LogBtn" onclick="window.location.href = 'inventory_log.php';">Inventory Log </button>
+                <button class="inventoryLogBtn" id="inventory_LogBtn" >Inventory Log </button>
                 <button class="removeProduct" id="removeProductBtn">Remove Product</button>
                 <button class="addProduct" id="addProductBtn">Add Product</button>
             </div>

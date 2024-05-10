@@ -8,11 +8,21 @@ document.getElementById("POSBtn").onclick = function () {
     window.location.href = "POS.php";
 };
 
-// //redirect to Inventory Log
-// document.getElementById("inventory_LogBtn").onclick = function () {
-//     alert("Clicking");
-//     window.location.href = "inventory_log.php";
-// };
+//redirect to Sales
+document.getElementById("salesBtn").onclick = function () {
+    window.location.href = "sales.php";
+};
+
+
+//redirect to Inventory Log
+document.getElementById("inventory_LogBtn").onclick = function () {
+    window.location.href = "inventory_log.php";
+};
+
+//redirect Inventory Log back to inventory
+document.getElementById("backBtn").onclick = function () {
+    window.location.href = "inventory.php";
+};
 
 //---SEARCH PRODUCT---//
 document.getElementById("search").addEventListener("input", function () {
