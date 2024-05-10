@@ -73,11 +73,23 @@ include ("PhpFunctions/connection.php");
     <div class="mainContainer">
         <div class="salesDisplay">
             <div class="sales">
-
                 <div class="salesStats">
-                    <div class="salesStatsLabel">
-                        <p>Sales Statistics</p>
+                    <div class="labelgroup">
+                        <div class="salesStatsLabel"><p>Sales Statistics</p></div>
+                        <div class="dropdown">
+                            <div class="dropdown-select">
+                                <span class="select">Daily</span>
+                                <div class="caret"></div>
+                            </div>
+                            <ul class="dropdown-list">
+                                <li>Daily</li>
+                                <li>Monthly</li>
+                                <li>Yearly</li>
+                            </ul>
+                        </div>
+                        
                     </div>
+                    
                     <div class="lineShape"></div>
 
                     <div class="mainContainer">

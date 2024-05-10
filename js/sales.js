@@ -71,3 +71,28 @@ function updateDateTime() {
 
 // Call updateDateTime initially to start the updating process
 updateDateTime();
+
+//
+document.addEventListener("DOMContentLoaded", function () {
+    var dropdownSelect = document.querySelector('.dropdown-select');
+    var dropdownList = document.querySelector('.dropdown-list');
+    var dropdownOptions = document.querySelectorAll('.dropdown-list li');
+    var selectSpan = document.querySelector('.select');
+
+    dropdownSelect.addEventListener('click', function () {
+        dropdownList.style.display = (dropdownList.style.display === 'block') ? 'none' : 'block';
+    });
+
+    dropdownOptions.forEach(function (option) {
+        option.addEventListener('click', function () {
+            selectSpan.textContent = option.textContent;
+            dropdownList.style.display = 'none';
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!dropdownSelect.contains(e.target)) {
+            dropdownList.style.display = 'none';
+        }
+    });
+});
