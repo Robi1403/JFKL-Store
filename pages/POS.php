@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("PhpFunctions/connection.php");
-include("PhpFunctions/SaveTransaction.php");
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +82,7 @@ include("PhpFunctions/SaveTransaction.php");
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health and Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
                 <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
                 <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
                 <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
@@ -95,11 +94,12 @@ include("PhpFunctions/SaveTransaction.php");
                 <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
                 <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
                 <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
                 <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
                 <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
             </form>
+
 
             <div class="ItemView">
 
@@ -139,6 +139,9 @@ include("PhpFunctions/SaveTransaction.php");
                             </div>
                         </form>
 
+
+
+
                     <?php
                     }
                     ?>
@@ -150,11 +153,9 @@ include("PhpFunctions/SaveTransaction.php");
             <div class="cart">
                 <div class="cartLabel">
                     <p>Cart</p>
-                </div>
-                <div class="buttons">
-                    <button>New Order</button>
-                    <button>Hold Order</button>
-                    <a href="POS.php?action=clearAll">Clear</a>
+                    <div class="buttons">
+                        <a href="POS.php?action=clearAll">Clear</a>
+                    </div>
                 </div>
 
                 <?php
@@ -163,6 +164,7 @@ include("PhpFunctions/SaveTransaction.php");
                 }
 
                 ?>
+
                 <div class="orderList">
                     
                 
@@ -173,11 +175,23 @@ include("PhpFunctions/SaveTransaction.php");
                     $quantity = 1;
 
 
+                    function add($quantity){
+                        return $quantity += 1;
+                    }
+                    function minus($quantity){
+                        return $quantity -= 1;
+                    }
+
                     if (!empty($_SESSION['cart'])) {
+
+
 
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
-                                <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
+                                <div class="image">
+                                    <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
+                                </div>
+                                
 
                                 <div class="items">
                                     <h3>Item</h3>
@@ -194,7 +208,7 @@ include("PhpFunctions/SaveTransaction.php");
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
-                                        <button">
+                                        <button>
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
                                         </button>
                                         
@@ -217,22 +231,23 @@ include("PhpFunctions/SaveTransaction.php");
                                     <h1>₱<?php echo $total ?></h1>
                                 </div>
 
-                                <div class="select">
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
+                                <div class="delete">
+                                    <button>
+                                        <img src="../assets/delete.svg" alt="">
+                                    </button>
                                 </div>
                             </div>
                     <?php
 
                             $SubTotal = $SubTotal + $total;
                             $realCostofGoods =  $realCostofGoods + $CostOfGoods;
-                            $numberOfItems += $value['quantity'];
+                            $numberOfItems += 1;
                         }
                     }
-
-
-                    
+                    echo $realCostofGoods ;
                     ?>
+
+
 
                 </div>
 
@@ -254,16 +269,13 @@ include("PhpFunctions/SaveTransaction.php");
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
-
-                        <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
+                        <button class="HoldOrder">Hold Order</button>
+                        <button id="Checkout" class="ProceedBtn">Proceed</button>
                     </div>
 
                 </div>
             </div>
         </div>
-   
-        <div class="addItem"></div>
-
    
         <div class="addItem"></div>
 
@@ -280,33 +292,24 @@ include("PhpFunctions/SaveTransaction.php");
                             <th>Quantity</th>
                             <th>Total</th>
                         </tr>
-                        <?php
-                        if (!empty($_SESSION['cart'])) {
 
-                                foreach ($_SESSION['cart'] as $key => $value) { ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $value['product_name'] ?>
-                                    </td>
+                        <tr>
+                            <td>
+                                Argentina Meat Loaf
+                            </td>
 
-                                    <td>
-                                        <?php echo $value['retail_price'] ?>
-                                    </td>
+                            <td>
+                                P 27.00
+                            </td>
 
-                                    <td>
-                                    <?php echo $value['quantity'] ?>
-                                    </td>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                P 27.00
+                            </td>
+                        </tr>
 
-                                    <?php
-                                    $total = $value['retail_price'] * $value['quantity'];
-                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
-                                    ?>
-                                    <td>
-                                    <?php echo $total ?>
-                                    </td>
-                                </tr>
-                         <?php }
-                        }?>           
 
                     </table>
 
@@ -315,7 +318,7 @@ include("PhpFunctions/SaveTransaction.php");
                 <div class="AmountSummary">
                     <div class="TotalPayment">
                         <h2>Total</h2>
-                        <h1><?php echo $SubTotal ?></h1>
+                        <h1>P 1,024.00</h1>
                     </div>
 
                     <div class="dividerDIV"></div>
@@ -326,15 +329,10 @@ include("PhpFunctions/SaveTransaction.php");
                     </div>
                     <div class="dividerDIV"></div>
 
-                    <div class="change" >
+                    <div class="change">
                         <h2>Change</h2>
                         <h1>P 1,024.00</h1>
                     </div>
-                </div>
-
-                <div class="ConfirmSection">
-                    <button class="BackBtn" onclick="cancel()">Back</button>
-                    <button class="ConfirmBtn">Confirm Order</button>
                 </div>
 
                 <div class="ConfirmSection">
@@ -342,10 +340,6 @@ include("PhpFunctions/SaveTransaction.php");
                     <button class="ConfirmBtn">Confirm Order</button>
                 </div>
             </div>
-        </div>
-    </div>
-            <?php //saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);?>
-
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -393,19 +387,8 @@ include("PhpFunctions/SaveTransaction.php");
                     var cancel = document.querySelector('.addItem');
                     cancel.style.display ='none';
                 }
-
-                function cancel() {
-                    var cancel = document.querySelector('.OrderSummary');
-                    cancel.style.display ='none';
-                }
-
-                function openSummaryModal() {
-                    var show = document.querySelector('.OrderSummary');
-                    show.style.display ='flex';
-                }
             </script>
         
-
 </body>
 
 </html>

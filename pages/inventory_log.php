@@ -29,12 +29,12 @@ include ("PhpFunctions/update_product.php");
         </div>
 
         <div class="right">
-            <!-- <div class="todayGrossSaleLabel">
+            <div class="todayGrossSaleLabel">
                 <p>Today's Gross Sale: </p>
             </div>
             <div class="todayGrossSale">
                 <p><strong>P969.00</strong></p>
-            </div> -->
+            </div>
             <div class="date">
                 <p>
                     <?php

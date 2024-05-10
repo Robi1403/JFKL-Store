@@ -29,12 +29,12 @@ include ("PhpFunctions/update_product.php");
         </div>
 
         <div class="right">
-            <!-- <div class="todayGrossSaleLabel">
+            <div class="todayGrossSaleLabel">
                 <p>Today's Gross Sale: </p>
             </div>
             <div class="todayGrossSale">
                 <p><strong>P969.00</strong></p>
-            </div> -->
+            </div>
             <div class="date">
                 <p>
                     <?php
@@ -88,33 +88,22 @@ include ("PhpFunctions/update_product.php");
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health &
-                    Beauty</button>
-                <button class="categoryBtn" type="submit" name="category"
-                    value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection
-                    Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered
-                    Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
                 <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
                 <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant
-                    Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic
-                    Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies &
-                    Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
                 <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments &
-                    Sauces</button>
-                <button class="categoryBtn" type="submit" name="category"
-                    value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads &
-                    Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School
-                    Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
             </form>
 
             <div class="inventory">
