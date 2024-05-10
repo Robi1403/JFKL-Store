@@ -16,7 +16,6 @@ body{
     height: 100px;
     width: 100%;
     display: flex;
-    position: relative;
     align-items: center;
     top: 0;
     overflow: hidden;
@@ -55,7 +54,7 @@ body{
     flex: 2.5;
     padding-right: 30px;
     display: flex;
-    width: 100vh;
+    width: 700px;
 }
 
 .navbar .searchBar input{
@@ -193,15 +192,17 @@ body{
     padding: 30px;
 }
 
-
-.products{
+.ItemView{
     background-color: #ffffff;
     height: 80vh;
     border-radius: 13px;
-    padding: 30px;
-    overflow: auto;
-    padding-bottom: 50px;
-
+    padding: 20px 0px 0px 0px;
+}
+.products{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 72vh;
+    padding: 0px 20px 0px 20px;
 }
 
 .ItemCardView{
@@ -279,28 +280,28 @@ body{
     padding: 30px 30px 125px 30px;
 }
 
+.cart .cartLabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 10px 0px 5px;
+}
 
-.cart .cartLabel p{
+.cart .cartLabel p {
     font-size: 27px;
     font-weight: 600;
     color: #009963;
-
-
 }
 
-.cart .buttons{
-    margin-top: 15px;
+.cart .buttons {
     display: flex;
-    flex-direction: row;
-    gap: 15px;
-    
+    flex-direction: row;  
 }
 
-.cart .buttons button, .buttons a{
+.cart .buttons a {
     font-size: 13px;
     width: auto;
     padding: 7px 25px 7px 25px;
-     
     text-align: center;
     vertical-align: middle;
     white-space: nowrap; 
@@ -312,23 +313,24 @@ body{
     cursor: pointer;
     transition: all .2s ease-in-out;
     text-decoration: none;
+    line-height: 15px;
+    height: 27px;
 }
+
 
  .orderList{
     display: flex;
     flex: 1;
-    margin-top: 10px;
-    padding: 5px 30px 0px 5px;
+    padding: 5px 20px 0px 5px;
+    margin-top: 25px;
     margin-bottom: 20px;
     overflow-y: scroll;
     display: flex;
     align-items: start;
     flex-direction: column;
     overflow-x: hidden;
+    gap: 15px;
 }
-
-
-
 
 .cart .orderList .container{
     display: flex;
@@ -337,20 +339,10 @@ body{
     width: 100%;
     height: 75px;
     border-radius: 13px;
-    margin-top: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;   
-    padding: 15px 20px 10px 20px;
+    padding: 15px 20px 15px 20px;
     gap: 5px;
     align-items: flex-start;
-    
-}
-
-.cart .orderList .container img{
-    height: 45px;
-    width: 45px;
-    margin-right: 5px;
-    object-fit: inherit;
-    
 }
 
 .cart .orderList .container h3{
@@ -386,12 +378,29 @@ body{
     text-overflow: ellipsis;
 }
 
-.qty{
+.cart .orderList .container .image {
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    margin-right: 7px;
+}
+
+.cart .orderList .container .Price {
+    margin-right: 12px;
+}
+
+.cart .orderList .container .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cart .orderList .container .qty{
     display: flex;
     justify-items: center;
     align-items: center;
     margin-top: 4px;
-    margin-right: 15px;
+    margin-right: 8px;
 }
 
 .cart .orderList .container .qty img{
@@ -424,22 +433,25 @@ body{
     
 }
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.cart .orderList .container .select{
+.cart .orderList .container .delete{
     display: flex;
     align-items: center;
 }
-.cart .orderList .container .select input{
+
+.cart .orderList .container .delete button{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+.cart .orderList .container .delete img{
     height: 15px;
     width: 15px;
-    border-radius: 2px;
-    border: 1.5px solid #008D5D;
     margin-top: 15px;
 }
 
@@ -469,7 +481,7 @@ input::-webkit-inner-spin-button {
 .Total h1{
     color: #000;
     font-family: Helvetica;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.3px;
     margin-top: 10px;
@@ -478,12 +490,13 @@ input::-webkit-inner-spin-button {
 .SubTotal{
     display: flex;
     justify-content: space-between;
-    margin: 0px 25px 10px 25px;
+    margin: 0px 5px 10px 5px;
+    
      
 }
 .SubTotal h1{
     color: #000;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.3px;
     margin-bottom: 10px;
@@ -491,7 +504,7 @@ input::-webkit-inner-spin-button {
 
 .CustomerAmount h1{
     color: #000;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.3px;
 }
@@ -504,7 +517,7 @@ input::-webkit-inner-spin-button {
     text-align: right;
     color: #000;
     text-align: right;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -533,14 +546,14 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
     transition: all .2s ease-in-out;
     color: #04B075;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: -0.3px;
 }
 
 .ProceedBtn{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 100%;
+    width: 100vh;
     height: 40px;
     padding: 7px 25px 7px 25px;
     text-align: center;
@@ -553,7 +566,7 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
     transition: all .2s ease-in-out;
     color: #F9F9F9;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: -0.3px;
 }
@@ -819,7 +832,6 @@ button:focus {
     background: #04B075;
     color: #FFF;
     text-align: center;
-    font-family: "Helvetica Neue";
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
@@ -829,15 +841,15 @@ button:focus {
 
 .SearchResult{
     width: 100%;
-    min-width: 650px;
-    max-width: 950px;
+    height: 50vh;
+    max-width: 670px;
     background-color: #fff;
     position: absolute;
     top: 0px;
     left: 320px;
     border-radius: 0px 0px 10px 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 0px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
 }
 
 .SearchBg{
@@ -852,22 +864,76 @@ button:focus {
 
 }
 
-.SearchResult th,
-.SearchResult td {
-    padding: 10px;
+.liveSearchContainer{
+    display: flex;
+    flex-direction: column;
+}
+.liveSearchContainer .header{
+    display: flex;
+    flex-direction: row;
+    padding: 0px 55px 10px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    position: sticky;
 }
 
-.SearchResult{
-    border: none;
+.liveSearchContainer .content .select{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding: 5px 30px 5px 20px;
+    font-size: 14px;
 }
 
-.searchRow{
+.liveSearchContainer .image,
+.liveSearchContainer .content .image {
+    width: 15%;
+}
+.liveSearchContainer .productID, 
+.liveSearchContainer .content .productID {
+    width: 20%;
+}
+.liveSearchContainer .productName,
+.liveSearchContainer .content .productName {
+    width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 20px;
+}
+.liveSearchContainer .netWeight,
+.liveSearchContainer .content .netWeight {
+    width: 20%;
+}
+.liveSearchContainer .productPrice,
+.liveSearchContainer .content .productPrice {
+    width: 10%;
+}
+
+.liveSearchContainer .content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 40vh;
+    padding: 1px 10px 1px 10px;
+}
+
+.liveSearchContainer .content button{
+    background-color: transparent;
     border: none;
     cursor: pointer;
-
+    transition: all .1s ease;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.searchRow:hover{
-    background-color: #e4e4e4;
+.liveSearchContainer .content button:hover{
+    background-color: #e9e9e9;
+    border: none;
+    cursor: pointer;
+    transition: all .1s ease;
+    border-radius: 7px;
 }
-

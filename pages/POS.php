@@ -7,6 +7,7 @@ include("PhpFunctions/SaveTransaction.php");
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,6 @@ include("PhpFunctions/SaveTransaction.php");
 
     <title>JFKL Store</title>
 </head>
-
 <body>
     <div class="navbar">
         <div class="left">
@@ -113,7 +113,7 @@ include("PhpFunctions/SaveTransaction.php");
                         $query = "SELECT * FROM inventory WHERE category='$category'";
                     }
 
-                    $result = mysqli_query($conn, $query);
+                        $result = mysqli_query($conn, $query);
 
 
                     while ($row = mysqli_fetch_array($result)) { ?>
@@ -150,11 +150,9 @@ include("PhpFunctions/SaveTransaction.php");
             <div class="cart">
                 <div class="cartLabel">
                     <p>Cart</p>
-                </div>
-                <div class="buttons">
-                    <button>New Order</button>
-                    <button>Hold Order</button>
-                    <a href="POS.php?action=clearAll">Clear</a>
+                    <div class="buttons">
+                        <a href="POS.php?action=clearAll">Clear</a>
+                    </div>
                 </div>
 
                 <?php
@@ -217,22 +215,23 @@ include("PhpFunctions/SaveTransaction.php");
                                     <h1>₱<?php echo $total ?></h1>
                                 </div>
 
-                                <div class="select">
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
+                                <div class="delete">
+                                    <button>
+                                        <img src="../assets/delete.svg" alt="">
+                                    </button>
                                 </div>
                             </div>
                     <?php
 
                             $SubTotal = $SubTotal + $total;
                             $realCostofGoods =  $realCostofGoods + $CostOfGoods;
-                            $numberOfItems += $value['quantity'];
+                            $numberOfItems += 1;
                         }
                     }
-
-
-                    
+                    echo $realCostofGoods ;
                     ?>
+
+
 
                 </div>
 
@@ -256,6 +255,7 @@ include("PhpFunctions/SaveTransaction.php");
                     <div class="Checkoutbuttons">
                         <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
+
 
                 </div>
             </div>
@@ -338,13 +338,7 @@ include("PhpFunctions/SaveTransaction.php");
         </div>
     </div>
             <?php 
-            if (isset($_GET['action']) && $_GET['action'] == "orderConfirmed") {
-                saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);
-                unset($_SESSION['cart']);
-                header("Cache-Control: no-cache, must-revalidate");
-                header("Location:../POS.php" );
-            }
-            
+                saveDataToDatabase($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);
             ?>
 
         </div>
