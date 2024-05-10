@@ -51,13 +51,12 @@ include ("PhpFunctions/update_product.php");
         <div class="sbPOS">
             <button id="POSBtn">
                 <img src="../assets/POS_g.svg" alt=""><br>
-
                 <strong>POS</strong>
             </button>
         </div>
         <div class="sbInventory">
             <button id="inventoryBtn">
-                <img src="../assets/inventory_g.svg" alt=""><br>
+                <img src="../assets/inventory.svg" alt=""><br>
                 <strong>Inventory</strong>
             </button>
         </div>
@@ -138,39 +137,29 @@ include ("PhpFunctions/update_product.php");
                                 <form name="productTable" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
                                     method="POST">
                                     <tr>
-                                        <td><input type="checkbox" name="selectedProducts[]"
-                                                value="<?php echo $row["product_id"]; ?>"></td>
+                                        <td><input type="checkbox" name="selectedProducts[]" value="<?php echo $row["product_id"]; ?>"></td>
                                         <td><?php echo $row["product_id"]; ?></td>
                                         <td><?php echo $row["product_name"]; ?></td>
                                         <td><?php echo $row["net_weight"] ?? '-'; ?></td>
                                         <td><?php echo $row["category"]; ?></td>
                                         <td><?php echo $row["unit_price"]; ?></td>
                                         <td><?php echo $row["retail_price"]; ?></td>
-                                        <td <?php if ($row["stock"] <= 5)
-                                            echo 'style="color: red;"'; ?>>
-                                            <?php echo $row["stock"]; ?>
+                                        <td><?php echo $row["stock"]; ?>
                                         </td>
                                         <td>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                                 <!-- hidden inputs for the UpdateProductModal with product information -->
-                                                <input type="hidden" name="productId_info"
-                                                    value="<?php echo $row["product_id"]; ?>">
-                                                <input type="hidden" name="productName_info"
-                                                    value="<?php echo $row["product_name"]; ?>">
-                                                <input type="hidden" name="netWeight_info"
-                                                    value="<?php echo $row["net_weight"]; ?>">
-                                                <input type="hidden" name="category_info"
-                                                    value="<?php echo $row["category"]; ?>">
+                                                <input type="hidden" name="productId_info" value="<?php echo $row["product_id"]; ?>">
+                                                <input type="hidden" name="productName_info" value="<?php echo $row["product_name"]; ?>">
+                                                <input type="hidden" name="netWeight_info" value="<?php echo $row["net_weight"]; ?>">
+                                                <input type="hidden" name="category_info" value="<?php echo $row["category"]; ?>">
                                                 <input type="hidden" name="unit_info" value="<?php echo $row["unit"]; ?>">
-                                                <input type="hidden" name="unitPrice_info"
-                                                    value="<?php echo $row["unit_price"]; ?>">
-                                                <input type="hidden" name="retailPrice_info"
-                                                    value="<?php echo $row["retail_price"]; ?>">
+                                                <input type="hidden" name="unitPrice_info" value="<?php echo $row["unit_price"]; ?>">
+                                                <input type="hidden" name="retailPrice_info" value="<?php echo $row["retail_price"]; ?>">
                                                 <input type="hidden" name="stock_info" value="<?php echo $row["stock"]; ?>">
                                                 <input type="hidden" name="url_info" value="<?php echo $row["picture_url"]; ?>">
 
-                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn"
-                                                    class="updateProduct"><img src='../assets/edit.svg'></button>
+                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn" class="updateProduct"><img src='../assets/edit.svg'></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -243,8 +232,7 @@ include ("PhpFunctions/update_product.php");
                                     <option value="Candies & Chocolates">Candies & Chocolates</option>
                                     <option value="Dairy Products">Dairy Products</option>
                                     <option value="Condiments & Sauces">Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings
-                                    </option>
+                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
                                     <option value="Spreads and Fillings">Spreads & Fillings</option>
                                     <option value="School Supplies">School Supplies</option>
                                 </select>
@@ -349,8 +337,7 @@ include ("PhpFunctions/update_product.php");
                                     <option value="Candies & Chocolates">Candies & Chocolates</option>
                                     <option value="Dairy Products">Dairy Products</option>
                                     <option value="Condiments & Sauces">Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings
-                                    </option>
+                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
                                     <option value="Spreads & Fillings">Spreads & Fillings</option>
                                     <option value="School Supplies">School Supplies</option>
                                 </select>
