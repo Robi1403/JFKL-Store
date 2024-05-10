@@ -123,33 +123,34 @@ include ("PhpFunctions/connection.php");
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <?php
-                                    $select_query = "SELECT * FROM `inventory`";
+                                <?php
+                                $select_query = "SELECT * FROM `inventory`";
 
-                                    $result = mysqli_query($conn, $select_query);
+                                $result = mysqli_query($conn, $select_query);
 
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) { ?>
-                                            <?php 
-                                            if ($row["stock"] <= 5) { ?>
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) { ?>
+                                        <?php
+                                        if ($row["stock"] <= 5) { ?>
                                             <tr>
                                                 <td class="productID" id="productID"><?php echo $row["product_id"]; ?></td>
                                                 <td class="productName" id="productName"><?php echo $row["product_name"]; ?></td>
                                                 <td class="netWeight" id="netWeight"><?php echo $row["net_weight"] ?? '-'; ?></td>
                                                 <td class="category" id="category"><?php echo $row["category"]; ?></td>
-                                                <td class="stock" id="stock"><p><?php echo $row["stock"]; ?></p></td>
-                                                </tr>
-                                            <?php 
-                                            } 
-                                            ?>   
-                                        </form>
+                                                <td class="stock" id="stock">
+                                                    <p><?php echo $row["stock"]; ?></p>
+                                                </td>
+                                            </tr>
                                         <?php
                                         }
-                                    } else {
-                                        echo "<tr><td colspan='9'>No products are low on stock</td></tr>";
+                                        ?>
+                                        </form>
+                                        <?php
                                     }
-                                    ?>
+                                } else {
+                                    echo "<tr><td>No products are low on stock</td></tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
 
@@ -174,50 +175,26 @@ include ("PhpFunctions/connection.php");
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="transactionNum" id="transactionNum">0001</td>
-                                <td class="numItems" id="numItems">5</td>
-                                <td class="total" id="total">P 125.00</td>
-                                <td class="date" id="date">Friday, 10 May 2024 | 4:00 PM</td>
-                                <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                            </tr>
-                            <tr>
-                                <td class="transactionNum" id="transactionNum">0001</td>
-                                <td class="numItems" id="numItems">5</td>
-                                <td class="total" id="total">P 125.00</td>
-                                <td class="date" id="date">Friday, 10 May 2024 | 4:00 PM</td>
-                                <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                            </tr>
-                            <tr>
-                                <td class="transactionNum" id="transactionNum">0001</td>
-                                <td class="numItems" id="numItems">5</td>
-                                <td class="total" id="total">P 125.00</td>
-                                <td class="date" id="date">Friday, 10 May 2024 | 4:00 PM</td>
-                                <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                            </tr>
-                            <tr>
-                                <td class="transactionNum" id="transactionNum">0001</td>
-                                <td class="numItems" id="numItems">5</td>
-                                <td class="total" id="total">P 125.00</td>
-                                <td class="date" id="date">Friday, 10 May 2024 | 4:00 PM</td>
-                                <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                            </tr>
-                            <tr>
-                                <td class="transactionNum" id="transactionNum">0001</td>
-                                <td class="numItems" id="numItems">5</td>
-                                <td class="total" id="total">P 125.00</td>
-                                <td class="date" id="date">Friday, 10 May 2024 | 4:00 PM</td>
-                                <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                            </tr>
-                            <tr>
-                                <td class="transactionNum" id="transactionNum">0001</td>
-                                <td class="numItems" id="numItems">5</td>
-                                <td class="total" id="total">P 125.00</td>
-                                <td class="date" id="date">Friday, 10 May 2024 | 4:00 PM</td>
-                                <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                            </tr>
+                            <?php
+                            $select_query = "SELECT * FROM `transaction_history`";
 
+                            $result = mysqli_query($conn, $select_query);
 
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?></td>
+                                            <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
+                                            <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
+                                            <td class="date" id="date"><?php echo $row["date"]; ?></td>
+                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                        </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo "<tr><td>No record of transaction.</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
