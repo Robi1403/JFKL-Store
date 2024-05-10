@@ -20,74 +20,74 @@ function filterInventory(category) {
     });
 }
 
-//
-document.addEventListener("DOMContentLoaded", function () {
-    var showModalButtons = document.querySelectorAll(".showthemodal");
+// //
+// document.addEventListener("DOMContentLoaded", function () {
+//     var showModalButtons = document.querySelectorAll(".showthemodal");
 
-    var modal = document.getElementById("modalmodal");
+//     var modal = document.getElementById("modalmodal");
 
-    showModalButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            event.preventDefault();
+//     showModalButtons.forEach(function (button) {
+//         button.addEventListener("click", function () {
+//             event.preventDefault();
 
-            var parentForm = button.closest("form");
+//             var parentForm = button.closest("form");
 
-            var productIdInput = parentForm.querySelector("input[name='productId']");
-            var productNameInput = parentForm.querySelector("input[name='productName']");
-            var netWeight = parentForm.querySelector("input[name='netWeight']");
-            var productRetailPrice = parentForm.querySelector("input[name='productRetailPrice']");
-            var productUnitPrice = parentForm.querySelector("input[name='productUnitPrice']");
-            var productURL = parentForm.querySelector("input[name='productURL']");
-            var quantity = parentForm.querySelector("input[name='quantity']");
+//             var productIdInput = parentForm.querySelector("input[name='productId']");
+//             var productNameInput = parentForm.querySelector("input[name='productName']");
+//             var netWeight = parentForm.querySelector("input[name='netWeight']");
+//             var productRetailPrice = parentForm.querySelector("input[name='productRetailPrice']");
+//             var productUnitPrice = parentForm.querySelector("input[name='productUnitPrice']");
+//             var productURL = parentForm.querySelector("input[name='productURL']");
+//             var quantity = parentForm.querySelector("input[name='quantity']");
 
-            //getting the value from hidden input of the itemView
-            var productId = productIdInput.value;
-            var productName = productNameInput.value;
-            var netWeight = netWeight.value;
-            var productRetailPrice = productRetailPrice.value;
-            var productUnitPrice = productUnitPrice.value;
-            var productURL = productURL.value;
-            var quantity = quantity.value;
+//             //getting the value from hidden input of the itemView
+//             var productId = productIdInput.value;
+//             var productName = productNameInput.value;
+//             var netWeight = netWeight.value;
+//             var productRetailPrice = productRetailPrice.value;
+//             var productUnitPrice = productUnitPrice.value;
+//             var productURL = productURL.value;
+//             var quantity = quantity.value;
 
-            // alert("Product ID: " + productId +
-            //     "\nProduct Name: " + productName +
-            //     "\nNet Weight: " + netWeight +
-            //     "\nRetail Price: " + productRetailPrice +
-            //     "\nUnit Price: " + productUnitPrice +
-            //     "\nProduct URL: " + productURL +
-            //     "\nQuantity: " + quantity);
+//             // alert("Product ID: " + productId +
+//             //     "\nProduct Name: " + productName +
+//             //     "\nNet Weight: " + netWeight +
+//             //     "\nRetail Price: " + productRetailPrice +
+//             //     "\nUnit Price: " + productUnitPrice +
+//             //     "\nProduct URL: " + productURL +
+//             //     "\nQuantity: " + quantity);
 
-            //populating the hidden input in the modal
-            document.getElementById("productIdHidden").value = productId;
-            document.getElementById("productNameHidden").value = productName;
-            document.getElementById("netWeightHidden").value = netWeight;
-            document.getElementById("productRetailPriceHidden").value = productRetailPrice;
-            document.getElementById("productUnitPriceHidden").value = productUnitPrice;
-            document.getElementById("quantityHidden").value = quantity;
-            document.getElementById("productURLHidden").value = productURL;
+//             //populating the hidden input in the modal
+//             document.getElementById("productIdHidden").value = productId;
+//             document.getElementById("productNameHidden").value = productName;
+//             document.getElementById("netWeightHidden").value = netWeight;
+//             document.getElementById("productRetailPriceHidden").value = productRetailPrice;
+//             document.getElementById("productUnitPriceHidden").value = productUnitPrice;
+//             document.getElementById("quantityHidden").value = quantity;
+//             document.getElementById("productURLHidden").value = productURL;
 
-            //populates elements in the modal
-            document.getElementById("productNameInfo").textContent = productName;
-            document.getElementById("netWeightInfo").textContent = netWeight;
-            document.getElementById("productRetailPriceInfo").textContent = "₱" + productRetailPrice;
+//             //populates elements in the modal
+//             document.getElementById("productNameInfo").textContent = productName;
+//             document.getElementById("netWeightInfo").textContent = netWeight;
+//             document.getElementById("productRetailPriceInfo").textContent = "₱" + productRetailPrice;
 
-            //img src to show picture of product
-            var imgElement = document.getElementById("productImage");
-            imgElement.src = "../assets/InventoryItems/" + productURL;
+//             //img src to show picture of product
+//             var imgElement = document.getElementById("productImage");
+//             imgElement.src = "../assets/InventoryItems/" + productURL;
 
-            modal.style.display = "flex";
-        });
-    });
+//             modal.style.display = "flex";
+//         });
+//     });
 
-    var forms = document.querySelectorAll(".itemView form");
+//     var forms = document.querySelectorAll(".itemView form");
 
-    forms.forEach(function (form) {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-        });
-    });
+//     forms.forEach(function (form) {
+//         form.addEventListener("submit", function (event) {
+//             event.preventDefault();
+//         });
+//     });
 
-});
+// });
 
 //minus 1 to quantity
 function decreaseQuantity() {

@@ -32,15 +32,25 @@ function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$c
         $ItemData = "INSERT INTO sale_items VALUES('','$transaction_number','$id','$productName','$retailPrice', '$quantity','$totalAmount')";
 
         mysqli_query($conn, $ItemData);
+
+        $Stock = "SELECT * FROM inventory WHERE product_id = '$id'";
+
+        $result = mysqli_query($conn, $Stock);
+        
+
+        if (mysqli_num_rows($result) > 0 ) {
+            while($row = mysqli_fetch_assoc($result)){
+                $oldStock = $row['stock'];
+                $UpdatedStock  = $oldStock - $quantity;
+
+                $UpdateStockDatabase = "UPDATE inventory SET stock = '$UpdatedStock' WHERE product_id = '$id'";
+                mysqli_query($conn,$UpdateStockDatabase);
+            }
+        }
+   
     }
 
 }
-
-function updateStockOnDatabaseFromSale(){
-    
-}
-
-
 
 
 
