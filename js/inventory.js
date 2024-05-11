@@ -19,14 +19,9 @@ document.getElementById("inventory_LogBtn").onclick = function () {
     window.location.href = "inventory_log.php";
 };
 
-//redirect Inventory Log back to inventory
-document.getElementById("backBtn").onclick = function () {
-    window.location.href = "inventory.php";
-};
-
 //---SEARCH PRODUCT---//
 document.getElementById("search").addEventListener("input", function () {
-    var searchText = this.value.toLowerCase(); 
+    var searchText = this.value.toLowerCase();
 
     //selects all rows in the table body
     var rows = document.querySelectorAll('.inventoryTable tbody tr');
@@ -34,13 +29,13 @@ document.getElementById("search").addEventListener("input", function () {
     //loops through each row and check if it contains the search text
     rows.forEach(function (row) {
         //gets the product name 
-        var productName = row.cells[2].textContent.toLowerCase(); 
+        var productName = row.cells[2].textContent.toLowerCase();
         if (productName.includes(searchText)) {
             //shows the row if it contains the search text
-            row.style.display = ''; 
+            row.style.display = '';
         } else {
             //hides the row if it doesn't 
-            row.style.display = 'none'; 
+            row.style.display = 'none';
         }
     });
 });
@@ -98,7 +93,7 @@ updateProductBtns.forEach(function (btn) {
         var url = this.parentNode.querySelector('[name="url_info"]').value;
 
         //sets the product info in the input fields inside the UpdateProductModal
-        
+
         var productURLInput = document.getElementById('productURLInput');
         productURLInput.value = url;
 
@@ -178,14 +173,27 @@ function getSelectedCheckboxes() {
 function removeSelectedProducts() {
     var selectedProducts = getSelectedCheckboxes();
 
-    //confirms deletion
-    var confirmation = confirm("Are you sure you want to delete the selected products?");
-    if (confirmation) {
+    var modalConfirm = document.getElementById("modalConfirmBackground");
+    modalConfirm.style.display = "flex";
+
+    
+    var confirmCancelBtn = document.getElementById("confirmCancelBtn");
+
+    confirmCancelBtn.addEventListener("click", function () {
+        var modalConfirm = document.getElementById("modalConfirmBackground");
+
+        modalConfirm.style.display = "none";
+    });
+
+    
+    var confirmation = document.getElementById("confirmBtn");
+
+    confirmation.addEventListener("click", function () {
         //update the hidden input field with selected products 
         document.getElementById("selectedProducts").value = selectedProducts.join(',');
 
         document.getElementById("removeProductForm").submit();
-    }
+    });
 }
 
 document.getElementById("removeProductBtn").onclick = function () {
@@ -193,3 +201,8 @@ document.getElementById("removeProductBtn").onclick = function () {
 };
 
 //---END---//
+
+//redirect Inventory Log back to inventory
+document.getElementById("backBtn").onclick = function () {
+    window.location.href = "inventory.php";
+};

@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica', sans-serif;
+}
+
+body{
+    background-color: #F9F9F9;
+    display: block;
+    overflow: hidden;
+}
+
+#modalConfirmBackground{
+    position: absolute;
+    height: 100vh;
+    top: 0px;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.30);
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.modalConfirmItemContainer {
+    width: 400px;
+    height: 325px;
+    border-radius: 13px;
+    background: #FAFAFA;
+    padding:30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+    padding: 40px 30px 50px 30px;
+}
+
+.image{
+    height: 100px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image img{
+    max-width: 100%; 
+    max-height: 100%;
+}
+.message{
+    height: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.message p {
+    font-weight: 600;
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+}
+.updateButtons {
+    display:  flex;
+    flex-direction: row-reverse;
+    gap: 15px;
+    width: 100%;
+}
+
+.updateButtons button {
+    width: 100%;
+    padding: 0px 20px 0px 20px;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel {
+    background-color: #dbdbdb;
+    transition: all .2s ease-in-out;
+}
+
+.addProduct {
+    background-color: #04B075;
+    transition: all .2s ease-in-out;
+}
+
+.cancel {
+    background-color: #dbdbdb;
+}
+
+.cancel:hover {
+    background-color: #cfcfcf; /* Darker shade on hover */
+}
+
+.addProduct {
+    background-color: #04B075;
+}
+
+.addProduct:hover {
+    background-color: #038f59; /* Darker shade on hover */
+}
+
+

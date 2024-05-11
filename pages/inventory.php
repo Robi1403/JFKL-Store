@@ -13,6 +13,7 @@ include ("PhpFunctions/update_product.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JFKL Store</title>
     <link rel="stylesheet" href="../css/inventory.css">
+    <link rel="stylesheet" href="../css/modalConfirm.css">
     <link rel="icon" href="../assets/storeLogo.svg">
 </head>
 
@@ -39,7 +40,7 @@ include ("PhpFunctions/update_product.php");
                 <p>
                     <?php
                     date_default_timezone_set('Asia/Manila');
-                    $currentDateTime = date('F j, Y h:i A');
+                    $currentDateTime = date('F j, Y | h:i A');
                     echo $currentDateTime;
                     ?>
                 </p>
@@ -382,6 +383,23 @@ include ("PhpFunctions/update_product.php");
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modalConfirmBackground" id="modalConfirmBackground">
+        <div class="modalConfirmItemContainer">
+            <div class="image">
+                <img src="../assets/confirmation.svg" alt="">
+            </div>
+            <div class="message">
+               <p>Are you sure you want to delete selected product(s)?</p> 
+            </div>
+            <div class="formContent">
+                <div class="updateButtons">
+                    <button class="addProduct" id="confirmBtn">Confirm</button>
+                    <button class="cancel" id="confirmCancelBtn">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
