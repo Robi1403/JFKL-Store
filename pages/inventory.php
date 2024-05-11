@@ -33,7 +33,7 @@ include ("PhpFunctions/update_product.php");
             <div class="todayGrossSaleLabel">
                 <p>Total Products: </p>
             </div>
-            <div class="totalProducts">
+            <div class="todayGrossSale">
                 <?php 
                 $count_query = "SELECT COUNT(*) AS product_count FROM inventory";
                 $result = mysqli_query($conn, $count_query);
