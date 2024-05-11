@@ -16,10 +16,6 @@ if (isset($_POST['addNewProductBtn'])) {
         $insert_query = "INSERT INTO `inventory`(`product_name`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES ('$productName', '$unit', '$category', '$unitPrice', '$retailPrice', '$stock', '$url')";
         if (mysqli_query($conn, $insert_query)) {
             $productId = mysqli_insert_id($conn); 
-
-            echo '<script>
-                    alert("Data inserted successfully to inventory."); 
-                </script>';
         } else {
             echo '<script>alert("Error inserting data: ' . mysqli_error($conn) . '");</script>';
         }
@@ -29,10 +25,6 @@ if (isset($_POST['addNewProductBtn'])) {
         $insert_query = "INSERT INTO `inventory`(`product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES ('$productName', '$netWeight', '$unit', '$category', '$unitPrice', '$retailPrice', '$stock', '$url')";
         if (mysqli_query($conn, $insert_query)) {
             $productId = mysqli_insert_id($conn);
-            
-            echo '<script>
-                    alert("Data inserted successfully to inventory."); 
-                </script>';
         } else {
             echo '<script>alert("Error inserting data to inventory: ' . mysqli_error($conn) . '");</script>';
         }
@@ -58,7 +50,6 @@ if (isset($_POST['addNewProductBtn'])) {
     $insert = "INSERT INTO `inventory_log`(`product_id`, `action_type`, `date`, `previous_state`, `new_state`) VALUES ('$productId', 'Add', '$date', '$previous_state', '$new_state')";
     if (mysqli_query($conn, $insert)) {
         echo '<script>
-                alert("Data inserted successfully to inventory log.");
                 window.location.href = "../inventory.php"; 
             </script>';
     } else {

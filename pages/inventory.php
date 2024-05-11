@@ -403,6 +403,30 @@ include ("PhpFunctions/update_product.php");
             </div>
         </div>
     </div>
+
+    <div class="successPrompt" id="add_successPrompt">
+        <div class="sucessContainer">
+            <img src="../assets/check.png" alt="">
+            <h1>Successfully Added Product to Inventory</h1>
+            <button class="addProduct" id="add_okBtn">Ok</button>
+        </div>
+    </div>
+
+    <div class="successPrompt" id="update_successPrompt">
+        <div class="sucessContainer">
+            <img src="../assets/check.png" alt="">
+            <h1>Successfully Updated Product Information</h1>
+            <button class="addProduct" id="update_okBtn">Ok</button>
+        </div>
+    </div>
+
+    <div class="successPrompt" id="remove_successPrompt">
+        <div class="sucessContainer">
+            <img src="../assets/check.png" alt="">
+            <h1>Successfully Removed Product(s) from Inventory</h1>
+            <button class="addProduct" id="remove_okBtn">Ok</button>
+        </div>
+    </div>
 </body>
 <script src="../js/inventory.js"></script>
 

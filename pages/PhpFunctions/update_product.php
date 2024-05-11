@@ -87,9 +87,9 @@ if (isset($_POST['updateProductInfoBtn'])) {
         
         $insert_query = "INSERT INTO `inventory_log`(`product_id`, `action_type`, `date`, `previous_state`, `new_state`) VALUES ('$productId', 'Update', '$date', '$previous_state', '$new_state')";
         if (mysqli_query($conn, $insert_query)) {
-            echo '<script>
-                alert("Data inserted successfully to inventory log."); 
-            </script>';
+            // echo '<script>
+            //     alert("Data inserted successfully to inventory log."); 
+            // </script>';
         } else {
             echo '<script>alert("Error inserting data to inventory log: ' . mysqli_error($conn) . '");</script>';
         }
@@ -113,7 +113,6 @@ if (isset($_POST['updateProductInfoBtn'])) {
 
         if (mysqli_query($conn, $update_query)) {
             echo '<script>
-                    alert("Data updated successfully."); 
                     window.location.href = "../inventory.php";
                 </script>';
         } else {
@@ -135,7 +134,6 @@ if (isset($_POST['updateProductInfoBtn'])) {
 
         if (mysqli_query($conn, $update_query)) {
             echo '<script>
-                    alert("Data updated successfully.");
                     window.location.href = "../inventory.php"; 
                 </script>';
         } else {

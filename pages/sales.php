@@ -350,8 +350,6 @@ include ("PhpFunctions/current_sales_transacHistory.php");
         <input type="hidden" id="endDate" name="endDate">
     </form>
 
-    <!-- <script src="../js/sales.js"></script> -->
-
     <script>
         // Function to update date
         function updateDate() {

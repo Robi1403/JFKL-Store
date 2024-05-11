@@ -57,6 +57,23 @@ addProductBtn.addEventListener("click", function () {
     var addProductModal = document.getElementById("addProductModal");
 
     addProductModal.style.display = "block";
+
+    //new
+        var addNewProductBtn = document.getElementById("addNewProductBtn");
+
+        addNewProductBtn.addEventListener("click", function (event) {
+            addProductModal.style.display = "none";
+            var add_successPrompt = document.getElementById("add_successPrompt");
+
+            add_successPrompt.style.display = "flex";
+            event.preventDefault();
+
+            var add_okBtn = document.getElementById("add_okBtn");
+
+            add_okBtn.addEventListener("click", function () {
+                add_successPrompt.style.display = "none";
+            });
+        });
 });
 
 var cancelBtn = document.getElementById("cancelBtn");
@@ -142,6 +159,23 @@ updateProductBtns.forEach(function (btn) {
 
         var updateProductModal = document.getElementById("updateProductModal");
         updateProductModal.style.display = "block";
+
+        //new ok na
+        var updateProductInfoBtn = document.getElementById("updateProductInfoBtn");
+
+        updateProductInfoBtn.addEventListener("click", function (event) {
+            updateProductModal.style.display = "none";
+            var update_successPrompt = document.getElementById("update_successPrompt");
+
+            update_successPrompt.style.display = "flex";
+            event.preventDefault();
+
+            var update_okBtn = document.getElementById("update_okBtn");
+
+            update_okBtn.addEventListener("click", function () {
+                update_successPrompt.style.display = "none";
+            });
+        });
     });
 });
 
@@ -176,7 +210,7 @@ function removeSelectedProducts() {
     var modalConfirm = document.getElementById("modalConfirmBackground");
     modalConfirm.style.display = "flex";
 
-    
+
     var confirmCancelBtn = document.getElementById("confirmCancelBtn");
 
     confirmCancelBtn.addEventListener("click", function () {
@@ -185,7 +219,7 @@ function removeSelectedProducts() {
         modalConfirm.style.display = "none";
     });
 
-    
+
     var confirmation = document.getElementById("confirmBtn");
 
     confirmation.addEventListener("click", function () {
@@ -193,7 +227,19 @@ function removeSelectedProducts() {
         document.getElementById("selectedProducts").value = selectedProducts.join(',');
 
         document.getElementById("removeProductForm").submit();
+
+        var remove_successPrompt = document.getElementById("remove_successPrompt");
+
+        remove_successPrompt.style.display = "flex";
+
+        var remove_okBtn = document.getElementById("remove_okBtn");
+
+        remove_okBtn.addEventListener("click", function () {
+            remove_successPrompt.style.display = "none";
+        });
     });
+
+
 }
 
 document.getElementById("removeProductBtn").onclick = function () {

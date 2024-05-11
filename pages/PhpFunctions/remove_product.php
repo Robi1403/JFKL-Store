@@ -63,9 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])) {
             }
         }
 
-        echo '<script>
-                alert("' . $num_selected_products . ' data successfully inserted to inventory log and removed from inventory.");
-            </script>';
+        // echo '<script>
+        //         alert("' . $num_selected_products . ' data successfully inserted to inventory log and removed from inventory.");
+        //     </script>';
 
         $conn->close();
 
