@@ -38,7 +38,14 @@ include ("PhpFunctions/current_sales.php");
             </div>
             <div class="todayGrossSale">
                 <p>Today's Gross Sale: </p>
-                <p><span>P1,000,000,000.00</span></p>
+                <p><span><?php if (isset($totalSales)) {
+                    echo $totalSales; ?></span></p>
+                    <?php
+                } else { ?>
+                    <p><span><?php echo $currentTotalSales; ?></span></p>
+                    <?php
+                }
+                ?>
             </div>
 
         </div>
@@ -286,7 +293,7 @@ include ("PhpFunctions/current_sales.php");
                         </thead>
                         <tbody>
                             <?php
-                            if (isset($totalTransactions)) { 
+                            if (isset($totalTransactions)) {
                                 if ($startDate == $endDate) {
                                     // Daily sales
                                     $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$startDate'";
@@ -294,9 +301,9 @@ include ("PhpFunctions/current_sales.php");
                                     // Custom Date Range's Sales
                                     $select_query = "SELECT * FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
                                 }
-    
+
                                 $result = mysqli_query($conn, $select_query);
-    
+
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) { ?>
                                         <tr>
@@ -312,9 +319,25 @@ include ("PhpFunctions/current_sales.php");
                                 } else {
                                     echo "<tr><td>No record of transaction.</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td>No record of transaction.</td></tr>";
-                            } ?>
+                            } else { 
+                                $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$currentDate'";
+                                $result = mysqli_query($conn, $select_query);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                    <td class="transactionNum" id="currentTransactionNum"><?php echo $currentTransactionNum; ?>
+                                    </td>
+                                    <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
+                                    <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
+                                    <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
+                                    <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                </tr>
+                                <?php
+                                    }
+                            } 
+                        }?>
                         </tbody>
                     </table>
                 </div>

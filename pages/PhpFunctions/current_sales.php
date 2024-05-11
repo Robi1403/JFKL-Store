@@ -26,4 +26,26 @@ include ("connection.php");
         echo "Error searching sales data: " . mysqli_error($conn);
     }
 
+    $searchTH_query = "SELECT * FROM `transaction_history` WHERE `date` = '$currentDate'";
+
+    $searchTH_result = mysqli_query($conn, $searchTH_query);
+    if ($searchTH_result) {
+        if (mysqli_num_rows($searchTH_result) > 0) {
+            $row = mysqli_fetch_assoc($searchTH_result);
+            $currentTransactionNum = $row['transaction_number'];
+            $currentNumItems = $row['number_of_items'];
+            $currentTotal = $row['gross_sales'];
+            $currentDates = $row['date'];
+
+            // $currentTransactionNum = $currentTransactionNum ?? 0;
+            // $currentNumItems = $currentNumItems ?? 0;
+            // $currentTotal = $currentTotal ?? 0;
+            // $currentDates = $currentDates ?? 0;
+        } else {
+            echo "No sales data found for $currentDate";
+        }
+    } else {
+        echo "Error searching sales data: " . mysqli_error($conn);
+    }
+
 ?>
