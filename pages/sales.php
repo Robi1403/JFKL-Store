@@ -1,5 +1,6 @@
 <?php
 include ("PhpFunctions/connection.php");
+include ("PhpFunctions/compute_sales.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +11,11 @@ include ("PhpFunctions/connection.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/sales.css">
     <title>JFKL Store</title>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
 </head>
 
 <body>
@@ -75,21 +81,15 @@ include ("PhpFunctions/connection.php");
             <div class="sales">
                 <div class="salesStats">
                     <div class="labelgroup">
-                        <div class="salesStatsLabel"><p>Sales Statistics</p></div>
-                        <div class="dropdown">
-                            <div class="dropdown-select">
-                                <span class="select">Daily</span>
-                                <div class="caret"></div>
-                            </div>
-                            <ul class="dropdown-list">
-                                <li>Daily</li>
-                                <li>Monthly</li>
-                                <li>Yearly</li>
-                            </ul>
+                        <div class="salesStatsLabel">
+                            <p>Sales Statistics</p>
                         </div>
-                        
+                        <div id="reportrange" class="daterange">
+                            <img src="../assets/calendar.svg" alt="">
+                            <span></span> <i class="fa fa-caret-down"></i>
+                        </div>
                     </div>
-                    
+
                     <div class="lineShape"></div>
 
                     <div class="mainContainer">
@@ -97,7 +97,7 @@ include ("PhpFunctions/connection.php");
                             <div class="grossSale">
                                 <h1>P 456.00</h1>
                                 <p>Todays <strong>Gross Sale</strong></p>
-
+                                
                             </div>
                             <div class="order">
                                 <h1>12</h1>
@@ -153,7 +153,7 @@ include ("PhpFunctions/connection.php");
                                                     <p><?php echo $row["stock"]; ?></p>
                                                 </td>
                                             </tr>
-                                        <?php
+                                            <?php
                                         }
                                         ?>
                                         </form>
@@ -194,13 +194,14 @@ include ("PhpFunctions/connection.php");
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) { ?>
-                                        <tr>
-                                            <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?></td>
-                                            <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
-                                            <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
-                                            <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                                        </tr>
+                                    <tr>
+                                        <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
+                                        </td>
+                                        <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
+                                        <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
+                                        <td class="date" id="date"><?php echo $row["date"]; ?></td>
+                                        <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                    </tr>
                                     <?php
                                 }
                             } else {
@@ -213,7 +214,148 @@ include ("PhpFunctions/connection.php");
             </div>
         </div>
     </div>
-    <script src="../js/sales.js"></script>
+
+    <form id="dateform" name="dateform" action="PhpFunctions/compute_sales.php" method="POST">
+        <input type="hidden" id="startDate" name="startDate">
+        <input type="hidden" id="endDate" name="endDate">
+    </form>
+
+    <!-- <script src="../js/sales.js"></script> -->
+
+    <script>
+        // Function to update date
+        function updateDate() {
+            let today = new Date();
+
+            // return number
+            let dayName = today.getDay(),
+                dayNum = today.getDate(),
+                month = today.getMonth(),
+                year = today.getFullYear();
+
+            const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+            const dayWeek = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ];
+            // value -> ID of the html element
+            const IDCollection = ["day", "daynum", "month", "year"];
+            // return value array with number as a index
+            const val = [dayWeek[dayName], dayNum, months[month], year];
+            for (let i = 0; i < IDCollection.length; i++) {
+                document.getElementById(IDCollection[i]).textContent = val[i];
+            }
+        }
+
+        // Function to update time
+        function updateTime() {
+            const displayTime = document.querySelector(".display-time");
+            let time = new Date();
+            displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
+        }
+
+        // Function to update date and time periodically
+        function updateDateTime() {
+            updateDate(); // Update date
+            updateTime(); // Update time
+            setTimeout(updateDateTime, 1000); // Call this function again after 1 second
+        }
+
+        // Call updateDateTime initially to start the updating process
+        updateDateTime();
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var dropdownSelect = document.querySelector('.dropdown-select');
+            var dropdownList = document.querySelector('.dropdown-list');
+            var dropdownOptions = document.querySelectorAll('.dropdown-list li');
+            var selectSpan = document.querySelector('.select');
+
+            dropdownSelect.addEventListener('click', function () {
+                dropdownList.style.display = (dropdownList.style.display === 'block') ? 'none' : 'block';
+            });
+
+            dropdownOptions.forEach(function (option) {
+                option.addEventListener('click', function () {
+                    selectSpan.textContent = option.textContent;
+                    dropdownList.style.display = 'none';
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!dropdownSelect.contains(e.target)) {
+                    dropdownList.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+                $('#startDate').val(start.format('YYYY-MM-DD'));
+                $('#endDate').val(end.format('YYYY-MM-DD'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+            // Submit the form when a range is selected
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                $('#dateform').submit();
+            });
+        });
+    </script>
+
+<script>
+    // JavaScript
+    // Assuming PHP variables are echoed into JavaScript variables like below
+    var grossSale = "<?php echo $totalSales; ?>";
+    var orders = "<?php echo $totalTransactions; ?>";
+    var profit = "<?php echo $totalProfit; ?>";
+    var products = "<?php echo $totalItems; ?>";
+
+    // Update HTML elements with PHP variables
+    document.getElementById("grossSaleValue").textContent = "P " + grossSale;
+    document.getElementById("orderValue").textContent = orders;
+    document.getElementById("totalProfitValue").textContent = "P " + profit;
+    document.getElementById("totalProductsValue").textContent = products;
+</script>
 </body>
 
 </html>
