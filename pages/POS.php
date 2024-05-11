@@ -1,10 +1,12 @@
 <?php
 session_start();
 include("PhpFunctions/connection.php");
+include("PhpFunctions/SaveTransaction.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +16,6 @@ include("PhpFunctions/connection.php");
 
     <title>JFKL Store</title>
 </head>
-
 <body>
     <div class="navbar">
         <div class="left">
@@ -75,7 +76,7 @@ include("PhpFunctions/connection.php");
 
         <div class="productDisplay">
 
-            <form class="category" id="categoryContainer" name="form"
+        <form class="category" id="categoryContainer" name="form"
                 action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <button class="categoryBtn" type="submit" name="category" value="All">All</button>
                 <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
@@ -100,14 +101,12 @@ include("PhpFunctions/connection.php");
                 <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
                 <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
             </form>
-
-
+            
             <div class="ItemView">
 
                 <div class="products">
                     <?php
                     $category = $_POST['category'] ?? 'All';
-
 
                     if ($category == "All") {
                         $query = "SELECT * FROM inventory";
@@ -115,7 +114,7 @@ include("PhpFunctions/connection.php");
                         $query = "SELECT * FROM inventory WHERE category='$category'";
                     }
 
-                    $result = mysqli_query($conn, $query);
+                        $result = mysqli_query($conn, $query);
 
 
                     while ($row = mysqli_fetch_array($result)) { ?>
@@ -134,14 +133,12 @@ include("PhpFunctions/connection.php");
                                 <div class="price">
                                     <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
+
                                 <input type="hidden" class="ProductID" name="productId" value="<?php echo $row['product_id']; ?>">
                                 <input type="hidden" name="quantity" value="1"> 
                                 <button type="button" name="toCart" class="toCart"><img src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
-
-
-
 
                     <?php
                     }
@@ -155,17 +152,44 @@ include("PhpFunctions/connection.php");
                 <div class="cartLabel">
                     <p>Cart</p>
                     <div class="buttons">
-                        <a href="POS.php?action=clearAll">Clear</a>
+                        <a href="POS.php?action=clearAll">New Transaction</a>
                     </div>
                 </div>
 
                 <?php
-                if (isset($_GET['action']) && $_GET['action'] == "clearAll") {
-                    unset($_SESSION['cart']);
-                }
+                if (isset($_GET['action'])){
+                    if ($_GET['action'] == "clearAll") {
+                        unset($_SESSION['cart']);
+                    }
 
+                    if ($_GET['action'] == "remove") {
+                        foreach($_SESSION['cart'] as $key => $value) {
+                            if($value['id'] == $_GET['id'] ){
+                                unset($_SESSION['cart'][$key]);
+                            }
+                        }
+                    }
+
+                    if ($_GET['action'] == "decreaseQty") {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['id'] == $_GET['id']) {
+                                $value['quantity'] -= 1;
+                            }
+                        }
+                        unset($value); 
+                    }
+
+                    if ($_GET['action'] == "increaseQty") {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['id'] == $_GET['id']) {
+                                $value['quantity'] += 1;
+                            }
+                        }
+                        unset($value); 
+                    }
+                    
+                } 
                 ?>
-
                 <div class="orderList">
                     
                 
@@ -176,23 +200,11 @@ include("PhpFunctions/connection.php");
                     $quantity = 1;
 
 
-                    function add($quantity){
-                        return $quantity += 1;
-                    }
-                    function minus($quantity){
-                        return $quantity -= 1;
-                    }
-
                     if (!empty($_SESSION['cart'])) {
-
-
 
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
-                                <div class="image">
-                                    <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
-                                </div>
-                                
+                                <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
 
                                 <div class="items">
                                     <h3>Item</h3>
@@ -209,14 +221,14 @@ include("PhpFunctions/connection.php");
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
-                                        <button>
+                                        <a href="POS.php?action=decreaseQty&id=<?php echo $value['id'] ?>">
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
-                                        </button>
+                                        </a>
                                         
                                         <input type="number" value="<?php echo $value['quantity'] ?>">
-                                        <button>
+                                        <a href="POS.php?action=increaseQty&id=<?php echo $value['id'] ?>" >
                                             <img src="../assets/buttonAdd.svg " alt="">
-                                        </button>
+                                        </a>
                                         
                                     </div>
                                 </div>
@@ -232,20 +244,19 @@ include("PhpFunctions/connection.php");
                                     <h1>₱<?php echo $total ?></h1>
                                 </div>
 
-                                <div class="delete">
+                                <a href="POS.php?action=remove&id=<?php echo $value['id'] ?>" class="delete">
                                     <button>
                                         <img src="../assets/delete.svg" alt="">
                                     </button>
-                                </div>
+                                </a>
                             </div>
                     <?php
 
                             $SubTotal = $SubTotal + $total;
                             $realCostofGoods =  $realCostofGoods + $CostOfGoods;
-                            $numberOfItems += 1;
+                            $numberOfItems = $numberOfItems + $value['quantity'];
                         }
                     }
-                    echo $realCostofGoods ;
                     ?>
 
 
@@ -270,13 +281,15 @@ include("PhpFunctions/connection.php");
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
-                        <button class="HoldOrder">Hold Order</button>
-                        <button id="Checkout" class="ProceedBtn">Proceed</button>
+
+                        <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
+
 
                 </div>
             </div>
         </div>
+
    
         <div class="addItem"></div>
 
@@ -293,24 +306,39 @@ include("PhpFunctions/connection.php");
                             <th>Quantity</th>
                             <th>Total</th>
                         </tr>
+                        <?php
 
-                        <tr>
-                            <td>
-                                Argentina Meat Loaf
-                            </td>
 
-                            <td>
-                                P 27.00
-                            </td>
+                        if (!empty($_SESSION['cart'])) {
 
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                P 27.00
-                            </td>
-                        </tr>
+                                foreach ($_SESSION['cart'] as $key => $value) { ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $value['product_name'] ?>
+                                    </td>
 
+                                    <td>
+                                        <?php echo $value['retail_price'] ?>
+                                    </td>
+
+                                    <td>
+                                    <?php echo $value['quantity'] ?>
+                                    </td>
+
+                                    <?php
+                                    $total = $value['retail_price'] * $value['quantity'];
+                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
+                                    ?>
+                                    <td>
+                                    <?php echo $total ?>
+                                    </td>
+                                </tr>
+                         <?php }
+                        }else {
+                            echo "<tr><td>Cart is empty</td></tr>";
+                        }
+
+                        ?>           
 
                     </table>
 
@@ -319,77 +347,128 @@ include("PhpFunctions/connection.php");
                 <div class="AmountSummary">
                     <div class="TotalPayment">
                         <h2>Total</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1><?php echo "₱ ". $SubTotal ?></h1>
                     </div>
 
                     <div class="dividerDIV"></div>
 
                     <div class="AmountReceived">
                         <h2>Amount Receive</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1 class="showReceive">0</h1>
                     </div>
                     <div class="dividerDIV"></div>
 
-                    <div class="change">
+                    <div class="change" >
                         <h2>Change</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1 class="showChange">0</h1>
                     </div>
                 </div>
 
-                <div class="ConfirmSection">
-                    <button class="BackBtn">Back</button>
-                    <button class="ConfirmBtn">Confirm Order</button>
-                </div>
+            
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
+                    <button class="BackBtn" onclick="cancel()">Back</button>
+                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                   
+                </form>
             </div>
+        </div>
+
+        <div class="successPrompt">
+            <div class="sucessContainer">
+                <img src="../assets/check.png" alt="">
+                <h1>Success</h1>
+                <a href="POS.php?action=clearAll">New Transaction</a> 
+            </div>
+        </div>
+
+        
+
+    </div>
+
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script src="../js/script.js"></script>
         <script>
-        $(document).ready(function() {
-            $(document).on('click', '.toCart', function(event) { 
+                $(document).ready(function() {
+                    $(document).on('click', '.toCart', function(event) { 
 
-                event.preventDefault(); 
-                var id = $(this).siblings(".ProductID").val();
-                $.ajax({
-                    method: 'POST',
-                    url: 'PhpFunctions/modal.php',
-                    data: {id: id},
-                    success: function(response) {
-                        $(".addItem").css("display", "flex");
-                        $('.addItem').html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred: " + error); 
-                    }
+                        event.preventDefault(); 
+                        var id = $(this).siblings(".ProductID").val();
+                        $.ajax({
+                            method: 'POST',
+                            url: 'PhpFunctions/modal.php',
+                            data: {id: id},
+                            success: function(response) {
+                                $(".addItem").css("display", "flex");
+                                $('.addItem').html(response);
+                            },
+                            error: function(xhr, status, error) {
+                                alert("An error occurred: " + error); 
+                            }
+                        });
+                    });
                 });
-            });
-        });
 
+                $(document).ready(function() {
+                    $(document).on('click', '.ConfirmBtn', function(event) { 
+                        event.preventDefault(); 
+                        $.ajax({
+                            method: 'POST',
+                            url: '', 
+                            data: { 
+                                action: 'saveData', 
+                                numberOfItems: '<?php echo $numberOfItems; ?>',
+                                SubTotal: '<?php echo $SubTotal; ?>',
+                                realCostofGoods: '<?php echo $realCostofGoods; ?>',
+                            
+                            },
+                            success: function(response) {
+                                $(".OrderSummary").css("display", "none");
+                                $(".successPrompt").css("display", "flex");
+                            },
+                            error: function(xhr, status, error) {
+                                alert("An error occurred: " + error); 
+                            }
+                        });
+                    });
+                });
 
         </script>
 
-<script>
-                function decreaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    if (currentValue > 1) {
-                        inputElement.value = currentValue - 1;
-                    }
-                }
+            <script>
+                            function decreaseQuantity() {
+                                var inputElement = document.querySelector('.quantityInput');
+                                var currentValue = parseInt(inputElement.value);
+                                if (currentValue > 1) {
+                                    inputElement.value = currentValue - 1;
+                                }
+                            }
 
-                function increaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    inputElement.value = currentValue + 1;
-                }
+                            function increaseQuantity() {
+                                var inputElement = document.querySelector('.quantityInput');
+                                var currentValue = parseInt(inputElement.value);
+                                inputElement.value = currentValue + 1;
+                            }
 
-                function exitModal() {
-                    var cancel = document.querySelector('.addItem');
-                    cancel.style.display ='none';
-                }
+                            function exitModal() {
+                                var cancel = document.querySelector('.addItem');
+                                cancel.style.display ='none';
+                            }
+
+                            function cancel() {
+                                var cancel = document.querySelector('.OrderSummary');
+                                cancel.style.display ='none';
+                            }
+
+                            function openSummaryModal() {
+                                var show = document.querySelector('.OrderSummary');
+                                show.style.display ='flex';
+                            }
+
             </script>
         
+
 </body>
 
 </html>

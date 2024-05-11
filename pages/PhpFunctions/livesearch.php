@@ -38,7 +38,9 @@ if (isset($_POST['input'])) {
                     $netweight = $row['net_weight'];
 
                     ?>
-                        <button class="select">
+
+                        <input type="hidden" class="ProductID" name="productId" value="<?php echo $id?>">
+                        <button type="button" class="select toCart" name="toCart" >
                             <div class="image">
                                 <img src="../assets/InventoryItems/<?php echo $pic ?>" alt="">
                             </div>
@@ -59,9 +61,6 @@ if (isset($_POST['input'])) {
                 }
                 ?>
             </div>
-
-
-        
         </div>
         <?php
     }else {

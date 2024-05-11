@@ -15,7 +15,7 @@ if (isset($_POST['id'])) {
 
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ItemContainer">
                 <div class="itemInfo">
-                    <img src="../assets/<?php echo $row['picture_url']; ?>" alt="">
+                    <img src="../assets/InventoryItems/<?php echo $row['picture_url']; ?>" alt="">
                     <div class="Infos">
                         <h1><?php echo $row['product_name'] ?></h1>
                         <h3><?php echo $row['net_weight'] ?></h3>
@@ -45,7 +45,7 @@ if (isset($_POST['id'])) {
 
                     <div class="addToCart">
                         <button type="button" class="cancel" onclick="exitModal()">Cancel</button> <!-- Changed type to button -->
-                        <button type="submit" name="AddToCart" class="toCart">Add to cart</button>
+                        <button type="submit" name="AddToCart" class="AddToCartBtn">Add to cart</button>
                     </div>
                 </div>
             </form>
