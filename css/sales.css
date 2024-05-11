@@ -1,8 +1,9 @@
+@import url('https://fonts.cdnfonts.com/css/br-sonoma');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Nueue', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 body{
@@ -98,6 +99,8 @@ body{
     gap: 10px;
 }
 
+/* Sidebar */
+
 .sideBar {
     height: 100%;
     width: 115px;
@@ -158,7 +161,7 @@ body{
     background-color: #ffffff;
 }
 
-
+/* Main Container */
 
 .mainContainer{
     padding: 30px;
@@ -182,11 +185,7 @@ body{
 
 .salesDisplay .transactions{
     display: flex;
-    gap: 20px;
-    background-color: #ffffff;
     height: 60%;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: 13px;
 }
 
 .sales .salesStats{
@@ -199,12 +198,14 @@ body{
     height: 100%;
 }
 
+/* Sales Stats */
+
 .salesStatsLabel{
     width: auto;
 }
 .salesStatsLabel p{
-    font-size: 24px;
-    margin-left: 10px;
+    font-size: 30px;
+    margin-left: 35px;
     line-height: 40px;
     font-weight: 600;
     color: #04B075;
@@ -217,14 +218,15 @@ body{
     border-radius: 20px 20px 0px 0px;
     height: 7px;
     position: relative;
-    background-color: #008D5D;
-
+    background-color: #04B075;
+    width: 250px;
+    margin-left: 20px;
 }
 
 .salesStats .mainContainer{
     background-color: #ffffff;
     height: 33vh;
-    border-radius: 0px 0px 13px 13px;
+    border-radius: 13px 13px 13px 13px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: flex;
     flex-direction: row;
@@ -297,19 +299,181 @@ body{
 }
 .grossSale h1, .order h1, .totalProfit h1, .others h1{
     font-size: 45px;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 3px;
 }
 
-
-
-
-.stocksLabel{
-    width: auto;
+.labelgroup{
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
+
+/* Dropdown */
+.dropdown {
+    position: absolute;
+    top: 0;
+    right: 0; /* Align to the right side */
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #04B075;
+}
+
+.dropdown-select {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #009963;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+    
+}
+
+.select {
+    margin-right: 5px;
+}
+
+.caret {
+    border: solid #008D5D;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    margin-left: 20px;
+}
+
+.dropdown-list {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    list-style: none;
+    display: none;
+    border-radius: 7px;
+    width: 100%;
+    border: 1px solid #009963;
+}
+
+.dropdown-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background-color: #f8f8f8;
+}
+
+.dropdown-select:hover .dropdown-list {
+    display: block;
+}
+
+/* Stocks */
+
 .stocksLabel p{
-    font-size: 24px;
-    margin-left: 10px;
+    font-size: 30px;
+    margin-left: 35px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+}
+.stockTracker .lineShape{
+    border-radius: 20px 20px 0px 0px;
+    height: 7px;
+    position: relative;
+    background-color: #04B075;
+    width: 240px;
+    margin-left: 20px;
+}
+.stockTracker .mainContainer{
+    background-color: #ffffff;
+    height: 33vh;
+    border-radius: 13px 13px 13px 13px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 30px 15px 30px;
+}
+.mainContainer::-webkit-scrollbar{
+    width: 0px;
+}
+.stocksTable{
+    font-size: 13px;
+    border-radius: 8px;
+    padding: 0px 10px 0px 10px;
+}
+.stocksTable thead th{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    padding: 20px 0px 10px 0px;
+    color: #b4b4b4;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: left;
+
+}
+.stocksTable td{
+    padding: 5px 0px 5px 0px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    border: none;
+    font-weight: 400;
+    font-size: 13px;
+}
+.stocksTable tbody #productID,
+.stocksTable .col1 {
+    width: 10vw;
+    margin-right: 15px;
+}
+.stocksTable tbody #productName,
+.stocksTable .col2 {
+    width: 40vw;
+}
+.stocksTable tbody #netWeight,
+.stocksTable .col3 {
+    width: 10vw;
+
+}
+.stocksTable tbody #category,
+.stocksTable .col4 {
+    width: 15vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.stocksTable tbody #stock,
+.stocksTable .col5 {
+    width: 5vw;
+}
+.stocksTable tbody #stock p{
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Transactions */
+
+.transactions{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.transactions .transactionLabel p{
+    font-size: 30px;
+    margin-left: 35px;
     line-height: 40px;
     font-weight: 600;
     color: #04B075;
@@ -318,45 +482,86 @@ body{
     white-space: nowrap;
 
 }
-.stockTracker .lineShape{
+.transactions .lineShape{
     border-radius: 20px 20px 0px 0px;
     height: 7px;
     position: relative;
-    background-color: #008D5D;
+    background-color: #04B075;
+    width: 310px;
+    margin-left: 20px;
 }
-
-.stockTracker .mainContainer{
+.transactions .mainContainer{
     background-color: #ffffff;
-    height: 33vh;
-    border-radius: 0px 0px 13px 13px;
+    height: 37vh;
+    border-radius: 13px 13px 13px 13px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: flex;
     flex-direction: row;
-    gap: 10px;
     overflow: scroll;
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
-
+    padding: 0px 40px 20px 40px;
 }
-
-.stocksTable{
-    font-size: 14px;
-    width: 100%;
-    padding: 10px;
+.transactionTable{
+    font-size: 13px;
     border-radius: 8px;
-
+    padding: 0px 10px 0px 10px;
 }
-
-.stocksTable th,
-.stocksTable td{
-    padding: 8px;
+.transactionTable thead th{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    padding: 20px 0px 15px 0px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 13px;
+    color: #b4b4b4;
+}
+.transactionTable td{
+    padding: 5px 0px 5px 0px;
     border: 1px solid #ddd;
     text-align: left;
     background-color: #ffffff;
     border: none;
+}
+.transactionTable tbody #transactionNum,
+.transactionTable .col1 {
+    width: 20vw;
+    margin-right: 15px;
+}
+.transactionTable tbody #numItems,
+.transactionTable .col2 {
+    width: 30vw;
+
+}
+.transactionTable tbody #total,
+.transactionTable .col3 {
+    width: 30vw;
+}
+.transactionTable tbody #date,
+.transactionTable .col4 {
+    width: 30vw;
     overflow: hidden;
-    text-overflow: inherit;
     white-space: nowrap;
-    width: 100%;
+    text-overflow: ellipsis;
+}
+.transactionTable tbody #seeDetails,
+.transactionTable .col5 {
+    width: 10vw;
+}
+.transactionTable tbody #seeDetails button{
+    border: 1px solid #04B075;
+    color: #04B075;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    font-size: 12px;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.transactionTable tbody #seeDetails button:hover{
+    background-color: #04B075;
+    outline: none;
+    color: #ffffff;
 }
