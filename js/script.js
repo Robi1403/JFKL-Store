@@ -9,17 +9,6 @@ document.getElementById("POSBtn").onclick = function () {
 
 };
 
-function filterInventory(category) {
-    var items = document.querySelectorAll('.ItemCardView');
-    items.forEach(function (item) {
-        var categoryCell = item.querySelector('input[name="category"]').value.trim();
-        if (category === 'All' || categoryCell === category) {
-            item.style.display = '';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
 
 document.getElementById("inventoryBtn").onclick = function() {
     window.location.href = "inventory.php";

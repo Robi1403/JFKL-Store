@@ -76,31 +76,31 @@ include("PhpFunctions/SaveTransaction.php");
 
         <div class="productDisplay">
 
-            
-        <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
-                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
-                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
-                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
-                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
-                <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
-                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
-                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
-            </form>
+            <div class="category" id="categoryContainer">
+                <button class="categoryBtn" onclick="filterInventory('All')">All</button>
+                <button class="categoryBtn" onclick="filterInventory('Canned Goods')">Canned Goods</button>
+                <button class="categoryBtn" onclick="filterInventory('Coffee')">Coffee</button>
+                <button class="categoryBtn" onclick="filterInventory('Biscuits')">Biscuits</button>
+                <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
+                <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
+                <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
+                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
+                <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
+                <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
+                <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
+                <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
+                <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
+                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic Beverages</button>
+                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies & Chocolates</button>
+                <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
+                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments & Sauces</button>
+                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
+                <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
+            </div>
+          
             <div class="ItemView">
 
                 <div class="products">
@@ -151,7 +151,7 @@ include("PhpFunctions/SaveTransaction.php");
                 <div class="cartLabel">
                     <p>Cart</p>
                     <div class="buttons">
-                        <a href="POS.php?action=clearAll">Clear</a>
+                        <a href="POS.php?action=clearAll">New Transaction</a>
                     </div>
                 </div>
 
@@ -225,10 +225,9 @@ include("PhpFunctions/SaveTransaction.php");
 
                             $SubTotal = $SubTotal + $total;
                             $realCostofGoods =  $realCostofGoods + $CostOfGoods;
-                            $numberOfItems += 1;
+                            $numberOfItems = $numberOfItems + $value['quantity'];
                         }
                     }
-                    echo $realCostofGoods ;
                     ?>
 
 
@@ -253,6 +252,7 @@ include("PhpFunctions/SaveTransaction.php");
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
+
                         <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
 
@@ -329,17 +329,30 @@ include("PhpFunctions/SaveTransaction.php");
                     </div>
                 </div>
 
-                <div class="addToCart">
-                        <button type="button" class="cancel" onclick="exitModal()">Cancel</button>
-                        <a href="POS.php?action=orderConfirmed"  name="AddToCart" class="AddToCart">Add to cart</a>
-                </div>
-                </div>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
+                    <button class="BackBtn" onclick="cancel()">Back</button>
+                    <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                </form>
             </form>
         </div>
     </div>
             <?php 
-                saveDataToDatabase($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);
-            ?>
+           if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ConfirmOrder'])) { 
+            // Save data to the database
+            saveDataToDatabase($conn, $numberOfItems, $SubTotal, $realCostofGoods, $_SESSION['cart']);
+            
+            // Unset the session variable
+            unset($_SESSION['cart']);
+            
+            echo "<script>window.location.href = 'subdirectory/POS.php';</script>";
+
+
+
+        }
+        
+            
+            
+            ;?>
 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
