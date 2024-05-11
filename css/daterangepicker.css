@@ -1,18 +1,23 @@
 .daterange{
     background: #fff; 
     cursor: pointer; 
-    padding: 9px 10px 9px 3px; 
+    padding: 9px 10px 9px 10px; 
     border: 1px solid #009963; 
     width: 40%;
     border-radius: 7px;
     position: absolute;
     top: 0;
     right: 0; /* Align to the right side */
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 35px;
     width: auto ;
     font-size: 14px;
-    color: 04B075;
+}
+.daterange img{
+    margin-right: 6px;
+    width: 19px;
 }
 .daterangepicker {
     position: absolute;
