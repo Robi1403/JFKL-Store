@@ -7,6 +7,7 @@ include("PhpFunctions/SaveTransaction.php");
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,6 @@ include("PhpFunctions/SaveTransaction.php");
 
     <title>JFKL Store</title>
 </head>
-
 <body>
     <div class="navbar">
         <div class="left">
@@ -76,31 +76,31 @@ include("PhpFunctions/SaveTransaction.php");
 
         <div class="productDisplay">
 
-            <div class="category" id="categoryContainer">
-                <button class="categoryBtn" onclick="filterInventory('All')">All</button>
-                <button class="categoryBtn" onclick="filterInventory('Canned Goods')">Canned Goods</button>
-                <button class="categoryBtn" onclick="filterInventory('Coffee')">Coffee</button>
-                <button class="categoryBtn" onclick="filterInventory('Biscuits')">Biscuits</button>
-                <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
-                <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
-                <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
-                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
-                <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
-                <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
-                <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
-                <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
-                <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
-                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic Beverages</button>
-                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies & Chocolates</button>
-                <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments & Sauces</button>
-                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking Ingredients & Seasonings</button>
-                <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
-                <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
-            </div>
-          
+            
+        <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
+                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
+                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
+                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
+                <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
+                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+            </form>
             <div class="ItemView">
 
                 <div class="products">
@@ -113,7 +113,7 @@ include("PhpFunctions/SaveTransaction.php");
                         $query = "SELECT * FROM inventory WHERE category='$category'";
                     }
 
-                    $result = mysqli_query($conn, $query);
+                        $result = mysqli_query($conn, $query);
 
 
                     while ($row = mysqli_fetch_array($result)) { ?>
@@ -150,18 +150,44 @@ include("PhpFunctions/SaveTransaction.php");
             <div class="cart">
                 <div class="cartLabel">
                     <p>Cart</p>
-                </div>
-                <div class="buttons">
-                    <button>New Order</button>
-                    <button>Hold Order</button>
-                    <a href="POS.php?action=clearAll">Clear</a>
+                    <div class="buttons">
+                        <a href="POS.php?action=clearAll">New Transaction</a>
+                    </div>
                 </div>
 
                 <?php
-                if (isset($_GET['action']) && $_GET['action'] == "clearAll") {
-                    unset($_SESSION['cart']);
-                }
+                if (isset($_GET['action'])){
+                    if ($_GET['action'] == "clearAll") {
+                        unset($_SESSION['cart']);
+                    }
 
+                    if ($_GET['action'] == "remove") {
+                        foreach($_SESSION['cart'] as $key => $value) {
+                            if($value['id'] == $_GET['id'] ){
+                                unset($_SESSION['cart'][$key]);
+                            }
+                        }
+                    }
+
+                    if ($_GET['action'] == "decreaseQty") {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['id'] == $_GET['id']) {
+                                $value['quantity'] -= 1;
+                            }
+                        }
+                        unset($value); 
+                    }
+
+                    if ($_GET['action'] == "increaseQty") {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['id'] == $_GET['id']) {
+                                $value['quantity'] += 1;
+                            }
+                        }
+                        unset($value); 
+                    }
+                    
+                } 
                 ?>
                 <div class="orderList">
                     
@@ -194,14 +220,14 @@ include("PhpFunctions/SaveTransaction.php");
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
-                                        <button">
+                                        <a href="POS.php?action=decreaseQty&id=<?php echo $value['id'] ?>">
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
-                                        </button>
+                                        </a>
                                         
                                         <input type="number" value="<?php echo $value['quantity'] ?>">
-                                        <button>
+                                        <a href="POS.php?action=increaseQty&id=<?php echo $value['id'] ?>" >
                                             <img src="../assets/buttonAdd.svg " alt="">
-                                        </button>
+                                        </a>
                                         
                                     </div>
                                 </div>
@@ -217,22 +243,22 @@ include("PhpFunctions/SaveTransaction.php");
                                     <h1>₱<?php echo $total ?></h1>
                                 </div>
 
-                                <div class="select">
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                                </div>
+                                <a href="POS.php?action=remove&id=<?php echo $value['id'] ?>" class="delete">
+                                    <button>
+                                        <img src="../assets/delete.svg" alt="">
+                                    </button>
+                                </a>
                             </div>
                     <?php
 
                             $SubTotal = $SubTotal + $total;
                             $realCostofGoods =  $realCostofGoods + $CostOfGoods;
-                            $numberOfItems += $value['quantity'];
+                            $numberOfItems = $numberOfItems + $value['quantity'];
                         }
                     }
-
-
-                    
                     ?>
+
+
 
                 </div>
 
@@ -258,6 +284,7 @@ include("PhpFunctions/SaveTransaction.php");
                         <button id="Checkout" class="ProceedBtn" onclick="openSummaryModal()">Proceed</button>
                     </div>
 
+
                 </div>
             </div>
         </div>
@@ -279,6 +306,8 @@ include("PhpFunctions/SaveTransaction.php");
                             <th>Total</th>
                         </tr>
                         <?php
+
+
                         if (!empty($_SESSION['cart'])) {
 
                                 foreach ($_SESSION['cart'] as $key => $value) { ?>
@@ -304,7 +333,10 @@ include("PhpFunctions/SaveTransaction.php");
                                     </td>
                                 </tr>
                          <?php }
-                        }?>           
+                        }else {
+                            echo "<tr><td>Cart is empty</td></tr>";
+                        }
+                        ?>           
 
                     </table>
 
@@ -313,108 +345,126 @@ include("PhpFunctions/SaveTransaction.php");
                 <div class="AmountSummary">
                     <div class="TotalPayment">
                         <h2>Total</h2>
-                        <h1><?php echo $SubTotal ?></h1>
+                        <h1><?php echo "₱ ". $SubTotal ?></h1>
                     </div>
 
                     <div class="dividerDIV"></div>
 
                     <div class="AmountReceived">
                         <h2>Amount Receive</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1 class="showReceive">0</h1>
                     </div>
                     <div class="dividerDIV"></div>
 
                     <div class="change" >
                         <h2>Change</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1 class="showChange">0</h1>
                     </div>
                 </div>
 
-                <div class="ConfirmSection">
+            
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
                     <button class="BackBtn" onclick="cancel()">Back</button>
-                    <button class="ConfirmBtn">Confirm Order</button>
-                </div>
-                <div class="ItemQuantity">
-                    <div class="addQuantity">
-                        <h3>Quantity</h3>
-                        <div class="addMinusQuantity">
-                            <button type="button" onclick="decreaseQuantity()">
-                                <img src="../assets/decreaseBtn.svg" alt="Decrease">
-                            </button>
-                            <input type="number" class="quantityInput" name="Quantity" value="1">
-                            <button type="button" onclick="increaseQuantity()">
-                                <img src="../assets/buttonAdd.svg" alt="Increase">
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="addToCart">
-                        <button type="button" class="cancel" onclick="exitModal()">Cancel</button>
-                        <button type="submit" name="AddToCart" class="AddToCart">Add to cart</button>
-                    </div>
-                </div>
-            </form>
+                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                   
+                </form>
+            </div>
         </div>
+
+        <div class="successPrompt">
+            <div class="sucessContainer">
+                <img src="../assets/check.png" alt="">
+                <h1>Success</h1>
+                <a href="POS.php?action=clearAll">New Transaction</a> 
+            </div>
+        </div>
+
+        
+
     </div>
-            <?php //saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$_SESSION['cart']);?>
 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script src="../js/script.js"></script>
         <script>
-        $(document).ready(function() {
-            $(document).on('click', '.toCart', function(event) { 
+                $(document).ready(function() {
+                    $(document).on('click', '.toCart', function(event) { 
 
-                event.preventDefault(); 
-                var id = $(this).siblings(".ProductID").val();
-                $.ajax({
-                    method: 'POST',
-                    url: 'PhpFunctions/modal.php',
-                    data: {id: id},
-                    success: function(response) {
-                        $(".addItem").css("display", "flex");
-                        $('.addItem').html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred: " + error); 
-                    }
+                        event.preventDefault(); 
+                        var id = $(this).siblings(".ProductID").val();
+                        $.ajax({
+                            method: 'POST',
+                            url: 'PhpFunctions/modal.php',
+                            data: {id: id},
+                            success: function(response) {
+                                $(".addItem").css("display", "flex");
+                                $('.addItem').html(response);
+                            },
+                            error: function(xhr, status, error) {
+                                alert("An error occurred: " + error); 
+                            }
+                        });
+                    });
                 });
-            });
-        });
 
+                $(document).ready(function() {
+                    $(document).on('click', '.ConfirmBtn', function(event) { 
+                        event.preventDefault(); 
+                        $.ajax({
+                            method: 'POST',
+                            url: '', // The same PHP file
+                            data: { 
+                                action: 'saveData', 
+                                numberOfItems: '<?php echo $numberOfItems; ?>',
+                                SubTotal: '<?php echo $SubTotal; ?>',
+                                realCostofGoods: '<?php echo $realCostofGoods; ?>',
+                                cart: '<?php echo $cartArray ?>' // Convert PHP array to JSON
+                            
+                            },
+                            success: function(response) {
+                                $(".OrderSummary").css("display", "none");
+                                $(".successPrompt").css("display", "flex");
+                            },
+                            error: function(xhr, status, error) {
+                                alert("An error occurred: " + error); 
+                            }
+                        });
+                    });
+                });
 
         </script>
 
-<script>
-                function decreaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    if (currentValue > 1) {
-                        inputElement.value = currentValue - 1;
-                    }
-                }
+            <script>
+                            function decreaseQuantity() {
+                                var inputElement = document.querySelector('.quantityInput');
+                                var currentValue = parseInt(inputElement.value);
+                                if (currentValue > 1) {
+                                    inputElement.value = currentValue - 1;
+                                }
+                            }
 
-                function increaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    inputElement.value = currentValue + 1;
-                }
+                            function increaseQuantity() {
+                                var inputElement = document.querySelector('.quantityInput');
+                                var currentValue = parseInt(inputElement.value);
+                                inputElement.value = currentValue + 1;
+                            }
 
-                function exitModal() {
-                    var cancel = document.querySelector('.addItem');
-                    cancel.style.display ='none';
-                }
+                            function exitModal() {
+                                var cancel = document.querySelector('.addItem');
+                                cancel.style.display ='none';
+                            }
 
-                function cancel() {
-                    var cancel = document.querySelector('.OrderSummary');
-                    cancel.style.display ='none';
-                }
+                            function cancel() {
+                                var cancel = document.querySelector('.OrderSummary');
+                                cancel.style.display ='none';
+                            }
 
-                function openSummaryModal() {
-                    var show = document.querySelector('.OrderSummary');
-                    show.style.display ='flex';
-                }
+                            function openSummaryModal() {
+                                var show = document.querySelector('.OrderSummary');
+                                show.style.display ='flex';
+                            }
+
             </script>
         
 
