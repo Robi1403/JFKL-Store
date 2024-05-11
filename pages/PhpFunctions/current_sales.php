@@ -9,22 +9,16 @@ include ("connection.php");
     $search_result = mysqli_query($conn, $search_query);
     if ($search_result) {
         if (mysqli_num_rows($search_result) > 0) {
-            // Output the search result
             $row = mysqli_fetch_assoc($search_result);
             $currentTotalTransactions = $row['total_transactions'];
             $currentTotalItems = $row['total_items'];
             $currentTotalSales = $row['total_sales'];
             $currentTotalProfit = $row['total_profit'];
 
-            // echo "<h2>Sales Summary for $currentDate</h2>";
-
-            // echo "<p>Total Number of Transactions: $currentTotalTransactions</p>";
-            // echo "<p>Total Number of Items: $currentTotalItems</p>";
-            // echo "<p>Total Gross Sales: $currentTotalSales</p>";
-            // echo "<p>Total Profit: $currentTotalProfit</p>";
-            // echo '<script>
-            //     window.location.href = "../sales.php"; 
-            // </script>';
+            $currentTotalTransactions = $currentTotalTransactions ?? 0;
+            $currentTotalItems = $currentTotalItems ?? 0;
+            $currentTotalSales = $currentTotalSales ?? 0;
+            $currentTotalProfit = $currentTotalProfit ?? 0;
         } else {
             echo "No sales data found for $currentDate";
         }

@@ -286,33 +286,35 @@ include ("PhpFunctions/current_sales.php");
                         </thead>
                         <tbody>
                             <?php
-
-                            if ($startDate == $endDate) {
-                                // Daily sales
-                                $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$startDate'";
-                            } else {
-                                // Custom Date Range's Sales
-                                $select_query = "SELECT * FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
-                            }
-
-                            $result = mysqli_query($conn, $select_query);
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) { ?>
-                                    <tr>
-                                        <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
-                                        </td>
-                                        <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
-                                        <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
-                                        <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                        <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                                    </tr>
-                                    <?php
+                            if (isset($totalTransactions)) { 
+                                if ($startDate == $endDate) {
+                                    // Daily sales
+                                    $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$startDate'";
+                                } else {
+                                    // Custom Date Range's Sales
+                                    $select_query = "SELECT * FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
+                                }
+    
+                                $result = mysqli_query($conn, $select_query);
+    
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
+                                            </td>
+                                            <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
+                                            <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
+                                            <td class="date" id="date"><?php echo $row["date"]; ?></td>
+                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<tr><td>No record of transaction.</td></tr>";
                                 }
                             } else {
                                 echo "<tr><td>No record of transaction.</td></tr>";
-                            }
-                            ?>
+                            } ?>
                         </tbody>
                     </table>
                 </div>
