@@ -140,6 +140,7 @@ include ("PhpFunctions/connection.php");
                                 // // echo "<p>Total Number of Items: $totalItems</p>";
                                 // // echo "<p>Total Gross Sales: $totalSales</p>";
                                 // // echo "<p>Total Profit: $totalProfit</p>";
+                    
                             } else {
                                 if ($startDate == $endDate) {
                                     echo "<script>alert('No sales data found for $startDate');</script>";
@@ -157,12 +158,31 @@ include ("PhpFunctions/connection.php");
                         <div class="container1">
                             <div class="grossSale">
                                 <h1><?php echo $totalSales; ?></h1>
-                                <p>Todays <strong>Gross Sale</strong></p>
-
+                                <?php
+                                date_default_timezone_set('Asia/Manila');
+                                $currentDate = date("Y-m-d");
+                                if ($startDate == $currentDate && $endDate == $currentDate) { ?>
+                                    <p>Today's <strong>Gross Sale</strong></p>
+                                <?php } else { ?>
+                                    <p> Total <strong>Gross Sale</strong><span></p>
+                                <?php
+                                }
+                                ?>
                             </div>
+
                             <div class="order">
                                 <h1><?php echo $totalTransactions; ?></h1>
-                                <p><strong>Orders</strong> Today</p>
+                                <?php
+                                date_default_timezone_set('Asia/Manila');
+                                $currentDate = date("Y-m-d");
+                                if ($startDate == $currentDate && $endDate == $currentDate) { ?>
+                                    <p><strong>Orders</strong> Today</p>
+                                <?php } else { ?>
+                                    <p> Total <strong>Orders</strong><span></p>
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </div>
                         <div class="container2">
@@ -370,8 +390,8 @@ include ("PhpFunctions/connection.php");
     </script>
     <script type="text/javascript">
         $(function () {
-
-            var start = moment().subtract(29, 'days');
+            // var start = moment().subtract(29, 'days');
+            var start = moment();
             var end = moment();
 
             function cb(start, end) {
@@ -401,21 +421,6 @@ include ("PhpFunctions/connection.php");
                 $('#dateform').submit();
             });
         });
-    </script>
-
-    <script>
-        // JavaScript
-        // Assuming PHP variables are echoed into JavaScript variables like below
-        var grossSale = "<?php echo $totalSales; ?>";
-        var orders = "<?php echo $totalTransactions; ?>";
-        var profit = "<?php echo $totalProfit; ?>";
-        var products = "<?php echo $totalItems; ?>";
-
-        // Update HTML elements with PHP variables
-        document.getElementById("grossSaleValue").textContent = "P " + grossSale;
-        document.getElementById("orderValue").textContent = orders;
-        document.getElementById("totalProfitValue").textContent = "P " + profit;
-        document.getElementById("totalProductsValue").textContent = products;
     </script>
 </body>
 
