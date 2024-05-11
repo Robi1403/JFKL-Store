@@ -1,5 +1,5 @@
 <?php
-include ("PhpFunctions/connection.php");
+include ("PhpFunctions/current_sales.php");
 ?>
 
 <!DOCTYPE html>
@@ -157,29 +157,46 @@ include ("PhpFunctions/connection.php");
                     <div class="mainContainer">
                         <div class="container1">
                             <div class="grossSale">
-                                <h1><?php echo $totalSales; ?></h1>
-                                <?php
-                                date_default_timezone_set('Asia/Manila');
-                                $currentDate = date("Y-m-d");
-                                if ($startDate == $currentDate && $endDate == $currentDate) { ?>
+                                <h1><?php
+                                if (isset($totalSales)) {
+                                    echo $totalSales; ?></h1>
+                                    <?php
+                                    date_default_timezone_set('Asia/Manila');
+                                    $currentDate = date("Y-m-d");
+
+                                    if ($startDate == $currentDate && $endDate == $currentDate) { ?>
+                                        <p>Today's <strong>Gross Sale</strong></p>
+                                    <?php } else { ?>
+                                        <p> Total <strong>Gross Sale</strong><span></p>
+                                        <?php
+                                    }
+                                } else { ?>
+                                    <h1><?php echo $currentTotalSales; ?></h1>
                                     <p>Today's <strong>Gross Sale</strong></p>
-                                <?php } else { ?>
-                                    <p> Total <strong>Gross Sale</strong><span></p>
-                                <?php
+                                    <?php
                                 }
                                 ?>
+
                             </div>
 
                             <div class="order">
-                                <h1><?php echo $totalTransactions; ?></h1>
-                                <?php
-                                date_default_timezone_set('Asia/Manila');
-                                $currentDate = date("Y-m-d");
-                                if ($startDate == $currentDate && $endDate == $currentDate) { ?>
+                                <h1><?php
+                                if (isset($totalTransactions)) {
+                                    echo $totalTransactions; ?></h1>
+                                    <?php
+                                    date_default_timezone_set('Asia/Manila');
+                                    $currentDate = date("Y-m-d");
+
+                                    if ($startDate == $currentDate && $endDate == $currentDate) { ?>
+                                        <p><strong>Orders</strong> Today</p>
+                                    <?php } else { ?>
+                                        <p> Total <strong>Orders</strong><span></p>
+                                        <?php
+                                    }
+                                } else { ?>
+                                    <h1><?php echo $currentTotalTransactions; ?></h1>
                                     <p><strong>Orders</strong> Today</p>
-                                <?php } else { ?>
-                                    <p> Total <strong>Orders</strong><span></p>
-                                <?php
+                                    <?php
                                 }
                                 ?>
 
@@ -187,11 +204,11 @@ include ("PhpFunctions/connection.php");
                         </div>
                         <div class="container2">
                             <div class="totalProfit">
-                                <h1><?php echo $totalProfit; ?></h1>
+                                <h1><?php echo isset($totalProfit) ? $totalProfit : $currentTotalProfit; ?></h1>
                                 <p>Total <strong>Profit</strong></p>
                             </div>
                             <div class="others">
-                                <h1><?php echo $totalItems; ?></h1>
+                                <h1><?php echo isset($totalItems) ? $totalItems : $currentTotalItems; ?></h1>
                                 <p>Total <strong>Products</strong></p>
                             </div>
                         </div>
@@ -388,6 +405,7 @@ include ("PhpFunctions/connection.php");
             });
         });
     </script>
+
     <script type="text/javascript">
         $(function () {
             // var start = moment().subtract(29, 'days');
@@ -421,6 +439,18 @@ include ("PhpFunctions/connection.php");
                 $('#dateform').submit();
             });
         });
+    </script>
+
+    <script>
+        //redirect to inventory
+        document.getElementById("inventoryBtn").onclick = function () {
+            window.location.href = "inventory.php";
+        };
+
+        //redirect to POS
+        document.getElementById("POSBtn").onclick = function () {
+            window.location.href = "POS.php";
+        };
     </script>
 </body>
 
