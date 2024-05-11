@@ -209,7 +209,7 @@ include ("PhpFunctions/current_sales.php");
                             </div>
                             <div class="others">
                                 <h1><?php echo isset($totalItems) ? $totalItems : $currentTotalItems; ?></h1>
-                                <p>Total <strong>Products</strong></p>
+                                <p>Total <strong>Products Sold</strong></p>
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,14 @@ include ("PhpFunctions/current_sales.php");
                         </thead>
                         <tbody>
                             <?php
-                            $select_query = "SELECT * FROM `transaction_history`";
+
+                            if ($startDate == $endDate) {
+                                // Daily sales
+                                $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$startDate'";
+                            } else {
+                                // Custom Date Range's Sales
+                                $select_query = "SELECT * FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
+                            }
 
                             $result = mysqli_query($conn, $select_query);
 
