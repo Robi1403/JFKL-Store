@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 06:25 AM
+-- Generation Time: May 09, 2024 at 08:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -445,13 +445,13 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (399, 'Nips Peanuts', '14g', 'Piece', 'Candies & Chocolates', 4.77, 5.00, 12, 'Nips Peanuts 14g.png'),
 (400, 'Nips Milk Chocolate', '14g', 'Piece', 'Candies & Chocolates', 4.77, 5.00, 12, 'Nips Milk Chocolate 14g.png'),
 (401, 'Nips White Chocolate', '14g', 'Piece', 'Candies & Chocolates', 4.77, 5.00, 12, 'Nips White Chocolate 14g.png'),
-(402, 'Lipps Pop Stick Color Rumble', '6.5g', 'Piece', 'Candies & Chocolates', 1.12, 2.00, 60, 'Lipps Pop Stick Color Rumble 6.5g.png'),
-(403, 'Choco Joy', '3.5g', 'Piece', 'Candies & Chocolates', 0.74, 1.00, 50, 'Choco Joy 3.5g.png'),
+(402, 'Lipps Pop Stick Strawberry', '6.5g', 'Piece', 'Candies & Chocolates', 1.12, 2.00, 60, 'Lipps Pop Stick Strawberry 6.5g.png'),
+(403, 'Champi', '3.5g', 'Piece', 'Candies & Chocolates', 0.74, 1.00, 50, 'Champi 3.5g.png'),
 (404, 'Pintoora Gum ball', '4g', 'Piece', 'Candies & Chocolates', 0.87, 1.00, 30, 'Pintoora Gum ball 4g.png'),
 (405, 'Halls Mentho-Lyptus', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Mentho-Lyptus 2.8g.png'),
 (406, 'Halls Honey-Lemon', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Honey-Lemon 2.8g.png'),
 (407, 'Halls Raspberry', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Raspberry 2.8g.png'),
-(408, 'Halls Fresh Spearmint', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Fresh Spearmint 2.8g.png'),
+(408, 'Halls Fresh Lime', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Fresh Lime 2.8g.png'),
 (409, 'Alaska Condensada', '206g', 'Piece', 'Dairy Products', 36.25, 40.00, 12, 'Alaska Condensada 206g.png');
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
 (410, 'Alaska Condensada', '370g', 'Piece', 'Dairy Products', 56.50, 60.00, 6, 'Alaska Condensada 370g.png'),
@@ -586,12 +586,12 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (539, 'Maxx Menthol Candy Cherry 50pcs', '200g', 'Pack', 'Candies & Chocolates', 42.00, 47.00, 3, 'Maxx Menthol Candy Cherry 50pcs 200g.png'),
 (540, 'Ricoa Flat Tops Milk Chocolate 30pcs', '150g', 'Pack', 'Candies & Chocolates', 47.00, 55.00, 3, 'Ricoa Flat Tops Milk Chocolate 30pcs 150g.png'),
 (541, 'Lipps Pop Stick Strawberry 22pcs', '143g', 'Pack', 'Candies & Chocolates', 20.00, 22.00, 3, 'Lipps Pop Stick Strawberry 22pcs 143g.png'),
-(542, 'Choco Joy 50pcs', '165g', 'Pack', 'Candies & Chocolates', 37.00, 45.00, 3, 'Choco Joy 50pcs 165g.png'),
+(542, 'Champi 50pcs', '165g', 'Pack', 'Candies & Chocolates', 37.00, 45.00, 3, 'Champi 50pcs 165g.png'),
 (543, 'Pintoora Gum ball 30pcs', '120g', 'Pack', 'Candies & Chocolates', 26.00, 30.00, 3, 'Pintoora Gum ball 30pcs 120g.png'),
 (544, 'Halls Mentho-Lyptus 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Mentho-Lyptus 50pcs 140g.png'),
 (545, 'Halls Honey-Lemon 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Honey-Lemon 50pcs 140g.png'),
 (546, 'Halls Raspberry 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Raspberry 50pcs 140g.png'),
-(547, 'Halls Fresh Spearmint 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Fresh Spearmint 50pcs 140g.png');
+(547, 'Halls Fresh Lime 50pcs', '140g', 'Pack', 'Candies & Chocolates', 43.00, 48.00, 3, 'Halls Fresh Lime 50pcs 140g.png');
 
 --
 -- Indexes for dumped tables
