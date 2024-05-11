@@ -95,22 +95,22 @@ include ("PhpFunctions/compute_sales.php");
                     <div class="mainContainer">
                         <div class="container1">
                             <div class="grossSale">
-                                <h1>P 456.00</h1>
+                                <h1><?php echo $totalSales; ?></h1>
                                 <p>Todays <strong>Gross Sale</strong></p>
                                 
                             </div>
                             <div class="order">
-                                <h1>12</h1>
+                                <h1><?php echo $totalTransactions; ?></h1>
                                 <p><strong>Orders</strong> Today</p>
                             </div>
                         </div>
                         <div class="container2">
                             <div class="totalProfit">
-                                <h1>P 5,432.00</h1>
+                                <h1><?php echo $totalProfit; ?></h1>
                                 <p>Total <strong>Profit</strong></p>
                             </div>
                             <div class="others">
-                                <h1>567</h1>
+                                <h1><?php echo $totalItems; ?></h1>
                                 <p>Total <strong>Products</strong></p>
                             </div>
                         </div>
