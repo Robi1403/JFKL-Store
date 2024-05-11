@@ -58,15 +58,14 @@ addProductBtn.addEventListener("click", function () {
 
     addProductModal.style.display = "block";
 
-    //new
+    //new ok na but automatically closes
         var addNewProductBtn = document.getElementById("addNewProductBtn");
 
         addNewProductBtn.addEventListener("click", function (event) {
             addProductModal.style.display = "none";
+            
             var add_successPrompt = document.getElementById("add_successPrompt");
-
             add_successPrompt.style.display = "flex";
-            event.preventDefault();
 
             var add_okBtn = document.getElementById("add_okBtn");
 
@@ -160,15 +159,14 @@ updateProductBtns.forEach(function (btn) {
         var updateProductModal = document.getElementById("updateProductModal");
         updateProductModal.style.display = "block";
 
-        //new ok na
+        //new ok na but automatically closes
         var updateProductInfoBtn = document.getElementById("updateProductInfoBtn");
 
         updateProductInfoBtn.addEventListener("click", function (event) {
             updateProductModal.style.display = "none";
-            var update_successPrompt = document.getElementById("update_successPrompt");
 
+            var update_successPrompt = document.getElementById("update_successPrompt");
             update_successPrompt.style.display = "flex";
-            event.preventDefault();
 
             var update_okBtn = document.getElementById("update_okBtn");
 

@@ -31,10 +31,22 @@ include ("PhpFunctions/update_product.php");
 
         <div class="right">
             <div class="todayGrossSaleLabel">
-                <p>Today's Gross Sale: </p>
+                <p>Total Products: </p>
             </div>
-            <div class="todayGrossSale">
-                <p><strong>P969.00</strong></p>
+            <div class="totalProducts">
+                <?php 
+                $count_query = "SELECT COUNT(*) AS product_count FROM inventory";
+                $result = mysqli_query($conn, $count_query);
+
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                
+                    $product_count = $row['product_count'];
+                } else {
+                    echo "Error: " . mysqli_error($conn);
+                }
+                ?>
+                <p><strong><?php echo $product_count; ?></strong></p>
             </div>
             <div class="date">
                 <p>
@@ -406,25 +418,43 @@ include ("PhpFunctions/update_product.php");
 
     <div class="successPrompt" id="add_successPrompt">
         <div class="sucessContainer">
-            <img src="../assets/check.png" alt="">
-            <h1>Successfully Added Product to Inventory</h1>
-            <button class="addProduct" id="add_okBtn">Ok</button>
+            <div class="image">
+                <img src="../assets/check.png" alt="">
+            </div>
+            <div class="message">
+                <p>Successfully Added Product to Inventory</p>
+            </div>
+            <div class="updateButtons">
+                <button class="addProduct" id="add_okBtn">Ok</button>
+            </div>
         </div>
     </div>
 
     <div class="successPrompt" id="update_successPrompt">
         <div class="sucessContainer">
-            <img src="../assets/check.png" alt="">
-            <h1>Successfully Updated Product Information</h1>
-            <button class="addProduct" id="update_okBtn">Ok</button>
+            <div class="image">
+                <img src="../assets/check.png" alt="">
+            </div>
+            <div class="message">
+                <p>Successfully Updated Product Information</p>
+            </div>
+            <div class="updateButtons">
+                <button class="addProduct" id="update_okBtn">Ok</button>
+            </div>
         </div>
     </div>
 
     <div class="successPrompt" id="remove_successPrompt">
         <div class="sucessContainer">
-            <img src="../assets/check.png" alt="">
-            <h1>Successfully Removed Product(s) from Inventory</h1>
-            <button class="addProduct" id="remove_okBtn">Ok</button>
+            <div class="image">
+                <img src="../assets/check.png" alt="">
+            </div>
+            <div class="message">
+                <p>Successfully Removed Product(s) from Inventory</p>
+            </div>
+            <div class="updateButtons">
+                <button class="addProduct" id="remove_okBtn">Ok</button>
+            </div>
         </div>
     </div>
 </body>

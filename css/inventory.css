@@ -75,7 +75,7 @@ body{
     flex: 1;
 }
 
-.navbar .right .todayGrossSale{
+.navbar .right .totalProducts{
     color: #04B075;
     font-weight: 600;
     margin-left: 10px;
@@ -594,54 +594,49 @@ input[type=text]:-ms-input-placeholder{
     text-align: center;
 }
 
-.successPrompt, #add_successPrompt, #update_successPrompt, #remove_successPrompt{ 
+.successPrompt, #add_successPrompt, #update_successPrompt, #remove_successPrompt{
     position: absolute;
     height: 100vh;
     top: 0px;
     width: 100vw;
     background: rgba(0, 0, 0, 0.30);
-    display: flex;
     justify-content: center;
     align-items: center;
     display: none;
 }
 
-
-.sucessContainer{
-    width: 450px;
-    height: 450px;
+.sucessContainer {
+    width: 400px;
+    height: 325px;
     border-radius: 13px;
     background: #FAFAFA;
+    padding:30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+    padding: 40px 30px 50px 30px;
+}
+
+.image{
+    height: 100px;
+    width: auto;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
+    align-items: center;
 }
-
-.sucessContainer img{
-    width: 129px;
-    height: 129px;
-
+.image img{
+    max-width: 100%; 
+    max-height: 100%;
 }
-
-.sucessContainer h1{
-    color: #008D5D;
+.message{
+    height: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.message p {
+    font-weight: 600;
     text-align: center;
-    font-size: 48px;
-    font-weight: 700;
-    margin-top: 10px;
-}
-
-.sucessContainer a{
-    width: 186.023px;
-    height: 40px;
-    border-radius: 7px;
-    background: #04B075;
-    color: #FFF;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 10px;
-    text-decoration: none;
-    margin-top: 50px;
+    padding: 20px;
+    font-size: 16px;
 }

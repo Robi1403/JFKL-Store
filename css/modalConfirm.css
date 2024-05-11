@@ -11,7 +11,7 @@ body{
     overflow: hidden;
 }
 
-#modalConfirmBackground{
+.modalConfirmBackground, #modalConfirmBackground {
     position: absolute;
     height: 100vh;
     top: 0px;

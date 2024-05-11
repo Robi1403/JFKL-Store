@@ -285,7 +285,8 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                             <tr>
                                 <th class="col1">Transaction No.</th>
                                 <th class="col2">No. of Items</th>
-                                <th class="col3">Total</th>
+                                <th class="col3">Gross Sales</th>
+                                <th class="col3">Profit</th>
                                 <th class="col4">Date</th>
                                 <th class="col5"></th>
 
@@ -311,6 +312,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                                             </td>
                                             <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
                                             <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
+                                            <td class="profit" id="profit"><?php echo $row["profit"] ?? '-'; ?></td>
                                             <td class="date" id="date"><?php echo $row["date"]; ?></td>
                                             <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
                                         </tr>
