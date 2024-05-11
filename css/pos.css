@@ -937,3 +937,55 @@ button:focus {
     transition: all .1s ease;
     border-radius: 7px;
 }
+
+.successPrompt{ 
+    position: absolute;
+    height: 100vh;
+    top: 0px;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+
+.sucessContainer{
+    width: 450px;
+    height: 450px;
+    border-radius: 13px;
+    background: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sucessContainer img{
+    width: 129px;
+    height: 129px;
+
+}
+
+.sucessContainer h1{
+    color: #008D5D;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.sucessContainer a{
+    width: 186.023px;
+    height: 40px;
+    border-radius: 7px;
+    background: #04B075;
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 50px;
+}

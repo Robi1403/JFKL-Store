@@ -76,31 +76,31 @@ include("PhpFunctions/SaveTransaction.php");
 
         <div class="productDisplay">
 
-            <div class="category" id="categoryContainer">
-                <button class="categoryBtn" onclick="filterInventory('All')">All</button>
-                <button class="categoryBtn" onclick="filterInventory('Canned Goods')">Canned Goods</button>
-                <button class="categoryBtn" onclick="filterInventory('Coffee')">Coffee</button>
-                <button class="categoryBtn" onclick="filterInventory('Biscuits')">Biscuits</button>
-                <button class="categoryBtn" onclick="filterInventory('Ice Cream')">Ice Cream</button>
-                <button class="categoryBtn" onclick="filterInventory('Bread')">Bread</button>
-                <button class="categoryBtn" onclick="filterInventory('Health & Beauty')">Health & Beauty</button>
-                <button class="categoryBtn" onclick="filterInventory('Household & Cleaning Supplies')">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" onclick="filterInventory('PC Products')">Personal Collection Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Cold Drinks')">Cold Drinks</button>
-                <button class="categoryBtn" onclick="filterInventory('Powdered Drinks')">Powdered Drinks</button>
-                <button class="categoryBtn" onclick="filterInventory('Junk Foods')">Junk Foods</button>
-                <button class="categoryBtn" onclick="filterInventory('Cigarettes')">Cigarettes</button>
-                <button class="categoryBtn" onclick="filterInventory('Frozen Foods')">Frozen Foods</button>
-                <button class="categoryBtn" onclick="filterInventory('Instant Noodles')">Instant Noodles</button>
-                <button class="categoryBtn" onclick="filterInventory('Alcoholic Beverages')">Alcoholic Beverages</button>
-                <button class="categoryBtn" onclick="filterInventory('Candies & Chocolates')">Candies & Chocolates</button>
-                <button class="categoryBtn" onclick="filterInventory('Dairy Products')">Dairy Products</button>
-                <button class="categoryBtn" onclick="filterInventory('Condiments & Sauces')">Condiments & Sauces</button>
-                <button class="categoryBtn" onclick="filterInventory('Cooking Ingredients & Seasonings')">Cooking Ingredients & Seasonings</button>
-                <button class="categoryBtn" onclick="filterInventory('Spreads & Fillings')">Spreads & Fillings</button>
-                <button class="categoryBtn" onclick="filterInventory('School Supplies')">School Supplies</button>
-            </div>
-          
+            
+        <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+                <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
+                <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
+                <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
+                <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
+                <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
+                <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+            </form>
             <div class="ItemView">
 
                 <div class="products">
@@ -156,10 +156,38 @@ include("PhpFunctions/SaveTransaction.php");
                 </div>
 
                 <?php
-                if (isset($_GET['action']) && $_GET['action'] == "clearAll") {
-                    unset($_SESSION['cart']);
-                }
+                if (isset($_GET['action'])){
+                    if ($_GET['action'] == "clearAll") {
+                        unset($_SESSION['cart']);
+                    }
 
+                    if ($_GET['action'] == "remove") {
+                        foreach($_SESSION['cart'] as $key => $value) {
+                            if($value['id'] == $_GET['id'] ){
+                                unset($_SESSION['cart'][$key]);
+                            }
+                        }
+                    }
+
+                    if ($_GET['action'] == "decreaseQty") {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['id'] == $_GET['id']) {
+                                $value['quantity'] -= 1;
+                            }
+                        }
+                        unset($value); 
+                    }
+
+                    if ($_GET['action'] == "increaseQty") {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['id'] == $_GET['id']) {
+                                $value['quantity'] += 1;
+                            }
+                        }
+                        unset($value); 
+                    }
+                    
+                } 
                 ?>
                 <div class="orderList">
                     
@@ -192,14 +220,14 @@ include("PhpFunctions/SaveTransaction.php");
                                 <div class="quantity">
                                     <h3>Quantity</h3>
                                     <div class="qty">
-                                        <button">
+                                        <a href="POS.php?action=decreaseQty&id=<?php echo $value['id'] ?>">
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
-                                        </button>
+                                        </a>
                                         
                                         <input type="number" value="<?php echo $value['quantity'] ?>">
-                                        <button>
+                                        <a href="POS.php?action=increaseQty&id=<?php echo $value['id'] ?>" >
                                             <img src="../assets/buttonAdd.svg " alt="">
-                                        </button>
+                                        </a>
                                         
                                     </div>
                                 </div>
@@ -215,11 +243,11 @@ include("PhpFunctions/SaveTransaction.php");
                                     <h1>₱<?php echo $total ?></h1>
                                 </div>
 
-                                <div class="delete">
+                                <a href="POS.php?action=remove&id=<?php echo $value['id'] ?>" class="delete">
                                     <button>
                                         <img src="../assets/delete.svg" alt="">
                                     </button>
-                                </div>
+                                </a>
                             </div>
                     <?php
 
@@ -303,7 +331,9 @@ include("PhpFunctions/SaveTransaction.php");
                                     </td>
                                 </tr>
                          <?php }
-                        }?>           
+                        }
+                        $cartArray = json_decode($cartJSON, true);
+                        ?>           
 
                     </table>
 
@@ -329,88 +359,111 @@ include("PhpFunctions/SaveTransaction.php");
                     </div>
                 </div>
 
+            
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
                     <button class="BackBtn" onclick="cancel()">Back</button>
-                    <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                    <a href="POS.php?action=clearAll">
+                        <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                    </a>
+                    
                 </form>
-            </form>
+            </div>
         </div>
-    </div>
-            <?php 
-           if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ConfirmOrder'])) { 
-            // Save data to the database
-            saveDataToDatabase($conn, $numberOfItems, $SubTotal, $realCostofGoods, $_SESSION['cart']);
-            
-            // Unset the session variable
-            unset($_SESSION['cart']);
-            
-            echo "<script>window.location.href = 'subdirectory/POS.php';</script>";
 
+        <div class="successPrompt">
+            <div class="sucessContainer">
+                <img src="../assets/check.png" alt="">
+                <h1>Success</h1>
+                <a href="POS.php?action=clearAll">New Transaction</a> 
+            </div>
+        </div>
 
-
-        }
         
-            
-            
-            ;?>
+
+    </div>
 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script src="../js/script.js"></script>
         <script>
-        $(document).ready(function() {
-            $(document).on('click', '.toCart', function(event) { 
+                $(document).ready(function() {
+                    $(document).on('click', '.toCart', function(event) { 
 
-                event.preventDefault(); 
-                var id = $(this).siblings(".ProductID").val();
-                $.ajax({
-                    method: 'POST',
-                    url: 'PhpFunctions/modal.php',
-                    data: {id: id},
-                    success: function(response) {
-                        $(".addItem").css("display", "flex");
-                        $('.addItem').html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred: " + error); 
-                    }
+                        event.preventDefault(); 
+                        var id = $(this).siblings(".ProductID").val();
+                        $.ajax({
+                            method: 'POST',
+                            url: 'PhpFunctions/modal.php',
+                            data: {id: id},
+                            success: function(response) {
+                                $(".addItem").css("display", "flex");
+                                $('.addItem').html(response);
+                            },
+                            error: function(xhr, status, error) {
+                                alert("An error occurred: " + error); 
+                            }
+                        });
+                    });
                 });
-            });
-        });
 
+                $(document).ready(function() {
+                    $(document).on('click', '.ConfirmBtn', function(event) { 
+                        event.preventDefault(); 
+                        $.ajax({
+                            method: 'POST',
+                            url: '', // The same PHP file
+                            data: { 
+                                action: 'saveData', 
+                                numberOfItems: '<?php echo $numberOfItems; ?>',
+                                SubTotal: '<?php echo $SubTotal; ?>',
+                                realCostofGoods: '<?php echo $realCostofGoods; ?>',
+                                cart: '<?php echo $cartArray ?>' // Convert PHP array to JSON
+                            
+                            },
+                            success: function(response) {
+                                $(".OrderSummary").css("display", "none");
+                                $(".successPrompt").css("display", "flex");
+                            },
+                            error: function(xhr, status, error) {
+                                alert("An error occurred: " + error); 
+                            }
+                        });
+                    });
+                });
 
         </script>
 
-<script>
-                function decreaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    if (currentValue > 1) {
-                        inputElement.value = currentValue - 1;
-                    }
-                }
+            <script>
+                            function decreaseQuantity() {
+                                var inputElement = document.querySelector('.quantityInput');
+                                var currentValue = parseInt(inputElement.value);
+                                if (currentValue > 1) {
+                                    inputElement.value = currentValue - 1;
+                                }
+                            }
 
-                function increaseQuantity() {
-                    var inputElement = document.querySelector('.quantityInput');
-                    var currentValue = parseInt(inputElement.value);
-                    inputElement.value = currentValue + 1;
-                }
+                            function increaseQuantity() {
+                                var inputElement = document.querySelector('.quantityInput');
+                                var currentValue = parseInt(inputElement.value);
+                                inputElement.value = currentValue + 1;
+                            }
 
-                function exitModal() {
-                    var cancel = document.querySelector('.addItem');
-                    cancel.style.display ='none';
-                }
+                            function exitModal() {
+                                var cancel = document.querySelector('.addItem');
+                                cancel.style.display ='none';
+                            }
 
-                function cancel() {
-                    var cancel = document.querySelector('.OrderSummary');
-                    cancel.style.display ='none';
-                }
+                            function cancel() {
+                                var cancel = document.querySelector('.OrderSummary');
+                                cancel.style.display ='none';
+                            }
 
-                function openSummaryModal() {
-                    var show = document.querySelector('.OrderSummary');
-                    show.style.display ='flex';
-                }
+                            function openSummaryModal() {
+                                var show = document.querySelector('.OrderSummary');
+                                show.style.display ='flex';
+                            }
+
             </script>
         
 

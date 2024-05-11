@@ -36,10 +36,17 @@ function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$c
 
 }
 
-function updateStockOnDatabaseFromSale(){
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
+        $numberOfItems = $_POST['numberOfItems'];
+        $SubTotal = $_POST['SubTotal'];
+        $realCostofGoods = $_POST['realCostofGoods'];
+        $cart = $_SESSION['cart'];
+
+
+    saveDataToDatabase($conn,$numberOfItems, $SubTotal, $realCostofGoods, $cart);
     
 }
-
 
 
 
