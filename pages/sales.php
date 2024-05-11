@@ -1,5 +1,5 @@
 <?php
-include ("PhpFunctions/current_sales.php");
+include ("PhpFunctions/current_sales_transacHistory.php");
 ?>
 
 <!DOCTYPE html>
