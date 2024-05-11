@@ -306,6 +306,8 @@ include("PhpFunctions/SaveTransaction.php");
                             <th>Total</th>
                         </tr>
                         <?php
+
+
                         if (!empty($_SESSION['cart'])) {
 
                                 foreach ($_SESSION['cart'] as $key => $value) { ?>
@@ -331,8 +333,9 @@ include("PhpFunctions/SaveTransaction.php");
                                     </td>
                                 </tr>
                          <?php }
+                        }else {
+                            echo "<tr><td>Cart is empty</td></tr>";
                         }
-                        $cartArray = json_decode($cartJSON, true);
                         ?>           
 
                     </table>
@@ -342,30 +345,28 @@ include("PhpFunctions/SaveTransaction.php");
                 <div class="AmountSummary">
                     <div class="TotalPayment">
                         <h2>Total</h2>
-                        <h1><?php echo $SubTotal ?></h1>
+                        <h1><?php echo "₱ ". $SubTotal ?></h1>
                     </div>
 
                     <div class="dividerDIV"></div>
 
                     <div class="AmountReceived">
                         <h2>Amount Receive</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1 class="showReceive">0</h1>
                     </div>
                     <div class="dividerDIV"></div>
 
                     <div class="change" >
                         <h2>Change</h2>
-                        <h1>P 1,024.00</h1>
+                        <h1 class="showChange">0</h1>
                     </div>
                 </div>
 
             
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
                     <button class="BackBtn" onclick="cancel()">Back</button>
-                    <a href="POS.php?action=clearAll">
-                        <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
-                    </a>
-                    
+                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                   
                 </form>
             </div>
         </div>

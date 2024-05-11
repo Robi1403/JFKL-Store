@@ -47,14 +47,26 @@ function Compute() {
     var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
     var ClientAmount = parseFloat(UserInput.value);
     var changeDiv = document.getElementById('change');
+    var showReceive = document.querySelector('.showReceive');
+    var showChange = document.querySelector('.showChange');
+
 
     var Change = ClientAmount - OverAllTotal;
 
     if (isNaN(Change)) {
         changeDiv.innerHTML = 0;
+        showChange.innerHTML = "₱ " +  0;
     } else {
         changeDiv.innerHTML = Change;
+        showChange.innerHTML = "₱ " +  Change;
     }
+    if (isNaN(ClientAmount)){
+        showReceive.innerHTML = "₱ " + 0;
+    }else{
+        showReceive.innerHTML = "₱ " + ClientAmount;
+    }
+    
+ 
 }
 
 
