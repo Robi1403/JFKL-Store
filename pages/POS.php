@@ -336,6 +336,7 @@ include("PhpFunctions/SaveTransaction.php");
                         }else {
                             echo "<tr><td>Cart is empty</td></tr>";
                         }
+
                         ?>           
 
                     </table>
@@ -413,13 +414,12 @@ include("PhpFunctions/SaveTransaction.php");
                         event.preventDefault(); 
                         $.ajax({
                             method: 'POST',
-                            url: '', // The same PHP file
+                            url: '', 
                             data: { 
                                 action: 'saveData', 
                                 numberOfItems: '<?php echo $numberOfItems; ?>',
                                 SubTotal: '<?php echo $SubTotal; ?>',
                                 realCostofGoods: '<?php echo $realCostofGoods; ?>',
-                                cart: '<?php echo $cartArray ?>' // Convert PHP array to JSON
                             
                             },
                             success: function(response) {
