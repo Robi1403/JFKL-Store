@@ -73,26 +73,53 @@ function updateDateTime() {
 updateDateTime();
 
 //
-document.addEventListener("DOMContentLoaded", function () {
-    var dropdownSelect = document.querySelector('.dropdown-select');
-    var dropdownList = document.querySelector('.dropdown-list');
-    var dropdownOptions = document.querySelectorAll('.dropdown-list li');
-    var selectSpan = document.querySelector('.select');
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdownSelect = document.querySelector('.dropdown-select');
+        var dropdownList = document.querySelector('.dropdown-list');
+        var dropdownOptions = document.querySelectorAll('.dropdown-list li');
+        var selectSpan = document.querySelector('.select');
 
-    dropdownSelect.addEventListener('click', function () {
-        dropdownList.style.display = (dropdownList.style.display === 'block') ? 'none' : 'block';
-    });
+        dropdownSelect.addEventListener('click', function () {
+            dropdownList.style.display = (dropdownList.style.display === 'block') ? 'none' : 'block';
+        });
 
-    dropdownOptions.forEach(function (option) {
-        option.addEventListener('click', function () {
-            selectSpan.textContent = option.textContent;
-            dropdownList.style.display = 'none';
+        dropdownOptions.forEach(function(option) {
+            option.addEventListener('click', function() {
+                selectSpan.textContent = option.textContent;
+                dropdownList.style.display = 'none';
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!dropdownSelect.contains(e.target)) {
+                dropdownList.style.display = 'none';
+            }
         });
     });
+    
+//
+$(function() {
 
-    document.addEventListener('click', function (e) {
-        if (!dropdownSelect.contains(e.target)) {
-            dropdownList.style.display = 'none';
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
-    });
+    }, cb);
+
+    cb(start, end);
+
 });
