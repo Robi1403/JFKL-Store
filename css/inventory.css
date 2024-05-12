@@ -384,10 +384,10 @@ select{
     color: #cccccc;
     opacity: 1;
 }
-input[type=text]:-ms-input-placeholder,{
+input[type=text]:-ms-input-placeholder{
     color: #cccccc;
 }
-input[type=text]:-ms-input-placeholder,{
+input[type=text]:-ms-input-placeholder{
     color: #cccccc;
 }
 
@@ -530,7 +530,6 @@ input[type=text]:-ms-input-placeholder,{
 }
 
 
-=======
 *{
     margin: 0;
     padding: 0;
@@ -1054,6 +1053,12 @@ input[type=text]:-ms-input-placeholder{
     background-color: #038f59; /* Darker shade on hover */
 }
 
+
+.updateProduct{
+    background:none;
+    border: none;
+    cursor: pointer;
+}
 /* NEW */
 #addProductModal, #updateProductModal{
     display: none;

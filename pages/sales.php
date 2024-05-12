@@ -1,5 +1,8 @@
 <?php
 include ("PhpFunctions/connection.php");
+include ("PhpFunctions/transactionDetails.php");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +11,7 @@ include ("PhpFunctions/connection.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/sales.css">
+    <link rel="stylesheet" href="../css/sales.css?v=<?php echo time(); ?>">
     <title>JFKL Store</title>
 </head>
 
@@ -193,13 +196,18 @@ include ("PhpFunctions/connection.php");
                             $result = mysqli_query($conn, $select_query);
 
                             if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) { ?>
+                                while ($row = $result->fetch_assoc()) { 
+                                    $transaction_number = $row["transaction_number"];?>
+                                    
                                         <tr>
                                             <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?></td>
                                             <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
                                             <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
                                             <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                            <td class="seeDetails" id="seeDetails">
+                                            <button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $transaction_number; ?>">See Details</button>
+                                        </td>
+
                                         </tr>
                                     <?php
                                 }
@@ -212,8 +220,38 @@ include ("PhpFunctions/connection.php");
                 </div>
             </div>
         </div>
+
+
+        <div class="TransactionDetails">
+    
+        </div>
+
+
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/sales.js"></script>
+    <script>
+
+            $(document).ready(function() {
+                $(document).on('click', '.ProductDetails', function(event) { 
+                    event.preventDefault(); 
+                    var id = $(this).data("transaction");
+                    $.ajax({
+                        method: 'POST',
+                        url: 'PhpFunctions/transactionDetails.php',
+                        data: {id: id},
+                        success: function(response) {
+                            $(".TransactionDetails").css("display", "flex");
+                            $('.TransactionDetails').html(response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert("An error occurred: " + error); 
+                        }
+                    });
+                });
+            });
+
+    </script>
 </body>
 
 </html>
