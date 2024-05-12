@@ -1,5 +1,8 @@
 <?php
-include ("PhpFunctions/current_sales_transacHistory.php");
+include ("PhpFunctions/connection.php");
+include ("PhpFunctions/transactionDetails.php");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -305,8 +308,10 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 
                                 $result = mysqli_query($conn, $select_query);
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) { ?>
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) { 
+                                    $transaction_number = $row["transaction_number"];?>
+                                    
                                         <tr>
                                             <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
                                             </td>
@@ -346,143 +351,29 @@ include ("PhpFunctions/current_sales_transacHistory.php");
             </div>
         </div>
     </div>
-
-    <form id="dateform" name="dateform" action="" method="POST">
-        <input type="hidden" id="startDate" name="startDate">
-        <input type="hidden" id="endDate" name="endDate">
-    </form>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/sales.js"></script>
     <script>
-        // Function to update date
-        function updateDate() {
-            let today = new Date();
 
-            // return number
-            let dayName = today.getDay(),
-                dayNum = today.getDate(),
-                month = today.getMonth(),
-                year = today.getFullYear();
-
-            const months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-            ];
-            const dayWeek = [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-            ];
-            // value -> ID of the html element
-            const IDCollection = ["day", "daynum", "month", "year"];
-            // return value array with number as a index
-            const val = [dayWeek[dayName], dayNum, months[month], year];
-            for (let i = 0; i < IDCollection.length; i++) {
-                document.getElementById(IDCollection[i]).textContent = val[i];
-            }
-        }
-
-        // Function to update time
-        function updateTime() {
-            const displayTime = document.querySelector(".display-time");
-            let time = new Date();
-            displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
-        }
-
-        // Function to update date and time periodically
-        function updateDateTime() {
-            updateDate(); // Update date
-            updateTime(); // Update time
-            setTimeout(updateDateTime, 1000); // Call this function again after 1 second
-        }
-
-        // Call updateDateTime initially to start the updating process
-        updateDateTime();
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var dropdownSelect = document.querySelector('.dropdown-select');
-            var dropdownList = document.querySelector('.dropdown-list');
-            var dropdownOptions = document.querySelectorAll('.dropdown-list li');
-            var selectSpan = document.querySelector('.select');
-
-            dropdownSelect.addEventListener('click', function () {
-                dropdownList.style.display = (dropdownList.style.display === 'block') ? 'none' : 'block';
-            });
-
-            dropdownOptions.forEach(function (option) {
-                option.addEventListener('click', function () {
-                    selectSpan.textContent = option.textContent;
-                    dropdownList.style.display = 'none';
+            $(document).ready(function() {
+                $(document).on('click', '.ProductDetails', function(event) { 
+                    event.preventDefault(); 
+                    var id = $(this).data("transaction");
+                    $.ajax({
+                        method: 'POST',
+                        url: 'PhpFunctions/transactionDetails.php',
+                        data: {id: id},
+                        success: function(response) {
+                            $(".TransactionDetails").css("display", "flex");
+                            $('.TransactionDetails').html(response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert("An error occurred: " + error); 
+                        }
+                    });
                 });
             });
 
-            document.addEventListener('click', function (e) {
-                if (!dropdownSelect.contains(e.target)) {
-                    dropdownList.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(function () {
-            // var start = moment().subtract(29, 'days');
-            var start = moment();
-            var end = moment();
-
-            function cb(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-
-                $('#startDate').val(start.format('YYYY-MM-DD'));
-                $('#endDate').val(end.format('YYYY-MM-DD'));
-            }
-
-            $('#reportrange').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                }
-            }, cb);
-
-            cb(start, end);
-
-            // Submit the form when a range is selected
-            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                $('#dateform').submit();
-            });
-        });
-    </script>
-
-    <script>
-        //redirect to inventory
-        document.getElementById("inventoryBtn").onclick = function () {
-            window.location.href = "inventory.php";
-        };
-
-        //redirect to POS
-        document.getElementById("POSBtn").onclick = function () {
-            window.location.href = "POS.php";
-        };
     </script>
 </body>
 

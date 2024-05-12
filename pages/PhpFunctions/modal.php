@@ -54,8 +54,6 @@ if (isset($_POST['id'])) {
 <?php
         }
     }
-}else{
-    echo "not found";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddToCart'])) {
