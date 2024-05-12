@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 08:46 PM
+-- Generation Time: May 12, 2024 at 03:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,8 +46,8 @@ CREATE TABLE `inventory` (
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
 (1, 'Argentina Meat Loaf', '150g', 'Piece', 'Canned Goods', 22.00, 27.00, 40, 'Argentina Meat Loaf 150g.png'),
 (2, 'Argentina Corn Beef', '150g', 'Piece', 'Canned Goods', 34.00, 39.00, 40, 'Argentina Corn Beef 150g.png'),
-(3, 'Argentina Giniling', '150g', 'Piece', 'Canned Goods', 28.00, 33.00, 12, 'Argentina Giniling 150g.png'),
-(4, 'Century Tuna Flakes in Oil', '155g', 'Piece', 'Canned Goods', 35.00, 39.00, 12, 'Century Tuna Flakes in Oil 155g.png'),
+(3, 'Argentina Giniling', '150g', 'Piece', 'Canned Goods', 28.00, 33.00, 9, 'Argentina Giniling 150g.png'),
+(4, 'Century Tuna Flakes in Oil', '155g', 'Piece', 'Canned Goods', 35.00, 39.00, 11, 'Century Tuna Flakes in Oil 155g.png'),
 (5, 'Fresca Tuna Adobo', '175g', 'Piece', 'Canned Goods', 27.00, 32.00, 6, 'Fresca Tuna Adobo 175g.png'),
 (6, 'Fresca Tuna Afritada', '175g', 'Piece', 'Canned Goods', 27.00, 32.00, 6, 'Fresca Tuna Afritada 175g.png'),
 (7, 'Fresca Tuna Caldereta', '175g', 'Piece', 'Canned Goods', 27.00, 32.00, 6, 'Fresca Tuna Caldereta 175g.png'),
@@ -130,11 +130,11 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (84, 'Clover Chips Cheese', '24g', 'Piece', 'Junk Foods', 6.95, 9.00, 25, 'Clover Chips Cheese 24g.png'),
 (85, 'Dragon Sid', '20g', 'Piece', 'Junk Foods', 7.50, 9.00, 25, 'Dragon Sid 20g.png'),
 (86, 'EC Crunchy Choco Flake', '60g', 'Piece', 'Junk Foods', 9.90, 12.00, 25, 'EC Crunchy Choco Flake 60g.png'),
-(87, 'Mang Juan Espesyal Sukat Sli', '26g', 'Piece', 'Junk Foods', 6.70, 9.00, 25, 'Mang Juan Espesyal Sukat Sli 26g.png'),
-(88, 'Mang Juan Espesyal Sukat Sli', '90g', 'Piece', 'Junk Foods', 20.00, 25.00, 12, 'Mang Juan Espesyal Sukat Sli 90g.png'),
+(87, 'Mang Juan Espesyal Sukat Sili', '26g', 'Piece', 'Junk Foods', 6.70, 9.00, 25, 'Mang Juan Espesyal Sukat Sili 26g.png'),
+(88, 'Mang Juan Espesyal Sukat Sili', '90g', 'Piece', 'Junk Foods', 20.00, 25.00, 12, 'Mang Juan Espesyal Sukat Sili 90g.png'),
 (89, 'Mang Juan Sukang Paombong', '26g', 'Piece', 'Junk Foods', 6.70, 9.00, 25, 'Mang Juan Sukang Paombong 26g.png'),
 (90, 'Mang Juan Sukang Paombong', '90g', 'Piece', 'Junk Foods', 20.00, 25.00, 12, 'Mang Juan Sukang Paombong 90g.png'),
-(91, 'Martys Craklin Spicy Vinegar Flavor', '26g', 'Piece', 'Junk Foods', 6.15, 8.00, 25, 'Martys Craklin Spicy Vinegar Flavor 26g.png'),
+(91, 'Martys Cracklin Spicy Vinegar Flavor', '26g', 'Piece', 'Junk Foods', 6.15, 8.00, 25, 'Martys Cracklin Spicy Vinegar Flavor 26g.png'),
 (92, 'Moby Caramel Puffs', '25g', 'Piece', 'Junk Foods', 6.50, 8.00, 25, 'Moby Caramel Puffs 25g.png'),
 (93, 'Moby Crunchy Chocolate', '25g', 'Piece', 'Junk Foods', 6.50, 8.00, 25, 'Moby Crunchy Chocolate 25g.png'),
 (94, 'Oishi Bread Pan Buttered Toast Flavor', '24g', 'Piece', 'Junk Foods', 6.30, 8.00, 25, 'Oishi Bread Pan Buttered Toast Flavor 24g.png'),
@@ -379,7 +379,7 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (333, 'Esperma Candle No.18', NULL, 'Piece', 'Household & Cleaning Supplies', 17.50, 20.00, 8, 'Esperma Candle No.18.png'),
 (334, 'Esperma Candle No.5', NULL, 'Piece', 'Household & Cleaning Supplies', 2.40, 4.00, 20, 'Esperma Candle No.5.png'),
 (335, 'LCC GreatBuys Dishwashing Paste Kalamansi', '200g', 'Piece', 'Household & Cleaning Supplies', 22.00, 28.00, 5, 'LCC GreatBuys Dishwashing Paste Kalamansi 200g.png'),
-(336, 'LCC Lighter w/ Flashlight', NULL, 'Piece', 'Household & Cleaning Supplies', 6.00, 10.00, 20, 'LCC Lighter w/ Flashlight.png'),
+(336, 'LCC Lighter with Flashlight', NULL, 'Piece', 'Household & Cleaning Supplies', 6.00, 10.00, 20, 'LCC Lighter with Flashlight.png'),
 (337, 'Lion-Tiger Mosquito Killer', NULL, 'Piece', 'Household & Cleaning Supplies', 1.80, 3.00, 50, 'Lion-Tiger Mosquito Killer.png'),
 (338, 'MMT Shoes Glue', '6g', 'Piece', 'Household & Cleaning Supplies', 6.67, 12.00, 24, 'MMT Shoes Glue 6g.png'),
 (339, 'Pinakamura Plastic Bag Medium', NULL, 'Piece', 'Household & Cleaning Supplies', 23.00, 28.00, 10, 'Pinakamura Plastic Bag Medium.png'),
@@ -391,16 +391,16 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (345, 'Star Wax Red Dye Floor Wax', '90g', 'Piece', 'Household & Cleaning Supplies', 17.00, 20.00, 10, 'Star Wax Red Dye Floor Wax 90g.png'),
 (346, 'Surf Fabric Conditioner', '25ml', 'Piece', 'Household & Cleaning Supplies', 6.60, 8.00, 12, 'Surf Fabric Conditioner 25ml.png'),
 (347, 'Surf Powder Cherry Blossom', '65g', 'Piece', 'Household & Cleaning Supplies', 6.60, 8.00, 12, 'Surf Powder Cherry Blossom 65g.png'),
-(348, 'Surf Powder Kalamansi', '65g', 'Piece', 'Household & Cleaning Supplies', 6.60, 8.00, 12, 'Surf Powder Kalamansi 65g.png'),
+(348, 'Surf Powder Kalamansi', '57g', 'Piece', 'Household & Cleaning Supplies', 6.60, 8.00, 12, 'Surf Powder Kalamansi 57g.png'),
 (349, 'Surf Powder Purple Blooms', '65g', 'Piece', 'Household & Cleaning Supplies', 6.60, 8.00, 12, 'Surf Powder Purple Blooms 65g.png'),
 (350, 'Thumb Tacks No.168', NULL, 'Piece', 'Household & Cleaning Supplies', 6.88, 10.00, 10, 'Thumb Tacks No.168.png'),
 (351, 'Tide Powder Garden Bloom Twin Jumbo', '67g', 'Piece', 'Household & Cleaning Supplies', 13.50, 15.00, 12, 'Tide Powder Garden Bloom Twin Jumbo 67g.png'),
 (352, 'Tops Bar Royal Blue', '400g', 'Piece', 'Household & Cleaning Supplies', 23.33, 28.00, 10, 'Tops Bar Royal Blue 400g.png'),
 (353, 'Triple Hat Ice Bag 4x12', NULL, 'Piece', 'Household & Cleaning Supplies', 21.00, 25.00, 10, 'Triple Hat Ice Bag 4x12.png'),
-(354, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh ', '95ml', 'Piece', 'Household & Cleaning Supplies', 13.00, 18.00, 10, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh  95ml.png'),
-(355, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh ', '225ml', 'Piece', 'Household & Cleaning Supplies', 25.00, 30.00, 10, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh  225ml.png'),
-(356, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh ', '450ml', 'Piece', 'Household & Cleaning Supplies', 38.00, 45.00, 10, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh  450ml.png'),
-(357, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh ', '900ml', 'Piece', 'Household & Cleaning Supplies', 68.00, 75.00, 5, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh  900ml.png'),
+(354, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh', '95ml', 'Piece', 'Household & Cleaning Supplies', 13.00, 18.00, 10, 'Zonrox Bleach Colorsafe Blossom Fresh 95ml.png'),
+(355, 'Zonrox Bleach Colorsafe Bleach Blossom Fresh', '225ml', 'Piece', 'Household & Cleaning Supplies', 25.00, 30.00, 10, 'Zonrox Bleach Colorsafe Blossom Fresh 225ml.png'),
+(356, 'Zonrox Bleach Colorsafe Blossom Fresh', '450ml', 'Piece', 'Household & Cleaning Supplies', 38.00, 45.00, 10, 'Zonrox Bleach Colorsafe Blossom Fresh 450ml.png'),
+(357, 'Zonrox Bleach Colorsafe Blossom Fresh', '900ml', 'Piece', 'Household & Cleaning Supplies', 68.00, 75.00, 5, 'Zonrox Bleach Colorsafe Blossom Fresh 900ml.png'),
 (358, 'Zonrox Bleach Original', '100ml', 'Piece', 'Household & Cleaning Supplies', 9.00, 12.00, 10, 'Zonrox Bleach Original 100ml.png'),
 (359, 'Zonrox Bleach Original', '250ml', 'Piece', 'Household & Cleaning Supplies', 14.50, 19.00, 10, 'Zonrox Bleach Original 250ml.png'),
 (360, 'Zonrox Bleach Original', '1L', 'Piece', 'Household & Cleaning Supplies', 42.00, 45.00, 5, 'Zonrox Bleach Original 1L.png'),
@@ -452,9 +452,9 @@ INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `ca
 (406, 'Halls Honey-Lemon', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Honey-Lemon 2.8g.png'),
 (407, 'Halls Raspberry', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Raspberry 2.8g.png'),
 (408, 'Halls Fresh Lime', '2.8g', 'Piece', 'Candies & Chocolates', 0.86, 1.00, 50, 'Halls Fresh Lime 2.8g.png'),
-(409, 'Alaska Condensada', '206g', 'Piece', 'Dairy Products', 36.25, 40.00, 12, 'Alaska Condensada 206g.png');
+(409, 'Alaska Condensada', '206g', 'Piece', 'Dairy Products', 36.25, 40.00, 12, 'Alaska Condensada 206g.png'),
+(410, 'Alaska Condensada', '370g', 'Piece', 'Dairy Products', 56.50, 60.00, 6, 'Alaska Condensada 370g.png');
 INSERT INTO `inventory` (`product_id`, `product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES
-(410, 'Alaska Condensada', '370g', 'Piece', 'Dairy Products', 56.50, 60.00, 6, 'Alaska Condensada 370g.png'),
 (411, 'Alaska Evaporada', '140ml', 'Piece', 'Dairy Products', 19.75, 23.00, 12, 'Alaska Evaporada 140ml.png'),
 (412, 'Alaska Evaporada', '360ml', 'Piece', 'Dairy Products', 35.00, 39.00, 6, 'Alaska Evaporada 360ml.png'),
 (413, 'Eden Cheese', '45g', 'Piece', 'Dairy Products', 17.50, 20.00, 6, 'Eden Cheese 45g.png'),
