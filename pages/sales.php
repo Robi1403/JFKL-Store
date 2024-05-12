@@ -1,8 +1,5 @@
 <?php
 include ("PhpFunctions/connection.php");
-include ("PhpFunctions/transactionDetails.php");
-
-
 ?>
 
 <!DOCTYPE html>
@@ -309,9 +306,7 @@ include ("PhpFunctions/transactionDetails.php");
                                 $result = mysqli_query($conn, $select_query);
 
                             if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) { 
-                                    $transaction_number = $row["transaction_number"];?>
-                                    
+                                while ($row = $result->fetch_assoc()) { ?>
                                         <tr>
                                             <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
                                             </td>
@@ -351,30 +346,7 @@ include ("PhpFunctions/transactionDetails.php");
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/sales.js"></script>
-    <script>
-
-            $(document).ready(function() {
-                $(document).on('click', '.ProductDetails', function(event) { 
-                    event.preventDefault(); 
-                    var id = $(this).data("transaction");
-                    $.ajax({
-                        method: 'POST',
-                        url: 'PhpFunctions/transactionDetails.php',
-                        data: {id: id},
-                        success: function(response) {
-                            $(".TransactionDetails").css("display", "flex");
-                            $('.TransactionDetails').html(response);
-                        },
-                        error: function(xhr, status, error) {
-                            alert("An error occurred: " + error); 
-                        }
-                    });
-                });
-            });
-
-    </script>
 </body>
 
 </html>
