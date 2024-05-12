@@ -61,6 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])) {
             if ($conn->query($delete_query) !== TRUE) {
                 echo '<script>alert("Error deleting product with ID: ' .$product_id .'" . $conn->error")</script>';
             }
+
+            echo '<script>alert("Product with ID ' .$product_id .' deleted successfully.")</script>';
         }
 
         echo '<script>

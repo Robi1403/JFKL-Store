@@ -8,9 +8,20 @@ document.getElementById("POSBtn").onclick = function () {
     window.location.href = "POS.php";
 };
 
+//redirect to Sales
+document.getElementById("salesBtn").onclick = function () {
+    window.location.href = "sales.php";
+};
+
+
+//redirect to Inventory Log
+document.getElementById("inventory_LogBtn").onclick = function () {
+    window.location.href = "inventory_log.php";
+};
+
 //---SEARCH PRODUCT---//
 document.getElementById("search").addEventListener("input", function () {
-    var searchText = this.value.toLowerCase(); 
+    var searchText = this.value.toLowerCase();
 
     //selects all rows in the table body
     var rows = document.querySelectorAll('.inventoryTable tbody tr');
@@ -18,13 +29,13 @@ document.getElementById("search").addEventListener("input", function () {
     //loops through each row and check if it contains the search text
     rows.forEach(function (row) {
         //gets the product name 
-        var productName = row.cells[2].textContent.toLowerCase(); 
+        var productName = row.cells[2].textContent.toLowerCase();
         if (productName.includes(searchText)) {
             //shows the row if it contains the search text
-            row.style.display = ''; 
+            row.style.display = '';
         } else {
             //hides the row if it doesn't 
-            row.style.display = 'none'; 
+            row.style.display = 'none';
         }
     });
 });
@@ -46,6 +57,22 @@ addProductBtn.addEventListener("click", function () {
     var addProductModal = document.getElementById("addProductModal");
 
     addProductModal.style.display = "block";
+
+    //new ok na but automatically closes
+        var addNewProductBtn = document.getElementById("addNewProductBtn");
+
+        addNewProductBtn.addEventListener("click", function (event) {
+            addProductModal.style.display = "none";
+            
+            var add_successPrompt = document.getElementById("add_successPrompt");
+            add_successPrompt.style.display = "flex";
+
+            var add_okBtn = document.getElementById("add_okBtn");
+
+            add_okBtn.addEventListener("click", function () {
+                add_successPrompt.style.display = "none";
+            });
+        });
 });
 
 var cancelBtn = document.getElementById("cancelBtn");
@@ -82,6 +109,10 @@ updateProductBtns.forEach(function (btn) {
         var url = this.parentNode.querySelector('[name="url_info"]').value;
 
         //sets the product info in the input fields inside the UpdateProductModal
+
+        var productURLInput = document.getElementById('productURLInput');
+        productURLInput.value = url;
+
         var productIdInput = document.getElementById('productIdInput');
         productIdInput.value = productId;
 
@@ -127,6 +158,22 @@ updateProductBtns.forEach(function (btn) {
 
         var updateProductModal = document.getElementById("updateProductModal");
         updateProductModal.style.display = "block";
+
+        //new ok na but automatically closes
+        var updateProductInfoBtn = document.getElementById("updateProductInfoBtn");
+
+        updateProductInfoBtn.addEventListener("click", function (event) {
+            updateProductModal.style.display = "none";
+
+            var update_successPrompt = document.getElementById("update_successPrompt");
+            update_successPrompt.style.display = "flex";
+
+            var update_okBtn = document.getElementById("update_okBtn");
+
+            update_okBtn.addEventListener("click", function () {
+                update_successPrompt.style.display = "none";
+            });
+        });
     });
 });
 
@@ -158,14 +205,39 @@ function getSelectedCheckboxes() {
 function removeSelectedProducts() {
     var selectedProducts = getSelectedCheckboxes();
 
-    //confirms deletion
-    var confirmation = confirm("Are you sure you want to delete the selected products?");
-    if (confirmation) {
+    var modalConfirm = document.getElementById("modalConfirmBackground");
+    modalConfirm.style.display = "flex";
+
+
+    var confirmCancelBtn = document.getElementById("confirmCancelBtn");
+
+    confirmCancelBtn.addEventListener("click", function () {
+        var modalConfirm = document.getElementById("modalConfirmBackground");
+
+        modalConfirm.style.display = "none";
+    });
+
+
+    var confirmation = document.getElementById("confirmBtn");
+
+    confirmation.addEventListener("click", function () {
         //update the hidden input field with selected products 
         document.getElementById("selectedProducts").value = selectedProducts.join(',');
 
         document.getElementById("removeProductForm").submit();
-    }
+
+        var remove_successPrompt = document.getElementById("remove_successPrompt");
+
+        remove_successPrompt.style.display = "flex";
+
+        var remove_okBtn = document.getElementById("remove_okBtn");
+
+        remove_okBtn.addEventListener("click", function () {
+            remove_successPrompt.style.display = "none";
+        });
+    });
+
+
 }
 
 document.getElementById("removeProductBtn").onclick = function () {
@@ -173,3 +245,8 @@ document.getElementById("removeProductBtn").onclick = function () {
 };
 
 //---END---//
+
+//redirect Inventory Log back to inventory
+document.getElementById("backBtn").onclick = function () {
+    window.location.href = "inventory.php";
+};
