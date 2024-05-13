@@ -91,6 +91,7 @@ include ("PhpFunctions/update_product.php");
         </div>
     </div>
 
+    <!-- halion nalang style, nilaag ko lang para kung sain siya pwede ilaag HAHAHH -->
     <select id="actionTypeFilter" style="width: 20%; margin-left: 11%;" onchange="filterTable()">
         <option value="all">All</option>
         <option value="add">Add</option>
@@ -98,7 +99,10 @@ include ("PhpFunctions/update_product.php");
         <option value="remove">Remove</option>
     </select>
 
-    <input type="text" id="datepicker" style="width: 20%; margin-left: 11%;" placeholder="Select Date">
+    <!-- halion nalang style, nilaag ko lang para kung sain siya pwede ilaag HAHAHH -->
+    <input type="text" id="datepicker" name="selectedDate" style="width: 20%; margin-left: 11%;"
+        value="<?php echo empty($_POST['selectedDate']) ? '' : $_POST['selectedDate']; ?>">
+    <button id="clearDateBtn">x</button>
 
     <div class="mainContainer">
 
@@ -116,71 +120,56 @@ include ("PhpFunctions/update_product.php");
                 </thead>
                 <tbody>
                     <?php
-                    date_default_timezone_set('Asia/Manila');
-                    $currentDate = date("Y-m-d");
+                    if (isset($_POST['selectedDate'])) {
+                        $selectedDate = date('Y-m-d', strtotime($_POST['selectedDate']));
 
-                    $select_query = "SELECT * FROM `inventory_log`";
+                        $select_query = "SELECT * FROM `inventory_log` WHERE DATE(date) = '$selectedDate'";
 
-                    $result = mysqli_query($conn, $select_query);
+                        $result = mysqli_query($conn, $select_query);
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) { ?>
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?php echo $row["log_id"]; ?></td>
+                                    <td><?php echo $row["product_id"]; ?></td>
+                                    <td><?php echo $row["action_type"]; ?></td>
+                                    <td><?php echo $row["date"] ?? '-'; ?></td>
+                                    <td style="text-align:left" ;><?php echo $row["previous_state"]; ?></td>
+                                    <td style="text-align:left" ;><?php echo $row["new_state"]; ?></td>
+                                </tr>
+                                <?php
+                            }
+                        } else { ?>
                             <tr>
-                                <td><?php echo $row["log_id"]; ?></td>
-                                <td><?php echo $row["product_id"]; ?></td>
-                                <td><?php echo $row["action_type"]; ?></td>
-                                <td><?php echo $row["date"] ?? '-'; ?></td>
-                                <td style="text-align:left" ;><?php echo $row["previous_state"]; ?></td>
-                                <td style="text-align:left" ;><?php echo $row["new_state"]; ?></td>
+                                <td colspan="6"><?php echo 'No logs recorded for the selected date.'; ?></td>
                             </tr>
                             <?php
                         }
-                    } else { ?>
-                        <tr>
-                            <td colspan="6"><?php echo 'No logs recorded today.'; ?></td>
-                        </tr>
-                        <?php
+                    } else {
+                        $select_query = "SELECT * FROM `inventory_log`";
+
+                        $result = mysqli_query($conn, $select_query);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?php echo $row["log_id"]; ?></td>
+                                    <td><?php echo $row["product_id"]; ?></td>
+                                    <td><?php echo $row["action_type"]; ?></td>
+                                    <td><?php echo $row["date"] ?? '-'; ?></td>
+                                    <td style="text-align:left" ;><?php echo $row["previous_state"]; ?></td>
+                                    <td style="text-align:left" ;><?php echo $row["new_state"]; ?></td>
+                                </tr>
+                                <?php
+                            }
+                        } else { ?>
+                            <tr>
+                                <td colspan="6"><?php echo 'No logs recorded.'; ?></td>
+                            </tr>
+                            <?php
+                        }
                     }
                     ?>
-
-                    <!-- FOR THE DATE PICKER
-                        <php
-
-
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        if (isset($_POST['selectedDate'])) {
-                            $selectedDate = $_POST['selectedDate'];
-                            // Do something with the selected date
-                            echo "<script>alert('Selected date: " . $selectedDate ."');</script>";
-                            $select_query = "SELECT * FROM `inventory_log` WHERE DATE(date) = '$selectedDate'";
-
-                            $result = mysqli_query($conn, $select_query);
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) { ?>
-                            <tr>
-                                <td><php echo $row["log_id"]; ?></td>
-                                <td><php echo $row["product_id"]; ?></td>
-                                <td><php echo $row["action_type"]; ?></td>
-                                <td><php echo $row["date"] ?? '-'; ?></td>
-                                <td style="text-align:left" ;><php echo $row["previous_state"]; ?></td>
-                                <td style="text-align:left" ;><php echo $row["new_state"]; ?></td>
-                            </tr>
-                            <php
-                        }
-                    } else { ?>
-                        <tr>
-                            <td colspan="6"><php echo 'No logs recorded today.'; ?></td>
-                        </tr>
-                        <php
-                    }
-
-                        } else {
-                            echo "No date selected.";
-                        }
-                    }
-
-                    ?> -->
                 </tbody>
             </table>
         </div>
@@ -227,6 +216,15 @@ include ("PhpFunctions/update_product.php");
         });
     </script>
 
+    <script>
+        document.getElementById('clearDateBtn').addEventListener('click', function () {
+            // Clear the value of the input field
+            document.getElementById('datepicker').value = '';
+            document.getElementById('datepicker').placeholder = 'Select Date';
+
+            window.location.href = window.location.href;
+        });
+    </script>
 </body>
 
 </html>
