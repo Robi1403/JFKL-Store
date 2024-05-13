@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])) {
                 $stock = $row['stock'];
                 $url = $row['picture_url'];
 
-                $new_state = "Removed from the inventory.";
+                $new_state = "Removed from inventory";
 
                 $previous_state = "Product ID: " . $productId . "\n";
                 $previous_state .= "Product Name: " . $productName . "\n";
