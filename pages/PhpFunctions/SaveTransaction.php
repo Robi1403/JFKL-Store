@@ -3,8 +3,13 @@ include('connection.php');
 
 
 function createTransactionNumber(){
-    $current_date = date('mdY');
-    $current_time = 60000+ date('His');
+    $datetime = new DateTime('now', new DateTimeZone('Asia/Manila'));
+    $current_date = $datetime->format('mdY');
+    $current_time = 60000 + intval($datetime->format('His'));
+
+    // $current_date = date('mdY');
+    // $current_time = 60000+ date('His');
+
     $random_number = mt_rand(1000, 9999); 
     
     $transaction_number = $current_date . $current_time . $random_number;
@@ -13,10 +18,15 @@ function createTransactionNumber(){
 }
 
 function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$cart){
-
+    $datetime = new DateTime('now', new DateTimeZone('Asia/Manila'));
+    
     $transaction_number = createTransactionNumber();
-    $current_date = date('Y-m-d');
+    $current_date = $datetime->format('Y-m-d');
     $profit = $SubTotal -$realCostofGoods;
+    
+    // $transaction_number = createTransactionNumber();
+    // $current_date = date('Y-m-d');
+    // $profit = $SubTotal -$realCostofGoods;
 
     $InsertData = "INSERT INTO transaction_history VALUES('$transaction_number','$current_date','$numberOfItems ','$SubTotal',' $profit')";
 
