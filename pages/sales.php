@@ -108,7 +108,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                         $totalItems = 0;
                         $totalSales = 0;
                         $totalProfit = 0;
-                    
+
                         if ($startDate == $endDate) {
                             $search_query = "SELECT COUNT(*) AS total_transactions, SUM(number_of_items) AS total_items, SUM(gross_sales) AS total_sales, SUM(profit) AS total_profit FROM `transaction_history` WHERE `date` = '$startDate'";
                         } else {
@@ -128,7 +128,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                                 $totalItems = $totalItems ?? 0;
                                 $totalSales = $totalSales ?? 0;
                                 $totalProfit = $totalProfit ?? 0;
-                    
+
                             }
                         } else {
                             echo "<script>alert('Error searching sales data: " . mysqli_error($conn) . "');</script>";
@@ -294,25 +294,26 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                                 } else {
                                     echo "<tr><td>No record of transaction</td></tr>";
                                 }
-                            } else { 
+                            } else {
                                 $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$currentDate'";
                                 $result = mysqli_query($conn, $select_query);
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                ?>
-                                <tr>
-                                    <td class="transactionNum" id="currentTransactionNum"><?php echo $currentTransactionNum; ?>
-                                    </td>
-                                    <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
-                                    <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
-                                    <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
-                                    <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                                </tr>
-                                <?php
+                                        ?>
+                                        <tr>
+                                            <td class="transactionNum" id="currentTransactionNum">
+                                                <?php echo $currentTransactionNum; ?>
+                                            </td>
+                                            <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
+                                            <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
+                                            <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
+                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                        </tr>
+                                        <?php
                                     }
-                            } 
-                        }?>
+                                }
+                            } ?>
                         </tbody>
                     </table>
                 </div>
@@ -371,9 +372,9 @@ include ("PhpFunctions/current_sales_transacHistory.php");
         }
 
         function updateDateTime() {
-            updateDate(); 
-            updateTime(); 
-            setTimeout(updateDateTime, 1000); 
+            updateDate();
+            updateTime();
+            setTimeout(updateDateTime, 1000);
         }
 
         updateDateTime();
@@ -409,11 +410,25 @@ include ("PhpFunctions/current_sales_transacHistory.php");
             var start = moment();
             var end = moment();
 
+            var savedStartDate = localStorage.getItem('startDate');
+            var savedEndDate = localStorage.getItem('endDate');
+
+            if (savedStartDate && savedEndDate) {
+                start = moment(savedStartDate);
+                end = moment(savedEndDate);
+            } else {
+                start = moment();
+                end = moment();
+            }
+
             function cb(start, end) {
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
                 $('#startDate').val(start.format('YYYY-MM-DD'));
                 $('#endDate').val(end.format('YYYY-MM-DD'));
+
+                localStorage.setItem('startDate', start.format('YYYY-MM-DD'));
+                localStorage.setItem('endDate', end.format('YYYY-MM-DD'));
             }
 
             $('#reportrange').daterangepicker({
@@ -432,17 +447,44 @@ include ("PhpFunctions/current_sales_transacHistory.php");
             cb(start, end);
 
             $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                $('#dateform').submit();
-            });
+
+            localStorage.setItem('startDate', picker.startDate.format('YYYY-MM-DD'));
+            localStorage.setItem('endDate', picker.endDate.format('YYYY-MM-DD'));
+            $('#dateform').submit();
+        });
         });
     </script>
 
     <script>
+        function resetDateRangePicker() {
+    var start = moment();
+    var end = moment();
+
+    // Reset date range picker to default dates
+    $('#reportrange').data('daterangepicker').setStartDate(start);
+    $('#reportrange').data('daterangepicker').setEndDate(end);
+
+    // Update date display
+    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+    // Update hidden input fields
+    $('#startDate').val(start.format('YYYY-MM-DD'));
+    $('#endDate').val(end.format('YYYY-MM-DD'));
+
+    // Store default dates in local storage
+    localStorage.setItem('startDate', start.format('YYYY-MM-DD'));
+    localStorage.setItem('endDate', end.format('YYYY-MM-DD'));
+}
+        </script>
+
+    <script>
         document.getElementById("inventoryBtn").onclick = function () {
+            resetDateRangePicker();
             window.location.href = "inventory.php";
         };
 
         document.getElementById("POSBtn").onclick = function () {
+            resetDateRangePicker();
             window.location.href = "POS.php";
         };
     </script>
