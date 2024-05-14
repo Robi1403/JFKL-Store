@@ -104,7 +104,6 @@ updateProductBtns.forEach(function (btn) {
     btn.addEventListener("click", function (event) {
         //prevents from soubmitting the form and redirecting to update_product.php
         event.preventDefault();
-        
 
         //gets the product information associated with these (from the hidden inputs)
         var productId = this.parentNode.querySelector('[name="productId_info"]').value;
