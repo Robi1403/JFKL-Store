@@ -20,7 +20,7 @@ include("PhpFunctions/SaveTransaction.php");
         <div class="left">
             <div class="shape"></div>
             <div class="logo">
-                <img src="../assets/storeLogo.svg" alt="" class="storeImage">
+                <img src="../assets/storeLogo.svg" alt="">
                 <p>JFKL Store</p>
             </div>
         </div>
@@ -320,8 +320,8 @@ include("PhpFunctions/SaveTransaction.php");
         <div class="addItem"></div>
 
         <div class="OrderSummary">
-            <div class="OrderSummaryConatiner">
-                <h1>Order Summary</h1>
+            <div class="OrderSummaryContainer">
+                <p>Order Summary</p>
                 <div class="SummaryContainer">
                     <table>
                         <tr>
@@ -384,15 +384,14 @@ include("PhpFunctions/SaveTransaction.php");
                         <h1 class="showChange">0</h1>
                     </div>
                 </div>
-
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
-                    <button class="BackBtn" onclick="cancel()">Back</button>
-                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
-                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                <div class="buttons">
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
+                        <button class="BackBtn" onclick="cancel()">Back</button>
                    
-                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>  
-                   
+                        <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>  
                 </form>
+                </div>
+
 
             </div>
         </div>
@@ -419,7 +418,6 @@ include("PhpFunctions/SaveTransaction.php");
 
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script src="../js/script.js"></script>
     <script>
     $(document).ready(function() {
