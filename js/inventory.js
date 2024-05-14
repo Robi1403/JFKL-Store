@@ -46,10 +46,18 @@ document.getElementById("search").addEventListener("input", function () {
 //To get uploaded img
 let productImage = document.getElementById("productImage");
 let inputFile = document.getElementById("input-file");
+let productURL = document.getElementById("productURL");
 
 inputFile.onchange = function () {
-    productImage.src = URL.createObjectURL(inputFile.files[0]);
-}
+    let file = inputFile.files[0];
+    if (file) {
+        productImage.src = URL.createObjectURL(file);
+        
+        productURL.value = file.name;
+    }
+};
+
+
 
 var addProductBtn = document.getElementById("addProductBtn");
 
@@ -96,6 +104,7 @@ updateProductBtns.forEach(function (btn) {
     btn.addEventListener("click", function (event) {
         //prevents from soubmitting the form and redirecting to update_product.php
         event.preventDefault();
+        
 
         //gets the product information associated with these (from the hidden inputs)
         var productId = this.parentNode.querySelector('[name="productId_info"]').value;

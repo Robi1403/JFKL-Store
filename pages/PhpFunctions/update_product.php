@@ -95,7 +95,6 @@ if (isset($_POST['updateProductInfoBtn'])) {
     }
 
     if ($netWeight == NULL) {
-        $url = $productName . ".png";
 
         $update_query = "UPDATE `inventory` SET
         `product_name` = '$productName',
@@ -116,7 +115,6 @@ if (isset($_POST['updateProductInfoBtn'])) {
             echo '<script>alert("Error updating data: ' . mysqli_error($conn) . '");</script>';
         }
     } else {
-        $url = $productName . " " . $netWeight . ".png";
 
         $update_query = "UPDATE `inventory` SET 
         `product_name` = '$productName',

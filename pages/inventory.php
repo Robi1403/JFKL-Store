@@ -205,7 +205,7 @@ include ("PhpFunctions/update_product.php");
                                 <div class="addImage">
                                     <div class="imageContainer">
                                         <img src="../assets/addImage.svg" id="productImage">
-                                        <input type="hidden" name="productURL" required><br><br>
+                                        <input type="hidden" name="productURL" id="productURL" required><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
@@ -301,14 +301,13 @@ include ("PhpFunctions/update_product.php");
                                 <label>Product Image</label>
                                 <div class="addImage">
                                     <div class="imageContainer">
-                                        <img src="../assets/addImage.svg" id="editProductImage">
-                                        <input type="hidden" id="productURLInput" name="productURLInput"
-                                            readonly><br><br>
+                                        <img src="../assets/addImage.svg" id="updateProductImage">
+                                        <input type="hidden" id="updateproductURLInput" name="updateproductURLInput"><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
                                         <label for="input-file" class="addProduct">Upload Image</label>
-                                        <input type="file" accept="image/jpeg, image/png, image/jpg," id="input-file">
+                                        <input type="file" accept="image/jpeg, image/png, image/jpg," id="updateInput-file">
                                     </div>
                                 </div>
                             </div>

@@ -9,10 +9,10 @@ if (isset($_POST['addNewProductBtn'])) {
     $unitPrice = $_POST['unitPrice'];
     $retailPrice = $_POST['retailPrice'];
     $stock = $_POST['stock'];
+    $url =  $_POST['productURL'];
 
     if ($netWeight == NULL) {
-        $url = $productName . ".png";
-
+         
         $insert_query = "INSERT INTO `inventory`(`product_name`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES ('$productName', '$unit', '$category', '$unitPrice', '$retailPrice', '$stock', '$url')";
         if (mysqli_query($conn, $insert_query)) {
             $productId = mysqli_insert_id($conn); 
@@ -20,7 +20,6 @@ if (isset($_POST['addNewProductBtn'])) {
             echo '<script>alert("Error inserting data: ' . mysqli_error($conn) . '");</script>';
         }
     } else {
-        $url = $productName . " " . $netWeight . ".png";
 
         $insert_query = "INSERT INTO `inventory`(`product_name`, `net_weight`, `unit`, `category`, `unit_price`, `retail_price`, `stock`, `picture_url`) VALUES ('$productName', '$netWeight', '$unit', '$category', '$unitPrice', '$retailPrice', '$stock', '$url')";
         if (mysqli_query($conn, $insert_query)) {
