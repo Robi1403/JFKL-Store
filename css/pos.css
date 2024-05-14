@@ -212,16 +212,18 @@ body{
     border-radius: 7px;
     outline: 1.5px solid #04B075;
     cursor: pointer;
-    transition: all .2s ease-in-out;
+    transition: all .1s ease-in-out;
 }
 
 .categoryBtn:hover{
     background-color: #008D5D;
     color: #ffffff;
+    outline: none;
 }
 .categoryBtn:active{
     background-color: #008D5D;
     color: #ffffff;
+    outline: none;
 }
 
 .productDisplay {
@@ -255,7 +257,7 @@ body{
     width: 175px;
     border-radius: 7px;
     padding: 10px;
-    display: inline-block;
+    display: flex;
     margin: 13.9px;
     flex-direction: column; /* Ensure the content inside the card is in column layout */
     justify-content: flex-end;
@@ -695,6 +697,7 @@ input::-webkit-inner-spin-button {
     margin-bottom: 10px;
 }
 img{
+    height: 20px;
     margin: 0px;
 }
 .addQuantity input{
