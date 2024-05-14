@@ -8,6 +8,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/storeLogo.svg">
     <link rel="stylesheet" href="../css/sales.css">
     <title>JFKL Store</title>
 
@@ -27,15 +28,6 @@ include ("PhpFunctions/current_sales_transacHistory.php");
             </div>
         </div>
         <div class="right">
-            <div class="displayDateTime">
-                <div class="display-date">
-                    <span id="day">day</span>,
-                    <span id="daynum">00</span>
-                    <span id="month">month</span>
-                    <span id="year">0000</span>
-                </div>
-                <div class="display-time"></div>
-            </div>
             <div class="todayGrossSale">
                 <p>Today's Gross Sale: </p>
                 <p><span><?php if (isset($totalSales)) {
@@ -47,7 +39,15 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                 }
                 ?>
             </div>
-
+            <div class="displayDateTime">
+                <div class="display-date">
+                    <span id="day">day</span>,
+                    <span id="daynum">00</span>
+                    <span id="month">month</span>
+                    <span id="year">0000</span>
+                </div>
+                <div class="display-time"></div>
+            </div>
         </div>
     </div>
 
@@ -78,7 +78,6 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                     <img src="../assets/logout.svg" alt=""><br>
                 </button>
             </div>
-
         </div>
     </div>
 
