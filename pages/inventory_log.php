@@ -18,6 +18,7 @@ include ("PhpFunctions/update_product.php");
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 </head>
 
 <body>
@@ -79,7 +80,7 @@ include ("PhpFunctions/update_product.php");
         </div>
         <div class="sbInventory">
             <button id="inventoryBtn">
-                <img src="../assets/inventory_g.svg" alt=""><br>
+                <img src="../assets/inventorygreen.svg" alt=""><br>
                 <strong>Inventory</strong>
             </button>
         </div>
@@ -91,18 +92,22 @@ include ("PhpFunctions/update_product.php");
         </div>
     </div>
 
-    <select id="actionTypeFilter" style="width: 20%; margin-left: 11%;" onchange="filterTable()">
-        <option value="all">All</option>
-        <option value="add">Add</option>
-        <option value="update">Update</option>
-        <option value="remove">Remove</option>
-    </select>
 
-    <input type="text" id="datepicker" style="width: 20%; margin-left: 11%;" placeholder="Select Date">
 
-    <div class="mainContainer">
+    <div class="mainContainerLog">
+        <div class="group">
+            <select id="actionTypeFilter" " onchange="filterTable()">
+                <option value="all">All</option>
+                <option value="add">Add</option>
+                <option value="update">Update</option>
+                <option value="remove">Remove</option>
+            </select>
+            
+            <input type="text" id="datepicker" placeholder="Select Date">         
+        </div>
+    
 
-        <div class="inventoryLog" style="max-height: 450px; overflow-y: auto;">
+        <div class="inventoryLog">
             <table class="inventoryTable" id="inventoryTable">
                 <thead>
                     <tr>
