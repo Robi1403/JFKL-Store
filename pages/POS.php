@@ -7,7 +7,6 @@ include("PhpFunctions/SaveTransaction.php");
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,11 +18,9 @@ include("PhpFunctions/SaveTransaction.php");
 <body>
     <div class="navbar">
         <div class="left">
-            <div class="shape">
-
-            </div>
+            <div class="shape"></div>
             <div class="logo">
-                <img src="../assets/storeLogo.svg" alt="">
+                <img src="../assets/storeLogo.svg" alt="" class="storeImage">
                 <p>JFKL Store</p>
             </div>
         </div>
@@ -36,14 +33,25 @@ include("PhpFunctions/SaveTransaction.php");
         </div>
 
         <div class="right">
-            <div class="todayGrossSaleLabel">
-                <p>Today's Gross Sale: </p>
-            </div>
             <div class="todayGrossSale">
-                <p><strong>P969.00</strong></p>
+                <p>Today's Gross Sale: </p>
+                <p><span><?php if (isset($totalSales)) {
+                    echo $totalSales; ?></span></p>
+                    <?php
+                } else { ?>
+                    <p><span><?php echo $currentTotalSales; ?></span></p>
+                    <?php
+                }
+                ?>
             </div>
-            <div class="date">
-                <p>May 13, 2024</p>
+            <div class="displayDateTime">
+                <div class="display-date">
+                    <span id="day">day</span>,
+                    <span id="daynum">00</span>
+                    <span id="month">month</span>
+                    <span id="year">0000</span>
+                </div>
+                <div class="display-time"></div>
             </div>
         </div>
     </div>
@@ -54,51 +62,63 @@ include("PhpFunctions/SaveTransaction.php");
     
     <div class="mainContainer">
         <div class="sideBar">
-            <div id="POSBtn" class="sbPOS">
-                <button id="POSBtn">
-                    <img src="../assets/POS.svg" alt=""><br>
-                    <strong>POS</strong>
-                </button>
+            <div class="features">
+                <div id="POSBtn" class="sbPOS">
+                    <button id="POSBtn">
+                        <img src="../assets/POS.svg" alt=""><br>
+                        <strong>POS</strong>
+                    </button>
+                </div>
+                <div class="sbInventory">
+                    <button id="inventoryBtn">
+                        <img src="../assets/inventory_g.svg" alt=""><br>
+                        <strong>Inventory</strong>
+                    </button>
+                </div>
+                <div class="sbSales">
+                    <button id="salesBtn">
+                        <img src="../assets/sales.svg" alt=""><br>
+                        <strong>Sales</strong>
+                    </button>
+                </div>                
             </div>
-            <div class="sbInventory">
-                <button id="inventoryBtn">
-                    <img src="../assets/inventory.svg" alt=""><br>
-                    <strong>Inventory</strong>
-                </button>
-            </div>
-            <div class="sbSales">
-                <button id="salesBtn">
-                    <img src="../assets/sales.svg" alt=""><br>
-                    <strong>Sales</strong>
-                </button>
+            <div class="logout">
+                <div class="sbLogout">
+                    <button>
+                        <img src="../assets/logout.svg" alt=""><br>
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="productDisplay">
 
+
+            
+         
             
         <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <button class="categoryBtn" type="submit" name="category" value="All">All</button>
+        <button class="categoryBtn" type="submit" name="category" value="All">All</button>
                 <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health and Beauty">Health and Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supply">Household & Cleaning Supply</button>
-                <button class="categoryBtn" type="submit" name="category" value="Personal Care Products">Personal Care Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Drinks">Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powered Drinks">Powered Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Junkfoods">Junkfoods</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
+                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
                 <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
                 <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
                 <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
                 <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments">Condiments</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasoning">Cooking Ingredients & Seasoning</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads and Fillings">Spreads and Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
+                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
                 <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
             </form>
             <div class="ItemView">
@@ -191,6 +211,9 @@ include("PhpFunctions/SaveTransaction.php");
                 ?>
                 <div class="orderList">
                     
+                    
+                
+         
                 
                     <?php
                     $SubTotal = 0;
@@ -203,7 +226,9 @@ include("PhpFunctions/SaveTransaction.php");
 
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
-                                <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
+                                <div class="image">
+                                    <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
+                                </div>
 
                                 <div class="items">
                                     <h3>Item</h3>
@@ -224,7 +249,8 @@ include("PhpFunctions/SaveTransaction.php");
                                         <img src="../assets/decreaseBtn.svg" alt=" ">
                                         </a>
                                         
-                                        <input type="number" value="<?php echo $value['quantity'] ?>">
+
+                                        <p><?php echo $value['quantity'] ?></p>
                                         <a href="POS.php?action=increaseQty&id=<?php echo $value['id'] ?>" >
                                             <img src="../assets/buttonAdd.svg " alt="">
                                         </a>
@@ -258,8 +284,6 @@ include("PhpFunctions/SaveTransaction.php");
                     }
                     ?>
 
-
-
                 </div>
 
                 <div class="CheckoutSection">
@@ -271,7 +295,7 @@ include("PhpFunctions/SaveTransaction.php");
                         </div>
                         <div class="SubTotal">
                             <h1>Subtotal</h1>
-                            <h1 id="OverAllTotal"><?php echo $SubTotal ?></h1>
+                            <h1 id="OverAllTotal">₱ <?php echo $SubTotal ?></h1>
                         </div>
                         <div class="lineDiv"></div>
                         <div class="Total">
@@ -289,11 +313,12 @@ include("PhpFunctions/SaveTransaction.php");
             </div>
         </div>
 
+
+   
+   
    
         <div class="addItem"></div>
 
-    
-          
         <div class="OrderSummary">
             <div class="OrderSummaryConatiner">
                 <h1>Order Summary</h1>
@@ -307,38 +332,35 @@ include("PhpFunctions/SaveTransaction.php");
                         </tr>
                         <?php
 
-
                         if (!empty($_SESSION['cart'])) {
+                            foreach ($_SESSION['cart'] as $key => $value) { ?>
+                            <tr>
+                                <td>
+                                    <?php echo $value['product_name'] ?>
+                                </td>
 
-                                foreach ($_SESSION['cart'] as $key => $value) { ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $value['product_name'] ?>
-                                    </td>
+                                <td>
+                                    <?php echo $value['retail_price'] ?>
+                                </td>
 
-                                    <td>
-                                        <?php echo $value['retail_price'] ?>
-                                    </td>
+                                <td>
+                                <?php echo $value['quantity'] ?>
+                                </td>
 
-                                    <td>
-                                    <?php echo $value['quantity'] ?>
-                                    </td>
-
-                                    <?php
-                                    $total = $value['retail_price'] * $value['quantity'];
-                                    $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
-                                    ?>
-                                    <td>
-                                    <?php echo $total ?>
-                                    </td>
-                                </tr>
+                                <?php
+                                $total = $value['retail_price'] * $value['quantity'];
+                                $CostOfGoods =  $value['unitPrice']  * $value['quantity'];
+                                ?>
+                                <td>
+                                <?php echo $total ?>
+                                </td>
+                            </tr>
                          <?php }
                         }else {
                             echo "<tr><td>Cart is empty</td></tr>";
                         }
 
                         ?>           
-
                     </table>
 
                 </div>
@@ -363,15 +385,17 @@ include("PhpFunctions/SaveTransaction.php");
                     </div>
                 </div>
 
-            
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ConfirmSection">
                     <button class="BackBtn" onclick="cancel()">Back</button>
                      <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>
+                   
+                     <button type="submit" name="ConfirmOrder" class="ConfirmBtn" >Confirm Order</button>  
                    
                 </form>
+
             </div>
         </div>
-
         <div class="successPrompt">
             <div class="sucessContainer">
                 <img src="../assets/check.png" alt="">
@@ -379,95 +403,177 @@ include("PhpFunctions/SaveTransaction.php");
                 <a href="POS.php?action=clearAll">New Transaction</a> 
             </div>
         </div>
+    </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
         
 
     </div>
 
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <script src="../js/script.js"></script>
-        <script>
-                $(document).ready(function() {
-                    $(document).on('click', '.toCart', function(event) { 
 
-                        event.preventDefault(); 
-                        var id = $(this).siblings(".ProductID").val();
-                        $.ajax({
-                            method: 'POST',
-                            url: 'PhpFunctions/modal.php',
-                            data: {id: id},
-                            success: function(response) {
-                                $(".addItem").css("display", "flex");
-                                $('.addItem').html(response);
-                            },
-                            error: function(xhr, status, error) {
-                                alert("An error occurred: " + error); 
-                            }
-                        });
-                    });
-                });
+    </div>
 
-                $(document).ready(function() {
-                    $(document).on('click', '.ConfirmBtn', function(event) { 
-                        event.preventDefault(); 
-                        $.ajax({
-                            method: 'POST',
-                            url: '', 
-                            data: { 
-                                action: 'saveData', 
-                                numberOfItems: '<?php echo $numberOfItems; ?>',
-                                SubTotal: '<?php echo $SubTotal; ?>',
-                                realCostofGoods: '<?php echo $realCostofGoods; ?>',
-                            
-                            },
-                            success: function(response) {
-                                $(".OrderSummary").css("display", "none");
-                                $(".successPrompt").css("display", "flex");
-                            },
-                            error: function(xhr, status, error) {
-                                alert("An error occurred: " + error); 
-                            }
-                        });
-                    });
-                });
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script src="../js/script.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(document).on('click', '.toCart', function(event) { 
+
+            event.preventDefault(); 
+            var id = $(this).siblings(".ProductID").val();
+            $.ajax({
+                method: 'POST',
+                url: 'PhpFunctions/modal.php',
+                data: {id: id},
+                success: function(response) {
+                    $(".addItem").css("display", "flex");
+                    $('.addItem').html(response);
+                },
+                error: function(xhr, status, error) {
+                    alert("An error occurred: " + error); 
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $(document).on('click', '.ConfirmBtn', function(event) { 
+            event.preventDefault(); 
+            $.ajax({
+                method: 'POST',
+                url: '', 
+                data: { 
+                    action: 'saveData', 
+                    numberOfItems: '<?php echo $numberOfItems; ?>',
+                    SubTotal: '<?php echo $SubTotal; ?>',
+                    realCostofGoods: '<?php echo $realCostofGoods; ?>',
+                
+                },
+                success: function(response) {
+                    $(".OrderSummary").css("display", "none");
+                    $(".successPrompt").css("display", "flex");
+                },
+                error: function(xhr, status, error) {
+                    alert("An error occurred: " + error); 
+                }
+            });
+        });
+    });
+        </script>
         </script>
 
-            <script>
-                            function decreaseQuantity() {
-                                var inputElement = document.querySelector('.quantityInput');
-                                var currentValue = parseInt(inputElement.value);
-                                if (currentValue > 1) {
-                                    inputElement.value = currentValue - 1;
-                                }
-                            }
+    </script>
 
-                            function increaseQuantity() {
-                                var inputElement = document.querySelector('.quantityInput');
-                                var currentValue = parseInt(inputElement.value);
-                                inputElement.value = currentValue + 1;
-                            }
+    <script>
+    function decreaseQuantity() {
+        var inputElement = document.querySelector('.quantityInput');
+        var currentValue = parseInt(inputElement.value);
+        if (currentValue > 1) {
+            inputElement.value = currentValue - 1;
+        }
+    }
 
-                            function exitModal() {
-                                var cancel = document.querySelector('.addItem');
-                                cancel.style.display ='none';
-                            }
+    function increaseQuantity() {
+        var inputElement = document.querySelector('.quantityInput');
+        var currentValue = parseInt(inputElement.value);
+        inputElement.value = currentValue + 1;
+    }
 
-                            function cancel() {
-                                var cancel = document.querySelector('.OrderSummary');
-                                cancel.style.display ='none';
-                            }
+    function exitModal() {
+        var cancel = document.querySelector('.addItem');
+        cancel.style.display ='none';
+    }
 
-                            function openSummaryModal() {
-                                var show = document.querySelector('.OrderSummary');
-                                show.style.display ='flex';
-                            }
+    function cancel() {
+        var cancel = document.querySelector('.OrderSummary');
+        cancel.style.display ='none';
+    }
 
-            </script>
-        
+    function openSummaryModal() {
+        var show = document.querySelector('.OrderSummary');
+        show.style.display ='flex';
+    }
+    </script>
+    <script>
+    // Function to update date
+    function updateDate() {
+        let today = new Date();
 
+        // return number
+        let dayName = today.getDay(),
+            dayNum = today.getDate(),
+            month = today.getMonth(),
+            year = today.getFullYear();
+
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ];
+        const dayWeek = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ];
+        // value -> ID of the html element
+        const IDCollection = ["day", "daynum", "month", "year"];
+        // return value array with number as a index
+        const val = [dayWeek[dayName], dayNum, months[month], year];
+        for (let i = 0; i < IDCollection.length; i++) {
+            document.getElementById(IDCollection[i]).textContent = val[i];
+        }
+    }
+
+    // Function to update time
+    function updateTime() {
+        const displayTime = document.querySelector(".display-time");
+        let time = new Date();
+        displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
+    }
+
+    // Function to update date and time periodically
+    function updateDateTime() {
+        updateDate(); // Update date
+        updateTime(); // Update time
+        setTimeout(updateDateTime, 1000); // Call this function again after 1 second
+    }
+
+    // Call updateDateTime initially to start the updating process
+    updateDateTime();
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryContainer = document.querySelector('.category');
+
+        categoryContainer.addEventListener('wheel', function(event) {
+            if (event.deltaY > 0) {
+                categoryContainer.scrollLeft += 50;
+            } else {
+                categoryContainer.scrollLeft -= 50;
+            }
+            event.preventDefault();
+        });
+    });
+    </script>
 </body>
 
 </html>
