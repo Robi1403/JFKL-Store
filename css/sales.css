@@ -109,7 +109,7 @@ body{
     transition: 0.2s;
     cursor: pointer;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .sideBar button img {
@@ -128,7 +128,7 @@ body{
 .sideBar .sbInventory button {
     background-color: #ffffff;
     color: #a6acb8;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .sideBar .sbPOS button:hover,
