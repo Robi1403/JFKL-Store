@@ -8,10 +8,11 @@
 body{
     background-color: #F9F9F9;
     display: block;
-    /* overflow: hidden; */
+    overflow: hidden;
    
 }
 
+/*NAVIGATION BAR*/
 .navbar{
     height: 100px;
     width: 100%;
@@ -23,13 +24,14 @@ body{
     background-color: #ffffff;
     box-shadow: 0px 2px 4px 0px rgba(92, 99, 105, 0.15);
     font-size: 15px;
+    position: relative;
 }
 
 .left{
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    min-width: 260px;
+    margin-right: 5px;
 }
 
 .navbar .left .shape{
@@ -51,10 +53,8 @@ body{
 
 .navbar .searchBar form{
     margin-left: 60px;
-    flex: 2.5;
-    padding-right: 30px;
     display: flex;
-    width: 700px;
+    width: 600px;
 }
 
 .navbar .searchBar input{
@@ -74,6 +74,11 @@ body{
     background-color: #F6F6F6;
     border: none;
     border-radius: 0px 7px 7px 0px;
+    cursor: pointer;
+}
+.navbar .searchBar button:hover{
+    transition: all .2s ease-in-out;
+    background-color: #eeeeee;
 }
 
 .navbar .searchBar img{
@@ -84,32 +89,46 @@ body{
 .navbar .right{
     display: flex;
     justify-content: end;
+    align-items: center;
     flex: 1;
-    padding-right: 30px;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+    gap: 30px;
+    margin: 3%;
 }
-
 .navbar .right .todayGrossSale{
+    display: flex;
+    gap: 5px;
+}
+.navbar .right .todayGrossSale span{
+    display: flex;
+    gap: 10px;
     color: #04B075;
     font-weight: 600;
-    margin-left: 10px;
 }
-
-.navbar .right .date{
-    margin-left: 40px;
+.navbar .right .displayDateTime{
+    display: flex;
+    gap: 10px;
 }
-
 
 
 .mainContainer{
     display: flex;
 }
+
+/*SIDE BAR*/
 .sideBar{
     height: 100%;
     width: 115px;
     padding-top: 20px;
-    position: fixed;
+    position: absolute;
     box-shadow: 2px 0 3px -2px rgba(0,0,0,.2);
     background-color: #ffffff;
+}
+
+.sideBar .features{
+    height: 70%;
 }
 
 .sideBar button{
@@ -143,6 +162,23 @@ body{
     color: #a6acb8;
     font-size: 11px;
 }
+.sideBar .sbInventory button:hover,
+.sideBar .sbSales button:hover {
+    transition: all .2s ease-in-out;
+    background-color: #f1f1f1;
+}
+
+.logout {
+    height: 7%;
+}
+
+.sideBar .logout .sbLogout button{
+    background-color: #ffffff;
+}
+.sideBar .logout .sbLogout button img{
+    width: 25px;
+}
+
 
 .productDisplay{
     background-color: #ffffff;
@@ -150,7 +186,6 @@ body{
     height: 100vh;
     min-width: 550px;
     margin-left: 115px;
-
 }
 
 .category{
@@ -181,38 +216,49 @@ body{
 }
 
 .categoryBtn:hover{
-    background-color: #DCFFF3;
+    background-color: #008D5D;
+    color: #ffffff;
 }
-.categoryBtn:focus{
-    background-color: #DCFFF3;
+.categoryBtn:active{
+    background-color: #008D5D;
+    color: #ffffff;
 }
 
-.productDisplay{
+.productDisplay {
     background-color: #F9F9F9;
     padding: 30px;
+    width: auto;
+
 }
 
-.ItemView{
+.ItemView {
     background-color: #ffffff;
-    height: 80vh;
+    height: 80%;
     border-radius: 13px;
-    padding: 20px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 }
-.products{
+
+.products {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 72vh;
-    padding: 0px 20px 0px 20px;
+    height: 100%;
+    padding: 30px 30px 30px 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    justify-content: space-between;
+    align-content: start;
 }
 
-.ItemCardView{
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
+.ItemCardView {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     height: auto;
     width: 175px;
     border-radius: 7px;
     padding: 10px;
     display: inline-block;
     margin: 13.9px;
+    flex-direction: column; /* Ensure the content inside the card is in column layout */
+    justify-content: flex-end;
 }
 
 .ItemCardView .image img{
@@ -253,7 +299,9 @@ body{
 
 }
 
-.ItemCardView button , img{
+.ItemCardView button , 
+.ItemCardView img,
+.liveSearchContainer img{
     width: 25px;
     height: 25px;
     object-fit: contain;
@@ -317,11 +365,14 @@ body{
     height: 27px;
 }
 
-
- .orderList{
+.cart .buttons a:hover {
+    background-color: #DCFFF3;
+    color: #04B075;
+}
+.orderList{
     display: flex;
     flex: 1;
-    padding: 5px 20px 0px 5px;
+    padding: 5px 20px 10px 5px;
     margin-top: 25px;
     margin-bottom: 20px;
     overflow-y: scroll;
@@ -386,7 +437,7 @@ body{
 }
 
 .cart .orderList .container .Price {
-    margin-right: 12px;
+    margin-right: 7px;
 }
 
 .cart .orderList .container .image img {
@@ -409,14 +460,16 @@ body{
     padding: 0;
 }
 
-.cart .orderList .container .qty input{
+.cart .orderList .container .qty p{
     height: 20px;
-    width: 15px;
-    margin-left: 5px;
+    width: 20px;
+    margin-left: 3px;
     margin-right: 5px;
     text-align: center;
     outline: none;
     border: none;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .cart .orderList .container .qty button{
@@ -448,6 +501,7 @@ input::-webkit-inner-spin-button {
     border: none;
     background-color: transparent;
     outline: none;
+    cursor: pointer;
 }
 .cart .orderList .container .delete img{
     height: 15px;
@@ -455,9 +509,7 @@ input::-webkit-inner-spin-button {
     margin-top: 15px;
 }
 
-.cart .orderList .container .select input:checked{
-    background-color: #04B075;
-}
+
 
 
 .lineDiv{
@@ -841,8 +893,8 @@ button:focus {
 
 .SearchResult{
     width: 100%;
-    height: 50vh;
-    max-width: 670px;
+    min-height: auto;
+    max-width: 600px;
     background-color: #fff;
     position: absolute;
     top: 0px;
@@ -916,7 +968,8 @@ button:focus {
     gap: 10px;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 40vh;
+    height: auto;
+    max-height: 40vh;
     padding: 1px 10px 1px 10px;
 }
 
