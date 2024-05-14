@@ -160,8 +160,7 @@ include ("PhpFunctions/update_product.php");
                                         <td><?php echo $row["stock"]; ?>
                                         </td>
                                         <td>
-                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                                                <!-- hidden inputs for the UpdateProductModal with product information -->
+                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"> 
                                                 <input type="hidden" name="productId_info" value="<?php echo $row["product_id"]; ?>">
                                                 <input type="hidden" name="productName_info" value="<?php echo $row["product_name"]; ?>">
                                                 <input type="hidden" name="netWeight_info" value="<?php echo $row["net_weight"]; ?>">

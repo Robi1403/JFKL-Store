@@ -31,7 +31,7 @@ if (isset($_POST['updateProductInfoBtn'])) {
         if ($netWeight != $row['net_weight']) {
             if ($netWeight != NULL) {
                 if ( $row['net_weight'] != NULL) {
-                $previous_state .= "Net Weight: " . $row['net_weight'] ."\n";
+                    $previous_state .= "Net Weight: " . $row['net_weight'] ."\n";
                 } else {
                     $previous_state .= "Net Weight: NULL\n";
                 }
@@ -87,9 +87,6 @@ if (isset($_POST['updateProductInfoBtn'])) {
         
         $insert_query = "INSERT INTO `inventory_log`(`product_id`, `action_type`, `date`, `previous_state`, `new_state`) VALUES ('$productId', 'Update', '$date', '$previous_state', '$new_state')";
         if (mysqli_query($conn, $insert_query)) {
-            // echo '<script>
-            //     alert("Data inserted successfully to inventory log."); 
-            // </script>';
         } else {
             echo '<script>alert("Error inserting data to inventory log: ' . mysqli_error($conn) . '");</script>';
         }

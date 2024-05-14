@@ -1,4 +1,5 @@
 <?php
+include ("PhpFunctions/connection.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
 ?>
 
@@ -99,10 +100,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                     <div class="lineShape"></div>
 
                     <?php
-                    include ("PhpFunctions/connection.php");
-
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        // Retrieve the start and end dates from the form
                         $startDate = $_POST['startDate'];
                         $endDate = $_POST['endDate'];
 
@@ -110,50 +108,27 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                         $totalItems = 0;
                         $totalSales = 0;
                         $totalProfit = 0;
-
-                        // Display the start and end dates (just for testing)
-                        // echo '<script>alert("Start Date: ' . $startDate . '\\nEnd Date: ' . $endDate . '");</script>';
                     
                         if ($startDate == $endDate) {
-                            // Daily sales
                             $search_query = "SELECT COUNT(*) AS total_transactions, SUM(number_of_items) AS total_items, SUM(gross_sales) AS total_sales, SUM(profit) AS total_profit FROM `transaction_history` WHERE `date` = '$startDate'";
                         } else {
-                            // Custom Date Range's Sales
                             $search_query = "SELECT COUNT(*) AS total_transactions, SUM(number_of_items) AS total_items, SUM(gross_sales) AS total_sales, SUM(profit) AS total_profit FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
                         }
 
                         $search_result = mysqli_query($conn, $search_query);
                         if ($search_result) {
                             if (mysqli_num_rows($search_result) > 0) {
-                                // Output the search result
                                 $row = mysqli_fetch_assoc($search_result);
                                 $totalTransactions = $row['total_transactions'];
                                 $totalItems = $row['total_items'];
                                 $totalSales = $row['total_sales'];
                                 $totalProfit = $row['total_profit'];
 
-                                // Update the variables to 0 if they are NULL
                                 $totalTransactions = $totalTransactions ?? 0;
                                 $totalItems = $totalItems ?? 0;
                                 $totalSales = $totalSales ?? 0;
                                 $totalProfit = $totalProfit ?? 0;
-
-                                // if ($startDate == $endDate) {
-                                //     echo "<h2>Sales Summary for $startDate</h2>";
-                                // } else {
-                                //     echo "<h2>Sales Summary for $startDate - $endDate</h2>";
-                                // }
-                                // // echo "<p>Total Number of Transactions: $totalTransactions</p>";
-                                // // echo "<p>Total Number of Items: $totalItems</p>";
-                                // // echo "<p>Total Gross Sales: $totalSales</p>";
-                                // // echo "<p>Total Profit: $totalProfit</p>";
                     
-                            } else {
-                                if ($startDate == $endDate) {
-                                    echo "<script>alert('No sales data found for $startDate');</script>";
-                                } else {
-                                    echo "<script>alert('No sales data found for $startDate - $endDate');</script>";
-                                }
                             }
                         } else {
                             echo "<script>alert('Error searching sales data: " . mysqli_error($conn) . "');</script>";
@@ -296,10 +271,8 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                             <?php
                             if (isset($totalTransactions)) {
                                 if ($startDate == $endDate) {
-                                    // Daily sales
                                     $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$startDate'";
                                 } else {
-                                    // Custom Date Range's Sales
                                     $select_query = "SELECT * FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
                                 }
 
@@ -319,7 +292,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                                         <?php
                                     }
                                 } else {
-                                    echo "<tr><td>No record of transaction.</td></tr>";
+                                    echo "<tr><td>No record of transaction</td></tr>";
                                 }
                             } else { 
                                 $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$currentDate'";
@@ -353,11 +326,9 @@ include ("PhpFunctions/current_sales_transacHistory.php");
     </form>
 
     <script>
-        // Function to update date
         function updateDate() {
             let today = new Date();
 
-            // return number
             let dayName = today.getDay(),
                 dayNum = today.getDate(),
                 month = today.getMonth(),
@@ -386,30 +357,25 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                 "Friday",
                 "Saturday",
             ];
-            // value -> ID of the html element
             const IDCollection = ["day", "daynum", "month", "year"];
-            // return value array with number as a index
             const val = [dayWeek[dayName], dayNum, months[month], year];
             for (let i = 0; i < IDCollection.length; i++) {
                 document.getElementById(IDCollection[i]).textContent = val[i];
             }
         }
 
-        // Function to update time
         function updateTime() {
             const displayTime = document.querySelector(".display-time");
             let time = new Date();
             displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
         }
 
-        // Function to update date and time periodically
         function updateDateTime() {
-            updateDate(); // Update date
-            updateTime(); // Update time
-            setTimeout(updateDateTime, 1000); // Call this function again after 1 second
+            updateDate(); 
+            updateTime(); 
+            setTimeout(updateDateTime, 1000); 
         }
 
-        // Call updateDateTime initially to start the updating process
         updateDateTime();
     </script>
     <script>
@@ -440,7 +406,6 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 
     <script type="text/javascript">
         $(function () {
-            // var start = moment().subtract(29, 'days');
             var start = moment();
             var end = moment();
 
@@ -466,7 +431,6 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 
             cb(start, end);
 
-            // Submit the form when a range is selected
             $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
                 $('#dateform').submit();
             });
@@ -474,12 +438,10 @@ include ("PhpFunctions/current_sales_transacHistory.php");
     </script>
 
     <script>
-        //redirect to inventory
         document.getElementById("inventoryBtn").onclick = function () {
             window.location.href = "inventory.php";
         };
 
-        //redirect to POS
         document.getElementById("POSBtn").onclick = function () {
             window.location.href = "POS.php";
         };

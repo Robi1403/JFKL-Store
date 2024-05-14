@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])) {
 
     if (is_string($_POST['selectedProducts']) && !empty($_POST['selectedProducts'])) {
 
-        //split string selectedProducts to array based on ,
         $selectedProducts = explode(',', $_POST['selectedProducts']);
 
         if ($conn->connect_error) {
@@ -14,10 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])) {
 
         $num_selected_products = count($selectedProducts);
 
-        // echo '<script>alert("no. of products: ' . $num_selected_products . '")</script>';
-
         foreach ($selectedProducts as $productId) {
-            // echo '<script>alert("selected products: ' . $product_id . '")</script>';
 
             $select_query = "SELECT * FROM `inventory` WHERE `product_id` = '$productId'";
             $result = mysqli_query($conn, $select_query);
@@ -62,11 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedProducts'])) {
                 echo '<script>alert("Error deleting product with ID: ' .$product_id .'" . $conn->error")</script>';
             }
         }
-
-        // echo '<script>
-        //         alert("' . $num_selected_products . ' data successfully inserted to inventory log and removed from inventory.");
-        //     </script>';
-
         $conn->close();
 
     } else {

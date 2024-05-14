@@ -187,17 +187,16 @@ include ("PhpFunctions/update_product.php");
 
     <script>
         function filterTable() {
-            var filterValue = document.getElementById("actionTypeFilter").value.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+            var filterValue = document.getElementById("actionTypeFilter").value.toLowerCase(); 
             var tableRows = document.querySelectorAll("#inventoryTable tbody tr");
 
-            // Loop through each table row and hide/show based on the filter value
             tableRows.forEach(function (row) {
-                var actionType = row.cells[2].textContent.toLowerCase(); // Get the action type from the third cell (index 2)
+                var actionType = row.cells[2].textContent.toLowerCase(); 
 
                 if (filterValue === "all" || actionType === filterValue) {
-                    row.style.display = ""; // Show row
+                    row.style.display = ""; 
                 } else {
-                    row.style.display = "none"; // Hide row
+                    row.style.display = "none"; 
                 }
             });
         }
@@ -218,7 +217,6 @@ include ("PhpFunctions/update_product.php");
 
     <script>
         document.getElementById('clearDateBtn').addEventListener('click', function () {
-            // Clear the value of the input field
             document.getElementById('datepicker').value = '';
             document.getElementById('datepicker').placeholder = 'Select Date';
 
