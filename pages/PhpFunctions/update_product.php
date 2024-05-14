@@ -78,8 +78,7 @@ if (isset($_POST['updateProductInfoBtn'])) {
         }
 
         if ($new_state == NULL) {
-            echo '<script> alert("Nothing was changed");
-            window.location.href = "../inventory.php";  </script>';
+            echo '<script> window.location.href = "../inventory.php";  </script>';
         }
 
         date_default_timezone_set('Asia/Manila');

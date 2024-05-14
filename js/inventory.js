@@ -52,7 +52,7 @@ inputFile.onchange = function () {
     let file = inputFile.files[0];
     if (file) {
         productImage.src = URL.createObjectURL(file);
-        
+
         productURL.value = file.name;
     }
 };
@@ -67,20 +67,20 @@ addProductBtn.addEventListener("click", function () {
     addProductModal.style.display = "block";
 
     //new ok na but automatically closes
-        var addNewProductBtn = document.getElementById("addNewProductBtn");
+    var addNewProductBtn = document.getElementById("addNewProductBtn");
 
-        addNewProductBtn.addEventListener("click", function (event) {
-            addProductModal.style.display = "none";
-            
-            var add_successPrompt = document.getElementById("add_successPrompt");
-            add_successPrompt.style.display = "flex";
+    addNewProductBtn.addEventListener("click", function (event) {
+        addProductModal.style.display = "none";
 
-            var add_okBtn = document.getElementById("add_okBtn");
+        var add_successPrompt = document.getElementById("add_successPrompt");
+        add_successPrompt.style.display = "flex";
 
-            add_okBtn.addEventListener("click", function () {
-                add_successPrompt.style.display = "none";
-            });
+        var add_okBtn = document.getElementById("add_okBtn");
+
+        add_okBtn.addEventListener("click", function () {
+            add_successPrompt.style.display = "none";
         });
+    });
 });
 
 var cancelBtn = document.getElementById("cancelBtn");
@@ -95,6 +95,19 @@ cancelBtn.addEventListener("click", function () {
 
 
 //---UPDATE PRODUCT INFO---//
+//To get uploaded img
+let updateProductImage = document.getElementById("updateProductImage");
+let updateInput = document.getElementById("updateInput-file");
+let productURLInput = document.getElementById("productURLInput");
+
+updateInput.onchange = function () {
+    let file = updateInput.files[0];
+    if (file) {
+        updateProductImage.src = URL.createObjectURL(file);
+
+        productURLInput.value = file.name;
+    }
+};
 
 //selects all buttons with the class updateProduct
 var updateProductBtns = document.querySelectorAll(".updateProduct");
@@ -161,8 +174,8 @@ updateProductBtns.forEach(function (btn) {
         var pictureUrl = "../assets/InventoryItems/" + url;
 
         //changes the src of image (from ../assets/addImage.svg to current product's url)
-        var editProductImage = document.getElementById('editProductImage');
-        editProductImage.src = pictureUrl;
+        var updateProductImage = document.getElementById('updateProductImage');
+        updateProductImage.src = pictureUrl;
 
         var updateProductModal = document.getElementById("updateProductModal");
         updateProductModal.style.display = "block";
@@ -184,6 +197,8 @@ updateProductBtns.forEach(function (btn) {
         });
     });
 });
+
+
 
 var cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
 

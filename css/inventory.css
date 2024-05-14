@@ -451,6 +451,24 @@ input[type=text]:-ms-input-placeholder{
     display: block;
 }
 
+.labelInput .addImageBtn label[for="updateInput-file"] {
+    width: 150px;
+    padding: 0px 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    white-space: nowrap; 
+    color: #008D5D;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    outline: 1.5px solid #04B075;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 6px;
+    display: block;
+}
+
 .additionalInfo {
     display: flex;
     flex-direction: column;

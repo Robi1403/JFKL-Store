@@ -301,14 +301,14 @@ include ("PhpFunctions/update_product.php");
                                 <label>Product Image</label>
                                 <div class="addImage">
                                     <div class="imageContainer">
-                                        <img src="../assets/addImage.svg" id="editProductImage">
+                                        <img src="../assets/addImage.svg" id="updateProductImage">
                                         <input type="hidden" id="productURLInput" name="productURLInput"
-                                            readonly><br><br>
+                                            ><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
-                                        <label for="input-file" class="addProduct">Upload Image</label>
-                                        <input type="file" accept="image/jpeg, image/png, image/jpg," id="input-file">
+                                        <label for="updateInput-file" class="addProduct">Upload Image</label>
+                                        <input type="file" accept="image/jpeg, image/png, image/jpg," id="updateInput-file">
                                     </div>
                                 </div>
                             </div>
