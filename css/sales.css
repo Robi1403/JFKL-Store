@@ -52,6 +52,10 @@ body{
     white-space: nowrap;
 }
 
+.navbar .left .logo img{
+    height: 30px;
+}
+
 .navbar .right{
     display: flex;
     justify-content: end;
