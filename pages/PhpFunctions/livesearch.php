@@ -39,12 +39,13 @@ if (isset($_POST['input'])) {
 
                     ?>
 
-                        <input type="hidden" class="ProductID" name="productId" value="<?php echo $id?>">
-                        <button type="button" class="select toCart" name="toCart" >
+                    <input type="hidden" class="ProductID" name="productId" value="<?php echo $id?>">
+                    <button type="button" class="select toCart" name="toCart" data-product-id="<?php echo $id ?>">
+
                             <div class="image">
                                 <img src="../assets/InventoryItems/<?php echo $pic ?>" alt="">
                             </div>
-                            <div class="productID">
+                            <div  class="productID">
                                 <?php echo $id ?>
                             </div>
                             <div class="productName">
@@ -62,6 +63,27 @@ if (isset($_POST['input'])) {
                 ?>
             </div>
         </div>
+        <script>
+            // gets the product id and prompt the add item modal
+           $(document).ready(function() {
+            $(document).on('click', '.toCart', function(event) { 
+                event.preventDefault(); 
+                var id = $(this).data("product-id"); /
+                $.ajax({
+                    method: 'POST',
+                    url: 'PhpFunctions/modal.php',
+                    data: {id: id},
+                    success: function(response) {
+                        $(".addItem").css("display", "flex");
+                        $('.addItem').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        alert("An error occurred: " + error); 
+                    }
+                });
+            });
+        });      
+                </script>
         <?php
     }else {
         echo '

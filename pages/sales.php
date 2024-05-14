@@ -457,23 +457,23 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 
     <script>
         function resetDateRangePicker() {
-    var start = moment();
-    var end = moment();
+        var start = moment();
+        var end = moment();
 
-    // Reset date range picker to default dates
-    $('#reportrange').data('daterangepicker').setStartDate(start);
-    $('#reportrange').data('daterangepicker').setEndDate(end);
+        // Reset date range picker to default dates
+        $('#reportrange').data('daterangepicker').setStartDate(start);
+        $('#reportrange').data('daterangepicker').setEndDate(end);
 
-    // Update date display
-    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        // Update date display
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
-    // Update hidden input fields
-    $('#startDate').val(start.format('YYYY-MM-DD'));
-    $('#endDate').val(end.format('YYYY-MM-DD'));
+        // Update hidden input fields
+        $('#startDate').val(start.format('YYYY-MM-DD'));
+        $('#endDate').val(end.format('YYYY-MM-DD'));
 
-    // Store default dates in local storage
-    localStorage.setItem('startDate', start.format('YYYY-MM-DD'));
-    localStorage.setItem('endDate', end.format('YYYY-MM-DD'));
+        // Store default dates in local storage
+        localStorage.setItem('startDate', start.format('YYYY-MM-DD'));
+        localStorage.setItem('endDate', end.format('YYYY-MM-DD'));
 }
         </script>
 

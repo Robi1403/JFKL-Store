@@ -1,0 +1,551 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica', sans-serif;
+}
+
+body{
+    background-color: #F9F9F9;
+    display: block;
+    overflow: hidden;
+}
+
+/*NAVIGATION BAR*/
+.navbar{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    top: 0;
+    overflow: hidden;
+    z-index: 1000;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px 0px rgba(92, 99, 105, 0.15);
+    font-size: 15px;
+    position: relative;
+}
+
+.navbar .left{
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    flex: 0.6;
+}
+
+.navbar .left .shape{
+    background-color: #04B075;
+    height: 60px;
+    width: 13px;
+    margin-right: 60px;
+    color: #04B075;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.navbar .left .logo{
+    display: flex;
+    font-size: 26px;
+    font-weight: 600;
+    color: #008D5D;
+    gap: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.navbar .left .logo img{
+    height: 30px;
+}
+
+.navbar .right{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex: 1;
+    margin-right: 3%;
+    gap: 40px;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+}
+
+.navbar .right .todayGrossSale{
+    display: flex;
+    gap: 10px;
+}
+.navbar .right .todayGrossSale span{
+    display: flex;
+    gap: 10px;
+    color: #04B075;
+    font-weight: 600;
+}
+
+.navbar .right .displayDateTime{
+    display: flex;
+    gap: 10px;
+}
+
+/* Sidebar */
+.sideBar {
+    height: 100%;
+    width: 115px;
+    padding-top: 20px;
+    position: absolute;
+    box-shadow: 2px 0 3px -2px rgba(0,0,0,.2);
+    background-color: #ffffff;
+}
+
+.sideBar .features{
+    height: 70%;
+}
+.sideBar button {
+    height: 70px;
+    width: 70px;
+    margin: 15px 20px 15px 20px;
+    border-radius: 10px;
+    background-color: #04B075;
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    transition: 0.2s;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 11px;
+}
+
+.sideBar button img {
+    margin: 5px;
+}
+
+.sideBar button:hover {
+    background-color: #009963;
+}
+
+.sideBar button:focus {
+    background-color: #04B075;
+}
+
+.sideBar .sbPOS button,
+.sideBar .sbInventory button {
+    background-color: #ffffff;
+    color: #a6acb8;
+    font-size: 11px;
+}
+
+.sideBar .sbPOS button:hover,
+.sideBar .sbInventory button:hover{
+    transition: all .2s ease-in-out;
+    background-color: #f1f1f1;
+}
+
+.logout {
+    height: 7%;
+}
+
+.sideBar .logout .sbLogout button{
+    background-color: #ffffff;
+}
+
+/* Main Container */
+
+.mainContainer{
+    padding: 30px;
+}
+
+.salesDisplay{
+    display: flex;
+    flex-direction: column;
+    margin-left: 115px;
+    height: 100vh;
+    gap: 20px;
+}
+
+
+.salesDisplay .sales {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: 40%;
+}
+
+.salesDisplay .transactions{
+    display: flex;
+    height: 60%;
+}
+
+.sales .salesStats{
+    width: 50%;
+    height: 100%;
+}
+
+.sales .stockTracker{
+    width: 50%;
+    height: 100%;
+}
+
+/* Sales Stats */
+
+.salesStatsLabel{
+    width: auto;
+}
+.salesStatsLabel p{
+    font-size: 30px;
+    margin-left: 35px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+
+}
+.salesStats .lineShape{
+    border-radius: 20px 20px 0px 0px;
+    height: 7px;
+    position: relative;
+    background-color: #04B075;
+    width: 250px;
+    margin-left: 20px;
+}
+
+.salesStats .mainContainer{
+    background-color: #ffffff;
+    height: 33vh;
+    border-radius: 13px 13px 13px 13px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 20px;
+}
+
+.salesStats .container1{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    gap: 10px;
+}
+.salesStats .container2{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    gap: 10px;
+}
+
+.salesStats .container1 .grossSale{
+    background: linear-gradient(to bottom right, #04B075, #06DB92);
+    height: 50%;
+    border-radius: 13px;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+.salesStats .container1 .order{
+    background-color: #ffffff;
+    height: 50%;
+    border-radius: 13px;
+    border: 1px solid #04B075;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+.salesStats .container2 .totalProfit{
+    background-color: #ffffff;
+    height: 50%;
+    border-radius: 13px;
+    border: 1px solid #04B075;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+.salesStats .container2 .others{
+    background-color: #ffffff;
+    height: 50%;
+    border-radius: 13px;
+    border: 1px solid #04B075;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.grossSale, .order, .totalProfit, .others {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.grossSale h1, .order h1, .totalProfit h1, .others h1{
+    font-size: 45px;
+    font-weight: 800;
+    margin-bottom: 3px;
+}
+
+.labelgroup{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+/* Dropdown */
+.dropdown {
+    position: absolute;
+    top: 0;
+    right: 0; /* Align to the right side */
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #04B075;
+}
+
+.dropdown-select {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #009963;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+    
+}
+
+.select {
+    margin-right: 5px;
+}
+
+.caret {
+    border: solid #008D5D;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    margin-left: 20px;
+}
+
+.dropdown-list {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    list-style: none;
+    display: none;
+    border-radius: 7px;
+    width: 100%;
+    border: 1px solid #009963;
+}
+
+.dropdown-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background-color: #f8f8f8;
+}
+
+.dropdown-select:hover .dropdown-list {
+    display: block;
+}
+
+/* Stocks */
+
+.stocksLabel p{
+    font-size: 30px;
+    margin-left: 35px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+}
+.stockTracker .lineShape{
+    border-radius: 20px 20px 0px 0px;
+    height: 7px;
+    position: relative;
+    background-color: #04B075;
+    width: 240px;
+    margin-left: 20px;
+}
+.stockTracker .mainContainer{
+    background-color: #ffffff;
+    height: 33vh;
+    border-radius: 13px 13px 13px 13px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 30px 15px 30px;
+}
+.mainContainer::-webkit-scrollbar{
+    width: 0px;
+}
+.stocksTable{
+    font-size: 13px;
+    border-radius: 8px;
+    padding: 0px 10px 0px 10px;
+}
+.stocksTable thead th{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    padding: 20px 0px 10px 0px;
+    color: #b4b4b4;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: left;
+
+}
+.stocksTable td{
+    padding: 5px 0px 5px 0px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    border: none;
+    font-weight: 400;
+    font-size: 13px;
+}
+.stocksTable tbody #productID,
+.stocksTable .col1 {
+    width: 10vw;
+    margin-right: 15px;
+}
+.stocksTable tbody #productName,
+.stocksTable .col2 {
+    width: 40vw;
+}
+.stocksTable tbody #netWeight,
+.stocksTable .col3 {
+    width: 10vw;
+
+}
+.stocksTable tbody #category,
+.stocksTable .col4 {
+    width: 15vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.stocksTable tbody #stock,
+.stocksTable .col5 {
+    width: 5vw;
+}
+.stocksTable tbody #stock p{
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Transactions */
+
+.transactions{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.transactions .transactionLabel p{
+    font-size: 30px;
+    margin-left: 35px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #04B075;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+
+}
+.transactions .lineShape{
+    border-radius: 20px 20px 0px 0px;
+    height: 7px;
+    position: relative;
+    background-color: #04B075;
+    width: 310px;
+    margin-left: 20px;
+}
+.transactions .mainContainer{
+    background-color: #ffffff;
+    height: 37vh;
+    border-radius: 13px 13px 13px 13px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 40px 20px 40px;
+}
+.transactionTable{
+    font-size: 13px;
+    border-radius: 8px;
+    padding: 0px 10px 0px 10px;
+}
+.transactionTable thead th{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    padding: 20px 0px 15px 0px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 13px;
+    color: #b4b4b4;
+}
+.transactionTable td{
+    padding: 5px 0px 5px 0px;
+    border: 1px solid #ddd;
+    text-align: left;
+    background-color: #ffffff;
+    border: none;
+}
+.transactionTable tbody #transactionNum,
+.transactionTable .col1 {
+    width: 20vw;
+    margin-right: 15px;
+}
+.transactionTable tbody #numItems,
+.transactionTable .col2 {
+    width: 30vw;
+
+}
+.transactionTable tbody #total,
+.transactionTable .col3 {
+    width: 30vw;
+}
+.transactionTable tbody #date,
+.transactionTable .col4 {
+    width: 30vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.transactionTable tbody #seeDetails,
+.transactionTable .col5 {
+    width: 10vw;
+}
+.transactionTable tbody #seeDetails button{
+    border: 1px solid #04B075;
+    color: #04B075;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    font-size: 12px;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.transactionTable tbody #seeDetails button:hover{
+    background-color: #04B075;
+    outline: none;
+    color: #ffffff;
+}

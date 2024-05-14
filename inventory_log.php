@@ -15,17 +15,17 @@ include ("PhpFunctions/update_product.php");
     <link rel="stylesheet" href="../css/inventory.css">
     <link rel="icon" href="../assets/storeLogo.svg">
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body>
     <div class="navbar">
         <div class="left">
-            <div class="shape"></div>
+            <div class="shape">
+
+            </div>
             <div class="logo">
                 <img src="../assets/storeLogo.svg" alt="">
                 <p>JFKL Store</p>
@@ -73,12 +73,13 @@ include ("PhpFunctions/update_product.php");
         <div class="sbPOS">
             <button id="POSBtn">
                 <img src="../assets/POS_g.svg" alt=""><br>
+
                 <strong>POS</strong>
             </button>
         </div>
         <div class="sbInventory">
             <button id="inventoryBtn">
-                <img src="../assets/inventorygreen.svg" alt=""><br>
+                <img src="../assets/inventory_g.svg" alt=""><br>
                 <strong>Inventory</strong>
             </button>
         </div>
@@ -90,20 +91,22 @@ include ("PhpFunctions/update_product.php");
         </div>
     </div>
 
-    <div class="mainContainerLog">
-        <div class="group">
-            <select id="actionTypeFilter" onchange="filterTable()">
-                <option value="all">All</option>
-                <option value="add">Add</option>
-                <option value="update">Update</option>
-                <option value="remove">Remove</option>
-            </select>
+    <!-- halion nalang style, nilaag ko lang para kung sain siya pwede ilaag HAHAHH -->
+    <select id="actionTypeFilter" style="width: 20%; margin-left: 11%;" onchange="filterTable()">
+        <option value="all">All</option>
+        <option value="add">Add</option>
+        <option value="update">Update</option>
+        <option value="remove">Remove</option>
+    </select>
 
-            <input type="text" id="datepicker" name="selectedDate" placeholder="Select Date" />
-            <button id="clearDateBtn">x</button>
-        </div>
+    <!-- halion nalang style, nilaag ko lang para kung sain siya pwede ilaag HAHAHH -->
+    <input type="text" id="datepicker" name="selectedDate" style="width: 20%; margin-left: 11%;"
+        value="<?php echo empty($_POST['selectedDate']) ? '' : $_POST['selectedDate']; ?>">
+    <button id="clearDateBtn">x</button>
 
-        <div class="inventoryLog">
+    <div class="mainContainer">
+
+        <div class="inventoryLog" style="max-height: 450px; overflow-y: auto;">
             <table class="inventoryTable" id="inventoryTable">
                 <thead>
                     <tr>
@@ -117,7 +120,7 @@ include ("PhpFunctions/update_product.php");
                 </thead>
                 <tbody>
                     <?php
-                    if (isset($_POST['selectedDate']) && $_POST['selectedDate'] !== '') {
+                    if (isset($_POST['selectedDate'])) {
                         $selectedDate = date('Y-m-d', strtotime($_POST['selectedDate']));
 
                         $select_query = "SELECT * FROM `inventory_log` WHERE DATE(date) = '$selectedDate'";
@@ -143,10 +146,7 @@ include ("PhpFunctions/update_product.php");
                             <?php
                         }
                     } else {
-                        date_default_timezone_set('Asia/Manila');
-                        $currentDateTime = date('F j, Y | h:i A');
-
-                        $select_query = "SELECT * FROM `inventory_log` WHERE DATE(date) = '$currentDateTime'";
+                        $select_query = "SELECT * FROM `inventory_log`";
 
                         $result = mysqli_query($conn, $select_query);
 
@@ -184,17 +184,19 @@ include ("PhpFunctions/update_product.php");
         </button>
     </div>
 
+
     <script>
         function filterTable() {
-            var filterValue = document.getElementById("actionTypeFilter").value.toLowerCase();
+            var filterValue = document.getElementById("actionTypeFilter").value.toLowerCase(); 
             var tableRows = document.querySelectorAll("#inventoryTable tbody tr");
 
             tableRows.forEach(function (row) {
-                var actionType = row.cells[2].textContent.toLowerCase();
+                var actionType = row.cells[2].textContent.toLowerCase(); 
+
                 if (filterValue === "all" || actionType === filterValue) {
-                    row.style.display = "";
+                    row.style.display = ""; 
                 } else {
-                    row.style.display = "none";
+                    row.style.display = "none"; 
                 }
             });
         }
@@ -202,44 +204,24 @@ include ("PhpFunctions/update_product.php");
 
     <script src="../js/inventory.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(function () {
-            var currentDate = new Date();
-            var currentFormattedDate = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
-
-            var initialDate = '<?php echo isset($_POST['selectedDate']) ? date('Y-m-d', strtotime($_POST['selectedDate'])) : ''; ?>';
-
-            $("#datepicker").daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                minYear: 2024,
-                startDate: initialDate || currentFormattedDate,
-                locale: {
-                    format: 'YYYY-MM-DD'
+            $("#datepicker").datepicker({
+                onSelect: function (dateText, inst) {
+                    $("#selectedDate").val(dateText);
+                    $("#dateForm").submit();
                 }
             });
-
-            $('#datepicker').on('apply.daterangepicker', function (ev, picker) {
-                var selectedDate = picker.startDate.format('YYYY-MM-DD');
-                $("#selectedDate").val(selectedDate);
-                $("#dateForm").submit();
-            });
-
-            $('#clearDateBtn').on('click', function () {
-                $("#datepicker").val(currentFormattedDate);
-                $("#selectedDate").val(currentFormattedDate);
-                $("#dateForm").submit();
-            }); 
         });
     </script>
 
     <script>
-        // document.getElementById('clearDateBtn').addEventListener('click', function () {
-        //     document.getElementById('datepicker').value = '';
-        //     document.getElementById('datepicker').placeholder = 'Select Date';
-        //     $("#selectedDate").val('');
-        //     $("#dateForm").submit();
-        // });
+        document.getElementById('clearDateBtn').addEventListener('click', function () {
+            document.getElementById('datepicker').value = '';
+            document.getElementById('datepicker').placeholder = 'Select Date';
+
+            window.location.href = window.location.href;
+        });
     </script>
 </body>
 
