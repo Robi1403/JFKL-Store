@@ -12,7 +12,7 @@ include ("PhpFunctions/update_product.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JFKL Store</title>
-    <link rel="stylesheet" href="../css/inventory.css">
+    <link rel="stylesheet" href="../css/inventory.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="../css/modalConfirm.css">
     <link rel="icon" href="../assets/storeLogo.svg">
 </head>
@@ -69,7 +69,7 @@ include ("PhpFunctions/update_product.php");
         </div>
         <div class="sbInventory">
             <button id="inventoryBtn">
-                <img src="../assets/inventory.svg" alt=""><br>
+                <img src="../assets/inventorygreen.svg" alt=""><br>
                 <strong>Inventory</strong>
             </button>
         </div>
@@ -83,15 +83,17 @@ include ("PhpFunctions/update_product.php");
 
     <div class="mainContainer">
         <div class="productDisplay">
-            <div class="delAddProduct">
-                
+            <div class="group">
                 <div class="searchBar">
                     <input type="text" id="search" placeholder="Search">
                 </div>
-                <button class="inventoryLogBtn" id="inventory_LogBtn" >Inventory Log </button>
-                <button class="removeProduct" id="removeProductBtn">Remove Product</button>
-                <button class="addProduct" id="addProductBtn">Add Product</button>
+                <div class="delAddProduct">
+                    <button class="inventoryLogBtn" id="inventory_LogBtn" >Inventory Log </button>
+                    <button class="removeProduct" id="removeProductBtn">Remove Product</button>
+                    <button class="addProduct" id="addProductBtn">Add Product</button>
+                </div>    
             </div>
+
             <form class="category" id="categoryContainer" name="form"
                 action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <button class="categoryBtn" type="submit" name="category" value="All">All</button>
@@ -157,8 +159,7 @@ include ("PhpFunctions/update_product.php");
                                         <td><?php echo $row["category"]; ?></td>
                                         <td><?php echo $row["unit_price"]; ?></td>
                                         <td><?php echo $row["retail_price"]; ?></td>
-                                        <td><?php echo $row["stock"]; ?>
-                                        </td>
+                                        <td><?php echo $row["stock"]; ?></td>
                                         <td>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                                 <!-- hidden inputs for the UpdateProductModal with product information -->
@@ -459,5 +460,19 @@ include ("PhpFunctions/update_product.php");
     </div>
 </body>
 <script src="../js/inventory.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryContainer = document.querySelector('.category');
+
+        categoryContainer.addEventListener('wheel', function(event) {
+            if (event.deltaY > 0) {
+                categoryContainer.scrollLeft += 50;
+            } else {
+                categoryContainer.scrollLeft -= 50;
+            }
+            event.preventDefault();
+        });
+    });
+    </script>
 
 </html>
