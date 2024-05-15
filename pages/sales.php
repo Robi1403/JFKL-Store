@@ -3,6 +3,10 @@
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
 include ("PhpFunctions/transactionDetails.php");
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location: LoginPage.php');
+    exit;
+}  
 ?>
 
 <!DOCTYPE html>

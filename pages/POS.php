@@ -3,6 +3,11 @@ session_start();
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/SaveTransaction.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
+
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location: LoginPage.php');
+    exit;
+}  
 ?>
 
 <!DOCTYPE html>

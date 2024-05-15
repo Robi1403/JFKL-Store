@@ -3,6 +3,12 @@ include ("PhpFunctions/connection.php");
 include ("PhpFunctions/remove_product.php");
 include ("PhpFunctions/add_product.php");
 include ("PhpFunctions/update_product.php");
+
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+        header('Location: LoginPage.php');
+        exit;
+    }   
+
 ?>
 
 <!DOCTYPE html>
