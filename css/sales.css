@@ -160,6 +160,10 @@ body{
 .sideBar .logout .sbLogout button{
     background-color: #ffffff;
 }
+.sideBar .logout .sbLogout button img{
+    width: 25px;
+}
+
 
 /* Main Container */
 
