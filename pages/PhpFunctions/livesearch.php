@@ -68,7 +68,8 @@ if (isset($_POST['input'])) {
            $(document).ready(function() {
             $(document).on('click', '.toCart', function(event) { 
                 event.preventDefault(); 
-                var id = $(this).data("product-id"); /
+                var id = $(this).data("product-id"); 
+                console.log(id);
                 $.ajax({
                     method: 'POST',
                     url: 'PhpFunctions/modal.php',

@@ -53,8 +53,12 @@ if (isset($_POST['id'])) {
                                         <h1><?php echo $totalAmount ?> </h1>
                                     </div>
                                 </div>
-                                <a href="sales.php" class="closeBtn">Close</a>
+                                <button  class="closeBtn" onclick="close();function close() {
+                                    var cancel = document.querySelector('.TransactionDetails');
+                                    cancel.style.display = 'none';
+                                 }">Close</button>
                             </div>
+                        
 
                             
             <?php

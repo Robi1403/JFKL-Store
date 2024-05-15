@@ -921,7 +921,7 @@ button:focus {
 
 .SearchResult{
     width: 100%;
-    min-height: auto;
+    /* min-height: auto; */
     max-width: 600px;
     background-color: #fff;
     position: absolute;
@@ -994,8 +994,8 @@ button:focus {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
     height: auto;
     max-height: 40vh;
     padding: 1px 10px 1px 10px;

@@ -568,3 +568,137 @@ body{
     outline: none;
     color: #ffffff;
 }
+
+
+.TransactionDetails{
+    position: absolute;
+    height: 100vh;
+    top: 0px;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    display: none;
+   
+ 
+}
+
+.transactionContainer{
+    width: 500px;
+    height: 503px;
+    border-radius: 13px;
+    background: #FAFAFA;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.SummaryContainer {
+    font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    height: 245px;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow-y: hidden;
+    background-color: #ffffff;
+}
+
+.SummaryContainer tr{
+    text-align: left;
+}
+
+.SummaryContainer th,
+.SummaryContainer td {
+    padding: 8px;
+    width: 100vh;
+    border: 1px solid #ddd;
+    text-align: left;
+    background-color: #ffffff;
+    border: none;
+    overflow-y: hidden;
+}
+
+.SummaryContainer th {
+    color: #007246;
+    font-weight: 500;
+}
+
+.SummaryContainer tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.SummaryContainer tbody tr:hover {
+    background-color: #e6e6e6;
+}
+
+.SummaryContainer td:first-child {
+    width: 40%;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.AmountSummary{
+    width: 441px;
+    height: 68px;
+    background-color: #FFF;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.05));
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.AmountSummary h1{
+    color: #008D5D;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+.AmountSummary h2{
+    color: #B1B7C1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+}
+
+.dividerDIV{
+    height: 40px;
+    width: 1px;
+    background-color: #D0D0D0;
+}
+.closeBtn {
+    width: 200px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #04B075;
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+    margin-top: 25px;
+}
+
+a{
+    padding: 12px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.transactionContainer h1{
+    margin-bottom: 10px;
+}

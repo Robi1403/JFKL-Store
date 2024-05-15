@@ -11,10 +11,11 @@ include ("PhpFunctions/transactionDetails.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/storeLogo.svg">
     <link rel="stylesheet" href="../css/sales.css">
     <title>JFKL Store</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
@@ -288,7 +289,8 @@ include ("PhpFunctions/transactionDetails.php");
                                             <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
                                             <td class="profit" id="profit"><?php echo $row["profit"] ?? '-'; ?></td>
                                             <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $transaction_number; ?>">See Details</button></td>
+                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
+
                                         </tr>
                                         <?php
                                     }
@@ -309,7 +311,7 @@ include ("PhpFunctions/transactionDetails.php");
                                             <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
                                             <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
                                             <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $transaction_number; ?>">See Details</button></td>
+                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
                                         </tr>
                                         <?php
                                     }
@@ -334,7 +336,6 @@ include ("PhpFunctions/transactionDetails.php");
     </form>
 
     <script src="../js/sales.js"></script>
-
     <script>
             $(document).ready(function() {
                 $(document).on('click', '.ProductDetails', function(event) { 
