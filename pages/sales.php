@@ -1,6 +1,8 @@
 <?php
 include ("PhpFunctions/connection.php");
-include ("PhpFunctions/current_sales_transacHistory.php");
+include ("PhpFunctions/transactionDetails.php");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -9,13 +11,8 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/sales.css">
+    <link rel="stylesheet" href="../css/sales.css?v=<?php echo time(); ?>">
     <title>JFKL Store</title>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
 </head>
 
 <body>
@@ -39,14 +36,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
             </div>
             <div class="todayGrossSale">
                 <p>Today's Gross Sale: </p>
-                <p><span><?php if (isset($totalSales)) {
-                    echo $totalSales; ?></span></p>
-                    <?php
-                } else { ?>
-                    <p><span><?php echo $currentTotalSales; ?></span></p>
-                    <?php
-                }
-                ?>
+                <p><span>P1,000,000,000.00</span></p>
             </div>
 
         </div>
@@ -88,110 +78,43 @@ include ("PhpFunctions/current_sales_transacHistory.php");
             <div class="sales">
                 <div class="salesStats">
                     <div class="labelgroup">
-                        <div class="salesStatsLabel">
-                            <p>Sales Statistics</p>
+                        <div class="salesStatsLabel"><p>Sales Statistics</p></div>
+                        <div class="dropdown">
+                            <div class="dropdown-select">
+                                <span class="select">Daily</span>
+                                <div class="caret"></div>
+                            </div>
+                            <ul class="dropdown-list">
+                                <li>Daily</li>
+                                <li>Monthly</li>
+                                <li>Yearly</li>
+                            </ul>
                         </div>
-                        <div id="reportrange" class="daterange">
-                            <img src="../assets/calendar.svg" alt="">
-                            <span></span> <i class="fa fa-caret-down"></i>
-                        </div>
+                        
                     </div>
-
+                    
                     <div class="lineShape"></div>
-
-                    <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $startDate = $_POST['startDate'];
-                        $endDate = $_POST['endDate'];
-
-                        $totalTransactions = 0;
-                        $totalItems = 0;
-                        $totalSales = 0;
-                        $totalProfit = 0;
-                    
-                        if ($startDate == $endDate) {
-                            $search_query = "SELECT COUNT(*) AS total_transactions, SUM(number_of_items) AS total_items, SUM(gross_sales) AS total_sales, SUM(profit) AS total_profit FROM `transaction_history` WHERE `date` = '$startDate'";
-                        } else {
-                            $search_query = "SELECT COUNT(*) AS total_transactions, SUM(number_of_items) AS total_items, SUM(gross_sales) AS total_sales, SUM(profit) AS total_profit FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
-                        }
-
-                        $search_result = mysqli_query($conn, $search_query);
-                        if ($search_result) {
-                            if (mysqli_num_rows($search_result) > 0) {
-                                $row = mysqli_fetch_assoc($search_result);
-                                $totalTransactions = $row['total_transactions'];
-                                $totalItems = $row['total_items'];
-                                $totalSales = $row['total_sales'];
-                                $totalProfit = $row['total_profit'];
-
-                                $totalTransactions = $totalTransactions ?? 0;
-                                $totalItems = $totalItems ?? 0;
-                                $totalSales = $totalSales ?? 0;
-                                $totalProfit = $totalProfit ?? 0;
-                    
-                            }
-                        } else {
-                            echo "<script>alert('Error searching sales data: " . mysqli_error($conn) . "');</script>";
-                        }
-                    }
-                    ?>
 
                     <div class="mainContainer">
                         <div class="container1">
                             <div class="grossSale">
-                                <h1><?php
-                                if (isset($totalSales)) {
-                                    echo $totalSales; ?></h1>
-                                    <?php
-                                    date_default_timezone_set('Asia/Manila');
-                                    $currentDate = date("Y-m-d");
-
-                                    if ($startDate == $currentDate && $endDate == $currentDate) { ?>
-                                        <p>Today's <strong>Gross Sale</strong></p>
-                                    <?php } else { ?>
-                                        <p> Total <strong>Gross Sale</strong><span></p>
-                                        <?php
-                                    }
-                                } else { ?>
-                                    <h1><?php echo $currentTotalSales; ?></h1>
-                                    <p>Today's <strong>Gross Sale</strong></p>
-                                    <?php
-                                }
-                                ?>
+                                <h1>P 456.00</h1>
+                                <p>Todays <strong>Gross Sale</strong></p>
 
                             </div>
-
                             <div class="order">
-                                <h1><?php
-                                if (isset($totalTransactions)) {
-                                    echo $totalTransactions; ?></h1>
-                                    <?php
-                                    date_default_timezone_set('Asia/Manila');
-                                    $currentDate = date("Y-m-d");
-
-                                    if ($startDate == $currentDate && $endDate == $currentDate) { ?>
-                                        <p><strong>Orders</strong> Today</p>
-                                    <?php } else { ?>
-                                        <p> Total <strong>Orders</strong><span></p>
-                                        <?php
-                                    }
-                                } else { ?>
-                                    <h1><?php echo $currentTotalTransactions; ?></h1>
-                                    <p><strong>Orders</strong> Today</p>
-                                    <?php
-                                }
-                                ?>
-
+                                <h1>12</h1>
+                                <p><strong>Orders</strong> Today</p>
                             </div>
                         </div>
                         <div class="container2">
                             <div class="totalProfit">
-                                <h1><?php echo isset($totalProfit) ? $totalProfit : $currentTotalProfit; ?></h1>
+                                <h1>P 5,432.00</h1>
                                 <p>Total <strong>Profit</strong></p>
                             </div>
                             <div class="others">
-                                <h1><?php echo isset($totalItems) ? $totalItems : $currentTotalItems; ?></h1>
-                                <p>Total <strong>Products Sold</strong></p>
+                                <h1>567</h1>
+                                <p>Total <strong>Products</strong></p>
                             </div>
                         </div>
                     </div>
@@ -233,7 +156,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                                                     <p><?php echo $row["stock"]; ?></p>
                                                 </td>
                                             </tr>
-                                            <?php
+                                        <?php
                                         }
                                         ?>
                                         </form>
@@ -260,8 +183,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                             <tr>
                                 <th class="col1">Transaction No.</th>
                                 <th class="col2">No. of Items</th>
-                                <th class="col3">Gross Sales</th>
-                                <th class="col3">Profit</th>
+                                <th class="col3">Total</th>
                                 <th class="col4">Date</th>
                                 <th class="col5"></th>
 
@@ -269,182 +191,66 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                         </thead>
                         <tbody>
                             <?php
-                            if (isset($totalTransactions)) {
-                                if ($startDate == $endDate) {
-                                    $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$startDate'";
-                                } else {
-                                    $select_query = "SELECT * FROM `transaction_history` WHERE `date` BETWEEN '$startDate' AND '$endDate'";
-                                }
+                            $select_query = "SELECT * FROM `transaction_history`";
 
-                                $result = mysqli_query($conn, $select_query);
+                            $result = mysqli_query($conn, $select_query);
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) { ?>
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) { 
+                                    $transaction_number = $row["transaction_number"];?>
+                                    
                                         <tr>
-                                            <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
-                                            </td>
+                                            <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?></td>
                                             <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
                                             <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
-                                            <td class="profit" id="profit"><?php echo $row["profit"] ?? '-'; ?></td>
                                             <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                                        </tr>
-                                        <?php
-                                    }
-                                } else {
-                                    echo "<tr><td>No record of transaction</td></tr>";
-                                }
-                            } else { 
-                                $select_query = "SELECT * FROM `transaction_history` WHERE `date` = '$currentDate'";
-                                $result = mysqli_query($conn, $select_query);
+                                            <td class="seeDetails" id="seeDetails">
+                                            <button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $transaction_number; ?>">See Details</button>
+                                        </td>
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                ?>
-                                <tr>
-                                    <td class="transactionNum" id="currentTransactionNum"><?php echo $currentTransactionNum; ?>
-                                    </td>
-                                    <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
-                                    <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
-                                    <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
-                                    <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
-                                </tr>
-                                <?php
-                                    }
-                            } 
-                        }?>
+                                        </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo "<tr><td>No record of transaction.</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+
+        <div class="TransactionDetails">
+    
+        </div>
+
+
     </div>
-
-    <form id="dateform" name="dateform" action="" method="POST">
-        <input type="hidden" id="startDate" name="startDate">
-        <input type="hidden" id="endDate" name="endDate">
-    </form>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/sales.js"></script>
     <script>
-        function updateDate() {
-            let today = new Date();
 
-            let dayName = today.getDay(),
-                dayNum = today.getDate(),
-                month = today.getMonth(),
-                year = today.getFullYear();
-
-            const months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-            ];
-            const dayWeek = [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-            ];
-            const IDCollection = ["day", "daynum", "month", "year"];
-            const val = [dayWeek[dayName], dayNum, months[month], year];
-            for (let i = 0; i < IDCollection.length; i++) {
-                document.getElementById(IDCollection[i]).textContent = val[i];
-            }
-        }
-
-        function updateTime() {
-            const displayTime = document.querySelector(".display-time");
-            let time = new Date();
-            displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
-        }
-
-        function updateDateTime() {
-            updateDate(); 
-            updateTime(); 
-            setTimeout(updateDateTime, 1000); 
-        }
-
-        updateDateTime();
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var dropdownSelect = document.querySelector('.dropdown-select');
-            var dropdownList = document.querySelector('.dropdown-list');
-            var dropdownOptions = document.querySelectorAll('.dropdown-list li');
-            var selectSpan = document.querySelector('.select');
-
-            dropdownSelect.addEventListener('click', function () {
-                dropdownList.style.display = (dropdownList.style.display === 'block') ? 'none' : 'block';
-            });
-
-            dropdownOptions.forEach(function (option) {
-                option.addEventListener('click', function () {
-                    selectSpan.textContent = option.textContent;
-                    dropdownList.style.display = 'none';
+            $(document).ready(function() {
+                $(document).on('click', '.ProductDetails', function(event) { 
+                    event.preventDefault(); 
+                    var id = $(this).data("transaction");
+                    $.ajax({
+                        method: 'POST',
+                        url: 'PhpFunctions/transactionDetails.php',
+                        data: {id: id},
+                        success: function(response) {
+                            $(".TransactionDetails").css("display", "flex");
+                            $('.TransactionDetails').html(response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert("An error occurred: " + error); 
+                        }
+                    });
                 });
             });
 
-            document.addEventListener('click', function (e) {
-                if (!dropdownSelect.contains(e.target)) {
-                    dropdownList.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(function () {
-            var start = moment();
-            var end = moment();
-
-            function cb(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-
-                $('#startDate').val(start.format('YYYY-MM-DD'));
-                $('#endDate').val(end.format('YYYY-MM-DD'));
-            }
-
-            $('#reportrange').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                }
-            }, cb);
-
-            cb(start, end);
-
-            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                $('#dateform').submit();
-            });
-        });
-    </script>
-
-    <script>
-        document.getElementById("inventoryBtn").onclick = function () {
-            window.location.href = "inventory.php";
-        };
-
-        document.getElementById("POSBtn").onclick = function () {
-            window.location.href = "POS.php";
-        };
     </script>
 </body>
 
