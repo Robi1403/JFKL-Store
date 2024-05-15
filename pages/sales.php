@@ -308,7 +308,7 @@ include ("PhpFunctions/transactionDetails.php");
                                             <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
                                             <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
                                             <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button>See Details</button></td>
+                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
                                         </tr>
                                         <?php
                                     }
@@ -333,7 +333,6 @@ include ("PhpFunctions/transactionDetails.php");
     </form>
 
     <script src="../js/sales.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
             $(document).ready(function() {
