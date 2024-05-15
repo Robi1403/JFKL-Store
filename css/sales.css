@@ -125,7 +125,7 @@ body{
     transition: 0.2s;
     cursor: pointer;
     color: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .sideBar button img {
@@ -144,7 +144,7 @@ body{
 .sideBar .sbInventory button {
     background-color: #ffffff;
     color: #a6acb8;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .sideBar .sbPOS button:hover,
@@ -160,6 +160,10 @@ body{
 .sideBar .logout .sbLogout button{
     background-color: #ffffff;
 }
+.sideBar .logout .sbLogout button img{
+    width: 25px;
+}
+
 
 /* Main Container */
 
@@ -300,7 +304,7 @@ body{
 .grossSale h1, .order h1, .totalProfit h1, .others h1{
     font-size: 45px;
     font-weight: 800;
-    margin-bottom: 3px;
+    line-height: 45px;
 }
 
 .labelgroup{
@@ -313,7 +317,7 @@ body{
 .dropdown {
     position: absolute;
     top: 0;
-    right: 0; /* Align to the right side */
+    right: 0; 
     display: inline-block;
     margin-right: 20px;
     font-size: 14px;
@@ -406,18 +410,20 @@ body{
     width: 0px;
 }
 .stocksTable{
-    font-size: 13px;
+    font-size: 14px;
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
+    border-collapse: separate; /* Ensure spacing between cells */
+    border-spacing: 15px 5px; /* Set horizontal and vertical spacing */
 }
 .stocksTable thead th{
     background-color: #ffffff;
     position: sticky;
     top: 0;
-    padding: 20px 0px 10px 0px;
+    padding: 15px 0px 15px 0px;
     color: #b4b4b4;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     text-align: left;
 
 }
@@ -427,11 +433,11 @@ body{
     background-color: #ffffff;
     border: none;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
 }
 .stocksTable tbody #productID,
 .stocksTable .col1 {
-    width: 10vw;
+    width: 15%;
     margin-right: 15px;
 }
 .stocksTable tbody #productName,
@@ -445,10 +451,7 @@ body{
 }
 .stocksTable tbody #category,
 .stocksTable .col4 {
-    width: 15vw;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    width: auto;;
 }
 .stocksTable tbody #stock,
 .stocksTable .col5 {
@@ -503,7 +506,7 @@ body{
     padding: 0px 40px 20px 40px;
 }
 .transactionTable{
-    font-size: 13px;
+    font-size: 14px;
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
 }
@@ -514,7 +517,7 @@ body{
     padding: 20px 0px 15px 0px;
     text-align: left;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     color: #b4b4b4;
 }
 .transactionTable td{
@@ -554,7 +557,7 @@ body{
     color: #04B075;
     border-radius: 5px;
     padding: 5px 15px 5px 15px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     background-color: transparent;
     cursor: pointer;
