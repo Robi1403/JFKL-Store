@@ -1,6 +1,7 @@
 <?php
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
+include ("PhpFunctions/transactionDetails.php");
 ?>
 
 <!DOCTYPE html>
@@ -318,6 +319,12 @@ include ("PhpFunctions/current_sales_transacHistory.php");
                 </div>
             </div>
         </div>
+
+        <div class="TransactionDetails">
+    
+        </div>
+
+        
     </div>
 
     <form id="dateform" name="dateform" action="" method="POST">
@@ -326,6 +333,29 @@ include ("PhpFunctions/current_sales_transacHistory.php");
     </form>
 
     <script src="../js/sales.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+            $(document).ready(function() {
+                $(document).on('click', '.ProductDetails', function(event) { 
+                    event.preventDefault(); 
+                    var id = $(this).data("transaction");
+                    $.ajax({
+                        method: 'POST',
+                        url: 'PhpFunctions/transactionDetails.php',
+                        data: {id: id},
+                        success: function(response) {
+                            $(".TransactionDetails").css("display", "flex");
+                            $('.TransactionDetails').html(response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert("An error occurred: " + error); 
+                        }
+                    });
+                });
+            });
+
+    </script>
 </body>
 
 </html>
