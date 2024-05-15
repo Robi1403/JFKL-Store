@@ -334,8 +334,8 @@ include ("PhpFunctions/transactionDetails.php");
 
     <script src="../js/sales.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
 
+    <script>
             $(document).ready(function() {
                 $(document).on('click', '.ProductDetails', function(event) { 
                     event.preventDefault(); 
@@ -354,7 +354,6 @@ include ("PhpFunctions/transactionDetails.php");
                     });
                 });
             });
-
     </script>
 </body>
 

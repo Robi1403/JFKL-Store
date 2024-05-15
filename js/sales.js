@@ -156,3 +156,5 @@ function resetDateRangePicker() {
     localStorage.setItem('startDate', start.format('YYYY-MM-DD'));
     localStorage.setItem('endDate', end.format('YYYY-MM-DD'));
 }
+
+//see details
