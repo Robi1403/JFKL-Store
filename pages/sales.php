@@ -11,6 +11,8 @@ include ("PhpFunctions/transactionDetails.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/sales.css">
+    <link rel="icon" href="../assets/storeLogo.svg">
+    
     <title>JFKL Store</title>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
