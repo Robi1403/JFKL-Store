@@ -329,7 +329,7 @@ include ("PhpFunctions/transactionDetails.php");
 
     <form id="dateform" name="dateform" action="" method="POST">
         <input type="hidden" id="startDate" name="startDate">
-        <input type="hidden" id="endDate" name="endDate">
+        <input type="hidden" id="endDate" name="endDate"> 
     </form>
 
     <script src="../js/sales.js"></script>
