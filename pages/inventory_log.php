@@ -33,60 +33,66 @@ include ("PhpFunctions/update_product.php");
         </div>
 
         <div class="right">
-            <div class="todayGrossSaleLabel">
-                <p>Today's Logs: </p>
-            </div>
-
-            <?php
-            date_default_timezone_set('Asia/Manila');
-            $currentDate = date("Y-m-d");
-
-            $search_query = "SELECT COUNT(*) AS total_logs FROM `inventory_log` WHERE DATE(date) = '$currentDate'";
-
-            $search_result = mysqli_query($conn, $search_query);
-            if ($search_result) {
-                if (mysqli_num_rows($search_result) > 0) {
-                    $row = mysqli_fetch_assoc($search_result);
-                    $currentTotalLogs = $row['total_logs'];
-
-                    $currentTotalLogs = $currentTotalLogs ?? 0;
-                }
-            }
-            ?>
-
             <div class="todayGrossSale">
+                <p>Today's Logs: </p>
+
+                <?php
+                date_default_timezone_set('Asia/Manila');
+                $currentDate = date("Y-m-d");
+
+                $search_query = "SELECT COUNT(*) AS total_logs FROM `inventory_log` WHERE DATE(date) = '$currentDate'";
+
+                $search_result = mysqli_query($conn, $search_query);
+                if ($search_result) {
+                    if (mysqli_num_rows($search_result) > 0) {
+                        $row = mysqli_fetch_assoc($search_result);
+                        $currentTotalLogs = $row['total_logs'];
+
+                        $currentTotalLogs = $currentTotalLogs ?? 0;
+                    }
+                }
+                ?>
                 <p><strong><?php echo $currentTotalLogs; ?></strong></p>
             </div>
-            <div class="date">
-                <p>
-                    <?php
-                    date_default_timezone_set('Asia/Manila');
-                    $currentDateTime = date('F j, Y h:i A');
-                    echo $currentDateTime;
-                    ?>
-                </p>
+            <div class="displayDateTime">
+                <div class="display-date">
+                    <span id="day">day</span>,
+                    <span id="daynum">00</span>
+                    <span id="month">month</span>
+                    <span id="year">0000</span>
+                </div>
+                <div class="display-time"></div>
             </div>
         </div>
     </div>
 
     <div class="sideBar">
-        <div class="sbPOS">
-            <button id="POSBtn">
-                <img src="../assets/POS_g.svg" alt=""><br>
-                <strong>POS</strong>
-            </button>
+        <div class="features">
+            <div class="sbPOS">
+                <button id="POSBtn">
+                    <img src="../assets/POS_g.svg" alt=""><br>
+                    <strong>POS</strong>
+                </button>
+            </div>
+            <div class="sbInventory">
+                <button id="inventoryBtn">
+                    <img src="../assets/inventorygreen.svg" alt=""><br>
+                    <strong>Inventory</strong>
+                </button>
+            </div>
+            <div class="sbSales">
+                <button id="salesBtn">
+                    <img src="../assets/sales.svg" alt=""><br>
+                    <strong>Sales</strong>
+                </button>
+            </div>
         </div>
-        <div class="sbInventory">
-            <button id="inventoryBtn">
-                <img src="../assets/inventorygreen.svg" alt=""><br>
-                <strong>Inventory</strong>
-            </button>
-        </div>
-        <div class="sbSales">
-            <button id="salesBtn">
-                <img src="../assets/sales.svg" alt=""><br>
-                <strong>Sales</strong>
-            </button>
+        <div class="logout">
+            <div class="sbLogout">
+                <button id="logoutBtn">
+                    <img src="../assets/logout.svg" alt=""><br>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -99,8 +105,17 @@ include ("PhpFunctions/update_product.php");
                 <option value="remove">Remove</option>
             </select>
 
-            <input type="text" id="datepicker" name="selectedDate" placeholder="Select Date" />
-            <button id="clearDateBtn">x</button>
+            <div class="clearBtn">
+                <input type="text" id="datepicker" name="selectedDate" placeholder="Select Date" />
+                <button class="clearBtn" id="clearDateBtn">X</button>
+            </div>
+
+            <div class="logBtn">
+                <button class="inventoryLogBtn" id="backBtn" onclick="window.location.href = 'inventory.php';">Back
+                </button>
+            </div>
+
+
         </div>
 
         <div class="inventoryLog">
@@ -144,7 +159,7 @@ include ("PhpFunctions/update_product.php");
                         }
                     } else {
                         date_default_timezone_set('Asia/Manila');
-                        $currentDateTime = date('F j, Y | h:i A');
+                        $currentDateTime = date('Y-m-d');
 
                         $select_query = "SELECT * FROM `inventory_log` WHERE DATE(date) = '$currentDateTime'";
 
@@ -179,10 +194,90 @@ include ("PhpFunctions/update_product.php");
         <input type="hidden" id="selectedDate" name="selectedDate">
     </form>
 
-    <div class="delAddProduct">
-        <button class="inventoryLogBtn" id="backBtn" onclick="window.location.href = 'inventory.php';">Back
-        </button>
-    </div>
+    <script>
+        function updateDate() {
+            let today = new Date();
+
+            let dayName = today.getDay(),
+                dayNum = today.getDate(),
+                month = today.getMonth(),
+                year = today.getFullYear();
+
+            const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+            const dayWeek = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ];
+            const IDCollection = ["day", "daynum", "month", "year"];
+            const val = [dayWeek[dayName], dayNum, months[month], year];
+            for (let i = 0; i < IDCollection.length; i++) {
+                document.getElementById(IDCollection[i]).textContent = val[i];
+            }
+        }
+
+        function updateTime() {
+            const displayTime = document.querySelector(".display-time");
+            let time = new Date();
+            displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
+        }
+
+        function updateDateTime() {
+            updateDate();
+            updateTime();
+            setTimeout(updateDateTime, 1000);
+        }
+
+        updateDateTime();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryContainer = document.querySelector('.category');
+
+            categoryContainer.addEventListener('wheel', function (event) {
+                if (event.deltaY > 0) {
+                    categoryContainer.scrollLeft += 50;
+                } else {
+                    categoryContainer.scrollLeft -= 50;
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
+
+    <script>
+        //redirect to POS
+        document.getElementById("POSBtn").onclick = function () {
+            window.location.href = "POS.php";
+        };
+
+        //redirect to Sales
+        document.getElementById("salesBtn").onclick = function () {
+            window.location.href = "sales.php";
+        };
+
+        //redirect to login page
+        document.getElementById("logoutBtn").onclick = function () {
+            window.location.href = "LoginPage.php";
+        };
+    </script>
 
     <script>
         function filterTable() {
@@ -199,8 +294,6 @@ include ("PhpFunctions/update_product.php");
             });
         }
     </script>
-
-    <script src="../js/inventory.js"></script>
 
     <script>
         $(function () {
@@ -229,17 +322,8 @@ include ("PhpFunctions/update_product.php");
                 $("#datepicker").val(currentFormattedDate);
                 $("#selectedDate").val(currentFormattedDate);
                 $("#dateForm").submit();
-            }); 
+            });
         });
-    </script>
-
-    <script>
-        // document.getElementById('clearDateBtn').addEventListener('click', function () {
-        //     document.getElementById('datepicker').value = '';
-        //     document.getElementById('datepicker').placeholder = 'Select Date';
-        //     $("#selectedDate").val('');
-        //     $("#dateForm").submit();
-        // });
     </script>
 </body>
 

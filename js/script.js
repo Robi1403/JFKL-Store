@@ -13,6 +13,10 @@ document.getElementById("salesBtn").onclick = function () {
     window.location.href = "sales.php";
 };
 
+//redirect to login page
+document.getElementById("logoutBtn").onclick = function () {
+    window.location.href = "LoginPage.php";
+};
 
 var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
 var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);

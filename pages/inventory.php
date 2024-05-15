@@ -35,10 +35,9 @@ include ("PhpFunctions/update_product.php");
         </div>
 
         <div class="right">
-            <div class="todayGrossSaleLabel">
-                <p>Total Products: </p>
-            </div>
             <div class="todayGrossSale">
+                <p>Total Products: </p>
+
                 <?php 
                 $count_query = "SELECT COUNT(*) AS product_count FROM inventory";
                 $result = mysqli_query($conn, $count_query);
@@ -53,36 +52,46 @@ include ("PhpFunctions/update_product.php");
                 ?>
                 <p><strong><?php echo $product_count; ?></strong></p>
             </div>
-            <div class="date">
-                <p>
-                    <?php
-                    date_default_timezone_set('Asia/Manila');
-                    $currentDateTime = date('F j, Y | h:i A');
-                    echo $currentDateTime;
-                    ?>
-                </p>
+
+            <div class="displayDateTime">
+                <div class="display-date">
+                    <span id="day">day</span>,
+                    <span id="daynum">00</span>
+                    <span id="month">month</span>
+                    <span id="year">0000</span>
+                </div>
+                <div class="display-time"></div>
             </div>
         </div>
     </div>
 
     <div class="sideBar">
-        <div class="sbPOS">
-            <button id="POSBtn">
-                <img src="../assets/POS_g.svg" alt=""><br>
-                <strong>POS</strong>
-            </button>
+        <div class="features">
+            <div class="sbPOS">
+                <button id="POSBtn">
+                    <img src="../assets/POS_g.svg" alt=""><br>
+                    <strong>POS</strong>
+                </button>
+            </div>
+            <div class="sbInventory">
+                <button id="inventoryBtn">
+                    <img src="../assets/inventory.svg" alt=""><br>
+                    <strong>Inventory</strong>
+                </button>
+            </div>
+            <div class="sbSales">
+                <button id="salesBtn">
+                    <img src="../assets/sales.svg" alt=""><br>
+                    <strong>Sales</strong>
+                </button>
+            </div>
         </div>
-        <div class="sbInventory">
-            <button id="inventoryBtn">
-                <img src="../assets/inventory.svg" alt=""><br>
-                <strong>Inventory</strong>
-            </button>
-        </div>
-        <div class="sbSales">
-            <button id="salesBtn">
-                <img src="../assets/sales.svg" alt=""><br>
-                <strong>Sales</strong>
-            </button>
+        <div class="logout">
+            <div class="sbLogout">
+                <button id="logoutBtn">
+                    <img src="../assets/logout.svg" alt=""><br>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -428,8 +437,10 @@ include ("PhpFunctions/update_product.php");
             <div class="message">
                 <p>Successfully Added Product to Inventory</p>
             </div>
-            <div class="updateButtons">
-                <button class="addProduct" id="add_okBtn">Ok</button>
+            <div class="formContent">
+                <div class="updateButtons">
+                    <button class="addProduct" id="add_okBtn">Ok</button>
+                </div>
             </div>
         </div>
     </div>
@@ -442,8 +453,10 @@ include ("PhpFunctions/update_product.php");
             <div class="message">
                 <p>Successfully Updated Product Information</p>
             </div>
-            <div class="updateButtons">
-                <button class="addProduct" id="update_okBtn">Ok</button>
+            <div class="formContent">
+                <div class="updateButtons">
+                    <button class="addProduct" id="update_okBtn">Ok</button>
+                </div>
             </div>
         </div>
     </div>
@@ -456,8 +469,10 @@ include ("PhpFunctions/update_product.php");
             <div class="message">
                 <p>Successfully Removed Product(s) from Inventory</p>
             </div>
-            <div class="updateButtons">
-                <button class="addProduct" id="remove_okBtn">Ok</button>
+            <div class="formContent">
+                <div class="updateButtons">
+                    <button class="addProduct" id="remove_okBtn">Ok</button>
+                </div>
             </div>
         </div>
     </div>

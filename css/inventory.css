@@ -55,23 +55,71 @@ body{
     height: 30px;
 }
 
+
+.navbar .searchBar form{
+    display: flex;
+    width: 600px;
+    position: relative;
+}
+
+.navbar .searchBar input{
+    font-size: 14px;
+    height: 40px;
+    width: 600px;
+    left: 0;
+    border: none;
+    border-radius: 7px 0px 0px 7px;
+    padding-left: 20px;
+    background-color: #F6F6F6;
+    position: relative;
+}
+.navbar .searchBar input:focus{
+    outline: none;
+}
+.navbar .searchBar button{
+    background-color: #F6F6F6;
+    border: none;
+    border-radius: 0px 7px 7px 0px;
+    cursor: pointer;
+}
+.navbar .searchBar button:hover{
+    transition: all .2s ease-in-out;
+    background-color: #eeeeee;
+}
+
+.navbar .searchBar img{
+    margin: 0px 15px 0px 15px;
+    width: 15px;
+}
+
 .navbar .right{
     display: flex;
+    justify-content: end;
     align-items: center;
     flex: 1;
+    overflow: hidden;
+    text-overflow: inherit;
+    white-space: nowrap;
+    gap: 30px;
+    margin: 3%;
 }
-
 .navbar .right .todayGrossSale{
+    display: flex;
+    gap: 5px;
+}
+.navbar .right .todayGrossSale strong{
+    display: flex;
+    gap: 10px;
     color: #04B075;
     font-weight: 600;
-    margin-left: 10px;
+}
+.navbar .right .displayDateTime{
+    display: flex;
+    gap: 10px;
 }
 
-.navbar .right .date{
-    margin-left: 80px;
-}
-
-.sideBar{
+/* Sidebar */
+.sideBar {
     height: 100%;
     width: 115px;
     padding-top: 20px;
@@ -80,6 +128,9 @@ body{
     background-color: #ffffff;
 }
 
+.sideBar .features{
+    height: 70%;
+}
 .sideBar button{
     height: 70px;
     width: 70px;
@@ -99,7 +150,6 @@ body{
     margin: 5px;
 }
 
-
 .sideBar button:hover{
     background-color: #009963;
 }
@@ -118,6 +168,14 @@ body{
 .sideBar .sbSales button:hover{
     background-color: #f1f1f1;
     transition: all .2s ease-in-out;
+}
+
+.logout {
+    height: 7%;
+}
+
+.sideBar .logout .sbLogout button{
+    background-color: #ffffff;
 }
 
 
@@ -240,7 +298,7 @@ body{
 /* Table styles */
 .inventory{
     height: auto;
-    max-height: 68vh;
+    max-height: 64vh; /*modified*/
     overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
@@ -426,7 +484,7 @@ input[type=text]:-ms-input-placeholder{
 .labelInput .addImageBtn input{
     display: none;
 }
-.labelInput .addImageBtn label[for="input-file"]{
+.labelInput .addImageBtn label[for="input-file"], .labelInput .addImageBtn label[for="updateInput-file"]{
     width: 150px;
     padding: 0px 30px 0px 30px;
     height: 30px;
@@ -520,6 +578,39 @@ input[type=text]:-ms-input-placeholder{
     display: none;
 }
 
+.logBtn {
+    display: flex;
+    justify-content: flex-end;
+    flex: 2;
+}
+
+.logBtn button, .clearBtn button {
+    width: auto;
+    padding: 0px 20px 0px 20px;
+    height: 40px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.clearBtn {
+    position: relative;
+}
+
+.clearBtn button {
+    padding: 0px 10px 0px 10px;
+    margin-left: 0px;
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+}
+
+
 .inventoryLogBtn {
     background-color: #414a4d;
     transition: all .2s ease-in-out;
@@ -529,10 +620,6 @@ input[type=text]:-ms-input-placeholder{
     background-color: #2d3335; /* Darker shade on hover */
 }
 
-#backBtn {
-    margin-top: 30px;
-    margin-right: 80px;
-}
 .mainContainerLog{
     background-color: #F9F9F9;
     flex: 1;
@@ -557,7 +644,8 @@ input[type=text]:-ms-input-placeholder{
 .inventoryLog{
     width: 100%;
     height: auto;
-    max-height: 68vh;
+    max-height: 71vh; /*modified*/
+    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
