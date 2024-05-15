@@ -317,7 +317,7 @@ include ("PhpFunctions/current_sales_transacHistory.php");
 
 
         <div class="OrderSummary">
-            <div class="OrderSummaryConatiner">
+            <div class="OrderSummaryContainer">
                 <p>Order Summary</p>
                 <div class="SummaryContainer">
                     <table>

@@ -790,7 +790,7 @@ button:focus {
     display: none;
 }
 
-.OrderSummaryConatiner{
+.OrderSummaryContainer{
     width: 500px;
     height: 503px;
     border-radius: 13px;
