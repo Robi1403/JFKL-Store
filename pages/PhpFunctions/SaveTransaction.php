@@ -3,6 +3,7 @@ include('connection.php');
 
 
 function createTransactionNumber(){
+    date_default_timezone_set('Asia/Manila');
     $current_date = date('mdY');
     $current_time = 60000+ date('His');
     $random_number = mt_rand(1000, 9999); 
@@ -15,6 +16,7 @@ function createTransactionNumber(){
 function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$cart){
 
     $transaction_number = createTransactionNumber();
+    date_default_timezone_set('Asia/Manila');
     $current_date = date('Y-m-d');
     $profit = $SubTotal -$realCostofGoods;
 

@@ -230,8 +230,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
 
                     <?php
-                    $SubTotal = 0;
-                    $realCostofGoods = 0;
+                    $SubTotal = 0.00;
+                    $realCostofGoods = 0.00;
                     $numberOfItems = 0;
                     $quantity = 1;
 
@@ -250,7 +250,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
                                 <div class="Price">
                                     <h3>Price</h3>
-                                    <h1>₱<?php echo $value['retail_price'] ?></h1>
+                                    <h1><?php echo "₱ " . $value['retail_price']?></h1>
                                 </div>
 
                                 <div class="quantity">
@@ -272,11 +272,12 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
                                     <?php
                                     $total = $value['retail_price'] * $value['quantity'];
+                                    $total = number_format($total, 2, '.', '');
                                     $CostOfGoods = $value['unitPrice'] * $value['quantity'];
                                     ?>
 
                                     <h3>Total</h3>
-                                    <h1>₱<?php echo $total ?></h1>
+                                    <h1><?php echo "₱ " . $total ?></h1>
                                 </div>
 
                                 <a href="POS.php?action=remove&id=<?php echo $value['id'] ?>" class="delete">
@@ -288,6 +289,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                             <?php
 
                             $SubTotal = $SubTotal + $total;
+                            $SubTotal = number_format($SubTotal, 2, '.', '');
                             $realCostofGoods = $realCostofGoods + $CostOfGoods;
                             $numberOfItems = $numberOfItems + $value['quantity'];
                         }
@@ -307,12 +309,12 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                         </div>
                         <div class="SubTotal">
                             <h1>Subtotal</h1>
-                            <h1 id="OverAllTotal"><?php echo $SubTotal ?></h1>
+                            <h1 id="OverAllTotal"><?php echo "₱ " . $SubTotal ?></h1>
                         </div>
                         <div class="lineDiv"></div>
                         <div class="Total">
                             <h1>Change</h1>
-                            <h1 id="change">P 1,100</h1>
+                            <h1 id="change">₱ 1,100</h1>
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
@@ -353,7 +355,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                     </td>
 
                                     <td>
-                                        <?php echo $value['retail_price'] ?>
+                                        <?php echo "₱ " . $value['retail_price'] ?>
                                     </td>
 
                                     <td>
@@ -362,10 +364,11 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
                                     <?php
                                     $total = $value['retail_price'] * $value['quantity'];
+                                    $total = number_format($total, 2, '.', '');
                                     $CostOfGoods = $value['unitPrice'] * $value['quantity'];
                                     ?>
                                     <td>
-                                        <?php echo $total ?>
+                                        <?php echo "₱ " . $total ?>
                                     </td>
                                 </tr>
                             <?php }

@@ -66,15 +66,18 @@ UserInput.addEventListener("keyup", function(event) {
 
 
 function Compute() {
-    var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
+
+    var OverAllTotalText = document.getElementById('OverAllTotal').innerText;
+    var cleanedTotalText = OverAllTotalText.replace(/₱/g, '');
+    var OverAllTotal = parseFloat(cleanedTotalText);
     var ClientAmount = parseFloat(UserInput.value);
     var changeDiv = document.getElementById('change');
     var showReceive = document.querySelector('.showReceive');
     var showChange = document.querySelector('.showChange');
 
 
-    var Change = ClientAmount - OverAllTotal;
-
+    var ChangeInt = ClientAmount - OverAllTotal;
+    var Change = ChangeInt.toFixed(2);
     if (isNaN(Change)) {
         changeDiv.innerHTML = 0;
         showChange.innerHTML = "₱ " +  0;
