@@ -1,8 +1,8 @@
 <?php
-session_start();
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/SaveTransaction.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
+include ("PhpFunctions/login.php");
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header('Location: LoginPage.php');
@@ -212,11 +212,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                             }
                         }
                         unset($value);
-                    }
-
-                    if ($_GET['action'] == "logout") {
-                     
-                        unset($_SESSION['loggedin']);
                     }
 
                 }

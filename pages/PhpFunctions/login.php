@@ -24,6 +24,15 @@ session_start();
 
 
     }
+
+    if (isset($_GET['action'])) {
+       
+        if ($_GET['action'] == "logout") {
+         
+            unset($_SESSION['loggedin']);
+        }
+
+    }
     
 
     
