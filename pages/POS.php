@@ -92,9 +92,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
             </div>
             <div class="logout">
                 <div class="sbLogout">
-                    <button id="logoutBtn">
+                    <a href="POS.php?action=logout" id="logoutBtn">
                         <img src="../assets/logout.svg" alt=""><br>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -212,6 +212,11 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                             }
                         }
                         unset($value);
+                    }
+
+                    if ($_GET['action'] == "logout") {
+                     
+                        unset($_SESSION['loggedin']);
                     }
 
                 }

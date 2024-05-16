@@ -3,6 +3,9 @@ include ("PhpFunctions/connection.php");
 include ("PhpFunctions/remove_product.php");
 include ("PhpFunctions/add_product.php");
 include ("PhpFunctions/update_product.php");
+include ("PhpFunctions/login.php");
+
+
 
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         header('Location: LoginPage.php');
@@ -94,9 +97,9 @@ include ("PhpFunctions/update_product.php");
         </div>
         <div class="logout">
             <div class="sbLogout">
-                <button id="logoutBtn">
+                <a href="inventory.php?action=logout" id="logoutBtn">
                     <img src="../assets/logout.svg" alt=""><br>
-                </button>
+                </a>
             </div>
         </div>
     </div>

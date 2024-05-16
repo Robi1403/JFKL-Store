@@ -3,6 +3,7 @@
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
 include ("PhpFunctions/transactionDetails.php");
+include ("PhpFunctions/login.php");
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header('Location: LoginPage.php');
     exit;
@@ -82,9 +83,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         </div>
         <div class="logout">
             <div class="sbLogout">
-                <button id="logoutBtn">
+                <a href="sales.php?action=logout" id="logoutBtn">
                     <img src="../assets/logout.svg" alt=""><br>
-                </button>
+                </a>
             </div>
         </div>
     </div>
