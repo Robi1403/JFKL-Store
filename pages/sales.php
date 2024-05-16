@@ -310,13 +310,12 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                     while ($row = $result->fetch_assoc()) {
                                         ?>
                                         <tr>
-                                            <td class="transactionNum" id="currentTransactionNum">
-                                                <?php echo $currentTransactionNum; ?>
+                                        <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
                                             </td>
-                                            <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
-                                            <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
-                                            <td class="profit" id="profit"><?php echo $currentProfit; ?></td>
-                                            <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
+                                            <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
+                                            <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
+                                            <td class="profit" id="profit"><?php echo $row["profit"] ?? '-'; ?></td>
+                                            <td class="date" id="date"><?php echo $row["date"]; ?></td>
                                             <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
                                         </tr>
                                         <?php
