@@ -3,6 +3,11 @@ session_start();
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/SaveTransaction.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
+
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location: LoginPage.php');
+    exit;
+}  
 ?>
 
 <!DOCTYPE html>
@@ -412,26 +417,6 @@ include ("PhpFunctions/current_sales_transacHistory.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/script.js"></script>
     <script>
-        $(document).ready(function () {
-            $(document).on('click', '.toCart', function (event) {
-
-                event.preventDefault();
-                var id = $(this).siblings(".ProductID").val();
-                $.ajax({
-                    method: 'POST',
-                    url: 'PhpFunctions/modal.php',
-                    data: { id: id },
-                    success: function (response) {
-                        $(".addItem").css("display", "flex");
-                        $('.addItem').html(response);
-                    },
-                    error: function (xhr, status, error) {
-                        alert("An error occurred: " + error);
-                    }
-                });
-            });
-        });
-
         $(document).ready(function () {
             $(document).on('click', '.ConfirmBtn', function (event) {
                 event.preventDefault();
