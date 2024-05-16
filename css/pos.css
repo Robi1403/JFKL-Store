@@ -1070,3 +1070,14 @@ button:focus {
     text-decoration: none;
     margin-top: 50px;
 }
+
+.ItemOOS{
+    width: 450px;
+    height: 450px;
+    border-radius: 13px;
+    background: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

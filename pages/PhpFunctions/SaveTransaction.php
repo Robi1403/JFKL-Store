@@ -1,11 +1,10 @@
 <?php 
 include('connection.php');
 
-function createTransactionNumber(){
-    $datetime = new DateTime('now', new DateTimeZone('Asia/Manila'));
-    $current_date = $datetime->format('mdY');
-    $current_time = 60000 + intval($datetime->format('His'));
 
+function createTransactionNumber(){
+    $current_date = date('mdY');
+    $current_time = 60000+ date('His');
     $random_number = mt_rand(1000, 9999); 
     
     $transaction_number = $current_date . $current_time . $random_number;
@@ -14,10 +13,10 @@ function createTransactionNumber(){
 }
 
 function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$cart){
-    $datetime = new DateTime('now', new DateTimeZone('Asia/Manila'));
-    
+
     $transaction_number = createTransactionNumber();
-    $current_date = $datetime->format('Y-m-d');
+    $current_date = date('Y-m-d');
+    $profit = $SubTotal -$realCostofGoods;
 
     $InsertData = "INSERT INTO transaction_history VALUES('$transaction_number','$current_date','$numberOfItems ','$SubTotal',' $profit')";
 
@@ -38,6 +37,7 @@ function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$c
 
         $result = mysqli_query($conn, $Stock);
         
+
         if (mysqli_num_rows($result) > 0 ) {
             while($row = mysqli_fetch_assoc($result)){
                 $oldStock = $row['stock'];
@@ -46,9 +46,12 @@ function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$c
                 $UpdateStockDatabase = "UPDATE inventory SET stock = '$UpdatedStock' WHERE product_id = '$id'";
                 mysqli_query($conn, $UpdateStockDatabase );
             }
-        } 
+        }
+
+        
 }
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         $numberOfItems = $_POST['numberOfItems'];
@@ -56,6 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         $realCostofGoods = $_POST['realCostofGoods'];
         $cart = $_SESSION['cart'];
 
+
     saveDataToDatabase($conn,$numberOfItems, $SubTotal, $realCostofGoods, $cart);
+    
 }
+
+
+
+
+
+
 ?>
