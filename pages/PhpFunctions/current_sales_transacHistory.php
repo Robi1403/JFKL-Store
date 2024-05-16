@@ -33,6 +33,7 @@ if ($searchTH_result) {
         $currentTransactionNum = $row['transaction_number'];
         $currentNumItems = $row['number_of_items'];
         $currentTotal = $row['gross_sales'];
+        $currentProfit = $row['profit'];
         $currentDates = $row['date'];
     }
 } else {

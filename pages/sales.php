@@ -315,6 +315,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                             </td>
                                             <td class="numItems" id="currentNumItems"><?php echo $currentNumItems; ?></td>
                                             <td class="total" id="currentTotal"><?php echo $currentTotal; ?></td>
+                                            <td class="profit" id="profit"><?php echo $currentProfit; ?></td>
                                             <td class="date" id="currentDates"><?php echo $currentDates; ?></td>
                                             <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
                                         </tr>
