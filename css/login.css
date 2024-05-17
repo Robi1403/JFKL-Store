@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica', sans-serif;
+    font-family: "Helvetica", sans-serif;
 }
 
 body{
@@ -21,12 +21,12 @@ body{
     border-radius: 13px;
     background-color: #ffffff;
     box-shadow: rgba(144, 144, 144, 0.1) 0px 0px 29px 0px;
-    border: 1px solid #d0d0d0;
+
     padding: 30px;
 }
 h3{
     color: #008D5D;
-    font-size: 32px;
+    font-size: 35px;
     line-height: 1.2;
     margin: 40px 20px 60px 20px;
 }
@@ -55,17 +55,18 @@ input[type=text], input[type=password] {
     color: #cccccc;
 }
 #submit {
-    font-size: 14px;
+    font-size: 13px;
     margin: 20px 0 70px 0;
     background: #04B075;
     color: white;
-    letter-spacing: 1px;
+
     cursor: pointer;
     width: 100%;
     height: 40px;
     border: none;
     border-radius: 7px;
     transition: all .3s ease-in-out;
+    font-weight: 600;
 }
 #submit:hover {
     background: #008D5D;
@@ -87,11 +88,11 @@ input[type=text], input[type=password] {
 }
 
 .container .errorUser{
-    background-color: #DCFFF3;
-    color: #008D5D;
+    background-color: #F9D2D2;
+    color: #E02020;
     height: 40px;
     border-radius: 7px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
