@@ -178,7 +178,6 @@ body{
 .sideBar .sbSales button {
     background-color: #ffffff;
     color: #a6acb8;
-    font-size: 11px;
 }
 .sideBar .sbInventory button:hover,
 .sideBar .sbSales button:hover {
@@ -391,7 +390,7 @@ body{
  .orderList{
     display: flex;
     flex: 1;
-    padding: 5px 20px 0px 5px;
+    padding: 5px 20px 10px 5px;
     margin-top: 25px;
     margin-bottom: 20px;
     overflow-y: scroll;
@@ -848,6 +847,7 @@ button:focus {
     font-weight: 500;
     position: sticky;
     top: 0;
+    font-weight: 600;
 }
 
 .SummaryContainer tbody tr:nth-child(even) {
