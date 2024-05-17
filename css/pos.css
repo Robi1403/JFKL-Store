@@ -25,6 +25,7 @@ body{
     box-shadow: 0px 2px 4px 0px rgba(92, 99, 105, 0.15);
     font-size: 15px;
     position: relative;
+    z-index: 1000;
 }
 
 .navbar .left{
@@ -91,6 +92,15 @@ body{
 .navbar .searchBar img{
     margin: 0px 15px 0px 15px;
     width: 15px;
+}
+@media screen and (max-width: 1180px) {
+    .navbar .searchBar input,
+    .navbar .searchBar form{
+        width: 375px;
+    }
+    .navbar .right{
+        font-size: 13px;
+    }
 }
 
 .navbar .right{
@@ -741,6 +751,7 @@ img{
 .addMinusQuantity button{
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 
@@ -767,6 +778,7 @@ button:focus {
     text-align: center;
     font-size: 12px;
     margin-bottom: 10px;
+    font-weight: 600;
         
 }
 
@@ -776,6 +788,7 @@ button:focus {
     color: #FFF;
     text-align: center;
     font-size: 12px;
+    font-weight: 600;
 }
 
 .OrderSummary{
@@ -801,6 +814,7 @@ button:focus {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .SummaryContainer {
@@ -902,6 +916,11 @@ button:focus {
     font-size: 12px;
     font-weight: 700;
     border: none;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.BackBtn:hover{
+    background: #c2c2c2;
 }
 
 .ConfirmBtn{
@@ -917,6 +936,11 @@ button:focus {
     font-weight: 700;
     line-height: normal;
     border: none;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.ConfirmBtn:hover{
+    background-color: #038f59;
 }
 
 .SearchResult{
@@ -1033,8 +1057,8 @@ button:focus {
 
 
 .sucessContainer{
-    width: 450px;
-    height: 450px;
+    width: 400px;
+    height: 400px;
     border-radius: 13px;
     background: #FAFAFA;
     display: flex;
@@ -1044,17 +1068,17 @@ button:focus {
 }
 
 .sucessContainer img{
-    width: 129px;
-    height: 129px;
+    width: 100px;
+    height: 100px;
 
 }
 
 .sucessContainer h1{
-    color: #008D5D;
+    color: #007246;
     text-align: center;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .sucessContainer a{
@@ -1062,13 +1086,19 @@ button:focus {
     height: 40px;
     border-radius: 7px;
     background: #04B075;
-    color: #FFF;
+    color: #ffffff;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     padding: 10px;
     text-decoration: none;
-    margin-top: 50px;
+    margin-top: 40px;
+    transition: all .1s ease-in-out;
+}
+.sucessContainer a:hover{
+    background-color: #00a76c;
+    outline: none;
+    color: #ffffff;
 }
 
 .ItemOOS{
@@ -1080,4 +1110,31 @@ button:focus {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.ItemOOS svg{
+    width: 109px;
+    height: 125px;
+    fill: none;
+}
+.ItemOOS h1{
+    color: #007246;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.ItemOOS button{
+    width: 186.023px;
+    height: 40px;
+    border-radius: 7px;
+    background: #bdbebe;
+    color: #ffffff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 40px;
+    border: none;
+    transition: all .1s ease-in-out;
 }

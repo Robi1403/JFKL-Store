@@ -1,9 +1,8 @@
-@import url('https://fonts.cdnfonts.com/css/br-sonoma');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 
 body{
@@ -399,11 +398,8 @@ body{
     height: 33vh;
     border-radius: 13px 13px 13px 13px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
-    flex-direction: row;
     overflow: scroll;
-    display: flex;
-    flex-wrap: wrap;
+    overflow-y: scroll;
     padding: 0px 30px 15px 30px;
 }
 .mainContainer::-webkit-scrollbar{
@@ -415,6 +411,7 @@ body{
     padding: 0px 10px 0px 10px;
     border-collapse: separate; /* Ensure spacing between cells */
     border-spacing: 15px 5px; /* Set horizontal and vertical spacing */
+    
 }
 .stocksTable thead th{
     background-color: #ffffff;
@@ -442,7 +439,7 @@ body{
 }
 .stocksTable tbody #productName,
 .stocksTable .col2 {
-    width: 40vw;
+    width: 30vw;
 }
 .stocksTable tbody #netWeight,
 .stocksTable .col3 {
@@ -451,7 +448,7 @@ body{
 }
 .stocksTable tbody #category,
 .stocksTable .col4 {
-    width: auto;;
+    width: 15vw;;
 }
 .stocksTable tbody #stock,
 .stocksTable .col5 {
@@ -498,17 +495,17 @@ body{
     height: 37vh;
     border-radius: 13px 13px 13px 13px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
-    flex-direction: row;
-    overflow: scroll;
-    display: flex;
-    flex-wrap: wrap;
+    overflow-y: scroll;
     padding: 0px 40px 20px 40px;
+    overflow: scroll;
+
 }
 .transactionTable{
     font-size: 14px;
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
+    width: 100%;
+
 }
 .transactionTable thead th{
     background-color: #ffffff;
@@ -529,39 +526,39 @@ body{
 }
 .transactionTable tbody #transactionNum,
 .transactionTable .col1 {
-    width: 20vw;
+    width: 15%;
     margin-right: 15px;
 }
 .transactionTable tbody #numItems,
 .transactionTable .col2 {
-    width: 30vw;
-
+    width: 20%;
 }
 .transactionTable tbody #total,
 .transactionTable .col3 {
-    width: 30vw;
+    width: 20%;
 }
 .transactionTable tbody #date,
 .transactionTable .col4 {
-    width: 30vw;
+    width: 15%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 .transactionTable tbody #seeDetails,
 .transactionTable .col5 {
-    width: 10vw;
+    width: 25%;
 }
 .transactionTable tbody #seeDetails button{
     border: 1px solid #04B075;
     color: #04B075;
     border-radius: 5px;
     padding: 5px 15px 5px 15px;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     background-color: transparent;
     cursor: pointer;
     transition: all .1s ease-in-out;
+    width: 100%;
 }
 .transactionTable tbody #seeDetails button:hover{
     background-color: #04B075;
@@ -594,19 +591,25 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;  
+}
+
+.transactionContainer p{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 
 .SummaryContainer {
-    font-size: 14px;
+    font-size: 13px;
     width: 100%;
-    padding: 10px;
+    padding: 0px 10px 10px 10px;
     height: 245px;
     border-collapse: collapse;
     border-radius: 8px;
     overflow-y: hidden;
     background-color: #ffffff;
+    overflow-y: scroll;
 }
 
 .SummaryContainer tr{
@@ -627,6 +630,8 @@ body{
 .SummaryContainer th {
     color: #007246;
     font-weight: 500;
+    position: sticky;
+    top: 0;
 }
 
 .SummaryContainer tbody tr:nth-child(even) {

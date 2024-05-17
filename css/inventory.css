@@ -647,7 +647,7 @@ input[type=text]:-ms-input-placeholder{
 .inventoryLog{
     width: 100%;
     height: auto;
-    max-height: 71vh; /*modified*/
+    max-height: 60vh; /*modified*/
     overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
@@ -659,6 +659,7 @@ input[type=text]:-ms-input-placeholder{
     width: 100%;
     border-radius: 8px;
     background-color: #ffffff;
+    padding-top: 8px;
 }
 .inventoryLog .inventoryTable table{
     max-height: 300px;
