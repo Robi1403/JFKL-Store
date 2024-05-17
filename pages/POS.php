@@ -240,7 +240,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
                         foreach ($_SESSION['cart'] as $key => $value) { ?>
                             <div class="container">
-                                <img src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
+                                <img class="image" src="../assets/InventoryItems/<?php echo $value['picture_url'] ?>" alt="">
 
                                 <div class="items">
                                     <h3>Item</h3>
