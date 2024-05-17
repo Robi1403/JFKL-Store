@@ -33,6 +33,17 @@ session_start();
         </form>
     </div>
 
+    <script>
+        // JavaScript to hide the error message when the user starts typing
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorUser').style.display = 'none';
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorUser').style.display = 'none';
+        });
+    </script>
+
     <?php
     // Unset the login error after displaying it
     unset($_SESSION['login_error']);
