@@ -95,6 +95,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <a href="POS.php?action=logout" id="logoutBtn">
                         <img src="../assets/logout.svg" alt=""><br>
                     </a>
+                    
                 </div>
             </div>
         </div>

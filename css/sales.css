@@ -107,6 +107,7 @@ body{
     position: absolute;
     box-shadow: 2px 0 3px -2px rgba(0,0,0,.2);
     background-color: #ffffff;
+    font-size: 11px;
 }
 
 .sideBar .features{
@@ -143,7 +144,6 @@ body{
 .sideBar .sbInventory button {
     background-color: #ffffff;
     color: #a6acb8;
-    font-size: 12px;
 }
 
 .sideBar .sbPOS button:hover,
@@ -631,6 +631,7 @@ body{
     font-weight: 500;
     position: sticky;
     top: 0;
+    font-weight: 600;
 }
 
 .SummaryContainer tbody tr:nth-child(even) {
@@ -665,6 +666,8 @@ body{
     text-align: center;
     font-size: 18px;
     font-weight: 700;
+    padding: 0px 10px 0px 10px;
+    width: 100px;
 
 }
 
@@ -673,7 +676,7 @@ body{
     text-align: center;
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: -0.3px;
+    margin-top: 5px;
 }
 
 .dividerDIV{
@@ -682,19 +685,21 @@ body{
     background-color: #D0D0D0;
 }
 .closeBtn {
-    width: 200px;
+    width: 102px;
     height: 40px;
-    flex-shrink: 0;
     border-radius: 7px;
-    background: #04B075;
-    color: #FFF;
+    background: #D9D9D9;
+    color: #FAFAFA;
     text-align: center;
     font-size: 12px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     border: none;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
     margin-top: 25px;
+}
+.closeBtn:hover{
+    background: #c2c2c2;
 }
 
 a{
