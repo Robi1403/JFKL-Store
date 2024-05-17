@@ -205,13 +205,32 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                         unset($value);
                     }
 
+                    // if ($_GET['action'] == "increaseQty") {
+                    //     foreach ($_SESSION['cart'] as &$value) {
+                    //         if ($value['id'] == $_GET['id']) {
+                    //             $value['quantity'] += 1;
+                    //         }
+                    //     }
+                    //     unset($value);
+                    // }
+
                     if ($_GET['action'] == "increaseQty") {
                         foreach ($_SESSION['cart'] as &$value) {
-                            if ($value['id'] == $_GET['id']) {
-                                $value['quantity'] += 1;
+                            $productID = $_GET['id'];
+                            $query = "SELECT * FROM inventory WHERE product_id = '$productID'";
+                            $result = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    //pag may tada pa stock
+                                    if (($row['stock'] - $value['quantity']) > 0) {
+                                        if ($value['id'] == $_GET['id']) {
+                                            $value['quantity'] += 1;
+                                        }
+                                    } 
+                                }
+                                unset($value);
                             }
                         }
-                        unset($value);
                     }
 
                     if (isset($_GET['action'])) {
