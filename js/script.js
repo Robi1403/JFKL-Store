@@ -80,6 +80,7 @@ function Compute() {
     var showReceive = document.querySelector('.showReceive');
     var showChange = document.querySelector('.showChange');
 
+    var ClientAmount = ClientAmount.toFixed(2);
 
     var ChangeInt = ClientAmount - OverAllTotal;
     var Change = ChangeInt.toFixed(2);
