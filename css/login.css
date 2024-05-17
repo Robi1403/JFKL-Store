@@ -85,3 +85,16 @@ input[type=text], input[type=password] {
 #logo img{
     height: 22px;
 }
+
+.container .errorUser{
+    background-color: #DCFFF3;
+    color: #008D5D;
+    height: 40px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    display: none;
+}
