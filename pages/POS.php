@@ -4,10 +4,10 @@ include ("PhpFunctions/connection.php");
 include ("PhpFunctions/SaveTransaction.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location: LoginPage.php');
     exit;
-}  
+}
 ?>
 
 <!DOCTYPE html>
@@ -102,29 +102,41 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         <div class="productDisplay">
 
 
-            <form class="category" id="categoryContainer" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="category" id="categoryContainer" name="form"
+                action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <button class="categoryBtn" type="submit" name="category" value="All">All</button>
                 <button class="categoryBtn" type="submit" name="category" value="Canned Goods">Canned Goods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Coffee">Coffee</button>
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health &
+                    Beauty</button>
+                <button class="categoryBtn" type="submit" name="category"
+                    value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection
+                    Products</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered
+                    Drinks</button>
                 <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
                 <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant
+                    Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic
+                    Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies &
+                    Chocolates</button>
                 <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments &
+                    Sauces</button>
+                <button class="categoryBtn" type="submit" name="category"
+                    value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads &
+                    Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School
+                    Supplies</button>
             </form>
             <div class="ItemView">
 
@@ -138,12 +150,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                         $query = "SELECT * FROM inventory WHERE category='$category'";
                     }
 
-                        $result = mysqli_query($conn, $query);
+                    $result = mysqli_query($conn, $query);
 
 
                     while ($row = mysqli_fetch_array($result)) { ?>
 
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="ItemCardView">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                            class="ItemCardView">
                             <div class="image">
                                 <img src="../assets/InventoryItems/<?php echo $row['picture_url']; ?>">
                             </div>
@@ -158,13 +171,17 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                     <p>₱<?php echo $row['retail_price']; ?></p>
                                 </div>
 
-                                <input type="hidden" class="ProductID" name="productId" value="<?php echo $row['product_id']; ?>">
-                                <input type="hidden" name="quantity" value="1"> 
-                                <button type="button" name="toCart" class="toCart"><img src="../assets/buttonAdd.svg"></button>
+                                <input type="hidden" class="ProductID" name="productId"
+                                    value="<?php echo $row['product_id']; ?>">
+                                <input type="hidden" class="ProductSotck" name="ProductSotck"
+                                    value="<?php echo $row['stock']; ?>">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="button" name="toCart" class="toCart"><img
+                                        src="../assets/buttonAdd.svg"></button>
                             </div>
                         </form>
 
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
@@ -213,7 +230,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                     //     }
                     //     unset($value);
                     // }
-
+                
                     if ($_GET['action'] == "increaseQty") {
                         foreach ($_SESSION['cart'] as &$value) {
                             $productID = $_GET['id'];
@@ -226,7 +243,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                         if ($value['id'] == $_GET['id']) {
                                             $value['quantity'] += 1;
                                         }
-                                    } 
+                                    }
                                 }
                                 unset($value);
                             }
@@ -234,12 +251,12 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                     }
 
                     if (isset($_GET['action'])) {
-       
+
                         if ($_GET['action'] == "logout") {
-                         
+
                             unset($_SESSION['loggedin']);
                         }
-                
+
                     }
 
                 }
@@ -269,7 +286,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
                                 <div class="Price">
                                     <h3>Price</h3>
-                                    <h1><?php echo "₱ " . $value['retail_price']?></h1>
+                                    <h1><?php echo "₱ " . $value['retail_price'] ?></h1>
                                 </div>
 
                                 <div class="quantity">
@@ -280,10 +297,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                         </a>
 
                                         <p><?php echo $value['quantity'] ?></p>
-                                        <a href="POS.php?action=increaseQty&id=<?php echo $value['id'] ?>" >
+                                        <a href="POS.php?action=increaseQty&id=<?php echo $value['id'] ?>">
                                             <img src="../assets/buttonAdd.svg " alt="">
                                         </a>
-                                        
+
                                     </div>
                                 </div>
 
@@ -420,7 +437,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                 </div>
 
                 <div class="buttons">
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"class="ConfirmSection">
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                        class="ConfirmSection">
                         <button class="BackBtn" onclick="cancel()">Back</button>
                         <button type="submit" name="ConfirmOrder" class="ConfirmBtn">Confirm Order</button>
                     </form>
@@ -438,13 +456,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         </div>
     </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </div>
-        </div>
     </div>
-        </div>
+    </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/script.js"></script>
     <script>
@@ -483,10 +501,23 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
             }
         }
 
+        // function increaseQuantity() {
+        //     var inputElement = document.querySelector('.quantityInput');
+        //     var currentValue = parseInt(inputElement.value);
+
+        //     inputElement.value = currentValue + 1;
+        // }
+
         function increaseQuantity() {
+            var stockElement = document.querySelector('.quantityStock');
             var inputElement = document.querySelector('.quantityInput');
+
+            var stock = parseInt(stockElement.value);
             var currentValue = parseInt(inputElement.value);
-            inputElement.value = currentValue + 1;
+
+            if (stock - currentValue > 0) {
+                inputElement.value = currentValue + 1;
+            }
         }
 
         function exitModal() {
@@ -505,7 +536,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
             if (clientAmount.trim() === '' || parseFloat(clientAmount) <= 0 || parseFloat(change) <= 0) {
                 //empty clientAmount
-                return; 
+                return;
             }
 
             var show = document.querySelector('.OrderSummary');
@@ -514,72 +545,72 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
     </script>
 
-<script>
-    function updateDate() {
-        let today = new Date();
+    <script>
+        function updateDate() {
+            let today = new Date();
 
-        let dayName = today.getDay(),
-            dayNum = today.getDate(),
-            month = today.getMonth(),
-            year = today.getFullYear();
+            let dayName = today.getDay(),
+                dayNum = today.getDate(),
+                month = today.getMonth(),
+                year = today.getFullYear();
 
-        const months = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-        const dayWeek = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-        ];
-        const IDCollection = ["day", "daynum", "month", "year"];
-        const val = [dayWeek[dayName], dayNum, months[month], year];
-        for (let i = 0; i < IDCollection.length; i++) {
-            document.getElementById(IDCollection[i]).textContent = val[i];
+            const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+            const dayWeek = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ];
+            const IDCollection = ["day", "daynum", "month", "year"];
+            const val = [dayWeek[dayName], dayNum, months[month], year];
+            for (let i = 0; i < IDCollection.length; i++) {
+                document.getElementById(IDCollection[i]).textContent = val[i];
+            }
         }
-    }
 
-    function updateTime() {
-        const displayTime = document.querySelector(".display-time");
-        let time = new Date();
-        displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
-    }
+        function updateTime() {
+            const displayTime = document.querySelector(".display-time");
+            let time = new Date();
+            displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
+        }
 
-    function updateDateTime() {
-        updateDate(); 
-        updateTime(); 
-        setTimeout(updateDateTime, 1000);
-    }
+        function updateDateTime() {
+            updateDate();
+            updateTime();
+            setTimeout(updateDateTime, 1000);
+        }
 
-    updateDateTime();
+        updateDateTime();
     </script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const categoryContainer = document.querySelector('.category');
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryContainer = document.querySelector('.category');
 
-        categoryContainer.addEventListener('wheel', function(event) {
-            if (event.deltaY > 0) {
-                categoryContainer.scrollLeft += 50;
-            } else {
-                categoryContainer.scrollLeft -= 50;
-            }
-            event.preventDefault();
+            categoryContainer.addEventListener('wheel', function (event) {
+                if (event.deltaY > 0) {
+                    categoryContainer.scrollLeft += 50;
+                } else {
+                    categoryContainer.scrollLeft -= 50;
+                }
+                event.preventDefault();
+            });
         });
-    });
     </script>
 
 </body>

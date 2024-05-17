@@ -32,6 +32,7 @@ if (isset($_POST['id'])) {
                                 <img src="../assets/decreaseBtn.svg" alt="Decrease">
                             </button>
                             <input type="number" class="quantityInput" name="Quantity" value="1">
+                            <input type="hidden" class="quantityStock" name="Stock" value="<?php echo $row['stock'] ?>">
                             <button type="button" onclick="increaseQuantity()"> 
                                 <img src="../assets/buttonAdd.svg" alt="Increase">
                             </button>
@@ -44,6 +45,7 @@ if (isset($_POST['id'])) {
                     <input type="hidden" name="productRetailPrice" value="<?php echo $row['retail_price'] ?>">
                     <input type="hidden" name="productNetweight" value="<?php echo $row['net_weight'] ?>">
                     <input type="hidden" name="productUnitPrice" value="<?php echo $row['unit_price'] ?>">
+                    
 
                     <div class="addToCart">
                         <button type="button" class="cancel" onclick="exitModal()">Cancel</button> 
