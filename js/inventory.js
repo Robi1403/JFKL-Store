@@ -1,5 +1,5 @@
- // Function to update date
- function updateDate() {
+// Function to update date
+function updateDate() {
     let today = new Date();
 
     // return number
@@ -57,10 +57,10 @@ function updateDateTime() {
 // Call updateDateTime initially to start the updating process
 updateDateTime();
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const categoryContainer = document.querySelector('.category');
 
-    categoryContainer.addEventListener('wheel', function(event) {
+    categoryContainer.addEventListener('wheel', function (event) {
         if (event.deltaY > 0) {
             categoryContainer.scrollLeft += 50;
         } else {
@@ -200,8 +200,11 @@ updateProductBtns.forEach(function (btn) {
         var retailPrice = this.parentNode.querySelector('[name="retailPrice_info"]').value;
         var stock = this.parentNode.querySelector('[name="stock_info"]').value;
         var url = this.parentNode.querySelector('[name="url_info"]').value;
+        var updateBoolean = this.parentNode.querySelector('[name="updateBoolean"]').value;
 
         //sets the product info in the input fields inside the UpdateProductModal
+        var updateBooleanInput = document.getElementById('updateBooleanInput');
+        updateBooleanInput.value = updateBoolean;
 
         var productURLInput = document.getElementById('productURLInput');
         productURLInput.value = url;
@@ -252,21 +255,12 @@ updateProductBtns.forEach(function (btn) {
         var updateProductModal = document.getElementById("updateProductModal");
         updateProductModal.style.display = "block";
 
-        //new ok na but automatically closes
         var updateProductInfoBtn = document.getElementById("updateProductInfoBtn");
 
         updateProductInfoBtn.addEventListener("click", function (event) {
             updateProductModal.style.display = "none";
-
-            var update_successPrompt = document.getElementById("update_successPrompt");
-            update_successPrompt.style.display = "flex";
-
-            var update_okBtn = document.getElementById("update_okBtn");
-
-            update_okBtn.addEventListener("click", function () {
-                update_successPrompt.style.display = "none";
-            });
         });
+
     });
 });
 

@@ -24,7 +24,9 @@ var changeDiv = document.getElementById('change');
 
 var Change = ClientAmount - OverAllTotal;
 
-changeDiv.innerHTML = Change;
+// changeDiv.innerHTML = Change;
+var formattedChange = Change.toFixed(2);
+changeDiv.innerHTML = '₱' + formattedChange;
 
 var UserInput = document.getElementById('ClientAmount');
 var typingTimer; 
@@ -47,7 +49,10 @@ var changeDiv = document.getElementById('change');
 
 var Change = ClientAmount - OverAllTotal;
 
-changeDiv.innerHTML = Change;
+// changeDiv.innerHTML = Change;
+
+var formattedChange = Change.toFixed(2);
+changeDiv.innerHTML = '₱' + formattedChange;
 
 var UserInput = document.getElementById('ClientAmount');
 var typingTimer; 
@@ -78,15 +83,17 @@ function Compute() {
 
     var ChangeInt = ClientAmount - OverAllTotal;
     var Change = ChangeInt.toFixed(2);
+    
     if (isNaN(Change)) {
-        changeDiv.innerHTML = 0;
-        showChange.innerHTML = "₱ " +  0;
+        // changeDiv.innerHTML = "₱ " + 0.00;
+        changeDiv.innerHTML = "₱ 0.00";
+        showChange.innerHTML = "₱ 0.00";
     } else {
-        changeDiv.innerHTML = Change;
+        changeDiv.innerHTML = "₱ " + Change;
         showChange.innerHTML = "₱ " +  Change;
     }
     if (isNaN(ClientAmount)){
-        showReceive.innerHTML = "₱ " + 0;
+        showReceive.innerHTML = "₱ 0.00";
     }else{
         showReceive.innerHTML = "₱ " + ClientAmount;
     }

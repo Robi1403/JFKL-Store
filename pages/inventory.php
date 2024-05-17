@@ -5,13 +5,13 @@ include ("PhpFunctions/add_product.php");
 include ("PhpFunctions/update_product.php");
 include ("PhpFunctions/login.php");
 
+$updateBoolean = isset($_GET['updateBoolean']) ? $_GET['updateBoolean'] : 'false';
+$addBoolean = isset($_GET['addBoolean']) ? $_GET['addBoolean'] : 'false';
 
-
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-        header('Location: LoginPage.php');
-        exit;
-    }   
-
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: LoginPage.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,13 +47,13 @@ include ("PhpFunctions/login.php");
             <div class="todayGrossSale">
                 <p>Total Products: </p>
 
-                <?php 
+                <?php
                 $count_query = "SELECT COUNT(*) AS product_count FROM inventory";
                 $result = mysqli_query($conn, $count_query);
 
                 if ($result) {
                     $row = mysqli_fetch_assoc($result);
-                
+
                     $product_count = $row['product_count'];
                 } else {
                     echo "Error: " . mysqli_error($conn);
@@ -107,11 +107,11 @@ include ("PhpFunctions/login.php");
     <div class="mainContainer">
         <div class="productDisplay">
             <div class="delAddProduct">
-                
+
                 <div class="searchBar">
                     <input type="text" id="search" placeholder="Search">
                 </div>
-                <button class="inventoryLogBtn" id="inventory_LogBtn" >Inventory Log </button>
+                <button class="inventoryLogBtn" id="inventory_LogBtn">Inventory Log </button>
                 <button class="removeProduct" id="removeProductBtn">Remove Product</button>
                 <button class="addProduct" id="addProductBtn">Add Product</button>
             </div>
@@ -123,22 +123,33 @@ include ("PhpFunctions/login.php");
                 <button class="categoryBtn" type="submit" name="category" value="Biscuits">Biscuits</button>
                 <button class="categoryBtn" type="submit" name="category" value="Ice Cream">Ice Cream</button>
                 <button class="categoryBtn" type="submit" name="category" value="Bread">Bread</button>
-                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health & Beauty</button>
-                <button class="categoryBtn" type="submit" name="category" value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
-                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection Products</button>
+                <button class="categoryBtn" type="submit" name="category" value="Health & Beauty">Health &
+                    Beauty</button>
+                <button class="categoryBtn" type="submit" name="category"
+                    value="Household & Cleaning Supplies">Household & Cleaning Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="PC Products">Personal Collection
+                    Products</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cold Drinks">Cold Drinks</button>
-                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered Drinks</button>
+                <button class="categoryBtn" type="submit" name="category" value="Powdered Drinks">Powdered
+                    Drinks</button>
                 <button class="categoryBtn" type="submit" name="category" value="Junk Foods">Junk Foods</button>
                 <button class="categoryBtn" type="submit" name="category" value="Cigarettes">Cigarettes</button>
                 <button class="categoryBtn" type="submit" name="category" value="Frozen Foods">Frozen Foods</button>
-                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant Noodles</button>
-                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic Beverages</button>
-                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies & Chocolates</button>
+                <button class="categoryBtn" type="submit" name="category" value="Instant Noodles">Instant
+                    Noodles</button>
+                <button class="categoryBtn" type="submit" name="category" value="Alcoholic Beverages">Alcoholic
+                    Beverages</button>
+                <button class="categoryBtn" type="submit" name="category" value="Candies & Chocolates">Candies &
+                    Chocolates</button>
                 <button class="categoryBtn" type="submit" name="category" value="Dairy Products">Dairy Products</button>
-                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments & Sauces</button>
-                <button class="categoryBtn" type="submit" name="category" value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
-                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads & Fillings</button>
-                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School Supplies</button>
+                <button class="categoryBtn" type="submit" name="category" value="Condiments & Sauces">Condiments &
+                    Sauces</button>
+                <button class="categoryBtn" type="submit" name="category"
+                    value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</button>
+                <button class="categoryBtn" type="submit" name="category" value="Spreads & Fillings">Spreads &
+                    Fillings</button>
+                <button class="categoryBtn" type="submit" name="category" value="School Supplies">School
+                    Supplies</button>
             </form>
 
             <div class="inventory">
@@ -173,7 +184,8 @@ include ("PhpFunctions/login.php");
                                 <form name="productTable" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
                                     method="POST">
                                     <tr>
-                                        <td><input type="checkbox" name="selectedProducts[]" value="<?php echo $row["product_id"]; ?>"></td>
+                                        <td><input type="checkbox" name="selectedProducts[]"
+                                                value="<?php echo $row["product_id"]; ?>"></td>
                                         <td><?php echo $row["product_id"]; ?></td>
                                         <td><?php echo $row["product_name"]; ?></td>
                                         <td><?php echo $row["net_weight"] ?? '-'; ?></td>
@@ -183,18 +195,29 @@ include ("PhpFunctions/login.php");
                                         <td><?php echo $row["stock"]; ?>
                                         </td>
                                         <td>
-                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"> 
-                                                <input type="hidden" name="productId_info" value="<?php echo $row["product_id"]; ?>">
-                                                <input type="hidden" name="productName_info" value="<?php echo $row["product_name"]; ?>">
-                                                <input type="hidden" name="netWeight_info" value="<?php echo $row["net_weight"]; ?>">
-                                                <input type="hidden" name="category_info" value="<?php echo $row["category"]; ?>">
+                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                                <input type="hidden" name="productId_info"
+                                                    value="<?php echo $row["product_id"]; ?>">
+                                                <input type="hidden" name="productName_info"
+                                                    value="<?php echo $row["product_name"]; ?>">
+                                                <input type="hidden" name="netWeight_info"
+                                                    value="<?php echo $row["net_weight"]; ?>">
+                                                <input type="hidden" name="category_info"
+                                                    value="<?php echo $row["category"]; ?>">
                                                 <input type="hidden" name="unit_info" value="<?php echo $row["unit"]; ?>">
-                                                <input type="hidden" name="unitPrice_info" value="<?php echo $row["unit_price"]; ?>">
-                                                <input type="hidden" name="retailPrice_info" value="<?php echo $row["retail_price"]; ?>">
+                                                <input type="hidden" name="unitPrice_info"
+                                                    value="<?php echo $row["unit_price"]; ?>">
+                                                <input type="hidden" name="retailPrice_info"
+                                                    value="<?php echo $row["retail_price"]; ?>">
                                                 <input type="hidden" name="stock_info" value="<?php echo $row["stock"]; ?>">
                                                 <input type="hidden" name="url_info" value="<?php echo $row["picture_url"]; ?>">
+                                                <input type="hidden" name="updateBoolean" id="updateBoolean"
+                                                    value="<?php echo isset($updateBoolean) ? $updateBoolean : 'false'; ?>">
+                                                    <input type="hidden" name="addBoolean" id="addBoolean"
+                                                    value="<?php echo isset($addBoolean) ? $addBoolean : 'false'; ?>">
 
-                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn" class="updateProduct"><img src='../assets/edit.svg'></button>
+                                                <button type="submit" name="passProductInfoBtn" id="passProductInfoBtn"
+                                                    class="updateProduct"><img src='../assets/edit.svg'></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -267,7 +290,8 @@ include ("PhpFunctions/login.php");
                                     <option value="Candies & Chocolates">Candies & Chocolates</option>
                                     <option value="Dairy Products">Dairy Products</option>
                                     <option value="Condiments & Sauces">Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
+                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings
+                                    </option>
                                     <option value="Spreads and Fillings">Spreads & Fillings</option>
                                     <option value="School Supplies">School Supplies</option>
                                 </select>
@@ -325,13 +349,13 @@ include ("PhpFunctions/login.php");
                                 <div class="addImage">
                                     <div class="imageContainer">
                                         <img src="../assets/addImage.svg" id="updateProductImage">
-                                        <input type="hidden" id="productURLInput" name="productURLInput"
-                                            ><br><br>
+                                        <input type="hidden" id="productURLInput" name="productURLInput"><br><br>
                                     </div>
                                     <div class="addImageBtn">
                                         <label>Add image</label>
                                         <label for="updateInput-file" class="addProduct">Upload Image</label>
-                                        <input type="file" accept="image/jpeg, image/png, image/jpg," id="updateInput-file">
+                                        <input type="file" accept="image/jpeg, image/png, image/jpg,"
+                                            id="updateInput-file">
                                     </div>
                                 </div>
                             </div>
@@ -372,7 +396,8 @@ include ("PhpFunctions/login.php");
                                     <option value="Candies & Chocolates">Candies & Chocolates</option>
                                     <option value="Dairy Products">Dairy Products</option>
                                     <option value="Condiments & Sauces">Condiments & Sauces</option>
-                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings</option>
+                                    <option value="Cooking Ingredients & Seasonings">Cooking Ingredients & Seasonings
+                                    </option>
                                     <option value="Spreads & Fillings">Spreads & Fillings</option>
                                     <option value="School Supplies">School Supplies</option>
                                 </select>
@@ -409,6 +434,9 @@ include ("PhpFunctions/login.php");
                                         required><br><br>
                                 </div>
                             </div>
+
+                            <input type="hidden" name="updateBooleanInput" id="updateBooleanInput">
+
                             <div class="updateButtons">
                                 <button class="addProduct" type="submit" id="updateProductInfoBtn"
                                     name="updateProductInfoBtn">Update Product</button>
@@ -427,7 +455,7 @@ include ("PhpFunctions/login.php");
                 <img src="../assets/confirmation.svg" alt="">
             </div>
             <div class="message">
-               <p>Are you sure you want to delete selected product(s)?</p> 
+                <p>Are you sure you want to delete selected product(s)?</p>
             </div>
             <div class="formContent">
                 <div class="updateButtons">
@@ -438,7 +466,8 @@ include ("PhpFunctions/login.php");
         </div>
     </div>
 
-    <div class="successPrompt" id="add_successPrompt">
+    <?php if ($addBoolean == 'true') { ?>
+    <div class="successPrompt" id="add_successPrompt" style="display:flex;">
         <div class="sucessContainer">
             <div class="image">
                 <img src="../assets/check.png" alt="">
@@ -448,27 +477,35 @@ include ("PhpFunctions/login.php");
             </div>
             <div class="formContent">
                 <div class="updateButtons">
-                    <button class="addProduct" id="add_okBtn">Ok</button>
+                    <button class="addProduct" id="add_okBtn" onclick=" window.location.href = 'PhpFunctions/end_session.php'">Ok</button>
                 </div>
             </div>
         </div>
     </div>
+    <?php
+    }
+    ?>
 
-    <div class="successPrompt" id="update_successPrompt">
-        <div class="sucessContainer">
-            <div class="image">
-                <img src="../assets/check.png" alt="">
-            </div>
-            <div class="message">
-                <p>Successfully Updated Product Information</p>
-            </div>
-            <div class="formContent">
-                <div class="updateButtons">
-                    <button class="addProduct" id="update_okBtn">Ok</button>
+    <?php if ($updateBoolean == 'true') { ?>
+        <div class="successPrompt" id="update_successPrompt" style="display:flex;">
+            <div class="sucessContainer">
+                <div class="image">
+                    <img src="../assets/check.png" alt="">
+                </div>
+                <div class="message">
+                    <p>Successfully Updated Product Information</p>
+                </div>
+                <div class="formContent">
+                    <div class="updateButtons">
+                        <button class="addProduct" id="update_okBtn" onclick=" window.location.href = 'PhpFunctions/end_session.php'">Ok</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <?php
+    }
+    ?>
+    
 
     <div class="successPrompt" id="remove_successPrompt">
         <div class="sucessContainer">

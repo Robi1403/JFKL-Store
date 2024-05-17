@@ -230,7 +230,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
 
                     <?php
-                    $SubTotal = 0.00;
+                    $SubTotal = "0.00";
                     $realCostofGoods = 0.00;
                     $numberOfItems = 0;
                     $quantity = 1;
@@ -314,7 +314,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                         <div class="lineDiv"></div>
                         <div class="Total">
                             <h1>Change</h1>
-                            <h1 id="change">₱ 1,100</h1>
+                            <h1 id="change">₱ 0.00</h1>
                         </div>
                     </div>
                     <div class="Checkoutbuttons">
@@ -390,13 +390,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
                     <div class="AmountReceived">
                         <h2>Amount Received</h2>
-                        <h1 class="showReceive">0</h1>
+                        <h1 class="showReceive">₱ 0.00</h1>
                     </div>
                     <div class="dividerDIV"></div>
 
                     <div class="change">
                         <h2>Change</h2>
-                        <h1 class="showChange">0</h1>
+                        <h1 class="showChange">₱ 0.00</h1>
                     </div>
                 </div>
 
@@ -481,6 +481,14 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         }
 
         function openSummaryModal() {
+            var clientAmount = document.getElementById('ClientAmount').value;
+            var change = document.getElementById('ClientAmount').change;
+
+            if (clientAmount.trim() === '' || parseFloat(clientAmount) <= 0 || parseFloat(change) <= 0) {
+                //empty clientAmount
+                return; 
+            }
+
             var show = document.querySelector('.OrderSummary');
             show.style.display = 'flex';
         }
