@@ -110,10 +110,6 @@ include ("PhpFunctions/update_product.php");
                 <button class="clearBtn" id="clearDateBtn">X</button>
             </div>
 
-            <div class="logBtn">
-                <button class="inventoryLogBtn" id="backBtn" onclick="window.location.href = 'inventory.php';">Back
-                </button>
-            </div>
 
 
         </div>
@@ -172,8 +168,8 @@ include ("PhpFunctions/update_product.php");
                                     <td><?php echo $row["product_id"]; ?></td>
                                     <td><?php echo $row["action_type"]; ?></td>
                                     <td><?php echo $row["date"] ?? '-'; ?></td>
-                                    <td style="text-align:left" ;><?php echo $row["previous_state"]; ?></td>
-                                    <td style="text-align:left" ;><?php echo $row["new_state"]; ?></td>
+                                    <td><?php echo $row["previous_state"]; ?></td>
+                                    <td><?php echo $row["new_state"]; ?></td>
                                 </tr>
                                 <?php
                             }
@@ -187,6 +183,10 @@ include ("PhpFunctions/update_product.php");
                     ?>
                 </tbody>
             </table>
+        </div>
+        <div class="logBtn">
+            <button class="inventoryLogBtn" id="backBtn" onclick="window.location.href = 'inventory.php';" style="margin-top: 20px;">Back
+            </button>
         </div>
     </div>
 
