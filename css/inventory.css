@@ -129,7 +129,7 @@ body{
 }
 
 .sideBar .features{
-    height: 70%;
+    height: 75%;
 }
 .sideBar button{
     height: 70px;
@@ -171,13 +171,12 @@ body{
 }
 
 .logout {
-    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-content: end;
 }
 
-.sideBar .logout .sbLogout button{
-    background-color: #ffffff;
-}
-.sideBar .logout .sbLogout button img{
+.sideBar .logout .sbLogout a img{
     width: 25px;
 }
 
