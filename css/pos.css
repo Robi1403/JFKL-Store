@@ -723,7 +723,7 @@ input::-webkit-inner-spin-button {
     font-weight: 400;
     margin-bottom: 10px;
 }
-img{
+.addQuantity img{
     height: 20px;
     margin: 0px;
 }
