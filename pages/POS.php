@@ -344,7 +344,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <h1>Amount Received</h1>
                             <div class="amountGroup">
                                 <span class="pesoSign">₱</span>
-                                <input type="number" id="ClientAmount">
+                                <input type="number" id="ClientAmount" placeholder="0.00">
                             </div>
                         </div>
                         <div class="SubTotal">
