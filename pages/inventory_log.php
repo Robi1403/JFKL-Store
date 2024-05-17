@@ -89,9 +89,9 @@ include ("PhpFunctions/update_product.php");
         </div>
         <div class="logout">
             <div class="sbLogout">
-                <button id="logoutBtn">
+                <a href="inventory.php?action=logout" id="logoutBtn">
                     <img src="../assets/logout.svg" alt=""><br>
-                </button>
+                </a>
             </div>
         </div>
     </div>
