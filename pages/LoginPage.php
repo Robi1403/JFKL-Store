@@ -1,5 +1,5 @@
 <?php
-    include("PhpFunctions/connection.php");
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,11 @@
     <div class="container">
         <form name="form" action="PhpFunctions/login.php" method="POST">
             <h3>Login</h3>
-            
+
+            <div class="errorUser" id="errorUser" style="display: <?php echo isset($_SESSION['login_error']) ? 'flex' : 'none'; ?>;">
+                <p><?php echo isset($_SESSION['login_error']) ? $_SESSION['login_error'] : ''; ?></p>
+            </div>
+
             <input type="text" id="username" name="username" placeholder="Username" required><br><br>
             
             <input type="password" id="password" name="password" placeholder="Password" required><br><br>
@@ -28,6 +32,10 @@
             </div>
         </form>
     </div>
-    
+
+    <?php
+    // Unset the login error after displaying it
+    unset($_SESSION['login_error']);
+    ?>
 </body>
 </html>
