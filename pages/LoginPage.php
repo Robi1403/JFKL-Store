@@ -34,7 +34,7 @@ session_start();
     </div>
 
     <script>
-        // JavaScript to hide the error message when the user starts typing
+        //hides the error message when the user starts typing
         document.getElementById('username').addEventListener('input', function() {
             document.getElementById('errorUser').style.display = 'none';
         });
@@ -45,7 +45,7 @@ session_start();
     </script>
 
     <?php
-    // Unset the login error after displaying it
+    //unset the login error after displaying it
     unset($_SESSION['login_error']);
     ?>
 </body>

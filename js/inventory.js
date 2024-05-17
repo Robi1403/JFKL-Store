@@ -31,30 +31,25 @@ function updateDate() {
         "Friday",
         "Saturday",
     ];
-    // value -> ID of the html element
     const IDCollection = ["day", "daynum", "month", "year"];
-    // return value array with number as a index
     const val = [dayWeek[dayName], dayNum, months[month], year];
     for (let i = 0; i < IDCollection.length; i++) {
         document.getElementById(IDCollection[i]).textContent = val[i];
     }
 }
 
-// Function to update time
 function updateTime() {
     const displayTime = document.querySelector(".display-time");
     let time = new Date();
     displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
 }
 
-// Function to update date and time periodically
 function updateDateTime() {
     updateDate(); // Update date
     updateTime(); // Update time
-    setTimeout(updateDateTime, 1000); // Call this function again after 1 second
+    setTimeout(updateDateTime, 1000); 
 }
 
-// Call updateDateTime initially to start the updating process
 updateDateTime();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -100,13 +95,10 @@ document.getElementById("search").addEventListener("input", function () {
 
     //loops through each row and check if it contains the search text
     rows.forEach(function (row) {
-        //gets the product name 
         var productName = row.cells[2].textContent.toLowerCase();
         if (productName.includes(searchText)) {
-            //shows the row if it contains the search text
             row.style.display = '';
         } else {
-            //hides the row if it doesn't 
             row.style.display = 'none';
         }
     });
@@ -137,22 +129,6 @@ addProductBtn.addEventListener("click", function () {
     var addProductModal = document.getElementById("addProductModal");
 
     addProductModal.style.display = "block";
-
-    //new ok na but automatically closes
-    var addNewProductBtn = document.getElementById("addNewProductBtn");
-
-    addNewProductBtn.addEventListener("click", function (event) {
-        addProductModal.style.display = "none";
-
-        var add_successPrompt = document.getElementById("add_successPrompt");
-        add_successPrompt.style.display = "flex";
-
-        var add_okBtn = document.getElementById("add_okBtn");
-
-        add_okBtn.addEventListener("click", function () {
-            add_successPrompt.style.display = "none";
-        });
-    });
 });
 
 var cancelBtn = document.getElementById("cancelBtn");
