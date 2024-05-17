@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -162,7 +165,6 @@ body{
 .sideBar .sbSales button {
     background-color: #ffffff;
     color: #a6acb8;
-    font-size: 11px;
 }
 .sideBar .sbPOS button:hover,
 .sideBar .sbSales button:hover{
@@ -714,15 +716,14 @@ input[type=text]:-ms-input-placeholder{
 }
 
 .sucessContainer {
-    width: 400px;
-    height: 325px;
+    width: 450px;
+    height: 450px;
     border-radius: 13px;
     background: #FAFAFA;
-    padding:30px;
-    margin-top: auto;
-    margin-bottom: auto;
-    box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
-    padding: 40px 30px 50px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .image{
@@ -742,9 +743,32 @@ input[type=text]:-ms-input-placeholder{
     justify-content: center;
     align-items: center;
 }
-.message p {
-    font-weight: 600;
+.message h1 {
+    color: #007246;
     text-align: center;
-    padding: 20px;
-    font-size: 16px;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.editupdateProduct,
+.editremoveProduct{
+    width: 186.023px;
+    height: 40px;
+    border-radius: 7px;
+    background: #bdbebe;
+    color: #ffffff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 40px;
+    border: none;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+.editupdateProduct:hover,
+.editremoveProduct:hover{
+    background-color: #cfcfcf;
 }
