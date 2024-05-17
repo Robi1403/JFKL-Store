@@ -48,9 +48,7 @@ if (isset($_POST['addNewProductBtn'])) {
 
     $insert = "INSERT INTO `inventory_log`(`product_id`, `action_type`, `date`, `previous_state`, `new_state`) VALUES ('$productId', 'Add', '$date', '$previous_state', '$new_state')";
     if (mysqli_query($conn, $insert)) {
-        echo '<script>
-                window.location.href = "../inventory.php"; 
-            </script>';
+        header("Location: ../inventory.php?addBoolean=true");
     } else {
         echo '<script>alert("Error inserting data to inventory log: ' . mysqli_error($conn) . '");</script>';
     }

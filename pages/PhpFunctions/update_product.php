@@ -1,5 +1,4 @@
 <?php
-
 include ("connection.php");
 
 if (isset($_POST['updateProductInfoBtn'])) {
@@ -13,6 +12,10 @@ if (isset($_POST['updateProductInfoBtn'])) {
     $retailPrice = $_POST['retailPriceInput'];
     $stock = $_POST['stockInput'];
     $url = $_POST['productURLInput'];
+    
+    $boolean = $_POST['updateBooleanInput'];
+
+    echo'<script>alert('.$boolean.');</script>';
 
     $select_query = "SELECT * FROM `inventory` WHERE `product_id` = '$productId'";
     $result = mysqli_query($conn, $select_query);
@@ -107,9 +110,7 @@ if (isset($_POST['updateProductInfoBtn'])) {
         WHERE `product_id` = '$productId'";
 
         if (mysqli_query($conn, $update_query)) {
-            echo '<script>
-                    window.location.href = "../inventory.php";
-                </script>';
+            header("Location: ../inventory.php?updateBoolean=true");
         } else {
             echo '<script>alert("Error updating data: ' . mysqli_error($conn) . '");</script>';
         }
@@ -127,9 +128,7 @@ if (isset($_POST['updateProductInfoBtn'])) {
         WHERE `product_id` = '$productId'";
 
         if (mysqli_query($conn, $update_query)) {
-            echo '<script>
-                    window.location.href = "../inventory.php"; 
-                </script>';
+            header("Location: ../inventory.php?updateBoolean=true");
         } else {
             echo '<script>alert("Error updating data: ' . mysqli_error($conn) . '");</script>';
         }
