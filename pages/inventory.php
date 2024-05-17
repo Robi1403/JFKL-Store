@@ -493,11 +493,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <img src="../assets/check.png" alt="">
                 </div>
                 <div class="message">
-                    <p>Successfully Updated Product Information</p>
+                    <h1>Successfully Updated Product Information</h1>
                 </div>
                 <div class="formContent">
-                    <div class="updateButtons">
-                        <button class="addProduct" id="update_okBtn" onclick=" window.location.href = 'PhpFunctions/end_session.php'">Ok</button>
+                    <div class="editButtons">
+                        <button class="editupdateProduct" id="update_okBtn" onclick=" window.location.href = 'PhpFunctions/end_session.php'">Ok</button>
                     </div>
                 </div>
             </div>
@@ -513,11 +513,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <img src="../assets/check.png" alt="">
             </div>
             <div class="message">
-                <p>Successfully Removed Product(s) from Inventory</p>
+                <h1>Successfully Removed Product(s) from Inventory</h1>
             </div>
             <div class="formContent">
-                <div class="updateButtons">
-                    <button class="addProduct" id="remove_okBtn">Ok</button>
+                <div class="editButtons">
+                    <button class="editremoveProduct" id="remove_okBtn">Ok</button>
                 </div>
             </div>
         </div>
