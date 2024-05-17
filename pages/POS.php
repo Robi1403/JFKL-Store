@@ -95,7 +95,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <a href="POS.php?action=logout" id="logoutBtn">
                         <img src="../assets/logout.svg" alt=""><br>
                     </a>
-                    
+
                 </div>
             </div>
         </div>
@@ -342,7 +342,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="lineDiv"></div>
                         <div class="CustomerAmount">
                             <h1>Amount Received</h1>
-                            <input type="number" id="ClientAmount">
+                            <div class="amountGroup">
+                                <span class="pesoSign">₱</span>
+                                <input type="number" id="ClientAmount">
+                            </div>
                         </div>
                         <div class="SubTotal">
                             <h1>Subtotal</h1>
