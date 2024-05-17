@@ -292,6 +292,7 @@ body{
     margin-right: 15px;
     margin-bottom: 3px;
     font-weight: 600;
+    height: 45px;
 }
 
 .ItemCardView .netWeight{
