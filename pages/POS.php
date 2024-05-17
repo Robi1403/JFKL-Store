@@ -481,6 +481,14 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         }
 
         function openSummaryModal() {
+            var clientAmount = document.getElementById('ClientAmount').value;
+            var change = document.getElementById('ClientAmount').change;
+
+            if (clientAmount.trim() === '' || parseFloat(clientAmount) <= 0 || parseFloat(change) <= 0) {
+                //empty clientAmount
+                return; 
+            }
+
             var show = document.querySelector('.OrderSummary');
             show.style.display = 'flex';
         }
