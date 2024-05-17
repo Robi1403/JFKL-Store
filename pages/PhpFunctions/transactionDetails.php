@@ -16,7 +16,7 @@ if (isset($_POST['id'])) {
             ?>
 
             <div class="transactionContainer">
-                            <h1>Transaction Details</h1>
+                            <p>Transaction Details</p>
                                 <div class="SummaryContainer">
                                     <table>
                                         <tr>
@@ -30,10 +30,10 @@ if (isset($_POST['id'])) {
                                 $totalAmount += $row['total_amount'];?>
                     
                                         <tr>
-                                            <th><?php echo $row['product_name'] ?></th>
-                                            <th><?php echo $row['retail_price'] ?></th>
-                                            <th><?php echo $row['quantity'] ?></th>
-                                            <th><?php echo $row['total_amount'] ?></th>
+                                            <td><?php echo $row['product_name'] ?></td>
+                                            <td><?php echo $row['retail_price'] ?></td>
+                                            <td><?php echo $row['quantity'] ?></td>
+                                            <td><?php echo $row['total_amount'] ?></td>
                                         </tr>
                            <?php 
                         }?>
