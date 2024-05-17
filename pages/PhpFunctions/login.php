@@ -13,10 +13,11 @@ if (isset($_POST['submit'])) {
 
     if ($count == 1) {
         $_SESSION['loggedin'] = true;
+        unset($_SESSION['login_error']);  // Clear any previous error
         header("Location: ../POS.php");
         exit();
     } else {
-        $_SESSION['login_error'] = "User Not Found";
+        $_SESSION['login_error'] = "Incorrect username or password.";
         header("Location: ../LoginPage.php");
         exit();
     }
