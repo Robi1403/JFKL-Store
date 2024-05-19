@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/login.css?v=<?php echo time(); ?>">
     <link rel="icon" href="../assets/storeLogo.svg">
     <title>JFKL Login</title>
 </head>
@@ -31,6 +31,20 @@ session_start();
                 <p>JFKL Store</p>
             </div>
         </form>
+    </div>
+
+    <div class="notSupportedScreenSize">
+        <div class="notSupportedScreenSizecontainer">
+            <h1>Unsupported Screen Size</h1>
+            <p>It looks like your screen size is not supported by our application. For the best experience, please use a device with a larger screen or try resizing your browser window.</p><br>
+            <p>If you continue to encounter issues, please contact our support team for assistance.</p>
+            <a href="mailto:jrcr2022-2647-26244@bicol-u.edu.ph
+            ">Contact Support</a><br>
+            <div id="logo">
+                <img src="../assets/storeLogo.svg" alt="">
+                <p>JFKL Store</p>
+            </div>
+        </div>
     </div>
 
     <script>

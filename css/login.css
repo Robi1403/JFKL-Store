@@ -99,3 +99,81 @@ input[type=text], input[type=password] {
     font-size: 13px;
     display: none;
 }
+
+.notSupportedScreenSize{
+    display: none;
+}
+
+@media (max-width: 1250px){
+
+    .container{
+ 
+        margin-top: 15%;
+
+    }
+
+}
+
+@media (max-width: 750px){
+
+    .notSupportedScreenSize{
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-color: #ECFCF6;
+    }
+    .notSupportedScreenSizecontainer {
+        text-align: center;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-left: 30px;
+        margin-right: 30px;
+
+    }
+    .notSupportedScreenSizecontainer h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .notSupportedScreenSizecontainer p {
+        font-size: 16px;
+        color: #666;
+    }
+    .notSupportedScreenSizecontainer a {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        text-decoration: none;
+        background-color: #04B075;
+        color: white;
+        border-radius: 5px;
+    }
+    .notSupportedScreenSizecontainer a:hover {
+        background-color: #0056b3;
+    }
+
+    
+    #logo {
+        display: inline-flex;
+        font-size: 18px;
+        font-weight: 600;
+        color: #008D5D;
+        gap: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-top: 30px;
+    }
+
+    #logo img{
+        height: 22px;
+    }
+
+    .container{
+        display: none;
+    }
+
+}

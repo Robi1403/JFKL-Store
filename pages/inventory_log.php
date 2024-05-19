@@ -194,6 +194,20 @@ include ("PhpFunctions/update_product.php");
         <input type="hidden" id="selectedDate" name="selectedDate">
     </form>
 
+    <div class="notSupportedScreenSize">
+        <div class="notSupportedScreenSizecontainer">
+            <h1>Unsupported Screen Size</h1>
+            <p>It looks like your screen size is not supported by our application. For the best experience, please use a device with a larger screen or try resizing your browser window.</p><br>
+            <p>If you continue to encounter issues, please contact our support team for assistance.</p>
+            <a href="mailto:jrcr2022-2647-26244@bicol-u.edu.ph
+            ">Contact Support</a><br>
+            <div id="logo">
+                <img src="../assets/storeLogo.svg" alt="">
+                <p>JFKL Store</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         function updateDate() {
             let today = new Date();

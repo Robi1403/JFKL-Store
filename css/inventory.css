@@ -772,3 +772,126 @@ input[type=text]:-ms-input-placeholder{
 .editremoveProduct:hover{
     background-color: #cfcfcf;
 }
+
+.notSupportedScreenSize{
+    display: none;
+}
+
+@media (max-width: 1000px){
+
+    .notSupportedScreenSize{
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-color: #ECFCF6;
+    }
+    .notSupportedScreenSizecontainer {
+        text-align: center;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-left: 30px;
+        margin-right: 30px;
+
+    }
+    .notSupportedScreenSizecontainer h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .notSupportedScreenSizecontainer p {
+        font-size: 16px;
+        color: #666;
+    }
+    .notSupportedScreenSizecontainer a {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        text-decoration: none;
+        background-color: #04B075;
+        color: white;
+        border-radius: 5px;
+    }
+    .notSupportedScreenSizecontainer a:hover {
+        background-color: #0056b3;
+    }
+
+    
+    #logo {
+        display: inline-flex;
+        font-size: 18px;
+        font-weight: 600;
+        color: #008D5D;
+        gap: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-top: 30px;
+    }
+
+    #logo img{
+        height: 22px;
+    }
+
+    .navbar{
+        display: none;
+    }
+    .mainContainer{
+        display: none;
+    }
+
+    .sideBar{
+        display: none;
+    }
+}
+
+@media (max-width: 1150px){
+    .navbar{
+     height: 70px;
+    }
+
+    .navbar .left .logo{
+        font-size: 22px;
+    }
+    .navbar .left .logo img{
+        height: 25px;
+    }
+
+    .navbar .searchBar input{
+        font-size: 10px;
+        height: 30px;
+        width: 500px;
+    }
+
+    .navbar .searchBar img{
+        width: 10px;
+    }
+
+    .sideBar{
+        height: 100%;
+        width: 90px;
+        padding-top: 20px;
+        position: absolute;
+        box-shadow: 2px 0 3px -2px rgba(0,0,0,.2);
+        background-color: #ffffff;
+    }
+
+    .sideBar button{
+        height: 50px;
+        width: 50px;
+        font-size: 10px;
+    }
+    .sideBar button img{
+        height: 16px;
+        width: 16px;
+        margin: 2px;
+
+    }
+
+    .sideBar .logout .sbLogout a img{
+        width: 22px;
+    }
+ }
+
