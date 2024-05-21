@@ -8,6 +8,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location: LoginPage.php');
     exit;
 }
+
+if (isset($_GET['action'])) {
+
+    if ($_GET['action'] == "logout") {
+
+        unset($_SESSION['loggedin']);
+
+        header("Location: LoginPage.php");
+    }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -251,14 +262,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         }
                     }
 
-                    if (isset($_GET['action'])) {
-
-                        if ($_GET['action'] == "logout") {
-
-                            unset($_SESSION['loggedin']);
-                        }
-
-                    }
 
                 }
                 ?>
