@@ -55,10 +55,10 @@ if (isset($_GET['action'])) {
             <div class="todayGrossSale">
                 <p>Today's Gross Sale: </p>
                 <p><span><?php if (isset($totalSales)) {
-                    echo $totalSales; ?></span></p>
+                    echo number_format($totalSales, 2); ?></span></p>
                     <?php
                 } else { ?>
-                    <p><span><?php echo $currentTotalSales; ?></span></p>
+                    <p><span><?php echo number_format($currentTotalSales, 2); ?></span></p>
                     <?php
                 }
                 ?>
@@ -274,7 +274,8 @@ if (isset($_GET['action'])) {
                     $realCostofGoods = 0.00;
                     $numberOfItems = 0;
                     $quantity = 1;
-
+                    $SubTotalFormatted = "0.00";
+                    $totalFormatted = "0.00";
 
                     if (!empty($_SESSION['cart'])) {
 
@@ -312,12 +313,12 @@ if (isset($_GET['action'])) {
 
                                     <?php
                                     $total = $value['retail_price'] * $value['quantity'];
-                                    $total = number_format($total, 2, '.', '');
+                                    $totalFormatted = number_format($total, 2);
                                     $CostOfGoods = $value['unitPrice'] * $value['quantity'];
                                     ?>
 
                                     <h3>Total</h3>
-                                    <h1><?php echo "₱ " . $total ?></h1>
+                                    <h1><?php echo "₱ " . $totalFormatted ?></h1>
                                 </div>
 
                                 <a href="POS.php?action=remove&id=<?php echo $value['id'] ?>" class="delete">
@@ -329,7 +330,7 @@ if (isset($_GET['action'])) {
                             <?php
 
                             $SubTotal = $SubTotal + $total;
-                            $SubTotal = number_format($SubTotal, 2, '.', '');
+                            $SubTotalFormatted = number_format($SubTotal, 2);
                             $realCostofGoods = $realCostofGoods + $CostOfGoods;
                             $numberOfItems = $numberOfItems + $value['quantity'];
                         }
@@ -352,7 +353,7 @@ if (isset($_GET['action'])) {
                         </div>
                         <div class="SubTotal">
                             <h1>Subtotal</h1>
-                            <h1 id="OverAllTotal"><?php echo "₱ " . $SubTotal ?></h1>
+                            <h1 id="OverAllTotal"><?php echo "₱ " . $SubTotalFormatted ?></h1>
                         </div>
                         <div class="lineDiv"></div>
                         <div class="Total">
@@ -407,11 +408,11 @@ if (isset($_GET['action'])) {
 
                                     <?php
                                     $total = $value['retail_price'] * $value['quantity'];
-                                    $total = number_format($total, 2, '.', '');
+                                    $total = number_format($total, 2);
                                     $CostOfGoods = $value['unitPrice'] * $value['quantity'];
                                     ?>
                                     <td>
-                                        <?php echo "₱ " . $total ?>
+                                        <?php echo "₱ " . $totalFormatted ?>
                                     </td>
                                 </tr>
                             <?php }
@@ -426,7 +427,7 @@ if (isset($_GET['action'])) {
                 <div class="AmountSummary">
                     <div class="TotalPayment">
                         <h2>Total</h2>
-                        <h1><?php echo "₱ " . $SubTotal ?></h1>
+                        <h1><?php echo "₱ " . $SubTotalFormatted ?></h1>
                     </div>
 
                     <div class="dividerDIV"></div>
@@ -553,9 +554,10 @@ if (isset($_GET['action'])) {
 
         function openSummaryModal() {
             var clientAmount = document.getElementById('ClientAmount').value;
-            var change = document.getElementById('ClientAmount').change;
+            var change = document.getElementById('change').innerText;
+            var change = change.replace(/₱/g, '').replace(/,/g, '');
 
-            if (clientAmount.trim() === '' || parseFloat(clientAmount) <= 0 || parseFloat(change) <= 0) {
+            if (clientAmount.trim() === '' || parseFloat(clientAmount) <= 0 || parseFloat(change) < 0  || change == undefined) {
                 //empty clientAmount
                 return;
             }

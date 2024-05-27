@@ -18,8 +18,10 @@ document.getElementById("logoutBtn").onclick = function () {
     window.location.href = "LoginPage.php";
 };
 
-var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
+var OverAllTotal = document.getElementById('OverAllTotal').innerText;
+var OverAllTotal = OverAllTotal.replace(/₱/g, '').replace(/,/g, '');
 var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);
+
 var changeDiv = document.getElementById('change');
 
 var Change = ClientAmount - OverAllTotal;
@@ -43,20 +45,20 @@ UserInput.addEventListener("keyup", function(event) {
     }, doneTypingInterval);
 });
 
-var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
-var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);
-var changeDiv = document.getElementById('change');
+// var OverAllTotal = parseFloat(document.getElementById('OverAllTotal').innerText);
+// var ClientAmount = parseFloat(document.getElementById('ClientAmount').value);
+// var changeDiv = document.getElementById('change');
 
-var Change = ClientAmount - OverAllTotal;
+// var Change = ClientAmount - OverAllTotal;
 
-// changeDiv.innerHTML = Change;
+// // changeDiv.innerHTML = Change;
 
-var formattedChange = Change.toFixed(2);
-changeDiv.innerHTML = '₱' + formattedChange;
+// var formattedChange = Change.toFixed(2);
+// changeDiv.innerHTML = '₱' + formattedChange;
 
-var UserInput = document.getElementById('ClientAmount');
-var typingTimer; 
-var doneTypingInterval = 500; 
+// var UserInput = document.getElementById('ClientAmount');
+// var typingTimer; 
+// var doneTypingInterval = 500; 
 
 Compute();
 
@@ -73,7 +75,7 @@ UserInput.addEventListener("keyup", function(event) {
 function Compute() {
 
     var OverAllTotalText = document.getElementById('OverAllTotal').innerText;
-    var cleanedTotalText = OverAllTotalText.replace(/₱/g, '');
+    var cleanedTotalText = OverAllTotalText.replace(/₱/g, '').replace(/,/g, '');
     var OverAllTotal = parseFloat(cleanedTotalText);
     var ClientAmount = parseFloat(UserInput.value);
     var changeDiv = document.getElementById('change');
@@ -95,7 +97,8 @@ function Compute() {
     if (isNaN(ClientAmount)){
         showReceive.innerHTML = "₱ 0.00";
     }else{
-        showReceive.innerHTML = "₱ " + ClientAmount;
+        showReceive.innerHTML = "₱ " + parseFloat(ClientAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
     }
     
  

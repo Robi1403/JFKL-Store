@@ -1,13 +1,12 @@
-
 <?php
 include ("PhpFunctions/connection.php");
 include ("PhpFunctions/current_sales_transacHistory.php");
 include ("PhpFunctions/transactionDetails.php");
 include ("PhpFunctions/login.php");
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location: LoginPage.php');
     exit;
-}  
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,10 +47,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
             <div class="todayGrossSale">
                 <p>Today's Gross Sale: </p>
                 <p><span><?php if (isset($totalSales)) {
-                    echo $totalSales; ?></span></p>
+                    echo number_format($totalSales, 2); ?></span></p>
                     <?php
                 } else { ?>
-                    <p><span><?php echo $currentTotalSales; ?></span></p>
+                    <p><span><?php echo number_format($currentTotalSales, 2); ?></span></p>
                     <?php
                 }
                 ?>
@@ -148,7 +147,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                             <div class="grossSale">
                                 <h1><?php
                                 if (isset($totalSales)) {
-                                    echo $totalSales; ?></h1>
+                                    echo number_format($totalSales, 2); ?></h1>
                                     <?php
                                     date_default_timezone_set('Asia/Manila');
                                     $currentDate = date("Y-m-d");
@@ -160,7 +159,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                         <?php
                                     }
                                 } else { ?>
-                                    <h1><?php echo $currentTotalSales; ?></h1>
+                                    <h1><?php echo number_format($currentTotalSales, 2); ?></h1>
                                     <p>Today's <strong>Gross Sale</strong></p>
                                     <?php
                                 }
@@ -193,7 +192,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                         </div>
                         <div class="container2">
                             <div class="totalProfit">
-                                <h1><?php echo isset($totalProfit) ? $totalProfit : $currentTotalProfit; ?></h1>
+                                <h1><?php echo isset($totalProfit)
+                                    ? number_format($totalProfit, 2)
+                                    : number_format($currentTotalProfit, 2); ?></h1>
                                 <p>Total <strong>Profit</strong></p>
                             </div>
                             <div class="others">
@@ -291,10 +292,20 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                             <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
                                             </td>
                                             <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
-                                            <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
-                                            <td class="profit" id="profit"><?php echo $row["profit"] ?? '-'; ?></td>
-                                            <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
+                                            <td class="total" id="total">
+                                                <?php echo isset($row["gross_sales"]) ? number_format($row["gross_sales"], 2) : '-'; ?>
+                                            </td>
+                                            <td class="profit" id="profit">
+                                                <?php echo isset($row["profit"]) ? number_format($row["profit"], 2) : '-'; ?></td>
+
+                                            <td class="date" id="date"><?php
+                                            $originalDate = $row["date"];
+                                            echo date('F j, Y', strtotime($originalDate));
+                                            ?></td>
+                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails"
+                                                    class="ProductDetails"
+                                                    data-transaction="<?php echo $row['transaction_number']; ?>">See
+                                                    Details</button></td>
 
                                         </tr>
                                         <?php
@@ -310,13 +321,23 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                                     while ($row = $result->fetch_assoc()) {
                                         ?>
                                         <tr>
-                                        <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
+                                            <td class="transactionNum" id="transactionNum"><?php echo $row["transaction_number"]; ?>
                                             </td>
                                             <td class="numItems" id="numItems"><?php echo $row["number_of_items"]; ?></td>
-                                            <td class="total" id="total"><?php echo $row["gross_sales"] ?? '-'; ?></td>
-                                            <td class="profit" id="profit"><?php echo $row["profit"] ?? '-'; ?></td>
-                                            <td class="date" id="date"><?php echo $row["date"]; ?></td>
-                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails" class="ProductDetails" data-transaction="<?php echo $row['transaction_number']; ?>">See Details</button></td>
+                                            <td class="total" id="total">
+                                                <?php echo isset($row["gross_sales"]) ? number_format($row["gross_sales"], 2) : '-'; ?>
+                                            </td>
+                                            <td class="profit" id="profit">
+                                                <?php echo isset($row["profit"]) ? number_format($row["profit"], 2) : '-'; ?>
+                                            </td>
+                                            <td class="date" id="date"><?php
+                                                $originalDate = $row["date"];
+                                                echo date('F j, Y', strtotime($originalDate));
+                                                ?></td>
+                                            <td class="seeDetails" id="seeDetails"><button type="button" name="seeProductDetails"
+                                                    class="ProductDetails"
+                                                    data-transaction="<?php echo $row['transaction_number']; ?>">See
+                                                    Details</button></td>
                                         </tr>
                                         <?php
                                     }
@@ -329,21 +350,22 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         </div>
 
         <div class="TransactionDetails">
-    
+
         </div>
 
-        
+
     </div>
 
     <form id="dateform" name="dateform" action="" method="POST">
         <input type="hidden" id="startDate" name="startDate">
-        <input type="hidden" id="endDate" name="endDate"> 
+        <input type="hidden" id="endDate" name="endDate">
     </form>
 
     <div class="notSupportedScreenSize">
         <div class="notSupportedScreenSizecontainer">
             <h1>Unsupported Screen Size</h1>
-            <p>It looks like your screen size is not supported by our application. For the best experience, please use a device with a larger screen or try resizing your browser window.</p><br>
+            <p>It looks like your screen size is not supported by our application. For the best experience, please use a
+                device with a larger screen or try resizing your browser window.</p><br>
             <p>If you continue to encounter issues, please contact our support team for assistance.</p>
             <a href="mailto:jrcr2022-2647-26244@bicol-u.edu.ph
             ">Contact Support</a><br>
@@ -356,24 +378,24 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 
     <script src="../js/sales.js"></script>
     <script>
-            $(document).ready(function() {
-                $(document).on('click', '.ProductDetails', function(event) { 
-                    event.preventDefault(); 
-                    var id = $(this).data("transaction");
-                    $.ajax({
-                        method: 'POST',
-                        url: 'PhpFunctions/transactionDetails.php',
-                        data: {id: id},
-                        success: function(response) {
-                            $(".TransactionDetails").css("display", "flex");
-                            $('.TransactionDetails').html(response);
-                        },
-                        error: function(xhr, status, error) {
-                            alert("An error occurred: " + error); 
-                        }
-                    });
+        $(document).ready(function () {
+            $(document).on('click', '.ProductDetails', function (event) {
+                event.preventDefault();
+                var id = $(this).data("transaction");
+                $.ajax({
+                    method: 'POST',
+                    url: 'PhpFunctions/transactionDetails.php',
+                    data: { id: id },
+                    success: function (response) {
+                        $(".TransactionDetails").css("display", "flex");
+                        $('.TransactionDetails').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("An error occurred: " + error);
+                    }
                 });
             });
+        });
     </script>
 </body>
 

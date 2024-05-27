@@ -19,7 +19,6 @@ function saveDataToDatabase ($conn,$numberOfItems ,$SubTotal,$realCostofGoods,$c
     date_default_timezone_set('Asia/Manila');
     $current_date = date('Y-m-d');
     $profit = $SubTotal -$realCostofGoods;
-
     $InsertData = "INSERT INTO transaction_history VALUES('$transaction_number','$current_date','$numberOfItems ','$SubTotal',' $profit')";
 
     mysqli_query($conn,$InsertData);
@@ -60,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         $SubTotal = $_POST['SubTotal'];
         $realCostofGoods = $_POST['realCostofGoods'];
         $cart = $_SESSION['cart'];
-
 
     saveDataToDatabase($conn,$numberOfItems, $SubTotal, $realCostofGoods, $cart);
     

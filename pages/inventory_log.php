@@ -141,7 +141,9 @@ include ("PhpFunctions/update_product.php");
                                     <td><?php echo $row["log_id"]; ?></td>
                                     <td><?php echo $row["product_id"]; ?></td>
                                     <td><?php echo $row["action_type"]; ?></td>
-                                    <td><?php echo $row["date"] ?? '-'; ?></td>
+                                    <td><?php echo isset($row["date"]) 
+                                        ? date('F j, Y', strtotime($row["date"])) 
+                                        : '-'; ?></td>
                                     <td style="text-align:left" ;><?php echo $row["previous_state"]; ?></td>
                                     <td style="text-align:left" ;><?php echo $row["new_state"]; ?></td>
                                 </tr>
@@ -314,7 +316,8 @@ include ("PhpFunctions/update_product.php");
             var currentDate = new Date();
             var currentFormattedDate = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
 
-            var initialDate = '<?php echo isset($_POST['selectedDate']) ? date('Y-m-d', strtotime($_POST['selectedDate'])) : ''; ?>';
+            var initialDate = '<?php echo isset($_POST['selectedDate']) ? date('F j, Y', strtotime($_POST['selectedDate'])) : ''; ?>';
+
 
             $("#datepicker").daterangepicker({
                 singleDatePicker: true,
@@ -322,12 +325,12 @@ include ("PhpFunctions/update_product.php");
                 minYear: 2024,
                 startDate: initialDate || currentFormattedDate,
                 locale: {
-                    format: 'YYYY-MM-DD'
+                    format: 'MMMM D, YYYY'
                 }
             });
 
             $('#datepicker').on('apply.daterangepicker', function (ev, picker) {
-                var selectedDate = picker.startDate.format('YYYY-MM-DD');
+                var selectedDate = picker.startDate.format('MMMM D, YYYY');
                 $("#selectedDate").val(selectedDate);
                 $("#dateForm").submit();
             });
